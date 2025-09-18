@@ -1,0 +1,170 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id                      Int               @id @default(autoincrement())
+  email                   String            @unique
+  phone                   String?           @unique
+  name                    String?
+  passwordHash            String
+  role                    UserRole          @default(USER)
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
+  
+  // Password reset
+  resetPasswordToken      String?
+  resetPasswordExpires    DateTime?
+  
+  // Discount tracking
+  totalDossiersCreated    Int               @default(0)
+  totalDossiersCompleted  Int               @default(0)
+  loyaltyTier             Int               @default(1)
+  
+  companyDossiers         CompanyDossier[]
+  tourismDossiers         TourismDossier[]
+  blogPosts               BlogPost[]
+  discountHistory         DiscountHistory[]
+}
+
+enum DossierStatus {
+  DRAFT
+  PENDING_PAYMENT
+  PAID
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model CompanyDossier {
+  id                Int           @id @default(autoincrement())
+  userId            Int
+  user              User          @relation(fields: [userId], references: [id])
+  status            DossierStatus @default(DRAFT)
+  currentStep       Int           @default(1)
+  
+  // Step 1: Associates info
+  associates        Json?         // Array of associate objects
+  
+  // Step 2: Company details
+  companyName       String?
+  activities        Json?         // Array of selected activities (max 3)
+  proposedNames     Json?         // Array of 3 proposed names
+  headquarters      String?       // domicile, contrat_domiciliation, location_local
+  capital           Int?          // 10000 or 100000 MAD
+  selectedBank      String?
+  
+  // Additional company information
+  raisonSociale     String?
+  formeJuridique    String?
+  nationalite       String?
+  adresseSiege      String?
+  villeSiege        String?
+  professionActivite String?
+  telephone         String?
+  fax               String?
+  email             String?
+  numeroArticleTaxeProfessionnelle String?
+  numeroArticleTaxeServicesCommunaux String?
+  numeroAffiliationCNSS String?
+  numeroRegistreCommerce String?
+  villeRegistreCommerce String?
+  referenceDepotDeclaration String?
+  dateDepotDeclaration String?
+  
+  // Files and documents
+  uploadedFiles     Json?         // Array of file metadata
+  
+  // Payment
+  paymentIntentId   String?
+  paymentStatus     String?
+  amountPaid        Int?          // in cents
+  
+  // Discount fields
+  originalPrice     Int?          // in cents
+  discountApplied   Int           @default(0) // in cents
+  finalPrice        Int?          // in cents
+  discountReason    String?       // e.g., "loyalty_tier_2", "loyalty_tier_3"
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+}
+
+model TourismDossier {
+  id                Int           @id @default(autoincrement())
+  userId            Int
+  user              User          @relation(fields: [userId], references: [id])
+  status            DossierStatus @default(DRAFT)
+  currentStep       Int           @default(1)
+  
+  // Step 1: Owner info
+  ownerInfo         Json?         // Owner details
+  
+  // Step 2: Establishment info
+  establishmentInfo Json?         // Establishment details (type, category, business info)
+  
+  // Step 4: Property details (after payment)
+  propertyDetails   Json?         // Property information
+  complianceAnswers Json?         // Yes/no compliance questionnaire
+  
+  // Files and documents
+  uploadedFiles     Json?         // Array of file metadata
+  uploadedPhotos    Json?         // Array of photo metadata
+  
+  // Payment
+  paymentIntentId   String?
+  paymentStatus     String?
+  amountPaid        Int?          // in cents
+  
+  // Discount fields
+  originalPrice     Int?          // in cents
+  discountApplied   Int           @default(0) // in cents
+  finalPrice        Int?          // in cents
+  discountReason    String?       // e.g., "loyalty_tier_2", "loyalty_tier_3"
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+}
+
+model DiscountHistory {
+  id                Int           @id @default(autoincrement())
+  userId            Int
+  user              User          @relation(fields: [userId], references: [id])
+  dossierId         Int?          // Can be null for general discount tracking
+  dossierType       String?       // "company" or "tourism"
+  discountPercentage Int
+  discountAmount    Int           // in cents
+  originalPrice     Int           // in cents
+  finalPrice        Int           // in cents
+  reason            String        // e.g., "loyalty_tier_2", "loyalty_tier_3"
+  createdAt         DateTime      @default(now())
+  
+  @@map("discount_history")
+}
+
+model BlogPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  excerpt     String?  // Short description for listing
+  content     String   // Full blog post content (HTML)
+  featuredImage String? // URL to featured image
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    Int
+  author      User     @relation(fields: [authorId], references: [id])
+  
+  @@map("blog_posts")
+}
