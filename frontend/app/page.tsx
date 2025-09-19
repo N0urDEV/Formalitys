@@ -398,7 +398,7 @@ export default function Home() {
                     className="text-3xl font-bold text-[#071B1E] mb-4 group-hover:text-[#F66B4C] transition-colors"
                     style={{ fontFamily: '"Gascogne Serial", serif' }}
                   >
-                    Formalités hébergements touristiques
+                    Formalités pour hébergements touristiques
                   </h3>
                   <p 
                     className="text-gray-600 text-lg mb-8 leading-relaxed flex-grow"
