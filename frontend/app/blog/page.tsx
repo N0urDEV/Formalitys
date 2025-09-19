@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Footer from '../components/sections/Footer';
 import Navigation from '../components/Navigation';
+import StructuredData from '../components/StructuredData';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
-import Image from 'next/image';
+import OptimizedImage from '../components/OptimizedImage';
 
 interface BlogPost {
   id: number;
@@ -71,6 +72,20 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-[#062A2F]">
+      <StructuredData type="breadcrumb" data={[
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://formalitys.vercel.app"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://formalitys.vercel.app/blog"
+        }
+      ]} />
       {/* Navigation Header */}
       <Navigation />
 
@@ -125,11 +140,13 @@ export default function BlogPage() {
                   {/* Featured Image */}
                   {post.featuredImage ? (
                     <div className="relative h-48 overflow-hidden">
-                      <Image
+                      <OptimizedImage
                         src={post.featuredImage}
-                        alt={post.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        alt={`Image d'illustration - ${post.title} | Formalitys Blog`}
+                        width={400}
+                        height={192}
+                        className="object-cover group-hover:scale-105 transition-transform duration-300 w-full h-full"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </div>
                   ) : (

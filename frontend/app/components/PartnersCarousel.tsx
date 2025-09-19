@@ -1,19 +1,43 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
+import OptimizedImage from './OptimizedImage';
 
 const PartnersCarousel = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   
-  // List of partner logos
+  // List of partner logos with SEO-optimized alt text
   const partners = [
-    { name: 'CDM', logo: '/logos/cdm.png' },
-    { name: 'Mastercard 1', logo: '/logos/master1.png' },
-    { name: 'CIH', logo: '/logos/CIH.png' },
-    { name: 'Sanlam', logo: '/logos/sanlam.png' },
-    { name: 'Mastercard 2', logo: '/logos/master2.png' },
-    { name: 'Tijari', logo: '/logos/TIJARI.png' },
+    { 
+      name: 'CDM', 
+      logo: '/logos/cdm.png',
+      alt: 'CDM - Partenaire bancaire Formalitys pour les démarches juridiques au Maroc'
+    },
+    { 
+      name: 'Mastercard', 
+      logo: '/logos/master1.png',
+      alt: 'Mastercard - Solution de paiement sécurisée pour Formalitys'
+    },
+    { 
+      name: 'CIH', 
+      logo: '/logos/CIH.png',
+      alt: 'CIH Bank - Partenaire financier Formalitys pour création société Maroc'
+    },
+    { 
+      name: 'Sanlam', 
+      logo: '/logos/sanlam.png',
+      alt: 'Sanlam - Assurance et services financiers partenaires Formalitys'
+    },
+    { 
+      name: 'Mastercard', 
+      logo: '/logos/master2.png',
+      alt: 'Mastercard - Paiement sécurisé pour démarches juridiques Maroc'
+    },
+    { 
+      name: 'Tijari', 
+      logo: '/logos/TIJARI.png',
+      alt: 'Tijari Bank - Partenaire bancaire Formalitys pour formalités Maroc'
+    },
   ];
 
   // Duplicate partners multiple times for seamless infinite scroll
@@ -55,12 +79,13 @@ const PartnersCarousel = () => {
             className="flex-shrink-0"
           >
             <div className="group relative">
-              <Image
+              <OptimizedImage
                 src={partner.logo}
-                alt={`Logo ${partner.name}`}
+                alt={partner.alt}
                 width={180}
                 height={60}
-                className="h-30 w-auto object-contain  opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                className="h-30 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                sizes="(max-width: 768px) 120px, 180px"
               />
             </div>
           </div>

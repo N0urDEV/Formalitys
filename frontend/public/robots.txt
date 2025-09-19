@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /api/
+
+# Allow important pages
+Allow: /dossiers/
+Allow: /blog/
+
+# Sitemap
+Sitemap: https://formalitys.vercel.app/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

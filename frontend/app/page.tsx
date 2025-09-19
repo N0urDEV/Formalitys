@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Footer from './components/sections/Footer';
 import PartnersCarousel from './components/PartnersCarousel';
 import Navigation from './components/Navigation';
+import StructuredData from './components/StructuredData';
+import OptimizedImage from './components/OptimizedImage';
 import { useState, useEffect } from 'react';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
@@ -50,6 +52,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#062A2F] pointer-events-auto">
+      <StructuredData type="organization" />
+      <StructuredData type="faq" />
       {/* Navigation Header */}
       <Navigation />
 
@@ -89,12 +93,12 @@ export default function Home() {
               </div>
             </div>
             
-            <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl font-light" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-            <span>
-              Création de votre société ou déclaration d'exploitation d'hébergements touristiques <span className="font-semibold text-[#F66B4C]">100% en ligne</span>.<br />
-              <span className="font-semibold text-[#F66B4C]">Rapide</span>, <span className="font-semibold text-[#F66B4C]">sécurisé</span> avec un accompagnement par des <span className="font-semibold text-[#F66B4C]">experts</span>.
-            </span>
-            </p>
+               <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl font-light" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                 <span>
+                   <span className="font-semibold text-[#F66B4C]">Création de société SARL</span> au Maroc ou <span className="font-semibold text-[#F66B4C]">régularisation d'hébergements touristiques</span> <span className="font-semibold text-[#F66B4C]">100% en ligne</span>.<br />
+                   <span className="font-semibold text-[#F66B4C]">OMPIC</span>, <span className="font-semibold text-[#F66B4C]">registre du commerce</span>, <span className="font-semibold text-[#F66B4C]">CNSS</span> - <span className="font-semibold text-[#F66B4C]">Rapide</span>, <span className="font-semibold text-[#F66B4C]">sécurisé</span> avec accompagnement <span className="font-semibold text-[#F66B4C]">expert</span>.
+                 </span>
+               </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start relative z-10">
               <Link 
                 href="/register" 
@@ -706,10 +710,13 @@ export default function Home() {
                   <article key={post.id} className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group">
                     <div className={`relative h-48 bg-gradient-to-br ${gradient} flex items-center justify-center`}>
                       {post.featuredImage ? (
-                        <img
+                        <OptimizedImage
                           src={post.featuredImage}
-                          alt={post.title}
+                          alt={`Image d'illustration - ${post.title} | Formalitys Blog`}
+                          width={400}
+                          height={192}
                           className="w-full h-full object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                       ) : (
                         <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

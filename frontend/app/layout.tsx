@@ -4,8 +4,45 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import WhatsAppWidget from "./components/WhatsAppWidget";
 
 export const metadata: Metadata = {
-  title: "Formalitys - Simplifiez vos démarches juridiques au Maroc",
-  description: "Création de société et régularisation de location touristique 100% en ligne. Rapide, sécurisé, et accompagné par des experts.",
+  title: "Formalitys - Création Société & Hébergement Touristique au Maroc | 100% En Ligne",
+  description: "Créez votre SARL au Maroc ou régularisez votre Airbnb/Riad en ligne. Service juridique rapide, sécurisé avec accompagnement expert. Devis gratuit.",
+  keywords: "création société Maroc, SARL Maroc, hébergement touristique, Airbnb Maroc, formalités juridiques, OMPIC, registre commerce",
+  openGraph: {
+    title: "Formalitys - Démarches Juridiques au Maroc | 100% En Ligne",
+    description: "Simplifiez vos démarches juridiques au Maroc. Création société SARL et régularisation hébergement touristique avec nos experts.",
+    url: "https://formalitys.vercel.app",
+    siteName: "Formalitys",
+    images: [
+      {
+        url: "https://formalitys.vercel.app/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Formalitys - Démarches Juridiques au Maroc",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Formalitys - Démarches Juridiques au Maroc",
+    description: "Créez votre société ou régularisez votre hébergement touristique en ligne au Maroc.",
+    images: ["https://formalitys.vercel.app/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://formalitys.vercel.app",
+  },
   icons: {
     icon: [
       { url: "/SVG/Asset 2.svg", type: "image/svg+xml" },
