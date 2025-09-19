@@ -16,6 +16,9 @@ export const metadata: Metadata = {
       { url: "/SVG/Asset 2.svg", sizes: "180x180", type: "image/svg+xml" },
     ],
   },
+  other: {
+    "google-site-verification": "wuDPl3uS3DYQCc_gsw4LbKxDYX1ieVmR2SUuX6m3bxc",
+  },
 };
 
 export default function RootLayout({
