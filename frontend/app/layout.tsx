@@ -6,6 +6,16 @@ import WhatsAppWidget from "./components/WhatsAppWidget";
 export const metadata: Metadata = {
   title: "Formalitys - Simplifiez vos démarches juridiques au Maroc",
   description: "Création de société et régularisation de location touristique 100% en ligne. Rapide, sécurisé, et accompagné par des experts.",
+  icons: {
+    icon: [
+      { url: "/SVG/Asset 2.svg", type: "image/svg+xml" },
+      { url: "/SVG/Asset 2.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "/SVG/Asset 2.svg", sizes: "16x16", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/SVG/Asset 2.svg", sizes: "180x180", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export default function RootLayout({
