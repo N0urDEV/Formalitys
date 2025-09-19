@@ -100,9 +100,34 @@ export default function Home() {
               <span className="block text-[#F66B4C]">démarches juridiques</span>
               au Maroc
             </h1>
+            
+            {/* Key Benefits Words */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-6 mb-8">
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+                <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
+                <span className="text-white font-semibold text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                  Simple
+                </span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+                <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
+                <span className="text-white font-semibold text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                  Rapide
+                </span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+                <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
+                <span className="text-white font-semibold text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                  Économique
+                </span>
+              </div>
+            </div>
+            
             <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl font-light" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              Création de société et régularisation de location touristique 100% en ligne. 
-              Rapide, sécurisé, et accompagné par des experts.
+            <span>
+              Création de votre société ou déclaration d'exploitation d'hébergements touristiques <span className="font-semibold text-[#F66B4C]">100% en ligne</span>.<br />
+              <span className="font-semibold text-[#F66B4C]">Rapide</span>, <span className="font-semibold text-[#F66B4C]">sécurisé</span> avec un accompagnement par des <span className="font-semibold text-[#F66B4C]">experts</span>.
+            </span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start relative z-10">
               <Link 
@@ -198,7 +223,7 @@ export default function Home() {
               },
               {
                 step: "04",
-                title: "Recevez vos documents",
+                title: "Recevez vos documents validés en quelques jours",
                 description: "Téléchargez vos documents officiels directement depuis votre espace client.",
                 icon: (
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -338,7 +363,7 @@ export default function Home() {
                     className="text-3xl font-bold text-white mb-4"
                     style={{ fontFamily: '"Gascogne Serial", serif' }}
                   >
-                    Création de société
+                    Création de société SARL
                   </h3>
                   <p 
                     className="text-white/90 text-lg mb-8 leading-relaxed flex-grow"
@@ -351,10 +376,11 @@ export default function Home() {
                   {/* Features List */}
                   <div className="space-y-3 mb-8">
                     {[
-                      'Constitution complète des dossiers',
-                      'Validation OMPIC automatique',
-                      'Registre de commerce et CNSS',
-                      'Accompagnement juridique expert'
+                      'Constitution complète de votre SARL',
+                      'Obtention certificat négatif OMPIC',
+                      'Immatriculation au registre du commerce, Patente/TP, impôts et CNSS',
+                      'Accompagnement juridique expert',
+                      'Introduction compte bancaire'
                     ].map((feature, index) => (
                       <div key={index} className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -404,7 +430,7 @@ export default function Home() {
                     className="text-3xl font-bold text-[#071B1E] mb-4 group-hover:text-[#F66B4C] transition-colors"
                     style={{ fontFamily: '"Gascogne Serial", serif' }}
                   >
-                    Régularisation touristique
+                    Formalités hébergements touristiques
                   </h3>
                   <p 
                     className="text-gray-600 text-lg mb-8 leading-relaxed flex-grow"
@@ -418,9 +444,10 @@ export default function Home() {
                   <div className="space-y-3 mb-8">
                     {[
                       'Validation complète des documents',
-                      'Autorisations ministérielles',
-                      'Classement officiel',
-                      'Conformité réglementaire totale'
+                      'Autorisations administratives',
+                      'Classement touristique',
+                      'Conformité réglementaire',
+                      'Déclaration nuitées / registre de Police / Taxes de séjour / Impôts'
                     ].map((feature, index) => (
                       <div key={index} className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
@@ -647,7 +674,7 @@ export default function Home() {
                     className="text-white/80 text-sm leading-relaxed mb-4"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    +500 clients nous font confiance
+                    +210 clients nous ont déjà fait confiance.
                   </p>
                   
                   <div className="inline-flex items-center text-white font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
@@ -808,7 +835,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="bg-[#062A2F] relative overflow-hidden rounded-4xl">
             <div className="absolute inset-0 bg-gradient-to-r from-[#062A2F] via-[#0a3b42] to-[#062A2F]"></div>
-            <div className="relative px-6 lg:px-12 py-16 lg:py-24 text-center">
+            <div className="relative px-6 lg:px-12 py-10 lg:py-14 text-center">
           <h2 
             className="text-4xl lg:text-5xl font-bold text-white mb-8"
             style={{ fontFamily: '"Gascogne Serial", serif' }}

@@ -41,13 +41,13 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
 
   const categorieOptions = [
     { value: '', label: 'Sélectionnez la catégorie' },
+    { value: 'luxe', label: 'Luxe' },
     { value: '5etoiles', label: 'Cinq étoiles' },
     { value: '4etoiles', label: 'Quatre étoiles' },
-    { value: 'categorieUnique', label: 'Catégorie unique' },
-    { value: '2etoiles', label: 'Deux étoiles' },
-    { value: 'luxe', label: 'Luxe' },
     { value: '3etoiles', label: 'Trois étoiles' },
-    { value: '1etoile', label: 'Une étoile' }
+    { value: '2etoiles', label: 'Deux étoiles' },
+    { value: '1etoile', label: 'Une étoile' },
+    { value: 'categorieUnique', label: 'Catégorie unique' }
   ];
 
   const regionOptions = [
