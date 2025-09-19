@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Footer from '../components/sections/Footer';
+import Navigation from '../components/Navigation';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 import Image from 'next/image';
@@ -71,44 +72,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-[#062A2F]">
       {/* Navigation Header */}
-      <nav className="bg-white/90">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/">
-                <img 
-                  src="/SVG/Asset 1.svg" 
-                  alt="Formalitys" 
-                  className="h-10 w-auto"
-                />
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link 
-                href="/blog" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-md font-medium transition-colors"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Blog
-              </Link>
-              <Link 
-                href="/login" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-md font-medium transition-colors"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Se connecter
-              </Link>
-              <Link 
-                href="/register" 
-                className="bg-[#F66B4C] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#e55a43] transition-colors shadow-lg hover:shadow-xl"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Créer un compte
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#062A2F] to-[#071B1E] text-white py-20">

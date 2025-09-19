@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Footer from './components/sections/Footer';
 import PartnersCarousel from './components/PartnersCarousel';
+import Navigation from './components/Navigation';
 import { useState, useEffect } from 'react';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
@@ -50,42 +51,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#062A2F] pointer-events-auto">
       {/* Navigation Header */}
-      <nav className="bg-white/90">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <img 
-                src="/SVG/Asset 1.svg" 
-                alt="Formalitys" 
-                className="h-10 w-auto"
-              />
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link 
-                href="/blog" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-md font-medium transition-colors"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Blog
-              </Link>
-              <Link 
-                href="/login" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-md font-medium transition-colors"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Se connecter
-              </Link>
-              <Link 
-                href="/register" 
-                className="bg-[#F66B4C] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#e55a43] transition-colors shadow-lg hover:shadow-xl"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Créer un compte
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden pointer-events-auto">
@@ -618,7 +584,7 @@ export default function Home() {
               <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 h-full shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/20 hover:border-[#F66B4C]/20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#F66B4C]/0 to-[#F66B4C]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
                 
-                <div className="relative z-10 h-full flex md:flex-row flex-col items-center ">
+                <div className="relative z-10 h-full flex md:flex-row flex-col md:items-center items-start ">
                   <div className="w-16 h-16 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] rounded-2xl flex items-center justify-center mr-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -640,10 +606,10 @@ export default function Home() {
                     </p>
                   </div>
                   
-                  <div className="ml-6">
+                  <div>
                     <div className="inline-flex items-center text-[#F66B4C] font-semibold group-hover:translate-x-2 transition-transform duration-300">
                       <span style={{ fontFamily: 'Satoshi, sans-serif' }}>Support dédié</span>
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
