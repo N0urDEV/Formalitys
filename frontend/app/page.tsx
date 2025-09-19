@@ -95,8 +95,8 @@ export default function Home() {
             
                <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl font-light" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                  <span>
-                   <span className="font-semibold text-[#F66B4C]">Création de société SARL</span> au Maroc ou <span className="font-semibold text-[#F66B4C]">régularisation d'hébergements touristiques</span> <span className="font-semibold text-[#F66B4C]">100% en ligne</span>.<br />
-                   <span className="font-semibold text-[#F66B4C]">OMPIC</span>, <span className="font-semibold text-[#F66B4C]">registre du commerce</span>, <span className="font-semibold text-[#F66B4C]">CNSS</span> - <span className="font-semibold text-[#F66B4C]">Rapide</span>, <span className="font-semibold text-[#F66B4C]">sécurisé</span> avec accompagnement <span className="font-semibold text-[#F66B4C]">expert</span>.
+                   <span className="font-semibold text-[#F66B4C]">Création de société SARL</span> au Maroc ou <span className="font-semibold text-[#F66B4C]">Formalités légales pour locations d'hébergements touristiques 100% en ligne</span>.<br />
+                   <span className="font-semibold text-[#F66B4C]">Rapide</span>, <span className="font-semibold text-[#F66B4C]">sécurisé</span> avec accompagnement <span className="font-semibold text-[#F66B4C]">expert</span>.
                  </span>
                </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start relative z-10">
@@ -325,7 +325,6 @@ export default function Home() {
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>3 600 DH</div>
-                      <div className="text-white/80 text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>+ options</div>
                     </div>
                   </div>
                   
@@ -392,7 +391,6 @@ export default function Home() {
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>1 600 DH</div>
-                      <div className="text-gray-500 text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>prix fixe</div>
                     </div>
                   </div>
                   
@@ -407,7 +405,7 @@ export default function Home() {
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
                     Régularisez votre Airbnb, Riad ou location touristique. 
-                    Obtenez toutes les autorisations nécessaires en toute légalité.
+                    Obtenez toutes les autorisations nécessaires pour louer en toute légalité.
                   </p>
                   
                   {/* Features List */}
@@ -679,7 +677,7 @@ export default function Home() {
               className="text-4xl lg:text-5xl font-bold text-[#071B1E] mb-6"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Actualités et Blog
+              Actualités & Blog
             </h2>
             <p 
               className="text-xl text-gray-600 max-w-3xl mx-auto"

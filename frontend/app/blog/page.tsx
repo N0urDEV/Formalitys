@@ -96,7 +96,7 @@ export default function BlogPage() {
             className="text-5xl lg:text-6xl font-bold mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Actualités et Blog
+            Actualités & Blog
           </h1>
           <p 
             className="text-xl text-white/90 max-w-3xl mx-auto"
