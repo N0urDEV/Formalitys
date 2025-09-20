@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { CompanyDossier, Associate, CompanyData, UploadedFiles } from '../types';
+import { PDFService } from '../../../services/pdfService';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -71,7 +72,7 @@ export const useCompanyDossier = () => {
         
         if (editDossierId) {
           // Load specific dossier for editing
-          const specificDossier = dossiers.find(d => d.id === parseInt(editDossierId));
+          const specificDossier = dossiers.find((d: any) => d.id === parseInt(editDossierId));
           if (specificDossier) {
             setDossier(specificDossier);
             
@@ -149,7 +150,13 @@ export const useCompanyDossier = () => {
     setLoading(true);
     
     try {
-      await fetch(`${API}/dossiers/company/${dossier.id}`, {
+      console.log('Saving step data:', stepData);
+      if (stepData.companyData) {
+        console.log('Company data being saved:', stepData.companyData);
+        console.log('Headquarters selection:', stepData.companyData.headquarters);
+      }
+      
+      const response = await fetch(`${API}/dossiers/company/${dossier.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -157,6 +164,12 @@ export const useCompanyDossier = () => {
         },
         body: JSON.stringify(stepData)
       });
+      
+      if (response.ok) {
+        console.log('Step data saved successfully');
+      } else {
+        console.error('Failed to save step data:', response.status);
+      }
     } catch (err) {
       console.error('Error saving step:', err);
     } finally {
@@ -164,8 +177,8 @@ export const useCompanyDossier = () => {
     }
   };
 
-  const handleFileUpload = async (files: File[]) => {
-    console.log('handleFileUpload called with files:', files.length, files.map(f => f.name));
+  const handleFileUpload = async (files: File[], documentType: string) => {
+    console.log('handleFileUpload called with files:', files.length, files.map(f => f.name), 'documentType:', documentType);
     
     const token = localStorage.getItem('token');
     const formData = new FormData();
@@ -173,6 +186,9 @@ export const useCompanyDossier = () => {
     files.forEach(file => {
       formData.append('files', file);
     });
+    
+    // Add document type to the request
+    formData.append('documentType', documentType);
 
     const response = await fetch(`${API}/uploads/multiple`, {
       method: 'POST',
@@ -189,7 +205,7 @@ export const useCompanyDossier = () => {
     const result = await response.json();
     console.log('Upload result:', result);
     
-    // Update dossier with uploaded files
+    // Update dossier with uploaded files (document type is now set by backend)
     const currentFiles = dossier?.uploadedFiles || [];
     console.log('Current files before update:', currentFiles.length);
     const newFiles = [...currentFiles, ...result.files];
@@ -205,27 +221,56 @@ export const useCompanyDossier = () => {
   };
 
   const downloadPdf = async () => {
-    if (!dossier) return;
+    console.log('Download PDF clicked!', { dossier, companyData, associates });
+    if (!dossier) {
+      console.log('No dossier found');
+      return;
+    }
     
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${API}/pdf/company/${dossier.id}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      // Get user data from localStorage or API
+      const userData = {
+        name: localStorage.getItem('userName') || 'Utilisateur',
+        email: localStorage.getItem('userEmail') || '',
+        phone: localStorage.getItem('userPhone') || '',
+      };
 
-      if (!response.ok) {
-        throw new Error('Erreur lors de la génération du PDF');
-      }
+      // Prepare dossier data for PDF
+      const dossierData = {
+        id: dossier.id,
+        companyName: companyData.companyName,
+        headquarters: companyData.headquarters,
+        capital: companyData.capital,
+        selectedBank: companyData.selectedBank,
+        activities: companyData.activities,
+        proposedNames: companyData.proposedNames,
+        associates: associates,
+        createdAt: dossier.createdAt,
+        status: dossier.status,
+        // Additional company information
+        raisonSociale: companyData.raisonSociale,
+        formeJuridique: companyData.formeJuridique,
+        nationalite: companyData.nationalite,
+        adresseSiege: companyData.adresseSiege,
+        villeSiege: companyData.villeSiege,
+        professionActivite: companyData.professionActivite,
+        telephone: companyData.telephone,
+        fax: companyData.fax,
+        email: companyData.email,
+        numeroArticleTaxeProfessionnelle: companyData.numeroArticleTaxeProfessionnelle,
+        numeroArticleTaxeServicesCommunaux: companyData.numeroArticleTaxeServicesCommunaux,
+        numeroAffiliationCNSS: companyData.numeroAffiliationCNSS,
+        numeroRegistreCommerce: companyData.numeroRegistreCommerce,
+        villeRegistreCommerce: companyData.villeRegistreCommerce,
+        referenceDepotDeclaration: companyData.referenceDepotDeclaration,
+        dateDepotDeclaration: companyData.dateDepotDeclaration,
+      };
 
-      const blob = await response.blob();
-      const { saveAs } = await import('file-saver');
-      saveAs(blob, `dossier-creation-societe-${dossier.id}.pdf`);
+      // Generate and download PDF using React PDF
+      await PDFService.generateAndDownloadCompanyDossier(userData, dossierData);
     } catch (error) {
-      console.error('Error downloading PDF:', error);
-      alert('Erreur lors du téléchargement du PDF');
+      console.error('Error generating PDF:', error);
+      alert('Erreur lors de la génération du PDF');
     }
   };
 

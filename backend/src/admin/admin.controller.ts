@@ -69,6 +69,17 @@ export class AdminController {
     return this.adminService.getDashboardStats();
   }
 
+  // All Dossiers with Files
+  @Get('dossiers')
+  getAllDossiersWithFiles(
+    @Query('page') page = 1,
+    @Query('limit') limit = 20,
+    @Query('type') type?: 'company' | 'tourism',
+    @Query('status') status?: DossierStatus,
+  ) {
+    return this.adminService.getAllDossiersWithFiles(+page, +limit, type, status);
+  }
+
   // Company Dossiers
   @Get('company-dossiers')
   getCompanyDossiers(
@@ -82,6 +93,11 @@ export class AdminController {
   @Get('company-dossiers/:id')
   getCompanyDossier(@Param('id', ParseIntPipe) id: number) {
     return this.adminService.getCompanyDossier(id);
+  }
+
+  @Get('company-dossiers/:id/files')
+  getCompanyDossierWithFiles(@Param('id', ParseIntPipe) id: number) {
+    return this.adminService.getCompanyDossierWithFiles(id);
   }
 
   @Put('company-dossiers/:id/status')
@@ -105,6 +121,11 @@ export class AdminController {
   @Get('tourism-dossiers/:id')
   getTourismDossier(@Param('id', ParseIntPipe) id: number) {
     return this.adminService.getTourismDossier(id);
+  }
+
+  @Get('tourism-dossiers/:id/files')
+  getTourismDossierWithFiles(@Param('id', ParseIntPipe) id: number) {
+    return this.adminService.getTourismDossierWithFiles(id);
   }
 
   @Put('tourism-dossiers/:id/status')

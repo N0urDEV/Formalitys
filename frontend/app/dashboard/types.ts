@@ -4,10 +4,40 @@ export interface Dossier {
   currentStep: number;
   createdAt: string;
   amountPaid?: number;
-  companyName?: string;
-  ownerInfo?: any;
-  associates?: any[];
   type: 'company' | 'tourism';
+  
+  // Company fields
+  companyName?: string;
+  headquarters?: string;
+  capital?: number;
+  selectedBank?: string;
+  activities?: string[];
+  proposedNames?: string[];
+  associates?: any[];
+  raisonSociale?: string;
+  formeJuridique?: string;
+  nationalite?: string;
+  adresseSiege?: string;
+  villeSiege?: string;
+  professionActivite?: string;
+  telephone?: string;
+  fax?: string;
+  email?: string;
+  numeroArticleTaxeProfessionnelle?: string;
+  numeroArticleTaxeServicesCommunaux?: string;
+  numeroAffiliationCNSS?: string;
+  numeroRegistreCommerce?: string;
+  villeRegistreCommerce?: string;
+  referenceDepotDeclaration?: string;
+  dateDepotDeclaration?: string;
+  
+  // Tourism fields
+  establishmentName?: string;
+  establishmentType?: string;
+  address?: string;
+  city?: string;
+  capacity?: number;
+  ownerInfo?: any;
 }
 
 export interface User {

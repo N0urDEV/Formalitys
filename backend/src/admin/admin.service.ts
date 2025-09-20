@@ -1,11 +1,86 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
+import { S3Service } from '../s3/s3.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { DossierStatus } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService, private readonly s3: S3Service) {}
+
+  // Get all dossiers with files for admin dashboard
+  async getAllDossiersWithFiles(page = 1, limit = 20, type?: 'company' | 'tourism', status?: DossierStatus) {
+    const skip = (page - 1) * limit;
+    
+    const [companyDossiers, tourismDossiers, companyTotal, tourismTotal] = await Promise.all([
+      type !== 'tourism' ? this.prisma.companyDossier.findMany({
+        where: status ? { status } : {},
+        skip: type === 'company' ? skip : 0,
+        take: type === 'company' ? limit : 0,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          user: { select: { id: true, name: true, email: true, phone: true } },
+        },
+      }) : [],
+      type !== 'company' ? this.prisma.tourismDossier.findMany({
+        where: status ? { status } : {},
+        skip: type === 'tourism' ? skip : 0,
+        take: type === 'tourism' ? limit : 0,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          user: { select: { id: true, name: true, email: true, phone: true } },
+        },
+      }) : [],
+      type !== 'tourism' ? this.prisma.companyDossier.count({ where: status ? { status } : {} }) : 0,
+      type !== 'company' ? this.prisma.tourismDossier.count({ where: status ? { status } : {} }) : 0,
+    ]);
+
+    // Process dossiers to include file information
+    const processedCompanyDossiers = await Promise.all(companyDossiers.map(async dossier => ({
+      ...dossier,
+      type: 'company' as const,
+      uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
+        id: file.id,
+        filename: file.filename,
+        originalName: file.originalName,
+        documentType: file.documentType,
+        size: file.size,
+        mimetype: file.mimetype,
+        url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
+        uploadedAt: file.uploadedAt,
+      }))),
+    })));
+
+    const processedTourismDossiers = await Promise.all(tourismDossiers.map(async dossier => ({
+      ...dossier,
+      type: 'tourism' as const,
+      uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
+        id: file.id,
+        filename: file.filename,
+        originalName: file.originalName,
+        documentType: file.documentType,
+        size: file.size,
+        mimetype: file.mimetype,
+        url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
+        uploadedAt: file.uploadedAt,
+      }))),
+    })));
+
+    // Combine and sort all dossiers
+    const allDossiers = [...processedCompanyDossiers, ...processedTourismDossiers]
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+    const total = companyTotal + tourismTotal;
+    const totalPages = Math.ceil(total / limit);
+
+    return {
+      dossiers: allDossiers,
+      total,
+      pages: totalPages,
+      companyTotal,
+      tourismTotal,
+    };
+  }
 
   // Dashboard Statistics
   async getDashboardStats() {
@@ -77,6 +152,36 @@ export class AdminService {
     });
   }
 
+  async getCompanyDossierWithFiles(id: number) {
+    const dossier = await this.prisma.companyDossier.findUnique({
+      where: { id },
+      include: {
+        user: { select: { id: true, name: true, email: true, phone: true } },
+      },
+    });
+
+    if (!dossier) {
+      return null;
+    }
+
+    // Extract uploaded files from dossier data
+    const uploadedFiles = Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : [];
+    
+    return {
+      ...dossier,
+      uploadedFiles: uploadedFiles.map((file: any) => ({
+        id: file.id,
+        filename: file.filename,
+        originalName: file.originalName,
+        documentType: file.documentType,
+        size: file.size,
+        mimetype: file.mimetype,
+        url: file.url,
+        uploadedAt: file.uploadedAt,
+      })),
+    };
+  }
+
   async updateCompanyDossierStatus(id: number, status: DossierStatus, notes?: string) {
     return this.prisma.companyDossier.update({
       where: { id },
@@ -112,6 +217,36 @@ export class AdminService {
         user: { select: { id: true, name: true, email: true, phone: true } },
       },
     });
+  }
+
+  async getTourismDossierWithFiles(id: number) {
+    const dossier = await this.prisma.tourismDossier.findUnique({
+      where: { id },
+      include: {
+        user: { select: { id: true, name: true, email: true, phone: true } },
+      },
+    });
+
+    if (!dossier) {
+      return null;
+    }
+
+    // Extract uploaded files from dossier data
+    const uploadedFiles = Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : [];
+    
+    return {
+      ...dossier,
+      uploadedFiles: uploadedFiles.map((file: any) => ({
+        id: file.id,
+        filename: file.filename,
+        originalName: file.originalName,
+        documentType: file.documentType,
+        size: file.size,
+        mimetype: file.mimetype,
+        url: file.url,
+        uploadedAt: file.uploadedAt,
+      })),
+    };
   }
 
   async updateTourismDossierStatus(id: number, status: DossierStatus, notes?: string) {

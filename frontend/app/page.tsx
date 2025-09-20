@@ -148,7 +148,8 @@ export default function Home() {
               className="text-xl text-gray-600 max-w-3xl mx-auto"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Un processus simple et transparent en 4 étapes pour vos démarches juridiques
+              Un processus simple et transparent<br />
+              en 4 étapes pour vos démarches juridiques
             </p>
           </div>
 
@@ -405,7 +406,7 @@ export default function Home() {
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
                     Régularisez votre Airbnb, Riad ou location touristique. 
-                    Obtenez toutes les autorisations nécessaires pour louer en toute légalité.
+                    <strong> Obtenez toutes les autorisations nécessaires pour louer en toute légalité.</strong>
                   </p>
                   
                   {/* Features List */}
@@ -431,7 +432,7 @@ export default function Home() {
                       className="inline-flex items-center justify-center w-full bg-[#F66B4C] text-white px-6 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Régulariser mon activité
+                      Régulariser mes locations
                       <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>

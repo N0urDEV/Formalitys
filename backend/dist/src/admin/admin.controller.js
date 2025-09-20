@@ -105,11 +105,17 @@ let AdminController = class AdminController {
     getDashboardStats() {
         return this.adminService.getDashboardStats();
     }
+    getAllDossiersWithFiles(page = 1, limit = 20, type, status) {
+        return this.adminService.getAllDossiersWithFiles(+page, +limit, type, status);
+    }
     getCompanyDossiers(page = 1, limit = 20, status) {
         return this.adminService.getCompanyDossiers(+page, +limit, status);
     }
     getCompanyDossier(id) {
         return this.adminService.getCompanyDossier(id);
+    }
+    getCompanyDossierWithFiles(id) {
+        return this.adminService.getCompanyDossierWithFiles(id);
     }
     updateCompanyDossierStatus(id, dto) {
         return this.adminService.updateCompanyDossierStatus(id, dto.status, dto.notes);
@@ -119,6 +125,9 @@ let AdminController = class AdminController {
     }
     getTourismDossier(id) {
         return this.adminService.getTourismDossier(id);
+    }
+    getTourismDossierWithFiles(id) {
+        return this.adminService.getTourismDossierWithFiles(id);
     }
     updateTourismDossierStatus(id, dto) {
         return this.adminService.updateTourismDossierStatus(id, dto.status, dto.notes);
@@ -156,6 +165,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "getDashboardStats", null);
 __decorate([
+    (0, common_1.Get)('dossiers'),
+    __param(0, (0, common_1.Query)('page')),
+    __param(1, (0, common_1.Query)('limit')),
+    __param(2, (0, common_1.Query)('type')),
+    __param(3, (0, common_1.Query)('status')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, String, String]),
+    __metadata("design:returntype", void 0)
+], AdminController.prototype, "getAllDossiersWithFiles", null);
+__decorate([
     (0, common_1.Get)('company-dossiers'),
     __param(0, (0, common_1.Query)('page')),
     __param(1, (0, common_1.Query)('limit')),
@@ -171,6 +190,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "getCompanyDossier", null);
+__decorate([
+    (0, common_1.Get)('company-dossiers/:id/files'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], AdminController.prototype, "getCompanyDossierWithFiles", null);
 __decorate([
     (0, common_1.Put)('company-dossiers/:id/status'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
@@ -195,6 +221,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "getTourismDossier", null);
+__decorate([
+    (0, common_1.Get)('tourism-dossiers/:id/files'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], AdminController.prototype, "getTourismDossierWithFiles", null);
 __decorate([
     (0, common_1.Put)('tourism-dossiers/:id/status'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

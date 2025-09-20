@@ -6,21 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PdfModule = void 0;
+exports.S3Module = void 0;
 const common_1 = require("@nestjs/common");
-const pdf_service_1 = require("./pdf.service");
-const pdf_controller_1 = require("./pdf.controller");
-const dossiers_module_1 = require("../dossiers/dossiers.module");
-const users_module_1 = require("../users/users.module");
-let PdfModule = class PdfModule {
+const config_1 = require("@nestjs/config");
+const s3_service_1 = require("./s3.service");
+let S3Module = class S3Module {
 };
-exports.PdfModule = PdfModule;
-exports.PdfModule = PdfModule = __decorate([
+exports.S3Module = S3Module;
+exports.S3Module = S3Module = __decorate([
     (0, common_1.Module)({
-        imports: [dossiers_module_1.DossiersModule, users_module_1.UsersModule],
-        providers: [pdf_service_1.PdfService],
-        controllers: [pdf_controller_1.PdfController],
-        exports: [pdf_service_1.PdfService],
+        imports: [config_1.ConfigModule],
+        providers: [s3_service_1.S3Service],
+        exports: [s3_service_1.S3Service],
     })
-], PdfModule);
-//# sourceMappingURL=pdf.module.js.map
+], S3Module);
+//# sourceMappingURL=s3.module.js.map

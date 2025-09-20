@@ -30,12 +30,23 @@ export class PaymentsService {
         where: { id: dossierId }
       });
       
+      console.log('Payment calculation - Company dossier:', {
+        id: dossierId,
+        headquarters: companyDossier?.headquarters,
+        currentStep: companyDossier?.currentStep
+      });
+      
       baseAmount = 360000; // 3600 MAD base price
       
       // Add domiciliation fee if selected
       if (companyDossier?.headquarters === 'contrat_domiciliation') {
+        console.log('Adding domiciliation fee: +2100 MAD');
         baseAmount += 210000; // +2100 MAD for domiciliation
+      } else {
+        console.log('No domiciliation fee - headquarters:', companyDossier?.headquarters);
       }
+      
+      console.log('Final base amount:', baseAmount, 'MAD');
     } else if (dossierType === 'tourism') {
       baseAmount = 160000; // 1600 MAD
     }
@@ -138,7 +149,7 @@ export class PaymentsService {
           data: {
             paymentStatus: 'succeeded',
             status: 'PAID',
-            currentStep: 3, // Move to step 3 after payment
+            currentStep: 4, // Move to step 4 after payment (step 3 is payment)
           },
         });
         
@@ -152,7 +163,7 @@ export class PaymentsService {
           data: {
             paymentStatus: 'succeeded',
             status: 'PAID',
-            currentStep: 3, // Move to step 3 after payment
+            currentStep: 4, // Move to step 4 after payment (step 3 is payment)
           },
         });
         

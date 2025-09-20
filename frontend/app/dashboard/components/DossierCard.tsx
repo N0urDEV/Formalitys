@@ -19,6 +19,11 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
         return { text: 'Payé', class: 'bg-blue-100 text-blue-800' };
       case 'IN_PROGRESS':
         return { text: 'En cours', class: 'bg-yellow-100 text-yellow-800' };
+      case 'PENDING_PAYMENT':
+        return { text: 'En attente de paiement', class: 'bg-orange-100 text-orange-800' };
+      case 'CANCELLED':
+        return { text: 'Annulé', class: 'bg-red-100 text-red-800' };
+      case 'DRAFT':
       default:
         return { text: 'Brouillon', class: 'bg-gray-100 text-gray-800' };
     }
@@ -26,12 +31,15 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
 
   const statusInfo = getStatusInfo(dossier.status);
   
-  // Check if dossier is completed (all steps done)
+  // Check if dossier is completed (all steps done and paid)
   const isCompleted = dossier.status === 'COMPLETED' || 
     (dossier.status === 'PAID' && (
       (dossier.type === 'company' && dossier.currentStep >= 5) ||
       (dossier.type === 'tourism' && dossier.currentStep >= 6)
-    ));
+    )) ||
+    // Also consider completed if all steps are done regardless of status
+    ((dossier.type === 'company' && dossier.currentStep >= 5) ||
+     (dossier.type === 'tourism' && dossier.currentStep >= 6));
 
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-white/20 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]">

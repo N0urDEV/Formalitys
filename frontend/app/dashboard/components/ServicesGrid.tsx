@@ -8,7 +8,7 @@ const services: Service[] = [
     title: 'Création de société SARL',
     description: 'Créez votre société en ligne au Maroc avec un accompagnement complet. De la constitution des dossiers à l\'obtention de tous les documents officiels.',
     price: '3 600 DH',
-    priceNote: '+ options',
+    priceNote: '',
     features: [
       'Constitution complète de votre SARL',
       'Obtention certificat négatif OMPIC',
@@ -27,10 +27,10 @@ const services: Service[] = [
   },
   {
     id: 'tourism',
-    title: 'Formalités hébergements touristiques',
-    description: 'Régularisez votre Airbnb, Riad ou location touristique. Obtenez toutes les autorisations nécessaires en toute légalité.',
+    title: 'Formalités pour hébergements touristiques',
+    description: 'Régularisez votre Airbnb, Riad ou location touristique. Obtenez toutes les autorisations nécessaires pour louer en toute légalité.',
     price: '1 600 DH',
-    priceNote: 'prix fixe',
+    priceNote: '',
     features: [
       'Validation complète des documents',
       'Autorisations administratives',

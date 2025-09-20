@@ -40,10 +40,48 @@ let DossiersService = class DossiersService {
     }
     async updateCompanyDossier(id, userId, data) {
         const dossier = await this.getCompanyDossier(id, userId);
-        const updateData = { ...data, updatedAt: new Date() };
+        const updateData = {
+            currentStep: data.currentStep,
+            updatedAt: new Date()
+        };
+        if (data.currentStep >= 5) {
+            updateData.status = 'COMPLETED';
+        }
+        if (data.companyData) {
+            const companyData = data.companyData;
+            updateData.companyName = companyData.companyName;
+            updateData.activities = companyData.activities;
+            updateData.proposedNames = companyData.proposedNames;
+            updateData.headquarters = companyData.headquarters;
+            updateData.capital = companyData.capital;
+            updateData.selectedBank = companyData.selectedBank;
+            updateData.raisonSociale = companyData.raisonSociale;
+            updateData.formeJuridique = companyData.formeJuridique;
+            updateData.nationalite = companyData.nationalite;
+            updateData.adresseSiege = companyData.adresseSiege;
+            updateData.villeSiege = companyData.villeSiege;
+            updateData.professionActivite = companyData.professionActivite;
+            updateData.telephone = companyData.telephone;
+            updateData.fax = companyData.fax;
+            updateData.email = companyData.email;
+            updateData.numeroArticleTaxeProfessionnelle = companyData.numeroArticleTaxeProfessionnelle;
+            updateData.numeroArticleTaxeServicesCommunaux = companyData.numeroArticleTaxeServicesCommunaux;
+            updateData.numeroAffiliationCNSS = companyData.numeroAffiliationCNSS;
+            updateData.numeroRegistreCommerce = companyData.numeroRegistreCommerce;
+            updateData.villeRegistreCommerce = companyData.villeRegistreCommerce;
+            updateData.referenceDepotDeclaration = companyData.referenceDepotDeclaration;
+            updateData.dateDepotDeclaration = companyData.dateDepotDeclaration;
+        }
+        if (data.associates) {
+            updateData.associates = data.associates;
+        }
         if (data.uploadedFiles === undefined && dossier.uploadedFiles) {
             updateData.uploadedFiles = dossier.uploadedFiles;
         }
+        else if (data.uploadedFiles) {
+            updateData.uploadedFiles = data.uploadedFiles;
+        }
+        console.log('Updating company dossier with data:', updateData);
         return this.prisma.companyDossier.update({
             where: { id },
             data: updateData,
@@ -83,6 +121,9 @@ let DossiersService = class DossiersService {
         }
         if (data.uploadedPhotos === undefined && dossier.uploadedPhotos) {
             updateData.uploadedPhotos = dossier.uploadedPhotos;
+        }
+        if (data.currentStep >= 6) {
+            updateData.status = 'COMPLETED';
         }
         return this.prisma.tourismDossier.update({
             where: { id },

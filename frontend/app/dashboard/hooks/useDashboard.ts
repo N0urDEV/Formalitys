@@ -148,21 +148,74 @@ export const useDashboard = () => {
 
   const downloadPdf = async (dossierId: number, type: 'company' | 'tourism') => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${API}/pdf/${type}/${dossierId}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Erreur lors de la génération du PDF');
+      // Find the dossier in the current list
+      const dossier = dossiers.find(d => d.id === dossierId && d.type === type);
+      if (!dossier) {
+        throw new Error('Dossier non trouvé');
       }
 
-      const blob = await response.blob();
-      const { saveAs } = await import('file-saver');
-      saveAs(blob, `dossier-${type}-${dossierId}.pdf`);
+      // Get user data
+      const userData = {
+        name: user?.name || 'Utilisateur',
+        email: user?.email || '',
+        phone: user?.phone || '',
+      };
+
+      if (type === 'company') {
+        // Import and use the company PDF service
+        const { PDFService } = await import('../../services/pdfService');
+        
+        // Prepare dossier data for PDF
+        const dossierData = {
+          id: dossier.id,
+          companyName: dossier.companyName || '',
+          headquarters: dossier.headquarters || '',
+          capital: dossier.capital || 0,
+          selectedBank: dossier.selectedBank || '',
+          activities: dossier.activities || [],
+          proposedNames: dossier.proposedNames || [],
+          associates: dossier.associates || [],
+          createdAt: dossier.createdAt,
+          status: dossier.status,
+          // Additional company information
+          raisonSociale: dossier.raisonSociale || '',
+          formeJuridique: dossier.formeJuridique || '',
+          nationalite: dossier.nationalite || '',
+          adresseSiege: dossier.adresseSiege || '',
+          villeSiege: dossier.villeSiege || '',
+          professionActivite: dossier.professionActivite || '',
+          telephone: dossier.telephone || '',
+          fax: dossier.fax || '',
+          email: dossier.email || '',
+          numeroArticleTaxeProfessionnelle: dossier.numeroArticleTaxeProfessionnelle || '',
+          numeroArticleTaxeServicesCommunaux: dossier.numeroArticleTaxeServicesCommunaux || '',
+          numeroAffiliationCNSS: dossier.numeroAffiliationCNSS || '',
+          numeroRegistreCommerce: dossier.numeroRegistreCommerce || '',
+          villeRegistreCommerce: dossier.villeRegistreCommerce || '',
+          referenceDepotDeclaration: dossier.referenceDepotDeclaration || '',
+          dateDepotDeclaration: dossier.dateDepotDeclaration || '',
+        };
+
+        await PDFService.generateAndDownloadCompanyDossier(userData, dossierData);
+      } else {
+        // Import and use the tourism PDF service
+        const { PDFService } = await import('../../services/pdfService');
+        
+        // Prepare dossier data for PDF
+        const dossierData = {
+          id: dossier.id,
+          establishmentName: dossier.establishmentName || '',
+          establishmentType: dossier.establishmentType || '',
+          address: dossier.address || '',
+          city: dossier.city || '',
+          capacity: dossier.capacity || 0,
+          ownerInfo: dossier.ownerInfo || {},
+          createdAt: dossier.createdAt,
+          status: dossier.status,
+        };
+
+        await PDFService.generateAndDownloadTourismDossier(userData, dossierData);
+      }
     } catch (error) {
       console.error('Error downloading PDF:', error);
       alert('Erreur lors du téléchargement du PDF');

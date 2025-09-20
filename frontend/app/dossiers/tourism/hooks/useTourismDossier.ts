@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { TourismDossier, OwnerInfo, EstablishmentInfo, UploadedFiles, QuestionnaireAnswers } from '../types';
+import { PDFService } from '../../../services/pdfService';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -180,6 +181,9 @@ export const useTourismDossier = () => {
     files.forEach(file => {
       formData.append('files', file);
     });
+    
+    // Add document type to the request
+    formData.append('documentType', documentType);
 
     try {
       const response = await fetch(`${API}/uploads/multiple`, {
@@ -196,10 +200,22 @@ export const useTourismDossier = () => {
 
       const result = await response.json();
       
+      // Convert uploaded files to the correct format
+      const uploadedFiles = result.files.map((file: any) => ({
+        id: file.id || file.filename,
+        filename: file.filename,
+        originalName: file.originalName || file.filename,
+        documentType: documentType,
+        size: file.size,
+        mimetype: file.mimetype,
+        url: file.url,
+        uploadedAt: file.uploadedAt || new Date().toISOString()
+      }));
+
       // Update the uploaded files state
       setUploadedFiles(prev => ({
         ...prev,
-        [documentType]: files
+        [documentType]: [...(prev[documentType] || []), ...uploadedFiles]
       }));
 
       // Update dossier with uploaded files
@@ -236,24 +252,33 @@ export const useTourismDossier = () => {
     if (!dossier) return;
     
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${API}/pdf/tourism/${dossier.id}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      // Get user data from localStorage or API
+      const userData = {
+        name: localStorage.getItem('userName') || 'Utilisateur',
+        email: localStorage.getItem('userEmail') || '',
+        phone: localStorage.getItem('userPhone') || '',
+      };
 
-      if (!response.ok) {
-        throw new Error('Erreur lors de la génération du PDF');
-      }
+      // Prepare dossier data for PDF
+      const dossierData = {
+        id: dossier.id,
+        establishmentName: establishmentInfo.name,
+        establishmentType: establishmentInfo.type,
+        address: establishmentInfo.address,
+        city: establishmentInfo.city,
+        capacity: establishmentInfo.capacity,
+        ownerInfo: ownerInfo,
+        establishmentInfo: establishmentInfo,
+        questionnaireAnswers: questionnaireAnswers,
+        createdAt: dossier.createdAt,
+        status: dossier.status,
+      };
 
-      const blob = await response.blob();
-      const { saveAs } = await import('file-saver');
-      saveAs(blob, `dossier-tourisme-${dossier.id}.pdf`);
+      // Generate and download PDF using React PDF
+      await PDFService.generateAndDownloadTourismDossier(userData, dossierData);
     } catch (error) {
-      console.error('Error downloading PDF:', error);
-      alert('Erreur lors du téléchargement du PDF');
+      console.error('Error generating PDF:', error);
+      alert('Erreur lors de la génération du PDF');
     }
   };
 

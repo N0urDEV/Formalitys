@@ -26,11 +26,56 @@ export interface EstablishmentInfo {
 }
 
 export interface UploadedFiles {
-  cni: File[];
-  titreFoncier: File[];
-  permisHabiter: File[];
-  assurance: File[];
-  photos: File[];
+  cni: Array<{
+    id: string;
+    filename: string;
+    originalName: string;
+    documentType: string;
+    size: number;
+    mimetype: string;
+    url: string;
+    uploadedAt: string;
+  }>;
+  titreFoncier: Array<{
+    id: string;
+    filename: string;
+    originalName: string;
+    documentType: string;
+    size: number;
+    mimetype: string;
+    url: string;
+    uploadedAt: string;
+  }>;
+  permisHabiter: Array<{
+    id: string;
+    filename: string;
+    originalName: string;
+    documentType: string;
+    size: number;
+    mimetype: string;
+    url: string;
+    uploadedAt: string;
+  }>;
+  assurance: Array<{
+    id: string;
+    filename: string;
+    originalName: string;
+    documentType: string;
+    size: number;
+    mimetype: string;
+    url: string;
+    uploadedAt: string;
+  }>;
+  photos: Array<{
+    id: string;
+    filename: string;
+    originalName: string;
+    documentType: string;
+    size: number;
+    mimetype: string;
+    url: string;
+    uploadedAt: string;
+  }>;
 }
 
 export interface QuestionnaireAnswers {

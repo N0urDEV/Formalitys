@@ -1,8 +1,17 @@
+import { S3Service } from '../s3/s3.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { DossierStatus } from '@prisma/client';
 export declare class AdminService {
     private readonly prisma;
-    constructor(prisma: PrismaService);
+    private readonly s3;
+    constructor(prisma: PrismaService, s3: S3Service);
+    getAllDossiersWithFiles(page?: number, limit?: number, type?: 'company' | 'tourism', status?: DossierStatus): Promise<{
+        dossiers: any[];
+        total: number;
+        pages: number;
+        companyTotal: number;
+        tourismTotal: number;
+    }>;
     getDashboardStats(): Promise<{
         totalUsers: number;
         totalCompanyDossiers: number;
@@ -151,6 +160,60 @@ export declare class AdminService {
         discountReason: string | null;
         userId: number;
     }) | null>;
+    getCompanyDossierWithFiles(id: number): Promise<{
+        uploadedFiles: {
+            id: any;
+            filename: any;
+            originalName: any;
+            documentType: any;
+            size: any;
+            mimetype: any;
+            url: any;
+            uploadedAt: any;
+        }[];
+        user: {
+            id: number;
+            email: string;
+            phone: string | null;
+            name: string | null;
+        };
+        id: number;
+        email: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        status: import("@prisma/client").$Enums.DossierStatus;
+        currentStep: number;
+        associates: import("@prisma/client/runtime/library").JsonValue | null;
+        companyName: string | null;
+        activities: import("@prisma/client/runtime/library").JsonValue | null;
+        proposedNames: import("@prisma/client/runtime/library").JsonValue | null;
+        headquarters: string | null;
+        capital: number | null;
+        selectedBank: string | null;
+        raisonSociale: string | null;
+        formeJuridique: string | null;
+        nationalite: string | null;
+        adresseSiege: string | null;
+        villeSiege: string | null;
+        professionActivite: string | null;
+        telephone: string | null;
+        fax: string | null;
+        numeroArticleTaxeProfessionnelle: string | null;
+        numeroArticleTaxeServicesCommunaux: string | null;
+        numeroAffiliationCNSS: string | null;
+        numeroRegistreCommerce: string | null;
+        villeRegistreCommerce: string | null;
+        referenceDepotDeclaration: string | null;
+        dateDepotDeclaration: string | null;
+        paymentIntentId: string | null;
+        paymentStatus: string | null;
+        amountPaid: number | null;
+        originalPrice: number | null;
+        discountApplied: number;
+        finalPrice: number | null;
+        discountReason: string | null;
+        userId: number;
+    } | null>;
     updateCompanyDossierStatus(id: number, status: DossierStatus, notes?: string): Promise<{
         id: number;
         email: string | null;
@@ -250,6 +313,42 @@ export declare class AdminService {
         complianceAnswers: import("@prisma/client/runtime/library").JsonValue | null;
         uploadedPhotos: import("@prisma/client/runtime/library").JsonValue | null;
     }) | null>;
+    getTourismDossierWithFiles(id: number): Promise<{
+        uploadedFiles: {
+            id: any;
+            filename: any;
+            originalName: any;
+            documentType: any;
+            size: any;
+            mimetype: any;
+            url: any;
+            uploadedAt: any;
+        }[];
+        user: {
+            id: number;
+            email: string;
+            phone: string | null;
+            name: string | null;
+        };
+        id: number;
+        createdAt: Date;
+        updatedAt: Date;
+        status: import("@prisma/client").$Enums.DossierStatus;
+        currentStep: number;
+        paymentIntentId: string | null;
+        paymentStatus: string | null;
+        amountPaid: number | null;
+        originalPrice: number | null;
+        discountApplied: number;
+        finalPrice: number | null;
+        discountReason: string | null;
+        userId: number;
+        ownerInfo: import("@prisma/client/runtime/library").JsonValue | null;
+        establishmentInfo: import("@prisma/client/runtime/library").JsonValue | null;
+        propertyDetails: import("@prisma/client/runtime/library").JsonValue | null;
+        complianceAnswers: import("@prisma/client/runtime/library").JsonValue | null;
+        uploadedPhotos: import("@prisma/client/runtime/library").JsonValue | null;
+    } | null>;
     updateTourismDossierStatus(id: number, status: DossierStatus, notes?: string): Promise<{
         id: number;
         createdAt: Date;

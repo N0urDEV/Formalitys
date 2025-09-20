@@ -62,7 +62,7 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateStep2 = (companyData: CompanyData): boolean => {
+  const validateStep2Headquarters = (companyData: CompanyData): boolean => {
     const stepErrorsList: string[] = [];
     
     if (!companyData.headquarters) {
@@ -77,7 +77,7 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateStep4 = (companyData: CompanyData): boolean => {
+  const validateStep2 = (companyData: CompanyData): boolean => {
     const stepErrorsList: string[] = [];
     
     if (!companyData.companyName.trim()) {
@@ -133,14 +133,16 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateCurrentStep = (currentStep: number, data: any): boolean => {
+  const validateStep = (currentStep: number, data: any): boolean => {
     switch (currentStep) {
       case 1:
         return validateStep1(data.associates);
       case 2:
-        return validateStep2(data.companyData);
+        return validateStep2Headquarters(data.companyData);
+      case 3:
+        return true; // Payment step - no validation needed
       case 4:
-        return validateStep4(data.companyData);
+        return validateStep2(data.companyData);
       default:
         return true;
     }
@@ -154,14 +156,23 @@ export const useValidation = () => {
     });
   };
 
+  const clearStepErrors = (step: number) => {
+    setStepErrors(prev => {
+      const newStepErrors = { ...prev };
+      delete newStepErrors[step];
+      return newStepErrors;
+    });
+  };
+
   return {
     errors,
     stepErrors,
     validateStep1,
     validateStep2,
-    validateStep4,
-    validateCurrentStep,
+    validateStep2Headquarters,
+    validateStep,
     clearFieldError,
+    clearStepErrors,
     setErrors,
     setStepErrors
   };

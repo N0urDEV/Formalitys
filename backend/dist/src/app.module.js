@@ -17,16 +17,16 @@ const dossiers_module_1 = require("./dossiers/dossiers.module");
 const uploads_module_1 = require("./uploads/uploads.module");
 const payments_module_1 = require("./payments/payments.module");
 const admin_module_1 = require("./admin/admin.module");
-const pdf_module_1 = require("./pdf/pdf.module");
 const blog_module_1 = require("./blog/blog.module");
 const discount_module_1 = require("./discount/discount.module");
 const email_module_1 = require("./email/email.module");
+const s3_module_1 = require("./s3/s3.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule, dossiers_module_1.DossiersModule, uploads_module_1.UploadsModule, payments_module_1.PaymentsModule, admin_module_1.AdminModule, pdf_module_1.PdfModule, blog_module_1.BlogModule, discount_module_1.DiscountModule, email_module_1.EmailModule],
+        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule, dossiers_module_1.DossiersModule, uploads_module_1.UploadsModule, payments_module_1.PaymentsModule, admin_module_1.AdminModule, blog_module_1.BlogModule, discount_module_1.DiscountModule, email_module_1.EmailModule, s3_module_1.S3Module],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

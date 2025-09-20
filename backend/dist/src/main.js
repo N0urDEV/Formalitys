@@ -9,8 +9,23 @@ async function bootstrap() {
     app.useStaticAssets((0, path_1.join)(__dirname, '..', 'uploads'), {
         prefix: '/uploads/',
     });
+    const envOrigins = (process.env.CORS_ORIGINS || '')
+        .split(',')
+        .map((o) => o.trim())
+        .filter((o) => o.length > 0);
+    const defaultLocalOrigins = [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/];
+    const parsedEnvOrigins = envOrigins.map((origin) => {
+        if (origin.includes('*')) {
+            const escaped = origin
+                .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+                .replace(/\\\*/g, '.*');
+            return new RegExp(`^${escaped}$`);
+        }
+        return origin;
+    });
+    const corsOrigins = [...defaultLocalOrigins, ...parsedEnvOrigins];
     app.enableCors({
-        origin: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/],
+        origin: corsOrigins.length > 0 ? corsOrigins : defaultLocalOrigins,
         credentials: true,
         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],

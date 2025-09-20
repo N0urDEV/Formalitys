@@ -162,6 +162,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
             </p>
             
             <FormSelect
+              name="selectedBank"
               label="Banque"
               value={companyData.selectedBank}
               onChange={handleBankChange}

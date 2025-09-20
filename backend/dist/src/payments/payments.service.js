@@ -38,10 +38,20 @@ let PaymentsService = class PaymentsService {
             const companyDossier = await this.prisma.companyDossier.findUnique({
                 where: { id: dossierId }
             });
+            console.log('Payment calculation - Company dossier:', {
+                id: dossierId,
+                headquarters: companyDossier?.headquarters,
+                currentStep: companyDossier?.currentStep
+            });
             baseAmount = 360000;
             if (companyDossier?.headquarters === 'contrat_domiciliation') {
+                console.log('Adding domiciliation fee: +2100 MAD');
                 baseAmount += 210000;
             }
+            else {
+                console.log('No domiciliation fee - headquarters:', companyDossier?.headquarters);
+            }
+            console.log('Final base amount:', baseAmount, 'MAD');
         }
         else if (dossierType === 'tourism') {
             baseAmount = 160000;
@@ -127,7 +137,7 @@ let PaymentsService = class PaymentsService {
                     data: {
                         paymentStatus: 'succeeded',
                         status: 'PAID',
-                        currentStep: 3,
+                        currentStep: 4,
                     },
                 });
                 await this.discountService.updateUserDossierCounters(companyDossier.userId);
@@ -138,7 +148,7 @@ let PaymentsService = class PaymentsService {
                     data: {
                         paymentStatus: 'succeeded',
                         status: 'PAID',
-                        currentStep: 3,
+                        currentStep: 4,
                     },
                 });
                 await this.discountService.updateUserDossierCounters(tourismDossier.userId);

@@ -3,6 +3,10 @@ export declare class DossiersController {
     private readonly dossiersService;
     constructor(dossiersService: DossiersService);
     createCompanyDossier(req: any): Promise<{
+        id: number;
+        email: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         associates: import("@prisma/client/runtime/library").JsonValue | null;
@@ -20,7 +24,6 @@ export declare class DossiersController {
         professionActivite: string | null;
         telephone: string | null;
         fax: string | null;
-        email: string | null;
         numeroArticleTaxeProfessionnelle: string | null;
         numeroArticleTaxeServicesCommunaux: string | null;
         numeroAffiliationCNSS: string | null;
@@ -36,12 +39,13 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
     }>;
     getCompanyDossiers(req: any): Promise<{
+        id: number;
+        email: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         associates: import("@prisma/client/runtime/library").JsonValue | null;
@@ -59,7 +63,6 @@ export declare class DossiersController {
         professionActivite: string | null;
         telephone: string | null;
         fax: string | null;
-        email: string | null;
         numeroArticleTaxeProfessionnelle: string | null;
         numeroArticleTaxeServicesCommunaux: string | null;
         numeroAffiliationCNSS: string | null;
@@ -75,12 +78,13 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
     }[]>;
     getCompanyDossier(id: number, req: any): Promise<{
+        id: number;
+        email: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         associates: import("@prisma/client/runtime/library").JsonValue | null;
@@ -98,7 +102,6 @@ export declare class DossiersController {
         professionActivite: string | null;
         telephone: string | null;
         fax: string | null;
-        email: string | null;
         numeroArticleTaxeProfessionnelle: string | null;
         numeroArticleTaxeServicesCommunaux: string | null;
         numeroAffiliationCNSS: string | null;
@@ -114,12 +117,13 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
     }>;
     updateCompanyDossier(id: number, data: any, req: any): Promise<{
+        id: number;
+        email: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         associates: import("@prisma/client/runtime/library").JsonValue | null;
@@ -137,7 +141,6 @@ export declare class DossiersController {
         professionActivite: string | null;
         telephone: string | null;
         fax: string | null;
-        email: string | null;
         numeroArticleTaxeProfessionnelle: string | null;
         numeroArticleTaxeServicesCommunaux: string | null;
         numeroAffiliationCNSS: string | null;
@@ -153,12 +156,13 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
     }>;
     deleteCompanyDossier(id: number, req: any): Promise<{
+        id: number;
+        email: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         associates: import("@prisma/client/runtime/library").JsonValue | null;
@@ -176,7 +180,6 @@ export declare class DossiersController {
         professionActivite: string | null;
         telephone: string | null;
         fax: string | null;
-        email: string | null;
         numeroArticleTaxeProfessionnelle: string | null;
         numeroArticleTaxeServicesCommunaux: string | null;
         numeroAffiliationCNSS: string | null;
@@ -192,12 +195,12 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
     }>;
     createTourismDossier(req: any): Promise<{
+        id: number;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         uploadedFiles: import("@prisma/client/runtime/library").JsonValue | null;
@@ -208,9 +211,6 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
         ownerInfo: import("@prisma/client/runtime/library").JsonValue | null;
         establishmentInfo: import("@prisma/client/runtime/library").JsonValue | null;
@@ -219,6 +219,9 @@ export declare class DossiersController {
         uploadedPhotos: import("@prisma/client/runtime/library").JsonValue | null;
     }>;
     getTourismDossiers(req: any): Promise<{
+        id: number;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         uploadedFiles: import("@prisma/client/runtime/library").JsonValue | null;
@@ -229,9 +232,6 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
         ownerInfo: import("@prisma/client/runtime/library").JsonValue | null;
         establishmentInfo: import("@prisma/client/runtime/library").JsonValue | null;
@@ -240,6 +240,9 @@ export declare class DossiersController {
         uploadedPhotos: import("@prisma/client/runtime/library").JsonValue | null;
     }[]>;
     getTourismDossier(id: number, req: any): Promise<{
+        id: number;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         uploadedFiles: import("@prisma/client/runtime/library").JsonValue | null;
@@ -250,9 +253,6 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
         ownerInfo: import("@prisma/client/runtime/library").JsonValue | null;
         establishmentInfo: import("@prisma/client/runtime/library").JsonValue | null;
@@ -261,6 +261,9 @@ export declare class DossiersController {
         uploadedPhotos: import("@prisma/client/runtime/library").JsonValue | null;
     }>;
     updateTourismDossier(id: number, data: any, req: any): Promise<{
+        id: number;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         uploadedFiles: import("@prisma/client/runtime/library").JsonValue | null;
@@ -271,9 +274,6 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
         ownerInfo: import("@prisma/client/runtime/library").JsonValue | null;
         establishmentInfo: import("@prisma/client/runtime/library").JsonValue | null;
@@ -282,6 +282,9 @@ export declare class DossiersController {
         uploadedPhotos: import("@prisma/client/runtime/library").JsonValue | null;
     }>;
     deleteTourismDossier(id: number, req: any): Promise<{
+        id: number;
+        createdAt: Date;
+        updatedAt: Date;
         status: import("@prisma/client").$Enums.DossierStatus;
         currentStep: number;
         uploadedFiles: import("@prisma/client/runtime/library").JsonValue | null;
@@ -292,9 +295,6 @@ export declare class DossiersController {
         discountApplied: number;
         finalPrice: number | null;
         discountReason: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        id: number;
         userId: number;
         ownerInfo: import("@prisma/client/runtime/library").JsonValue | null;
         establishmentInfo: import("@prisma/client/runtime/library").JsonValue | null;

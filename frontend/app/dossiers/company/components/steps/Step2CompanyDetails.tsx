@@ -8,9 +8,19 @@ interface Step2CompanyDetailsProps {
   companyData: CompanyData;
   setCompanyData: (data: CompanyData) => void;
   stepErrors: StepErrors;
-  onFileUpload: (files: File[]) => Promise<void>;
+  onFileUpload: (files: File[], documentType: string) => Promise<void>;
   calculateTotalPrice: () => number;
   associates: Associate[];
+  uploadedFiles?: Array<{
+    id: string;
+    filename: string;
+    originalName: string;
+    documentType: string;
+    size: number;
+    mimetype: string;
+    url: string;
+    uploadedAt: string;
+  }>;
 }
 
 export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
@@ -19,12 +29,13 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
   stepErrors,
   onFileUpload,
   calculateTotalPrice,
-  associates
+  associates,
+  uploadedFiles = []
 }) => {
 
   const capitalOptions = [
-    { value: 10000, label: '10,000 MAD' },
-    { value: 100000, label: '100,000 MAD' }
+    { value: '10000', label: '10,000 MAD' },
+    { value: '100000', label: '100,000 MAD' }
   ];
 
   const activityOptions = [
@@ -71,7 +82,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                 Veuillez corriger les erreurs suivantes :
               </h3>
               <ul className="space-y-1">
-                {stepErrors[4].map((error, index) => (
+                {stepErrors[4]?.map((error, index) => (
                   <li 
                     key={index} 
                     className="text-red-700 text-sm"
@@ -196,7 +207,6 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               value={companyData.formeJuridique}
               onChange={(value) => setCompanyData({...companyData, formeJuridique: value})}
               options={[
-                { value: '', label: 'Sélectionner une forme juridique' },
                 { value: 'SARL', label: 'SARL (Société à Responsabilité Limitée)' },
                 { value: 'SA', label: 'SA (Société Anonyme)' },
                 { value: 'SNC', label: 'SNC (Société en Nom Collectif)' },
@@ -383,12 +393,14 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                   {associate.prenom} {associate.nom} {associate.isGerant ? '(Gérant)' : ''}
                 </p>
                 <FileUpload
+                  key={`cni-${index}`}
                   title=""
-                  description="Téléchargez la CNI de cet associé"
-                  onUpload={onFileUpload}
-                  acceptedTypes={['image/*', '.pdf']}
+                  description="Téléchargez la CNI de cet associé (PDF uniquement)"
+                  onUpload={(files) => onFileUpload(files, 'cni')}
+                  acceptedTypes={['.pdf']}
                   maxFiles={1}
                   maxSize={5}
+                  currentFiles={uploadedFiles.filter(file => file.documentType === 'cni')}
                 />
               </div>
             ))}
@@ -409,12 +421,18 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                 {companyData.headquarters === 'location_local' && 'Contrat de location du local'}
               </p>
               <FileUpload
+                key="headquarters"
                 title=""
-                description="Téléchargez le document justificatif"
-                onUpload={onFileUpload}
-                acceptedTypes={['image/*', '.pdf']}
+                description="Téléchargez le document justificatif (PDF uniquement)"
+                onUpload={(files) => onFileUpload(files, companyData.headquarters === 'domicile' ? 'justificatif_domicile' : companyData.headquarters === 'contrat_domiciliation' ? 'contrat_domiciliation' : 'location_local')}
+                acceptedTypes={['.pdf']}
                 maxFiles={1}
                 maxSize={5}
+                currentFiles={uploadedFiles.filter(file => 
+                  file.documentType === 'justificatif_domicile' || 
+                  file.documentType === 'contrat_domiciliation' ||
+                  file.documentType === 'location_local'
+                )}
               />
             </div>
           </div>
@@ -433,12 +451,14 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                   {associate.prenom} {associate.nom} {associate.isGerant ? '(Gérant)' : ''}
                 </p>
                 <FileUpload
+                  key={`domicile-${index}`}
                   title=""
-                  description="Téléchargez le justificatif de domicile"
-                  onUpload={onFileUpload}
-                  acceptedTypes={['image/*', '.pdf']}
+                  description="Téléchargez le justificatif de domicile (PDF uniquement)"
+                  onUpload={(files) => onFileUpload(files, 'justificatif_domicile')}
+                  acceptedTypes={['.pdf']}
                   maxFiles={1}
                   maxSize={5}
+                  currentFiles={uploadedFiles.filter(file => file.documentType === 'justificatif_domicile')}
                 />
               </div>
             ))}
@@ -457,12 +477,18 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                 Statuts, procès-verbaux, autres justificatifs
               </p>
               <FileUpload
+                key="autres"
                 title=""
-                description="Téléchargez les autres documents requis"
-                onUpload={onFileUpload}
-                acceptedTypes={['image/*', '.pdf', '.doc', '.docx']}
+                description="Téléchargez les autres documents requis (PDF uniquement)"
+                onUpload={(files) => onFileUpload(files, 'autre')}
+                acceptedTypes={['.pdf']}
                 maxFiles={5}
                 maxSize={10}
+                currentFiles={uploadedFiles.filter(file => 
+                  file.documentType === 'statuts' || 
+                  file.documentType === 'acte_constitution' ||
+                  file.documentType === 'autre'
+                )}
               />
             </div>
           </div>

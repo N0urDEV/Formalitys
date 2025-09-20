@@ -12,6 +12,7 @@ const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
 const path_1 = require("path");
 const prisma_module_1 = require("../prisma/prisma.module");
+const s3_module_1 = require("../s3/s3.module");
 const uploads_controller_1 = require("./uploads.controller");
 let UploadsModule = class UploadsModule {
 };
@@ -20,15 +21,18 @@ exports.UploadsModule = UploadsModule = __decorate([
     (0, common_1.Module)({
         imports: [
             prisma_module_1.PrismaModule,
+            s3_module_1.S3Module,
             platform_express_1.MulterModule.register({
-                storage: (0, multer_1.diskStorage)({
-                    destination: './uploads',
-                    filename: (req, file, cb) => {
-                        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-                        cb(null, `${file.fieldname}-${uniqueSuffix}${(0, path_1.extname)(file.originalname)}`);
-                    },
-                }),
+                storage: (0, multer_1.memoryStorage)(),
                 limits: { fileSize: 10 * 1024 * 1024 },
+                fileFilter: (_req, file, cb) => {
+                    const isPdfMime = file.mimetype === 'application/pdf';
+                    const isPdfExt = (0, path_1.extname)(file.originalname).toLowerCase() === '.pdf';
+                    if (!isPdfMime || !isPdfExt) {
+                        return cb(new Error('Only PDF files are allowed'), false);
+                    }
+                    cb(null, true);
+                },
             }),
         ],
         controllers: [uploads_controller_1.UploadsController],

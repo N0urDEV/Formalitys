@@ -187,7 +187,7 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateCurrentStep = (currentStep: number, data: any): boolean => {
+  const validateStep = (currentStep: number, data: any): boolean => {
     switch (currentStep) {
       case 1:
         return validateStep1(data.ownerInfo);
@@ -210,6 +210,14 @@ export const useValidation = () => {
     });
   };
 
+  const clearStepErrors = (step: number) => {
+    setStepErrors(prev => {
+      const newStepErrors = { ...prev };
+      delete newStepErrors[step];
+      return newStepErrors;
+    });
+  };
+
   return {
     errors,
     stepErrors,
@@ -217,8 +225,9 @@ export const useValidation = () => {
     validateStep2,
     validateStep4,
     validateStep5,
-    validateCurrentStep,
+    validateStep,
     clearFieldError,
+    clearStepErrors,
     setErrors,
     setStepErrors
   };

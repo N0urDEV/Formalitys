@@ -85,11 +85,12 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
           <div className="relative z-10">
             <FileUpload
               title="CNI du propriétaire *"
-              description="Carte nationale d'identité du propriétaire"
+              description="Carte nationale d'identité du propriétaire (PDF uniquement)"
               onUpload={(files) => onDocumentUpload(files, 'cni')}
-              acceptedTypes={['.pdf', '.jpg', '.jpeg', '.png']}
+              acceptedTypes={['.pdf']}
               maxFiles={1}
               maxSize={5}
+              currentFiles={uploadedFiles.cni}
             />
             {uploadedFiles.cni.length > 0 && (
               <div className="mt-3 text-green-600 text-sm">
@@ -105,11 +106,12 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
           <div className="relative z-10">
             <FileUpload
               title="Titre foncier *"
-              description="Document de propriété du terrain"
+              description="Document de propriété du terrain (PDF uniquement)"
               onUpload={(files) => onDocumentUpload(files, 'titreFoncier')}
-              acceptedTypes={['.pdf', '.jpg', '.jpeg', '.png']}
+              acceptedTypes={['.pdf']}
               maxFiles={1}
               maxSize={5}
+              currentFiles={uploadedFiles.titreFoncier}
             />
             {uploadedFiles.titreFoncier.length > 0 && (
               <div className="mt-3 text-green-600 text-sm">
@@ -125,11 +127,12 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
           <div className="relative z-10">
             <FileUpload
               title="Permis d'habiter ou attestation architecte *"
-              description="Normes de sécurité et hygiène"
+              description="Normes de sécurité et hygiène (PDF uniquement)"
               onUpload={(files) => onDocumentUpload(files, 'permisHabiter')}
-              acceptedTypes={['.pdf', '.jpg', '.jpeg', '.png']}
+              acceptedTypes={['.pdf']}
               maxFiles={1}
               maxSize={5}
+              currentFiles={uploadedFiles.permisHabiter}
             />
             {uploadedFiles.permisHabiter.length > 0 && (
               <div className="mt-3 text-green-600 text-sm">
@@ -145,11 +148,12 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
           <div className="relative z-10">
             <FileUpload
               title="Assurance habitation *"
-              description="Police d'assurance de la propriété"
+              description="Police d'assurance de la propriété (PDF uniquement)"
               onUpload={(files) => onDocumentUpload(files, 'assurance')}
-              acceptedTypes={['.pdf', '.jpg', '.jpeg', '.png']}
+              acceptedTypes={['.pdf']}
               maxFiles={1}
               maxSize={5}
+              currentFiles={uploadedFiles.assurance}
             />
             {uploadedFiles.assurance.length > 0 && (
               <div className="mt-3 text-green-600 text-sm">
@@ -165,11 +169,12 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
           <div className="relative z-10">
             <FileUpload
               title="Photos de la propriété *"
-              description="Façade, chambres, cuisine, salle de bains, espaces communs, salon, terrasse, jardin"
+              description="Façade, chambres, cuisine, salle de bains, espaces communs, salon, terrasse, jardin (PDF uniquement)"
               onUpload={(files) => onDocumentUpload(files, 'photos')}
-              acceptedTypes={['image/*']}
+              acceptedTypes={['.pdf']}
               maxFiles={15}
               maxSize={5}
+              currentFiles={uploadedFiles.photos}
             />
             {uploadedFiles.photos.length > 0 && (
               <div className="mt-3 text-green-600 text-sm">
