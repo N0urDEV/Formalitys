@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, Suspense } from 'react';
 import { useTourismDossier } from './hooks/useTourismDossier';
 import { useValidation } from './hooks/useValidation';
 import DossierNavigation from '../components/DossierNavigation';
@@ -23,7 +23,7 @@ const serviceData = {
   }
 };
 
-export default function TourismDossierPage() {
+function TourismDossierPageContent() {
   const {
     dossier,
     currentStep,
@@ -287,5 +287,20 @@ export default function TourismDossierPage() {
       
       <Footer />
     </div>
+  );
+}
+
+export default function TourismDossierPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto mb-4"></div>
+          <p className="text-gray-600">Chargement du dossier...</p>
+        </div>
+      </div>
+    }>
+      <TourismDossierPageContent />
+    </Suspense>
   );
 }
