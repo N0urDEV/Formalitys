@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useCompanyDossier } from './hooks/useCompanyDossier';
 import { useValidation } from './hooks/useValidation';
 import DossierNavigation from '../components/DossierNavigation';
@@ -22,7 +22,7 @@ const serviceData = {
   }
 };
 
-export default function CompanyDossierPage() {
+function CompanyDossierPageContent() {
   const {
     dossier,
     currentStep,
@@ -258,5 +258,20 @@ export default function CompanyDossierPage() {
       
       <Footer />
     </div>
+  );
+}
+
+export default function CompanyDossierPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto mb-4"></div>
+          <p className="text-gray-600">Chargement du dossier...</p>
+        </div>
+      </div>
+    }>
+      <CompanyDossierPageContent />
+    </Suspense>
   );
 }
