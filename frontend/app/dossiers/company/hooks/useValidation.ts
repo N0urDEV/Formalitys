@@ -163,7 +163,7 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateStep4Documents = (companyData: CompanyData, uploadedFiles: any[]): boolean => {
+  const validateStep4Documents = (companyData: CompanyData, uploadedFiles: any): boolean => {
     const stepErrorsList: string[] = [];
     
     // Validate company data first
@@ -174,7 +174,17 @@ export const useValidation = () => {
     
     // Check required document uploads
     const requiredDocuments = ['cni', 'justificatif_domicile', 'statuts'];
-    const uploadedTypes = uploadedFiles.map(file => file.documentType);
+    
+    // Handle both array and object formats for uploadedFiles
+    let uploadedTypes: string[] = [];
+    
+    if (Array.isArray(uploadedFiles)) {
+      // If it's already an array, use it directly
+      uploadedTypes = uploadedFiles.map(file => file.documentType);
+    } else if (uploadedFiles && typeof uploadedFiles === 'object') {
+      // If it's an object, flatten it to get all document types
+      uploadedTypes = Object.values(uploadedFiles).flat().map(file => file.documentType);
+    }
     
     requiredDocuments.forEach(docType => {
       if (!uploadedTypes.includes(docType)) {
