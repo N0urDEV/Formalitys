@@ -50,10 +50,6 @@ export const useValidation = () => {
       stepErrorsList.push('La qualité est requise');
     }
 
-    if (ownerInfo.qualite === 'Représentant légal' && !ownerInfo.registreCommerce?.trim()) {
-      newErrors['registreCommerce'] = 'Le numéro de registre de commerce est requis pour le représentant légal';
-      stepErrorsList.push('Le numéro de registre de commerce est requis pour le représentant légal');
-    }
 
     setErrors(newErrors);
     setStepErrors(prev => ({ ...prev, 1: stepErrorsList }));
@@ -85,15 +81,7 @@ export const useValidation = () => {
       stepErrorsList.push('La date d\'ouverture prévue est requise');
     }
 
-    if (!establishmentInfo.registreCommerce.trim()) {
-      newErrors['registreCommerce'] = 'Le numéro de registre de commerce est requis';
-      stepErrorsList.push('Le numéro de registre de commerce est requis');
-    }
 
-    if (!establishmentInfo.ice.trim()) {
-      newErrors['ice'] = 'L\'ICE est requis';
-      stepErrorsList.push('L\'ICE est requis');
-    }
 
     if (!establishmentInfo.telephone.trim()) {
       newErrors['telephone'] = 'Le téléphone est requis';
@@ -187,16 +175,33 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
+  const validateStep3Payment = (dossier: any): boolean => {
+    const stepErrorsList: string[] = [];
+    
+    if (!dossier) {
+      stepErrorsList.push('Dossier non trouvé');
+    } else if (dossier.paymentStatus !== 'succeeded') {
+      stepErrorsList.push('Le paiement doit être effectué pour continuer');
+    }
+    
+    setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
+    return stepErrorsList.length === 0;
+  };
+
   const validateStep = (currentStep: number, data: any): boolean => {
     switch (currentStep) {
       case 1:
         return validateStep1(data.ownerInfo);
       case 2:
         return validateStep2(data.establishmentInfo);
+      case 3:
+        return validateStep3Payment(data.dossier);
       case 4:
         return validateStep4(data.uploadedFiles);
       case 5:
         return validateStep5(data.questionnaireAnswers);
+      case 6:
+        return true; // Final step - no validation needed
       default:
         return true;
     }
@@ -223,6 +228,7 @@ export const useValidation = () => {
     stepErrors,
     validateStep1,
     validateStep2,
+    validateStep3Payment,
     validateStep4,
     validateStep5,
     validateStep,

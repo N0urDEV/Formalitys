@@ -15,7 +15,7 @@ export const useTourismDossier = () => {
   
   const [ownerInfo, setOwnerInfo] = useState<OwnerInfo>({
     nom: '', prenom: '', typePiece: 'CNI', numero: '', telephone: '', email: '', adresse: '', 
-    qualite: 'Investisseur', registreCommerce: ''
+    qualite: 'Propriétaire', registreCommerce: ''
   });
   
   const [establishmentInfo, setEstablishmentInfo] = useState<EstablishmentInfo>({

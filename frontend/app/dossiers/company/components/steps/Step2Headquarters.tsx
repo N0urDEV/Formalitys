@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatPrice, formatPriceWithBreakdown } from '../../../../utils/currency';
 import { CompanyData, StepErrors } from '../../types';
 import { FormSelect } from '../FormSelect';
 
@@ -193,7 +194,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
               className="font-medium"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              3600 MAD
+              {formatPrice(3600)}
             </span>
           </div>
           {companyData.headquarters === 'contrat_domiciliation' && (
@@ -208,7 +209,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
                 className="font-medium"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                +2100 MAD
+                +{formatPrice(2100)}
               </span>
             </div>
           )}
@@ -221,7 +222,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
             <span 
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              {calculateTotalPrice()} MAD
+              {formatPrice(calculateTotalPrice())}
             </span>
           </div>
         </div>

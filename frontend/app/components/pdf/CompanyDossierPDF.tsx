@@ -1,5 +1,6 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { convertMadToEur } from '../../utils/currency';
 
 const styles = StyleSheet.create({
   page: {
@@ -169,6 +170,11 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
     return total;
   };
 
+  const formatPrice = (madAmount: number) => {
+    const eurAmount = convertMadToEur(madAmount);
+    return `${madAmount} MAD (${eurAmount}€)`;
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -314,11 +320,11 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
           <View style={styles.twoColumnRow}>
             <View style={styles.leftColumn}>
               <View style={styles.row}>
-                <Text style={styles.label}>N° Article Taxe Professionnelle:</Text>
+                <Text style={styles.label}>N° Taxe Professionnelle:</Text>
                 <Text style={styles.value}>{dossier.numeroArticleTaxeProfessionnelle || 'Non spécifié'}</Text>
               </View>
               <View style={styles.row}>
-                <Text style={styles.label}>N° Article Taxe Services Communaux:</Text>
+                <Text style={styles.label}>N° Taxe Services Communaux:</Text>
                 <Text style={styles.value}>{dossier.numeroArticleTaxeServicesCommunaux || 'Non spécifié'}</Text>
               </View>
             </View>
@@ -394,22 +400,22 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
           <Text style={styles.sectionTitle}>Récapitulatif des Coûts</Text>
           <View style={styles.twoColumnRow}>
             <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Création de société:</Text>
-                <Text style={styles.value}>3600 MAD</Text>
-              </View>
-              {dossier.headquarters === 'contrat_domiciliation' && (
-                <View style={styles.row}>
-                  <Text style={styles.label}>Domiciliation (6 mois):</Text>
-                  <Text style={styles.value}>+2100 MAD</Text>
-                </View>
-              )}
+                     <View style={styles.row}>
+                       <Text style={styles.label}>Création de société:</Text>
+                       <Text style={styles.value}>{formatPrice(3600)}</Text>
+                     </View>
+                     {dossier.headquarters === 'contrat_domiciliation' && (
+                       <View style={styles.row}>
+                         <Text style={styles.label}>Domiciliation (6 mois):</Text>
+                         <Text style={styles.value}>+{formatPrice(2100)}</Text>
+                       </View>
+                     )}
             </View>
             <View style={styles.rightColumn}>
               <View style={[styles.row, { borderTop: '1px solid #E5E5E5', paddingTop: 4, marginTop: 4 }]}>
                 <Text style={[styles.label, { fontWeight: 'bold', fontSize: 10 }]}>Total:</Text>
                 <Text style={[styles.value, { fontWeight: 'bold', fontSize: 10, color: '#F66B4C' }]}>
-                  {calculateTotalPrice()} MAD
+                  {formatPrice(calculateTotalPrice())}
                 </Text>
               </View>
             </View>

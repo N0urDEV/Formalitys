@@ -1,5 +1,6 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { convertMadToEur } from '../../utils/currency';
 
 const styles = StyleSheet.create({
   page: {
@@ -184,8 +185,10 @@ export const TourismDossierPDF: React.FC<TourismDossierPDFProps> = ({ user, doss
 
   const getQualiteLabel = (qualite: string) => {
     switch (qualite) {
+      case 'Propriétaire':
+        return 'Propriétaire';
       case 'investisseur':
-        return 'Investisseur';
+        return 'Investisseur'; // Keep for backward compatibility
       case 'representant_legal':
         return 'Représentant légal';
       default:
@@ -223,7 +226,12 @@ export const TourismDossierPDF: React.FC<TourismDossierPDFProps> = ({ user, doss
     );
   };
 
-  const questionnaireAnswers = dossier.questionnaireAnswers || {};
+         const questionnaireAnswers = dossier.questionnaireAnswers || {};
+
+         const formatPrice = (madAmount: number) => {
+           const eurAmount = convertMadToEur(madAmount);
+           return `${madAmount} MAD (${eurAmount}€)`;
+         };
 
   return (
     <Document>
@@ -534,16 +542,16 @@ export const TourismDossierPDF: React.FC<TourismDossierPDFProps> = ({ user, doss
           <Text style={styles.sectionTitle}>Récapitulatif des Coûts</Text>
           <View style={styles.twoColumnRow}>
             <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Classement touristique:</Text>
-                <Text style={styles.value}>1600 MAD</Text>
-              </View>
+                     <View style={styles.row}>
+                       <Text style={styles.label}>Classement touristique:</Text>
+                       <Text style={styles.value}>{formatPrice(1600)}</Text>
+                     </View>
             </View>
             <View style={styles.rightColumn}>
               <View style={[styles.row, { borderTop: '1px solid #E5E5E5', paddingTop: 4, marginTop: 4 }]}>
                 <Text style={[styles.label, { fontWeight: 'bold', fontSize: 10 }]}>Total:</Text>
                 <Text style={[styles.value, { fontWeight: 'bold', fontSize: 10, color: '#F66B4C' }]}>
-                  1600 MAD
+                  {formatPrice(1600)}
                 </Text>
               </View>
             </View>

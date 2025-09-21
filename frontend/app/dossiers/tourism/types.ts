@@ -6,7 +6,7 @@ export interface OwnerInfo {
   telephone: string;
   email: string;
   adresse: string;
-  qualite: string; // Investisseur ou représentant légal
+  qualite: string; // Propriétaire, Conciergerie ou représentant légal
   registreCommerce?: string; // Pour personne morale
 }
 

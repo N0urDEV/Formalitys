@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
+import { formatPrice, formatPriceWithBreakdown } from '../utils/currency';
 
 interface PaymentFormProps {
   onSuccess: () => void;
@@ -55,32 +56,42 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
           Récapitulatif des coûts
         </h3>
         <div className="space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              {serviceName || 'Service'}
-            </span>
-            <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              {costBreakdown ? costBreakdown.basePrice : 3600} MAD
-            </span>
-          </div>
-          {costBreakdown?.domiciliationFee && (
-            <div className="flex justify-between">
-              <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Domiciliation (6 mois)
-              </span>
-              <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                +{costBreakdown.domiciliationFee} MAD
-              </span>
-            </div>
-          )}
-          <div className="border-t pt-2 flex justify-between font-bold text-lg">
-            <span className="text-gray-900" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              Total
-            </span>
-            <span className="text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              {amount / 100} {currency.toUpperCase()}
-            </span>
-          </div>
+                 <div className="flex justify-between">
+                   <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                     {serviceName || 'Service'}
+                   </span>
+                   <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                     {formatPrice(costBreakdown ? costBreakdown.basePrice : 3600)}
+                   </span>
+                 </div>
+                 {costBreakdown?.domiciliationFee && (
+                   <div className="flex justify-between">
+                     <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                       Domiciliation (6 mois)
+                     </span>
+                     <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                       +{formatPrice(costBreakdown.domiciliationFee)}
+                     </span>
+                   </div>
+                 )}
+                 {costBreakdown?.total && costBreakdown.total < (costBreakdown.basePrice + (costBreakdown.domiciliationFee || 0)) && (
+                   <div className="flex justify-between text-green-600">
+                     <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                       Réduction appliquée
+                     </span>
+                     <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                       -{formatPrice((costBreakdown.basePrice + (costBreakdown.domiciliationFee || 0)) - costBreakdown.total)}
+                     </span>
+                   </div>
+                 )}
+                 <div className="border-t pt-2 flex justify-between font-bold text-lg">
+                   <span className="text-gray-900" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                     Total
+                   </span>
+                   <span className="text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                     {formatPrice(costBreakdown?.total || amount / 100)}
+                   </span>
+                 </div>
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import PaymentForm from '../../../../components/PaymentForm';
+import { formatPrice } from '../../../../utils/currency';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_...');
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';

@@ -17,7 +17,7 @@ const serviceData = {
   name: "Création Société SARL au Maroc",
   description: "Service de création de société SARL au Maroc 100% en ligne avec accompagnement expert",
   offers: {
-    price: "3600",
+    price: "3600 MAD (343€)",
     description: "Création complète SARL avec tous les documents officiels"
   }
 };
@@ -65,7 +65,8 @@ function CompanyDossierPageContent() {
     const isValid = await validateStep(currentStep, {
       associates,
       companyData,
-      uploadedFiles
+      uploadedFiles,
+      dossier
     });
 
     if (!isValid) {

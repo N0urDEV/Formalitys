@@ -140,12 +140,55 @@ export const useValidation = () => {
       case 2:
         return validateStep2Headquarters(data.companyData);
       case 3:
-        return true; // Payment step - no validation needed
+        return validateStep3Payment(data.dossier);
       case 4:
-        return validateStep2(data.companyData);
+        return validateStep4Documents(data.companyData, data.uploadedFiles);
+      case 5:
+        return true; // Final step - no validation needed
       default:
         return true;
     }
+  };
+
+  const validateStep3Payment = (dossier: any): boolean => {
+    const stepErrorsList: string[] = [];
+    
+    if (!dossier) {
+      stepErrorsList.push('Dossier non trouvé');
+    } else if (dossier.paymentStatus !== 'succeeded') {
+      stepErrorsList.push('Le paiement doit être effectué pour continuer');
+    }
+    
+    setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
+    return stepErrorsList.length === 0;
+  };
+
+  const validateStep4Documents = (companyData: CompanyData, uploadedFiles: any[]): boolean => {
+    const stepErrorsList: string[] = [];
+    
+    // Validate company data first
+    const companyValid = validateStep2(companyData);
+    if (!companyValid) {
+      return false;
+    }
+    
+    // Check required document uploads
+    const requiredDocuments = ['cni', 'justificatif_domicile', 'statuts'];
+    const uploadedTypes = uploadedFiles.map(file => file.documentType);
+    
+    requiredDocuments.forEach(docType => {
+      if (!uploadedTypes.includes(docType)) {
+        const docNames = {
+          'cni': 'CNI',
+          'justificatif_domicile': 'Justificatif de domicile',
+          'statuts': 'Statuts'
+        };
+        stepErrorsList.push(`${docNames[docType as keyof typeof docNames]} est requis`);
+      }
+    });
+    
+    setStepErrors(prev => ({ ...prev, 4: stepErrorsList }));
+    return stepErrorsList.length === 0;
   };
 
   const clearFieldError = (field: string) => {
@@ -170,6 +213,8 @@ export const useValidation = () => {
     validateStep1,
     validateStep2,
     validateStep2Headquarters,
+    validateStep3Payment,
+    validateStep4Documents,
     validateStep,
     clearFieldError,
     clearStepErrors,

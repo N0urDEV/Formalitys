@@ -305,20 +305,20 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* N° Article Taxe professionnelle */}
+            {/* N° Taxe professionnelle */}
             <FormInput
-              label="N° Article Taxe professionnelle"
+              label="N° Taxe professionnelle"
               name="numeroArticleTaxeProfessionnelle"
-              placeholder="Numéro d&apos;article taxe professionnelle"
+              placeholder="Numéro taxe professionnelle"
               value={companyData.numeroArticleTaxeProfessionnelle}
               onChange={(value) => setCompanyData({...companyData, numeroArticleTaxeProfessionnelle: value})}
             />
 
-            {/* N° Article Taxe de Services Communaux */}
+            {/* N° Taxe de Services Communaux */}
             <FormInput
-              label="N° Article Taxe de Services Communaux"
+              label="N° Taxe de Services Communaux"
               name="numeroArticleTaxeServicesCommunaux"
-              placeholder="Numéro d&apos;article taxe services communaux"
+              placeholder="Numéro taxe services communaux"
               value={companyData.numeroArticleTaxeServicesCommunaux}
               onChange={(value) => setCompanyData({...companyData, numeroArticleTaxeServicesCommunaux: value})}
             />

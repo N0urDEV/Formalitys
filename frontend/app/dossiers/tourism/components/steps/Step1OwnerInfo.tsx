@@ -32,7 +32,7 @@ export const Step1OwnerInfo: React.FC<Step1OwnerInfoProps> = ({
   ];
 
   const qualiteOptions = [
-    { value: 'Investisseur', label: 'Investisseur' },
+    { value: 'Propriétaire', label: 'Propriétaire' },
     { value: 'Conciergerie', label: 'Conciergerie' },
     { value: 'Représentant légal', label: 'Représentant légal' }
   ];
@@ -160,7 +160,6 @@ export const Step1OwnerInfo: React.FC<Step1OwnerInfoProps> = ({
               value={ownerInfo.registreCommerce || ''}
               onChange={(value) => updateOwnerInfo('registreCommerce', value)}
               error={errors['registreCommerce']}
-              required={ownerInfo.qualite === 'Représentant légal'}
             />
             
             <div className="md:col-span-2">

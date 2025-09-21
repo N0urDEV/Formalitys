@@ -31,7 +31,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
     { value: 'HotelClub', label: 'Hôtel club' },
     { value: 'ResidenceTourisme', label: 'Résidence de tourisme' },
     { value: 'ResidenceImmobiliere', label: 'Résidence Immobilière de Promotion Touristique' },
-    { value: 'MaisonHotes', label: 'Maison d&apos;hôtes' },
+    { value: 'MaisonHotes', label: 'Maison d\'hôtes' },
     { value: 'Riad', label: 'Riad' },
     { value: 'Kasbah', label: 'Kasbah' },
     { value: 'Camping', label: 'Camping' },
@@ -73,7 +73,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
           className="text-2xl font-bold text-[#071B1E] mb-4"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
-          Informations de l<span style={{ fontFamily: 'Times New Roman, serif' }}>'</span>établissement
+          Informations de l'établissement
         </h2>
         <p 
           className="text-gray-600"
@@ -124,12 +124,12 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             className="text-xl font-bold text-[#071B1E] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Type et catégorie de l<span style={{ fontFamily: 'Times New Roman, serif' }}>'</span>établissement
+            Type et catégorie de l'établissement
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormSelect
-              label="Type d&apos;établissement"
+              label="Type d'établissement"
               value={establishmentInfo.type}
               onChange={(value) => updateEstablishmentInfo('type', value)}
               options={typeOptions}
@@ -138,7 +138,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormSelect
-              label="Catégorie d&apos;établissement"
+              label="Catégorie d'établissement"
               value={establishmentInfo.categorie}
               onChange={(value) => updateEstablishmentInfo('categorie', value)}
               options={categorieOptions}
@@ -164,7 +164,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormInput
               label="Enseigne commerciale"
-              placeholder="Nom commercial de l&apos;établissement"
+              placeholder="Nom commercial de l'établissement"
               value={establishmentInfo.enseigneCommerciale}
               onChange={(value) => updateEstablishmentInfo('enseigneCommerciale', value)}
               error={errors['enseigneCommerciale']}
@@ -172,7 +172,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormInput
-              label="Date d&apos;ouverture prévue"
+              label="Date d'ouverture prévue"
               type="date"
               value={establishmentInfo.dateOuverturePrevue}
               onChange={(value) => updateEstablishmentInfo('dateOuverturePrevue', value)}
@@ -186,20 +186,18 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
               value={establishmentInfo.registreCommerce}
               onChange={(value) => updateEstablishmentInfo('registreCommerce', value)}
               error={errors['registreCommerce']}
-              required
             />
             
             <FormInput
-              label="ICE (Identifiant commun de l&apos;entreprise)"
-              placeholder="ICE de l&apos;entreprise"
+              label="ICE (Identifiant commun de l'entreprise)"
+              placeholder="ICE de l'entreprise"
               value={establishmentInfo.ice}
               onChange={(value) => updateEstablishmentInfo('ice', value)}
               error={errors['ice']}
-              required
             />
             
             <FormInput
-              label="N° d&apos;affiliation à la CNSS"
+              label="N° d'affiliation à la CNSS"
               placeholder="Numéro CNSS"
               value={establishmentInfo.numeroCNSS}
               onChange={(value) => updateEstablishmentInfo('numeroCNSS', value)}
@@ -207,7 +205,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             
             <FormInput
               label="Téléphone"
-              placeholder="Téléphone de l&apos;établissement"
+              placeholder="Téléphone de l'établissement"
               value={establishmentInfo.telephone}
               onChange={(value) => updateEstablishmentInfo('telephone', value)}
               error={errors['telephone']}
@@ -217,7 +215,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             <FormInput
               label="Email"
               type="email"
-              placeholder="Email de l&apos;établissement"
+              placeholder="Email de l'établissement"
               value={establishmentInfo.email}
               onChange={(value) => updateEstablishmentInfo('email', value)}
               error={errors['email']}

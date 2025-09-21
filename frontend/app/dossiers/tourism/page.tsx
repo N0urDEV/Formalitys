@@ -18,7 +18,7 @@ const serviceData = {
   name: "Régularisation Hébergement Touristique Maroc",
   description: "Service de régularisation d'hébergements touristiques au Maroc 100% en ligne avec accompagnement expert",
   offers: {
-    price: "1600",
+    price: "1600 MAD (152€)",
     description: "Régularisation complète avec toutes les autorisations nécessaires"
   }
 };
@@ -81,7 +81,8 @@ function TourismDossierPageContent() {
       ownerInfo,
       establishmentInfo,
       uploadedFiles,
-      questionnaireAnswers
+      questionnaireAnswers,
+      dossier
     });
 
     if (!isValid) {
