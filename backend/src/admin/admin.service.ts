@@ -12,6 +12,76 @@ export class AdminService {
   async getAllDossiersWithFiles(page = 1, limit = 20, type?: 'company' | 'tourism', status?: DossierStatus) {
     const skip = (page - 1) * limit;
     
+    // If no type specified, get all dossiers with pagination
+    if (!type) {
+      const [companyDossiers, tourismDossiers, companyTotal, tourismTotal] = await Promise.all([
+        this.prisma.companyDossier.findMany({
+          where: status ? { status } : {},
+          orderBy: { createdAt: 'desc' },
+          include: {
+            user: { select: { id: true, name: true, email: true, phone: true } },
+          },
+        }),
+        this.prisma.tourismDossier.findMany({
+          where: status ? { status } : {},
+          orderBy: { createdAt: 'desc' },
+          include: {
+            user: { select: { id: true, name: true, email: true, phone: true } },
+          },
+        }),
+        this.prisma.companyDossier.count({ where: status ? { status } : {} }),
+        this.prisma.tourismDossier.count({ where: status ? { status } : {} }),
+      ]);
+
+      // Process dossiers to include file information
+      const processedCompanyDossiers = await Promise.all(companyDossiers.map(async dossier => ({
+        ...dossier,
+        type: 'company' as const,
+        uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
+          id: file.id,
+          filename: file.filename,
+          originalName: file.originalName,
+          documentType: file.documentType,
+          size: file.size,
+          mimetype: file.mimetype,
+          url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
+          uploadedAt: file.uploadedAt,
+        }))),
+      })));
+
+      const processedTourismDossiers = await Promise.all(tourismDossiers.map(async dossier => ({
+        ...dossier,
+        type: 'tourism' as const,
+        uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
+          id: file.id,
+          filename: file.filename,
+          originalName: file.originalName,
+          documentType: file.documentType,
+          size: file.size,
+          mimetype: file.mimetype,
+          url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
+          uploadedAt: file.uploadedAt,
+        }))),
+      })));
+
+      // Combine and sort all dossiers, then apply pagination
+      const allDossiers = [...processedCompanyDossiers, ...processedTourismDossiers]
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(skip, skip + limit);
+
+      const total = companyTotal + tourismTotal;
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        dossiers: allDossiers,
+        total,
+        pages: totalPages,
+        companyTotal,
+        tourismTotal,
+      };
+    }
+    
+    // If type is specified, get only that type with pagination
     const [companyDossiers, tourismDossiers, companyTotal, tourismTotal] = await Promise.all([
       type !== 'tourism' ? this.prisma.companyDossier.findMany({
         where: status ? { status } : {},
