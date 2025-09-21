@@ -39,11 +39,8 @@ model User {
 
 enum DossierStatus {
   DRAFT
-  PENDING_PAYMENT
   PAID
-  IN_PROGRESS
   COMPLETED
-  CANCELLED
 }
 
 model CompanyDossier {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Dossier, User, DashboardStats, UserDiscountStatus } from '../types';
 
@@ -54,7 +54,7 @@ export const useDashboard = () => {
     }
   };
 
-  const loadDossiers = async () => {
+  const loadDossiers = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) return;
     
@@ -70,23 +70,26 @@ export const useDashboard = () => {
       
       if (companyRes.ok) {
         const companyData = await companyRes.json();
+        console.log('Company dossiers loaded:', companyData);
         allDossiers.push(...companyData.map((d: any) => ({ ...d, type: 'company' })));
       }
       
       if (tourismRes.ok) {
         const tourismData = await tourismRes.json();
+        console.log('Tourism dossiers loaded:', tourismData);
         allDossiers.push(...tourismData.map((d: any) => ({ ...d, type: 'tourism' })));
       }
 
       // Sort by creation date (newest first)
       allDossiers.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      console.log('All dossiers loaded:', allDossiers);
       setDossiers(allDossiers);
     } catch (error) {
       console.error('Error loading dossiers:', error);
     } finally {
       setDossiersLoading(false);
     }
-  };
+  }, []);
 
   const loadDiscountStatus = async () => {
     const token = localStorage.getItem('token');
@@ -222,6 +225,11 @@ export const useDashboard = () => {
     }
   };
 
+  const refreshDossiers = useCallback(async () => {
+    console.log('Refreshing dossiers...');
+    await loadDossiers();
+  }, [loadDossiers]);
+
   return {
     user,
     dossiers,
@@ -230,6 +238,7 @@ export const useDashboard = () => {
     activeTab,
     setActiveTab,
     loadDossiers,
+    refreshDossiers,
     deleteDossier,
     handleLogout,
     getStats,

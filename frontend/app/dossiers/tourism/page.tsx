@@ -148,7 +148,21 @@ function TourismDossierPageContent() {
         return (
           <Step3Payment
             dossier={dossier}
-            onPaymentSuccess={() => setCurrentStep(4)}
+            onPaymentSuccess={async () => {
+              // Update dossier status to PAID and advance to step 4
+              if (dossier) {
+                const token = localStorage.getItem('token');
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001'}/dossiers/tourism/${dossier.id}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                  },
+                  body: JSON.stringify({ currentStep: 4, status: 'PAID' })
+                });
+              }
+              setCurrentStep(4);
+            }}
           />
         );
       case 4:

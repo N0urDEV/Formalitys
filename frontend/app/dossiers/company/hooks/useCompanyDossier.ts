@@ -78,6 +78,8 @@ export const useCompanyDossier = () => {
             
             // Check if payment was successful and update step
             const paymentSuccess = searchParams.get('payment') === 'success';
+            
+            // If user just completed payment (URL parameter) and is on step 3, advance to step 4
             if (paymentSuccess && specificDossier.currentStep === 3) {
               // Update dossier to step 4 after successful payment
               await fetch(`${API}/dossiers/company/${specificDossier.id}`, {
@@ -89,7 +91,22 @@ export const useCompanyDossier = () => {
                 body: JSON.stringify({ currentStep: 4, status: 'PAID' })
               });
               setCurrentStep(4);
-            } else {
+            } 
+            // If user already paid but is still on step 3, advance them to step 4
+            else if (specificDossier.status === 'PAID' && specificDossier.currentStep === 3) {
+              // Update dossier to step 4 since payment is already completed
+              await fetch(`${API}/dossiers/company/${specificDossier.id}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ currentStep: 4 })
+              });
+              setCurrentStep(4);
+            } 
+            // Otherwise, use the current step from the dossier
+            else {
               setCurrentStep(specificDossier.currentStep);
             }
             
@@ -125,15 +142,91 @@ export const useCompanyDossier = () => {
             }
           }
         } else {
-          // Create new dossier (no edit parameter, so create new one)
-          console.log('useCompanyDossier: Creating new dossier');
-          const createRes = await fetch(`${API}/dossiers/company`, {
-            method: 'POST',
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          const newDossier = await createRes.json();
-          console.log('useCompanyDossier: Created new dossier:', newDossier.id);
-          setDossier(newDossier);
+          // No edit parameter - check if user has existing dossiers
+          if (dossiers.length > 0) {
+            // Find the most recent incomplete dossier
+            const incompleteDossier = dossiers.find((d: any) => d.status !== 'COMPLETED');
+            const dossierToLoad = incompleteDossier || dossiers[0]; // Use incomplete or most recent
+            
+            console.log('useCompanyDossier: Loading existing dossier:', dossierToLoad.id);
+            setDossier(dossierToLoad);
+            
+            // Check if payment was successful and update step
+            const paymentSuccess = searchParams.get('payment') === 'success';
+            
+            // If user just completed payment (URL parameter) and is on step 3, advance to step 4
+            if (paymentSuccess && dossierToLoad.currentStep === 3) {
+              // Update dossier to step 4 after successful payment
+              await fetch(`${API}/dossiers/company/${dossierToLoad.id}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ currentStep: 4, status: 'PAID' })
+              });
+              setCurrentStep(4);
+            } 
+            // If user already paid but is still on step 3, advance them to step 4
+            else if (dossierToLoad.status === 'PAID' && dossierToLoad.currentStep === 3) {
+              // Update dossier to step 4 since payment is already completed
+              await fetch(`${API}/dossiers/company/${dossierToLoad.id}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ currentStep: 4 })
+              });
+              setCurrentStep(4);
+            } 
+            // Otherwise, use the current step from the dossier
+            else {
+              setCurrentStep(dossierToLoad.currentStep);
+            }
+            
+            // Load existing data
+            if (dossierToLoad.associates) {
+              setAssociates(dossierToLoad.associates);
+            }
+            if (dossierToLoad.companyName || dossierToLoad.activities) {
+              setCompanyData({
+                companyName: dossierToLoad.companyName || '',
+                activities: dossierToLoad.activities || [],
+                proposedNames: dossierToLoad.proposedNames || ['', '', ''],
+                headquarters: dossierToLoad.headquarters || 'domicile',
+                capital: dossierToLoad.capital || 10000,
+                selectedBank: dossierToLoad.selectedBank || '',
+                // Additional company information
+                raisonSociale: dossierToLoad.raisonSociale || '',
+                formeJuridique: dossierToLoad.formeJuridique || '',
+                nationalite: dossierToLoad.nationalite || '',
+                adresseSiege: dossierToLoad.adresseSiege || '',
+                villeSiege: dossierToLoad.villeSiege || '',
+                professionActivite: dossierToLoad.professionActivite || '',
+                telephone: dossierToLoad.telephone || '',
+                fax: dossierToLoad.fax || '',
+                email: dossierToLoad.email || '',
+                numeroArticleTaxeProfessionnelle: dossierToLoad.numeroArticleTaxeProfessionnelle || '',
+                numeroArticleTaxeServicesCommunaux: dossierToLoad.numeroArticleTaxeServicesCommunaux || '',
+                numeroAffiliationCNSS: dossierToLoad.numeroAffiliationCNSS || '',
+                numeroRegistreCommerce: dossierToLoad.numeroRegistreCommerce || '',
+                villeRegistreCommerce: dossierToLoad.villeRegistreCommerce || '',
+                referenceDepotDeclaration: dossierToLoad.referenceDepotDeclaration || '',
+                dateDepotDeclaration: dossierToLoad.dateDepotDeclaration || '',
+              });
+            }
+          } else {
+            // No existing dossiers - create new one
+            console.log('useCompanyDossier: Creating new dossier');
+            const createRes = await fetch(`${API}/dossiers/company`, {
+              method: 'POST',
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            const newDossier = await createRes.json();
+            console.log('useCompanyDossier: Created new dossier:', newDossier.id);
+            setDossier(newDossier);
+          }
         }
         initializedRef.current = true;
       } catch (err) {

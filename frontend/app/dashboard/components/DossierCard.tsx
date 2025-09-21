@@ -12,17 +12,12 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
   const router = useRouter();
 
   const getStatusInfo = (status: string) => {
+    console.log('DossierCard - Status received:', status, 'for dossier:', dossier.id);
     switch (status) {
       case 'COMPLETED':
         return { text: 'Terminé', class: 'bg-green-100 text-green-800' };
       case 'PAID':
         return { text: 'Payé', class: 'bg-blue-100 text-blue-800' };
-      case 'IN_PROGRESS':
-        return { text: 'En cours', class: 'bg-yellow-100 text-yellow-800' };
-      case 'PENDING_PAYMENT':
-        return { text: 'En attente de paiement', class: 'bg-orange-100 text-orange-800' };
-      case 'CANCELLED':
-        return { text: 'Annulé', class: 'bg-red-100 text-red-800' };
       case 'DRAFT':
       default:
         return { text: 'Brouillon', class: 'bg-gray-100 text-gray-800' };

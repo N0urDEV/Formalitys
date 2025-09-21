@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDashboard } from './hooks/useDashboard';
 import { DashboardLayout } from './components/DashboardLayout';
 import { DashboardNavigation } from './components/DashboardNavigation';
@@ -16,12 +16,30 @@ export default function DashboardPage() {
     dossiersLoading,
     activeTab,
     setActiveTab,
+    refreshDossiers,
     deleteDossier,
     handleLogout,
     getStats,
     discountStatus,
     downloadPdf,
   } = useDashboard();
+
+  // Refresh dossiers when user returns to dashboard (e.g., after payment)
+  useEffect(() => {
+    const handleFocus = () => {
+      console.log('Window focused, refreshing dossiers...');
+      refreshDossiers();
+    };
+
+    window.addEventListener('focus', handleFocus);
+    
+    // Also refresh when component mounts (in case user navigated back)
+    refreshDossiers();
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [refreshDossiers]);
 
   return (
     <DashboardLayout loading={loading}>

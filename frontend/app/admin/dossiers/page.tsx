@@ -182,22 +182,18 @@ export default function AdminDossiersPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'PENDING': return 'bg-gradient-to-r from-yellow-100 to-yellow-200 text-yellow-800';
+      case 'DRAFT': return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800';
       case 'PAID': return 'bg-gradient-to-r from-[#F66B4C]/10 to-[#e55a43]/10 text-[#F66B4C] border border-[#F66B4C]/20';
-      case 'IN_PROGRESS': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800';
       case 'COMPLETED': return 'bg-gradient-to-r from-green-100 to-green-200 text-green-800';
-      case 'CANCELLED': return 'bg-gradient-to-r from-red-100 to-red-200 text-red-800';
       default: return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800';
     }
   };
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'PENDING': return 'En attente';
+      case 'DRAFT': return 'Brouillon';
       case 'PAID': return 'Payé';
-      case 'IN_PROGRESS': return 'En cours';
       case 'COMPLETED': return 'Terminé';
-      case 'CANCELLED': return 'Annulé';
       default: return status;
     }
   };
