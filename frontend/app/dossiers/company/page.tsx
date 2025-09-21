@@ -137,7 +137,7 @@ function CompanyDossierPageContent() {
             onFileUpload={handleFileUpload}
             calculateTotalPrice={calculateTotalPrice}
             associates={associates}
-            uploadedFiles={dossier?.uploadedFiles || []}
+            uploadedFiles={Object.values(uploadedFiles).flat()}
           />
         );
       case 5:

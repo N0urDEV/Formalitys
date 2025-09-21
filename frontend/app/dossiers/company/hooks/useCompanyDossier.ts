@@ -205,18 +205,37 @@ export const useCompanyDossier = () => {
     const result = await response.json();
     console.log('Upload result:', result);
     
-    // Update dossier with uploaded files (document type is now set by backend)
-    const currentFiles = dossier?.uploadedFiles || [];
-    console.log('Current files before update:', currentFiles.length);
-    const newFiles = [...currentFiles, ...result.files];
-    console.log('New files after update:', newFiles.length);
-    
-    // Update local state immediately
-    setDossier(prev => prev ? { ...prev, uploadedFiles: newFiles } : null);
-    
-    // Save to backend
-    await saveStep({
-      uploadedFiles: newFiles,
+    // Convert uploaded files to the correct format for the object structure
+    const uploadedFiles = result.files.map((file: any) => ({
+      id: file.id || file.filename,
+      filename: file.filename,
+      originalName: file.originalName || file.filename,
+      documentType: documentType, // Use the documentType passed to the function
+      size: file.size,
+      mimetype: file.mimetype,
+      url: file.url,
+      uploadedAt: file.uploadedAt || new Date().toISOString()
+    }));
+
+    // Update local state with the new files
+    setUploadedFiles(prev => {
+      const newState = {
+        ...prev,
+        [documentType]: [...(prev[documentType] || []), ...uploadedFiles]
+      };
+      
+      // Convert object to array for backend storage
+      const allFiles = Object.values(newState).flat();
+      
+      // Update dossier with uploaded files
+      setDossier(prevDossier => prevDossier ? { ...prevDossier, uploadedFiles: allFiles } : null);
+      
+      // Save to backend
+      saveStep({
+        uploadedFiles: allFiles,
+      });
+      
+      return newState;
     });
   };
 

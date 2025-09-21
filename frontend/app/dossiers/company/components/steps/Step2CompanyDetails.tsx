@@ -424,12 +424,12 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                 key="headquarters"
                 title=""
                 description="Téléchargez le document justificatif (PDF uniquement)"
-                onUpload={(files) => onFileUpload(files, companyData.headquarters === 'domicile' ? 'justificatif_domicile' : companyData.headquarters === 'contrat_domiciliation' ? 'contrat_domiciliation' : 'location_local')}
+                onUpload={(files) => onFileUpload(files, companyData.headquarters === 'domicile' ? 'justificatif_domicile_gerant' : companyData.headquarters === 'contrat_domiciliation' ? 'contrat_domiciliation' : 'location_local')}
                 acceptedTypes={['.pdf']}
                 maxFiles={1}
                 maxSize={5}
                 currentFiles={uploadedFiles.filter(file => 
-                  file.documentType === 'justificatif_domicile' || 
+                  file.documentType === 'justificatif_domicile_gerant' || 
                   file.documentType === 'contrat_domiciliation' ||
                   file.documentType === 'location_local'
                 )}

@@ -173,7 +173,7 @@ export const useValidation = () => {
     }
     
     // Check required document uploads
-    const requiredDocuments = ['cni', 'justificatif_domicile', 'statuts'];
+    const requiredDocuments = ['cni', 'justificatif_domicile', 'autre'];
     
     // Handle both array and object formats for uploadedFiles
     let uploadedTypes: string[] = [];
@@ -191,7 +191,7 @@ export const useValidation = () => {
         const docNames = {
           'cni': 'CNI',
           'justificatif_domicile': 'Justificatif de domicile',
-          'statuts': 'Statuts'
+          'autre': 'Statuts'
         };
         stepErrorsList.push(`${docNames[docType as keyof typeof docNames]} est requis`);
       }
