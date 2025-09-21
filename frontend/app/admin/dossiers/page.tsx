@@ -52,6 +52,8 @@ interface Dossier {
   numeroAffiliationCNSS?: string;
   numeroRegistreCommerce?: string;
   villeRegistreCommerce?: string;
+  referenceDepotDeclaration?: string;
+  dateDepotDeclaration?: string;
   // Tourism dossier fields (stored in JSON)
   establishmentName?: string;
   establishmentType?: string;
@@ -66,6 +68,11 @@ interface Dossier {
   establishmentInfoJson?: any;
   propertyDetailsJson?: any;
   complianceAnswersJson?: any;
+  // Payment and discount fields
+  originalPrice?: number;
+  discountApplied?: number;
+  finalPrice?: number;
+  discountReason?: string;
 }
 
 interface DossiersResponse {
@@ -238,7 +245,7 @@ export default function AdminDossiersPage() {
       };
 
       if (dossier.type === 'company') {
-        // Prepare company dossier data - use same structure as dashboard
+        // Prepare comprehensive company dossier data with all available fields
         const dossierData = {
           id: dossier.id,
           companyName: dossier.companyName || '',
@@ -248,21 +255,55 @@ export default function AdminDossiersPage() {
           activities: dossier.activities || [],
           proposedNames: dossier.proposedNames || [],
           associates: dossier.associates || [],
+          // Additional company information
+          raisonSociale: dossier.raisonSociale || '',
+          formeJuridique: dossier.formeJuridique || '',
+          nationalite: dossier.nationalite || '',
+          adresseSiege: dossier.adresseSiege || '',
+          villeSiege: dossier.villeSiege || '',
+          professionActivite: dossier.professionActivite || '',
+          telephone: dossier.telephone || '',
+          fax: dossier.fax || '',
+          email: dossier.email || '',
+          numeroArticleTaxeProfessionnelle: dossier.numeroArticleTaxeProfessionnelle || '',
+          numeroArticleTaxeServicesCommunaux: dossier.numeroArticleTaxeServicesCommunaux || '',
+          numeroAffiliationCNSS: dossier.numeroAffiliationCNSS || '',
+          numeroRegistreCommerce: dossier.numeroRegistreCommerce || '',
+          villeRegistreCommerce: dossier.villeRegistreCommerce || '',
+          referenceDepotDeclaration: dossier.referenceDepotDeclaration || '',
+          dateDepotDeclaration: dossier.dateDepotDeclaration || '',
+          // Payment information
+          amountPaid: dossier.amountPaid || 0,
+          originalPrice: dossier.originalPrice || 0,
+          discountApplied: dossier.discountApplied || 0,
+          finalPrice: dossier.finalPrice || 0,
+          discountReason: dossier.discountReason || '',
           createdAt: dossier.createdAt,
           status: dossier.status,
         };
 
         await PDFService.generateAndDownloadCompanyDossier(userData, dossierData);
       } else {
-        // Prepare tourism dossier data - use same structure as dashboard
+        // Prepare comprehensive tourism dossier data with all available fields
         const dossierData = {
           id: dossier.id,
           establishmentName: dossier.establishmentName || '',
           establishmentType: dossier.establishmentType || '',
+          // Property details from JSON fields
           address: (dossier.propertyDetailsJson?.address || dossier.propertyDetails?.address || ''),
           city: (dossier.propertyDetailsJson?.city || dossier.propertyDetails?.city || ''),
           capacity: (dossier.propertyDetailsJson?.capacity || dossier.propertyDetails?.capacity || 0),
+          // Owner and establishment info from JSON fields
           ownerInfo: dossier.ownerInfo || dossier.ownerInfoJson || {},
+          establishmentInfo: dossier.establishmentInfo || dossier.establishmentInfoJson || {},
+          // Compliance answers
+          complianceAnswers: dossier.complianceAnswers || dossier.complianceAnswersJson || {},
+          // Payment information
+          amountPaid: dossier.amountPaid || 0,
+          originalPrice: dossier.originalPrice || 0,
+          discountApplied: dossier.discountApplied || 0,
+          finalPrice: dossier.finalPrice || 0,
+          discountReason: dossier.discountReason || '',
           createdAt: dossier.createdAt,
           status: dossier.status,
         };

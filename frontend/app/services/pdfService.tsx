@@ -18,6 +18,29 @@ export interface CompanyDossierData {
   activities: string[];
   proposedNames: string[];
   associates: any[];
+  // Additional company information
+  raisonSociale?: string;
+  formeJuridique?: string;
+  nationalite?: string;
+  adresseSiege?: string;
+  villeSiege?: string;
+  professionActivite?: string;
+  telephone?: string;
+  fax?: string;
+  email?: string;
+  numeroArticleTaxeProfessionnelle?: string;
+  numeroArticleTaxeServicesCommunaux?: string;
+  numeroAffiliationCNSS?: string;
+  numeroRegistreCommerce?: string;
+  villeRegistreCommerce?: string;
+  referenceDepotDeclaration?: string;
+  dateDepotDeclaration?: string;
+  // Payment information
+  amountPaid?: number;
+  originalPrice?: number;
+  discountApplied?: number;
+  finalPrice?: number;
+  discountReason?: string;
   createdAt: string;
   status: string;
 }
@@ -30,6 +53,14 @@ export interface TourismDossierData {
   city: string;
   capacity: number;
   ownerInfo: any;
+  establishmentInfo?: any;
+  complianceAnswers?: any;
+  // Payment information
+  amountPaid?: number;
+  originalPrice?: number;
+  discountApplied?: number;
+  finalPrice?: number;
+  discountReason?: string;
   createdAt: string;
   status: string;
 }
