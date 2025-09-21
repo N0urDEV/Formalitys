@@ -78,10 +78,12 @@ export class DossiersService {
     if (data.uploadedFiles === undefined && dossier.uploadedFiles) {
       updateData.uploadedFiles = dossier.uploadedFiles;
     } else if (data.uploadedFiles) {
+      console.log('Updating uploadedFiles for company dossier:', data.uploadedFiles);
       updateData.uploadedFiles = data.uploadedFiles;
     }
     
     console.log('Updating company dossier with data:', updateData);
+    console.log('Uploaded files in update data:', updateData.uploadedFiles);
     
     return this.prisma.companyDossier.update({
       where: { id },
@@ -125,10 +127,16 @@ export class DossiersService {
     const updateData = { ...data, updatedAt: new Date() };
     if (data.uploadedFiles === undefined && dossier.uploadedFiles) {
       updateData.uploadedFiles = dossier.uploadedFiles;
+    } else if (data.uploadedFiles) {
+      console.log('Updating uploadedFiles for tourism dossier:', data.uploadedFiles);
+      updateData.uploadedFiles = data.uploadedFiles;
     }
     if (data.uploadedPhotos === undefined && dossier.uploadedPhotos) {
       updateData.uploadedPhotos = dossier.uploadedPhotos;
     }
+    
+    console.log('Updating tourism dossier with data:', updateData);
+    console.log('Uploaded files in update data:', updateData.uploadedFiles);
     
     // Check if dossier is completed (all 6 steps done)
     if (data.currentStep >= 6) {

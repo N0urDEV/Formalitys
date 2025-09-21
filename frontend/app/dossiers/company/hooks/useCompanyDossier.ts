@@ -248,6 +248,10 @@ export const useCompanyDossier = () => {
         console.log('Company data being saved:', stepData.companyData);
         console.log('Headquarters selection:', stepData.companyData.headquarters);
       }
+      if (stepData.uploadedFiles) {
+        console.log('Uploaded files being saved:', stepData.uploadedFiles);
+        console.log('Number of files:', stepData.uploadedFiles.length);
+      }
       
       const response = await fetch(`${API}/dossiers/company/${dossier.id}`, {
         method: 'PUT',
@@ -260,8 +264,12 @@ export const useCompanyDossier = () => {
       
       if (response.ok) {
         console.log('Step data saved successfully');
+        const responseData = await response.json();
+        console.log('Backend response:', responseData);
       } else {
         console.error('Failed to save step data:', response.status);
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
       }
     } catch (err) {
       console.error('Error saving step:', err);

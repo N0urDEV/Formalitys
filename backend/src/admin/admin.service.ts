@@ -34,40 +34,73 @@ export class AdminService {
       ]);
 
       // Process dossiers to include file information
-      const processedCompanyDossiers = await Promise.all(companyDossiers.map(async dossier => ({
-        ...dossier,
-        type: 'company' as const,
-        uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
-          id: file.id,
-          filename: file.filename,
-          originalName: file.originalName,
-          documentType: file.documentType,
-          size: file.size,
-          mimetype: file.mimetype,
-          url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
-          uploadedAt: file.uploadedAt,
-        }))),
-      })));
+        const processedCompanyDossiers = await Promise.all(companyDossiers.map(async dossier => {
+          // Handle both array and object formats for uploadedFiles
+          let filesToProcess: any[] = [];
+          if (Array.isArray(dossier.uploadedFiles)) {
+            // Array format: files are directly in the array
+            filesToProcess = dossier.uploadedFiles;
+          } else if (dossier.uploadedFiles && typeof dossier.uploadedFiles === 'object') {
+            // Object format: files are grouped by document type
+            filesToProcess = Object.values(dossier.uploadedFiles).flat();
+          }
+          
+          return {
+            ...dossier,
+            type: 'company' as const,
+            uploadedFiles: await Promise.all(filesToProcess.map(async (file: any) => {
+              const fileKey = file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url;
+              const signedUrl = await this.s3.getSignedUrl(fileKey, 60 * 15);
+              return {
+                id: file.id,
+                filename: file.filename,
+                originalName: file.originalName,
+                documentType: file.documentType,
+                size: file.size,
+                mimetype: file.mimetype,
+                url: signedUrl,
+                uploadedAt: file.uploadedAt,
+              };
+            })),
+          };
+        }));
 
-      const processedTourismDossiers = await Promise.all(tourismDossiers.map(async dossier => ({
-        ...dossier,
-        type: 'tourism' as const,
-        uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
-          id: file.id,
-          filename: file.filename,
-          originalName: file.originalName,
-          documentType: file.documentType,
-          size: file.size,
-          mimetype: file.mimetype,
-          url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
-          uploadedAt: file.uploadedAt,
-        }))),
-      })));
+        const processedTourismDossiers = await Promise.all(tourismDossiers.map(async dossier => {
+          // Handle both array and object formats for uploadedFiles
+          let filesToProcess: any[] = [];
+          if (Array.isArray(dossier.uploadedFiles)) {
+            // Array format: files are directly in the array
+            filesToProcess = dossier.uploadedFiles;
+          } else if (dossier.uploadedFiles && typeof dossier.uploadedFiles === 'object') {
+            // Object format: files are grouped by document type
+            filesToProcess = Object.values(dossier.uploadedFiles).flat();
+          }
+          
+          return {
+            ...dossier,
+            type: 'tourism' as const,
+            uploadedFiles: await Promise.all(filesToProcess.map(async (file: any) => {
+              const fileKey = file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url;
+              const signedUrl = await this.s3.getSignedUrl(fileKey, 60 * 15);
+              return {
+                id: file.id,
+                filename: file.filename,
+                originalName: file.originalName,
+                documentType: file.documentType,
+                size: file.size,
+                mimetype: file.mimetype,
+                url: signedUrl,
+                uploadedAt: file.uploadedAt,
+              };
+            })),
+          };
+        }));
 
       // Combine and sort all dossiers, then apply pagination
       const allDossiers = [...processedCompanyDossiers, ...processedTourismDossiers]
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .slice(skip, skip + limit);
+
 
       const total = companyTotal + tourismTotal;
       const totalPages = Math.ceil(total / limit);
@@ -106,39 +139,64 @@ export class AdminService {
     ]);
 
     // Process dossiers to include file information
-    const processedCompanyDossiers = await Promise.all(companyDossiers.map(async dossier => ({
-      ...dossier,
-      type: 'company' as const,
-      uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
-        id: file.id,
-        filename: file.filename,
-        originalName: file.originalName,
-        documentType: file.documentType,
-        size: file.size,
-        mimetype: file.mimetype,
-        url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
-        uploadedAt: file.uploadedAt,
-      }))),
-    })));
+    const processedCompanyDossiers = await Promise.all(companyDossiers.map(async dossier => {
+      // Handle both array and object formats for uploadedFiles
+      let filesToProcess: any[] = [];
+      if (Array.isArray(dossier.uploadedFiles)) {
+        // Array format: files are directly in the array
+        filesToProcess = dossier.uploadedFiles;
+      } else if (dossier.uploadedFiles && typeof dossier.uploadedFiles === 'object') {
+        // Object format: files are grouped by document type
+        filesToProcess = Object.values(dossier.uploadedFiles).flat();
+      }
+      
+      return {
+        ...dossier,
+        type: 'company' as const,
+        uploadedFiles: await Promise.all(filesToProcess.map(async (file: any) => ({
+          id: file.id,
+          filename: file.filename,
+          originalName: file.originalName,
+          documentType: file.documentType,
+          size: file.size,
+          mimetype: file.mimetype,
+          url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
+          uploadedAt: file.uploadedAt,
+        }))),
+      };
+    }));
 
-    const processedTourismDossiers = await Promise.all(tourismDossiers.map(async dossier => ({
-      ...dossier,
-      type: 'tourism' as const,
-      uploadedFiles: await Promise.all((Array.isArray(dossier.uploadedFiles) ? dossier.uploadedFiles : []).map(async (file: any) => ({
-        id: file.id,
-        filename: file.filename,
-        originalName: file.originalName,
-        documentType: file.documentType,
-        size: file.size,
-        mimetype: file.mimetype,
-        url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
-        uploadedAt: file.uploadedAt,
-      }))),
-    })));
+    const processedTourismDossiers = await Promise.all(tourismDossiers.map(async dossier => {
+      // Handle both array and object formats for uploadedFiles
+      let filesToProcess: any[] = [];
+      if (Array.isArray(dossier.uploadedFiles)) {
+        // Array format: files are directly in the array
+        filesToProcess = dossier.uploadedFiles;
+      } else if (dossier.uploadedFiles && typeof dossier.uploadedFiles === 'object') {
+        // Object format: files are grouped by document type
+        filesToProcess = Object.values(dossier.uploadedFiles).flat();
+      }
+      
+      return {
+        ...dossier,
+        type: 'tourism' as const,
+        uploadedFiles: await Promise.all(filesToProcess.map(async (file: any) => ({
+          id: file.id,
+          filename: file.filename,
+          originalName: file.originalName,
+          documentType: file.documentType,
+          size: file.size,
+          mimetype: file.mimetype,
+          url: await this.s3.getSignedUrl(file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url, 60 * 15),
+          uploadedAt: file.uploadedAt,
+        }))),
+      };
+    }));
 
     // Combine and sort all dossiers
     const allDossiers = [...processedCompanyDossiers, ...processedTourismDossiers]
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
 
     const total = companyTotal + tourismTotal;
     const totalPages = Math.ceil(total / limit);

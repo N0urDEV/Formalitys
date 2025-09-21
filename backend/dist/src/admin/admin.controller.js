@@ -106,6 +106,7 @@ let AdminController = class AdminController {
         return this.adminService.getDashboardStats();
     }
     getAllDossiersWithFiles(page = 1, limit = 20, type, status) {
+        console.log('Admin controller - getAllDossiersWithFiles called with:', { page, limit, type, status });
         return this.adminService.getAllDossiersWithFiles(+page, +limit, type, status);
     }
     getCompanyDossiers(page = 1, limit = 20, status) {
