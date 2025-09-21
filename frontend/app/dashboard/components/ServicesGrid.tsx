@@ -8,7 +8,7 @@ const services: Service[] = [
     title: 'Création de société SARL',
     description: 'Créez votre société en ligne au Maroc avec un accompagnement complet. De la constitution des dossiers à l\'obtention de tous les documents officiels.',
     price: '3 600 DH',
-    priceNote: '',
+    priceNote: '(343€)',
     features: [
       'Constitution complète de votre SARL',
       'Obtention certificat négatif OMPIC',
@@ -30,7 +30,7 @@ const services: Service[] = [
     title: 'Formalités pour hébergements touristiques',
     description: 'Régularisez votre Airbnb, Riad ou location touristique. Obtenez toutes les autorisations nécessaires pour louer en toute légalité.',
     price: '1 600 DH',
-    priceNote: '',
+    priceNote: '(152€)',
     features: [
       'Validation complète des documents',
       'Autorisations administratives',
@@ -67,7 +67,9 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ discountStatus }) =>
     return {
       ...service,
       price: `${(discount.finalPrice / 100).toLocaleString()} DH`,
+      priceNote: `(${Math.round((discount.finalPrice / 100) / 10.5)}€)`,
       originalPrice: `${(discount.originalPrice / 100).toLocaleString()} DH`,
+      originalPriceNote: `(${Math.round((discount.originalPrice / 100) / 10.5)}€)`,
       discountPercentage: discount.discountPercentage,
       discountAmount: discount.discountAmount,
       hasDiscount: true

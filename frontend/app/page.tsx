@@ -326,6 +326,7 @@ export default function Home() {
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>3 600 DH</div>
+                      <div className="text-sm text-white/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>(343€)</div>
                     </div>
                   </div>
                   
@@ -392,6 +393,7 @@ export default function Home() {
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>1 600 DH</div>
+                      <div className="text-sm text-[#F66B4C]/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>(152€)</div>
                     </div>
                   </div>
                   

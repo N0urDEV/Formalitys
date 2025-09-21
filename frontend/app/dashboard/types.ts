@@ -61,6 +61,7 @@ export interface Service {
   buttonStyle: string;
   // Discount fields
   originalPrice?: string;
+  originalPriceNote?: string; // Euro pricing for original price
   discountPercentage?: number;
   discountAmount?: number;
   hasDiscount?: boolean;

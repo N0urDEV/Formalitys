@@ -35,12 +35,22 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
                     isWhiteBackground ? 'text-gray-400' : 'text-white/60'
                   }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
                     {service.originalPrice}
+                    {service.originalPriceNote && (
+                      <span className="ml-1 text-sm">{service.originalPriceNote}</span>
+                    )}
                   </div>
                   <div className={`text-3xl font-bold ${
                     isWhiteBackground ? 'text-[#F66B4C]' : 'text-white'
                   }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
                     {service.price}
                   </div>
+                  {service.priceNote && (
+                    <div className={`text-sm ${
+                      isWhiteBackground ? 'text-gray-500' : 'text-white/80'
+                    }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                      {service.priceNote}
+                    </div>
+                  )}
                   <div className={`text-sm font-semibold ${
                     isWhiteBackground ? 'text-green-600' : 'text-green-300'
                   }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
