@@ -26,12 +26,7 @@ export const DashboardNavigation: React.FC<DashboardNavigationProps> = ({
             />
           </Link>
           <div className="flex items-center space-x-4">
-            <span 
-              className="text-gray-600" 
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              Bonjour, {user?.name || user?.email}
-            </span>
+            
             <button
               onClick={onLogout}
               className="text-gray-500 hover:text-[#F66B4C] transition-colors"

@@ -31,34 +31,69 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep, totalStep
   };
 
   return (
-    <div className="mb-12">
-      <div className="flex items-center justify-between mb-4">
-        {steps.map((step) => (
-          <div key={step} className="flex items-center">
-            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-bold shadow-lg transition-all duration-300 ${
-              step <= currentStep 
-                ? 'bg-gradient-to-br from-[#F66B4C] to-[#e55a43] text-white scale-110' 
-                : 'bg-gray-200 text-gray-600'
-            }`}>
-              {step}
+    <div className="mb-8">
+      {/* Mobile Progress Bar */}
+      <div className="block md:hidden">
+        <div className="flex items-center justify-between mb-6 px-2">
+          {steps.map((step) => (
+            <div key={step} className="flex flex-col items-center relative">
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                step <= currentStep 
+                  ? 'bg-gradient-to-br from-[#F66B4C] to-[#e55a43] text-white shadow-lg' 
+                  : 'bg-gray-200 text-gray-500'
+              }`}>
+                {step}
+              </div>
+              {step < totalSteps && (
+                <div className={`absolute top-4 left-1/2 w-full h-0.5 -translate-y-1/2 ${
+                  step < currentStep ? 'bg-gradient-to-r from-[#F66B4C] to-[#e55a43]' : 'bg-gray-200'
+                }`} style={{ width: 'calc(100% + 2rem)', marginLeft: '1rem' }}></div>
+              )}
             </div>
-            {step < totalSteps && (
-              <div className={`w-16 h-1 mx-2 rounded-full transition-all duration-300 ${
-                step < currentStep ? 'bg-gradient-to-r from-[#F66B4C] to-[#e55a43]' : 'bg-gray-200'
-              }`}></div>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
+      {/* Desktop Progress Bar */}
+      <div className="hidden md:block">
+        <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center">
+            {steps.map((step) => (
+              <div key={step} className="flex items-center">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-bold shadow-lg transition-all duration-300 ${
+                  step <= currentStep 
+                    ? 'bg-gradient-to-br from-[#F66B4C] to-[#e55a43] text-white scale-105' 
+                    : 'bg-gray-200 text-gray-600'
+                }`}>
+                  {step}
+                </div>
+                {step < totalSteps && (
+                  <div className={`w-16 h-1 mx-3 rounded-full transition-all duration-300 ${
+                    step < currentStep ? 'bg-gradient-to-r from-[#F66B4C] to-[#e55a43]' : 'bg-gray-200'
+                  }`}></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Step Info */}
       <div className="text-center">
+        <div className="inline-flex items-center gap-2 mb-3">
+          <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
+          <span className="text-sm font-medium text-[#F66B4C] uppercase tracking-wide">
+            Étape {currentStep} sur {totalSteps}
+          </span>
+        </div>
         <h2 
-          className="text-xl font-bold text-[#071B1E] mb-2"
+          className="text-lg md:text-xl font-bold text-[#071B1E] mb-2"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
-          Étape {currentStep}: {getStepTitle(currentStep)}
+          {getStepTitle(currentStep)}
         </h2>
         <p 
-          className="text-gray-600"
+          className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           {getStepDescription(currentStep)}
