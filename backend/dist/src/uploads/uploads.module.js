@@ -26,22 +26,19 @@ exports.UploadsModule = UploadsModule = __decorate([
                 storage: (0, multer_1.memoryStorage)(),
                 limits: { fileSize: 10 * 1024 * 1024 },
                 fileFilter: (req, file, cb) => {
-                    const documentType = req.body?.documentType || 'autre';
-                    if (documentType === 'blog_image') {
-                        const allowedImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-                        const allowedImageExts = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-                        const isImageMime = allowedImageTypes.includes(file.mimetype);
-                        const isImageExt = allowedImageExts.includes((0, path_1.extname)(file.originalname).toLowerCase());
-                        if (!isImageMime || !isImageExt) {
-                            return cb(new Error('Only image files (JPG, PNG, GIF, WebP) are allowed for blog images'), false);
-                        }
-                    }
-                    else {
-                        const isPdfMime = file.mimetype === 'application/pdf';
-                        const isPdfExt = (0, path_1.extname)(file.originalname).toLowerCase() === '.pdf';
-                        if (!isPdfMime || !isPdfExt) {
-                            return cb(new Error('Only PDF files are allowed'), false);
-                        }
+                    const allowedTypes = [
+                        'application/pdf',
+                        'image/jpeg',
+                        'image/jpg',
+                        'image/png',
+                        'image/gif',
+                        'image/webp'
+                    ];
+                    const allowedExts = ['.pdf', '.jpg', '.jpeg', '.png', '.gif', '.webp'];
+                    const isValidMime = allowedTypes.includes(file.mimetype);
+                    const isValidExt = allowedExts.includes((0, path_1.extname)(file.originalname).toLowerCase());
+                    if (!isValidMime || !isValidExt) {
+                        return cb(new Error('Only PDF and image files are allowed'), false);
                     }
                     cb(null, true);
                 },

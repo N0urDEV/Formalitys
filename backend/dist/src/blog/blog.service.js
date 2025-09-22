@@ -12,10 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const s3_service_1 = require("../s3/s3.service");
 let BlogService = class BlogService {
     prisma;
-    constructor(prisma) {
+    s3Service;
+    constructor(prisma, s3Service) {
         this.prisma = prisma;
+        this.s3Service = s3Service;
     }
     async createBlogPost(createBlogPostDto, authorId) {
         const slug = this.generateSlug(createBlogPostDto.title);
@@ -39,7 +42,7 @@ let BlogService = class BlogService {
     }
     async findAllBlogPosts(published) {
         const where = published !== undefined ? { published } : {};
-        return this.prisma.blogPost.findMany({
+        const blogPosts = await this.prisma.blogPost.findMany({
             where,
             include: {
                 author: {
@@ -54,9 +57,10 @@ let BlogService = class BlogService {
                 createdAt: 'desc',
             },
         });
+        return Promise.all(blogPosts.map(post => this.processBlogPost(post)));
     }
     async findBlogPostBySlug(slug) {
-        return this.prisma.blogPost.findUnique({
+        const blogPost = await this.prisma.blogPost.findUnique({
             where: { slug },
             include: {
                 author: {
@@ -68,9 +72,12 @@ let BlogService = class BlogService {
                 },
             },
         });
+        if (!blogPost)
+            return null;
+        return this.processBlogPost(blogPost);
     }
     async findBlogPostById(id) {
-        return this.prisma.blogPost.findUnique({
+        const blogPost = await this.prisma.blogPost.findUnique({
             where: { id },
             include: {
                 author: {
@@ -82,6 +89,9 @@ let BlogService = class BlogService {
                 },
             },
         });
+        if (!blogPost)
+            return null;
+        return this.processBlogPost(blogPost);
     }
     async updateBlogPost(id, updateBlogPostDto) {
         const updateData = { ...updateBlogPostDto };
@@ -91,7 +101,7 @@ let BlogService = class BlogService {
         if (updateBlogPostDto.published !== undefined) {
             updateData.publishedAt = updateBlogPostDto.published ? new Date() : null;
         }
-        return this.prisma.blogPost.update({
+        const blogPost = await this.prisma.blogPost.update({
             where: { id },
             data: updateData,
             include: {
@@ -104,6 +114,7 @@ let BlogService = class BlogService {
                 },
             },
         });
+        return this.processBlogPost(blogPost);
     }
     async deleteBlogPost(id) {
         return this.prisma.blogPost.delete({
@@ -111,7 +122,7 @@ let BlogService = class BlogService {
         });
     }
     async getPublishedBlogPosts(limit) {
-        return this.prisma.blogPost.findMany({
+        const blogPosts = await this.prisma.blogPost.findMany({
             where: { published: true },
             include: {
                 author: {
@@ -127,6 +138,7 @@ let BlogService = class BlogService {
             },
             take: limit,
         });
+        return Promise.all(blogPosts.map(post => this.processBlogPost(post)));
     }
     generateSlug(title) {
         return title
@@ -138,10 +150,40 @@ let BlogService = class BlogService {
             .replace(/-+/g, '-')
             .trim();
     }
+    async convertS3UrlToSignedUrl(url) {
+        if (!url)
+            return null;
+        console.log('Converting S3 URL to signed URL:', url);
+        const s3Endpoint = process.env.S3_ENDPOINT;
+        const bucketName = process.env.S3_BUCKET_NAME || 'formalitys-uploads';
+        console.log('S3 Config:', { s3Endpoint, bucketName });
+        if (url.includes(`${s3Endpoint}/${bucketName}/`)) {
+            const key = url.replace(`${s3Endpoint}/${bucketName}/`, '');
+            console.log('Extracted S3 key:', key);
+            try {
+                const signedUrl = await this.s3Service.getSignedUrl(key, 3600);
+                console.log('Generated signed URL:', signedUrl);
+                return signedUrl;
+            }
+            catch (error) {
+                console.error('Error generating signed URL:', error);
+                return url;
+            }
+        }
+        console.log('URL is not an S3 URL, returning original');
+        return url;
+    }
+    async processBlogPost(blogPost) {
+        if (blogPost.featuredImage) {
+            blogPost.featuredImage = await this.convertS3UrlToSignedUrl(blogPost.featuredImage);
+        }
+        return blogPost;
+    }
 };
 exports.BlogService = BlogService;
 exports.BlogService = BlogService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        s3_service_1.S3Service])
 ], BlogService);
 //# sourceMappingURL=blog.service.js.map

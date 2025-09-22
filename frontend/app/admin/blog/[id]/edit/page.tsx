@@ -53,7 +53,7 @@ export default function EditBlogPostPage() {
         return;
       }
 
-      const response = await fetch(`${API}/blog/${params.id}`, {
+      const response = await fetch(`${API}/blog/admin/${params.id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

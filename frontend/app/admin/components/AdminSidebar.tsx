@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 interface AdminSidebarProps {
   sidebarOpen: boolean;
@@ -8,8 +9,43 @@ interface AdminSidebarProps {
   currentPath: string;
 }
 
+interface AdminProfile {
+  id: number;
+  name: string | null;
+  email: string;
+  phone: string | null;
+}
+
 export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: AdminSidebarProps) {
   const router = useRouter();
+  const [adminProfile, setAdminProfile] = useState<AdminProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAdminProfile();
+  }, []);
+
+  const fetchAdminProfile = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      if (!token) return;
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001'}/auth/profile`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const profile = await response.json();
+        setAdminProfile(profile);
+      }
+    } catch (error) {
+      console.error('Error fetching admin profile:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const navigationItems = [
     {
@@ -119,18 +155,27 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
               </svg>
             </div>
             <div>
-              <p 
-                className="text-sm font-medium text-[#071B1E]"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Administrateur
-              </p>
-              <p 
-                className="text-xs text-gray-500"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                admin@formalitys.ma
-              </p>
+              {loading ? (
+                <div className="space-y-1">
+                  <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-3 bg-gray-200 rounded animate-pulse w-3/4"></div>
+                </div>
+              ) : (
+                <>
+                  <p 
+                    className="text-sm font-medium text-[#071B1E]"
+                    style={{ fontFamily: 'Satoshi, sans-serif' }}
+                  >
+                    {adminProfile?.name || 'Administrateur'}
+                  </p>
+                  <p 
+                    className="text-xs text-gray-500"
+                    style={{ fontFamily: 'Satoshi, sans-serif' }}
+                  >
+                    {adminProfile?.email || 'admin@formalitys.ma'}
+                  </p>
+                </>
+              )}
             </div>
           </div>
           <button
