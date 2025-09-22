@@ -169,22 +169,7 @@ export default function NewBlogPostPage() {
                 currentImage={formData.featuredImage}
                 placeholder="Téléchargez une image pour votre article"
               />
-              <p 
-                className="text-sm text-gray-500 mt-2"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Vous pouvez également utiliser une URL d'image externe ci-dessous si vous préférez.
-              </p>
-              <input
-                type="url"
-                id="featuredImageUrl"
-                name="featuredImage"
-                value={formData.featuredImage}
-                onChange={handleChange}
-                className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors mt-3"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-                placeholder="Ou entrez une URL d'image externe"
-              />
+              
             </div>
 
             {/* Content */}

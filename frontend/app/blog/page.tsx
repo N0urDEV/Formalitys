@@ -124,7 +124,7 @@ export default function BlogPage() {
                 Aucun article pour le moment
               </h3>
               <p 
-                className="text-gray-600 max-w-md mx-auto"
+                className="text-gray-700 md:text-gray-600 max-w-md mx-auto"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 Revenez bientôt pour découvrir nos derniers articles et actualités.
@@ -167,7 +167,7 @@ export default function BlogPage() {
                         {formatDate(post.publishedAt || post.createdAt)}
                       </span>
                       <span 
-                        className="text-sm text-gray-500"
+                        className="text-sm text-gray-600 md:text-gray-500"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
                         par {post.author.name || post.author.email}
@@ -176,7 +176,7 @@ export default function BlogPage() {
                     
                     {/* Title */}
                     <h2 
-                      className="text-xl font-bold text-[#071B1E] mb-3 group-hover:text-[#F66B4C] transition-colors line-clamp-2"
+                      className="text-xl font-bold text-[#071B1E] md:text-[#071B1E] mb-3 group-hover:text-[#F66B4C] transition-colors line-clamp-2"
                       style={{ fontFamily: '"Gascogne Serial", serif' }}
                     >
                       {post.title}
@@ -185,7 +185,7 @@ export default function BlogPage() {
                     {/* Excerpt */}
                     {post.excerpt && (
                       <p 
-                        className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed"
+                        className="text-gray-700 md:text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
                         {post.excerpt}
@@ -221,7 +221,7 @@ export default function BlogPage() {
             Prêt à simplifier vos démarches ?
           </h2>
           <p 
-            className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto"
+            className="text-lg text-gray-700 md:text-gray-600 mb-8 max-w-2xl mx-auto"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             Découvrez nos services de création de société et régularisation touristique
