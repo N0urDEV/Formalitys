@@ -68,7 +68,7 @@ let S3Service = class S3Service {
     generateKey(userName, documentType, originalName) {
         const timestamp = Date.now();
         const randomSuffix = Math.round(Math.random() * 1e9);
-        const fileExtension = 'pdf';
+        const fileExtension = originalName.split('.').pop()?.toLowerCase() || 'file';
         const sanitizedUserName = userName.replace(/[^a-zA-Z0-9]/g, '_');
         return `uploads/${sanitizedUserName}/${documentType}/${timestamp}-${randomSuffix}.${fileExtension}`;
     }

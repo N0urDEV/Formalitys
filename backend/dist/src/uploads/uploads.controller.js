@@ -26,6 +26,13 @@ let UploadsController = class UploadsController {
         this.s3Service = s3Service;
     }
     async uploadFile(file, req, body) {
+        console.log('Upload request received:', {
+            fileName: file?.originalname,
+            fileSize: file?.size,
+            mimeType: file?.mimetype,
+            documentType: body?.documentType,
+            userId: req.user?.userId
+        });
         if (!file) {
             throw new common_1.BadRequestException('No file uploaded');
         }
@@ -62,20 +69,28 @@ let UploadsController = class UploadsController {
         }
         const userName = user.name || user.email.split('@')[0];
         const key = this.s3Service.generateKey(userName, documentType, file.originalname);
-        const uploadResult = await this.s3Service.uploadFile(file, key);
-        return {
-            id: `file_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-            filename: key.split('/').pop(),
-            originalName: file.originalname,
-            documentType: documentType,
-            size: file.size,
-            mimetype: file.mimetype,
-            url: uploadResult.url,
-            key: uploadResult.key,
-            uploadedBy: req.user.userId,
-            uploadedByName: user.name || user.email,
-            uploadedAt: new Date().toISOString(),
-        };
+        try {
+            console.log('Attempting S3 upload:', { key, documentType, userName });
+            const uploadResult = await this.s3Service.uploadFile(file, key);
+            console.log('S3 upload successful:', { url: uploadResult.url });
+            return {
+                id: `file_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                filename: key.split('/').pop(),
+                originalName: file.originalname,
+                documentType: documentType,
+                size: file.size,
+                mimetype: file.mimetype,
+                url: uploadResult.url,
+                key: uploadResult.key,
+                uploadedBy: req.user.userId,
+                uploadedByName: user.name || user.email,
+                uploadedAt: new Date().toISOString(),
+            };
+        }
+        catch (error) {
+            console.error('S3 upload failed:', error);
+            throw new common_1.BadRequestException(`Upload failed: ${error.message}`);
+        }
     }
     async uploadMultipleFiles(files, req, body) {
         if (!files || files.length === 0) {

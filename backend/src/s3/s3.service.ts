@@ -74,8 +74,9 @@ export class S3Service {
   generateKey(userName: string, documentType: string, originalName: string): string {
     const timestamp = Date.now();
     const randomSuffix = Math.round(Math.random() * 1e9);
-    // We only accept PDFs; enforce a safe extension
-    const fileExtension = 'pdf';
+    
+    // Get file extension from original name
+    const fileExtension = originalName.split('.').pop()?.toLowerCase() || 'file';
     const sanitizedUserName = userName.replace(/[^a-zA-Z0-9]/g, '_');
     
     return `uploads/${sanitizedUserName}/${documentType}/${timestamp}-${randomSuffix}.${fileExtension}`;
