@@ -29,11 +29,26 @@ let UploadsController = class UploadsController {
         if (!file) {
             throw new common_1.BadRequestException('No file uploaded');
         }
-        const allowedTypes = [
-            'application/pdf'
-        ];
-        if (!allowedTypes.includes(file.mimetype)) {
-            throw new common_1.BadRequestException('Seuls les fichiers PDF sont acceptés');
+        const documentType = (body?.documentType || 'autre').toString();
+        if (documentType === 'blog_image') {
+            const allowedImageTypes = [
+                'image/jpeg',
+                'image/jpg',
+                'image/png',
+                'image/gif',
+                'image/webp'
+            ];
+            if (!allowedImageTypes.includes(file.mimetype)) {
+                throw new common_1.BadRequestException('Seuls les fichiers image (JPG, PNG, GIF, WebP) sont acceptés pour les images de blog');
+            }
+        }
+        else {
+            const allowedTypes = [
+                'application/pdf'
+            ];
+            if (!allowedTypes.includes(file.mimetype)) {
+                throw new common_1.BadRequestException('Seuls les fichiers PDF sont acceptés');
+            }
         }
         if (file.size > 10 * 1024 * 1024) {
             throw new common_1.BadRequestException('File too large (max 10MB)');
@@ -46,7 +61,6 @@ let UploadsController = class UploadsController {
             throw new common_1.BadRequestException('User not found');
         }
         const userName = user.name || user.email.split('@')[0];
-        const documentType = (body?.documentType || 'autre').toString();
         const key = this.s3Service.generateKey(userName, documentType, file.originalname);
         const uploadResult = await this.s3Service.uploadFile(file, key);
         return {
@@ -77,11 +91,25 @@ let UploadsController = class UploadsController {
         const userName = user.name || user.email.split('@')[0];
         const documentType = body.documentType || 'autre';
         const results = await Promise.all(files.map(async (file) => {
-            const allowedTypes = [
-                'application/pdf'
-            ];
-            if (!allowedTypes.includes(file.mimetype)) {
-                throw new common_1.BadRequestException(`Seuls les fichiers PDF sont acceptés: ${file.originalname}`);
+            if (documentType === 'blog_image') {
+                const allowedImageTypes = [
+                    'image/jpeg',
+                    'image/jpg',
+                    'image/png',
+                    'image/gif',
+                    'image/webp'
+                ];
+                if (!allowedImageTypes.includes(file.mimetype)) {
+                    throw new common_1.BadRequestException(`Seuls les fichiers image (JPG, PNG, GIF, WebP) sont acceptés: ${file.originalname}`);
+                }
+            }
+            else {
+                const allowedTypes = [
+                    'application/pdf'
+                ];
+                if (!allowedTypes.includes(file.mimetype)) {
+                    throw new common_1.BadRequestException(`Seuls les fichiers PDF sont acceptés: ${file.originalname}`);
+                }
             }
             if (file.size > 10 * 1024 * 1024) {
                 throw new common_1.BadRequestException(`File too large: ${file.originalname} (max 10MB)`);

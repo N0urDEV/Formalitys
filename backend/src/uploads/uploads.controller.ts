@@ -63,7 +63,6 @@ export class UploadsController {
     }
 
     const userName = user.name || user.email.split('@')[0];
-    const documentType = (body?.documentType || 'autre').toString();
     const key = this.s3Service.generateKey(userName, documentType, file.originalname);
     
     const uploadResult = await this.s3Service.uploadFile(file, key);

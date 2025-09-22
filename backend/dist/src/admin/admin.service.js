@@ -55,7 +55,6 @@ let AdminService = class AdminService {
         this.s3 = s3;
     }
     async getAllDossiersWithFiles(page = 1, limit = 20, type, status) {
-        console.log('Admin service - getAllDossiersWithFiles called with:', { page, limit, type, status });
         const skip = (page - 1) * limit;
         if (!type) {
             const [companyDossiers, tourismDossiers, companyTotal, tourismTotal] = await Promise.all([
@@ -77,30 +76,19 @@ let AdminService = class AdminService {
                 this.prisma.tourismDossier.count({ where: status ? { status } : {} }),
             ]);
             const processedCompanyDossiers = await Promise.all(companyDossiers.map(async (dossier) => {
-                console.log('Processing company dossier:', dossier.id, 'uploadedFiles:', dossier.uploadedFiles);
                 let filesToProcess = [];
                 if (Array.isArray(dossier.uploadedFiles)) {
-                    console.log(`Dossier ${dossier.id} - Array format, files count:`, dossier.uploadedFiles.length);
                     filesToProcess = dossier.uploadedFiles;
                 }
                 else if (dossier.uploadedFiles && typeof dossier.uploadedFiles === 'object') {
-                    const objectValues = Object.values(dossier.uploadedFiles);
-                    console.log(`Dossier ${dossier.id} - Object format, object values:`, objectValues);
-                    filesToProcess = objectValues.flat();
-                    console.log(`Dossier ${dossier.id} - Flattened files count:`, filesToProcess.length);
-                }
-                else {
-                    console.log(`Dossier ${dossier.id} - No files or invalid format:`, dossier.uploadedFiles);
+                    filesToProcess = Object.values(dossier.uploadedFiles).flat();
                 }
                 return {
                     ...dossier,
                     type: 'company',
                     uploadedFiles: await Promise.all(filesToProcess.map(async (file) => {
-                        console.log('Processing company file:', file.originalName, 'key:', file.key, 'url:', file.url);
                         const fileKey = file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url;
-                        console.log('Extracted file key:', fileKey);
                         const signedUrl = await this.s3.getSignedUrl(fileKey, 60 * 15);
-                        console.log('Generated signed URL for company file:', file.originalName, 'URL:', signedUrl);
                         return {
                             id: file.id,
                             filename: file.filename,
@@ -115,7 +103,6 @@ let AdminService = class AdminService {
                 };
             }));
             const processedTourismDossiers = await Promise.all(tourismDossiers.map(async (dossier) => {
-                console.log('Processing tourism dossier:', dossier.id, 'uploadedFiles:', dossier.uploadedFiles);
                 let filesToProcess = [];
                 if (Array.isArray(dossier.uploadedFiles)) {
                     filesToProcess = dossier.uploadedFiles;
@@ -127,11 +114,8 @@ let AdminService = class AdminService {
                     ...dossier,
                     type: 'tourism',
                     uploadedFiles: await Promise.all(filesToProcess.map(async (file) => {
-                        console.log('Processing tourism file:', file.originalName, 'key:', file.key, 'url:', file.url);
                         const fileKey = file.key ?? file.url?.split(`${process.env.S3_BUCKET_NAME}/`)[1] ?? file.url;
-                        console.log('Extracted file key:', fileKey);
                         const signedUrl = await this.s3.getSignedUrl(fileKey, 60 * 15);
-                        console.log('Generated signed URL for tourism file:', file.originalName, 'URL:', signedUrl);
                         return {
                             id: file.id,
                             filename: file.filename,
@@ -148,7 +132,6 @@ let AdminService = class AdminService {
             const allDossiers = [...processedCompanyDossiers, ...processedTourismDossiers]
                 .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                 .slice(skip, skip + limit);
-            console.log('Admin service - Final processed dossiers (no type filter):', allDossiers.map(d => ({ id: d.id, uploadedFilesCount: d.uploadedFiles?.length || 0 })));
             const total = companyTotal + tourismTotal;
             const totalPages = Math.ceil(total / limit);
             return {
@@ -182,20 +165,12 @@ let AdminService = class AdminService {
             type !== 'company' ? this.prisma.tourismDossier.count({ where: status ? { status } : {} }) : 0,
         ]);
         const processedCompanyDossiers = await Promise.all(companyDossiers.map(async (dossier) => {
-            console.log('Processing company dossier (type-specific):', dossier.id, 'uploadedFiles:', dossier.uploadedFiles);
             let filesToProcess = [];
             if (Array.isArray(dossier.uploadedFiles)) {
-                console.log(`Dossier ${dossier.id} - Array format (type-specific), files count:`, dossier.uploadedFiles.length);
                 filesToProcess = dossier.uploadedFiles;
             }
             else if (dossier.uploadedFiles && typeof dossier.uploadedFiles === 'object') {
-                const objectValues = Object.values(dossier.uploadedFiles);
-                console.log(`Dossier ${dossier.id} - Object format (type-specific), object values:`, objectValues);
-                filesToProcess = objectValues.flat();
-                console.log(`Dossier ${dossier.id} - Flattened files count (type-specific):`, filesToProcess.length);
-            }
-            else {
-                console.log(`Dossier ${dossier.id} - No files or invalid format (type-specific):`, dossier.uploadedFiles);
+                filesToProcess = Object.values(dossier.uploadedFiles).flat();
             }
             return {
                 ...dossier,
@@ -237,7 +212,6 @@ let AdminService = class AdminService {
         }));
         const allDossiers = [...processedCompanyDossiers, ...processedTourismDossiers]
             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        console.log('Admin service - Final processed dossiers (with type filter):', allDossiers.map(d => ({ id: d.id, uploadedFilesCount: d.uploadedFiles?.length || 0 })));
         const total = companyTotal + tourismTotal;
         const totalPages = Math.ceil(total / limit);
         return {
