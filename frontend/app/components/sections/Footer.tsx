@@ -29,12 +29,13 @@ export default function Footer() {
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                   </svg>
                 </div>
-                <span 
-                  className="text-white/80"
+                <a 
+                  href="mailto:info@formalitys.com?subject=Demande d'information&body=Bonjour, je souhaite obtenir des informations sur vos services."
+                  className="text-white/80 hover:text-white transition-colors duration-300"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
                   info@formalitys.com
-                </span>
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 bg-[#F66B4C] rounded-full flex items-center justify-center">
