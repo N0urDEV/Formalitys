@@ -1,12 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ImageUpload } from '../../../components/ImageUpload';
+import React, { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import { ImageUpload } from '../../../../components/ImageUpload';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
-export default function NewBlogPostPage() {
+interface BlogPost {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string;
+  featuredImage: string | null;
+  published: boolean;
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  author: {
+    id: number;
+    name: string | null;
+    email: string;
+  };
+}
+
+export default function EditBlogPostPage() {
+  const params = useParams();
+  const router = useRouter();
+  const [blogPost, setBlogPost] = useState<BlogPost | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     excerpt: '',
@@ -14,13 +35,54 @@ export default function NewBlogPostPage() {
     featuredImage: '',
     published: false,
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+
+  useEffect(() => {
+    if (params.id) {
+      fetchBlogPost();
+    }
+  }, [params.id]);
+
+  const fetchBlogPost = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      if (!token) {
+        router.push('/admin/login');
+        return;
+      }
+
+      const response = await fetch(`${API}/blog/${params.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors du chargement de l\'article');
+      }
+
+      const data = await response.json();
+      setBlogPost(data);
+      setFormData({
+        title: data.title,
+        excerpt: data.excerpt || '',
+        content: data.content,
+        featuredImage: data.featuredImage || '',
+        published: data.published,
+      });
+    } catch (error) {
+      console.error('Error fetching blog post:', error);
+      setError(error instanceof Error ? error.message : 'Une erreur est survenue');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setSaving(true);
     setError(null);
 
     try {
@@ -30,8 +92,8 @@ export default function NewBlogPostPage() {
         return;
       }
 
-      const response = await fetch(`${API}/blog`, {
-        method: 'POST',
+      const response = await fetch(`${API}/blog/${params.id}`, {
+        method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -41,16 +103,15 @@ export default function NewBlogPostPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Erreur lors de la création de l\'article');
+        throw new Error(errorData.message || 'Erreur lors de la mise à jour de l\'article');
       }
 
-      const newPost = await response.json();
       router.push('/admin/blog');
     } catch (error) {
-      console.error('Error creating blog post:', error);
+      console.error('Error updating blog post:', error);
       setError(error instanceof Error ? error.message : 'Une erreur est survenue');
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
@@ -61,6 +122,36 @@ export default function NewBlogPostPage() {
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     }));
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-6"></div>
+          <p className="text-[#071B1E] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement de l'article...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!blogPost) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8] flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-[#071B1E] mb-4" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+            Article non trouvé
+          </h1>
+          <button
+            onClick={() => router.push('/admin/blog')}
+            className="bg-[#F66B4C] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#e55a43] transition-colors"
+            style={{ fontFamily: 'Satoshi, sans-serif' }}
+          >
+            Retour aux articles
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8]">
@@ -73,13 +164,13 @@ export default function NewBlogPostPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Nouvel Article
+                Modifier l'Article
               </h1>
               <p 
                 className="text-xl text-white/90"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Créez un nouvel article de blog
+                {blogPost.title}
               </p>
             </div>
             <button
@@ -238,17 +329,17 @@ export default function NewBlogPostPage() {
             <div className="flex items-center space-x-4 pt-8">
               <button
                 type="submit"
-                disabled={loading}
+                disabled={saving}
                 className="bg-[#F66B4C] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                {loading ? (
+                {saving ? (
                   <div className="flex items-center">
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Création...
+                    Sauvegarde...
                   </div>
                 ) : (
-                  'Créer l\'article'
+                  'Sauvegarder les modifications'
                 )}
               </button>
               

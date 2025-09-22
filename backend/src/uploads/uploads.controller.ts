@@ -20,14 +20,32 @@ export class UploadsController {
       throw new BadRequestException('No file uploaded');
     }
     
-          // Validate file type - only PDF files allowed
-          const allowedTypes = [
-            'application/pdf'
-          ];
+    const documentType = (body?.documentType || 'autre').toString();
     
-          if (!allowedTypes.includes(file.mimetype)) {
-            throw new BadRequestException('Seuls les fichiers PDF sont acceptés');
-          }
+    // Validate file type based on document type
+    if (documentType === 'blog_image') {
+      // Allow images for blog posts
+      const allowedImageTypes = [
+        'image/jpeg',
+        'image/jpg', 
+        'image/png',
+        'image/gif',
+        'image/webp'
+      ];
+      
+      if (!allowedImageTypes.includes(file.mimetype)) {
+        throw new BadRequestException('Seuls les fichiers image (JPG, PNG, GIF, WebP) sont acceptés pour les images de blog');
+      }
+    } else {
+      // For other document types, only allow PDF files
+      const allowedTypes = [
+        'application/pdf'
+      ];
+      
+      if (!allowedTypes.includes(file.mimetype)) {
+        throw new BadRequestException('Seuls les fichiers PDF sont acceptés');
+      }
+    }
     
     // Validate file size (10MB max)
     if (file.size > 10 * 1024 * 1024) {
@@ -86,14 +104,30 @@ export class UploadsController {
     const documentType = body.documentType || 'autre'; // Use provided document type or default to 'autre'
     
     const results = await Promise.all(files.map(async (file) => {
-          // Validate file type - only PDF files allowed
-          const allowedTypes = [
-            'application/pdf'
-          ];
-      
-            if (!allowedTypes.includes(file.mimetype)) {
-              throw new BadRequestException(`Seuls les fichiers PDF sont acceptés: ${file.originalname}`);
-            }
+      // Validate file type based on document type
+      if (documentType === 'blog_image') {
+        // Allow images for blog posts
+        const allowedImageTypes = [
+          'image/jpeg',
+          'image/jpg', 
+          'image/png',
+          'image/gif',
+          'image/webp'
+        ];
+        
+        if (!allowedImageTypes.includes(file.mimetype)) {
+          throw new BadRequestException(`Seuls les fichiers image (JPG, PNG, GIF, WebP) sont acceptés: ${file.originalname}`);
+        }
+      } else {
+        // For other document types, only allow PDF files
+        const allowedTypes = [
+          'application/pdf'
+        ];
+        
+        if (!allowedTypes.includes(file.mimetype)) {
+          throw new BadRequestException(`Seuls les fichiers PDF sont acceptés: ${file.originalname}`);
+        }
+      }
       
       if (file.size > 10 * 1024 * 1024) {
         throw new BadRequestException(`File too large: ${file.originalname} (max 10MB)`);
