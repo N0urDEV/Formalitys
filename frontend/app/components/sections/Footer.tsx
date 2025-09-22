@@ -161,7 +161,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/faq"
+                  href="/#faq"
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >

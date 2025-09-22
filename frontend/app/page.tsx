@@ -6,6 +6,7 @@ import PartnersCarousel from './components/PartnersCarousel';
 import Navigation from './components/Navigation';
 import StructuredData from './components/StructuredData';
 import OptimizedImage from './components/OptimizedImage';
+import FAQ from './components/FAQ';
 import { useState, useEffect } from 'react';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
@@ -805,40 +806,127 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ />
+
       {/* CTA Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="bg-[#062A2F] relative overflow-hidden rounded-4xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#062A2F] via-[#0a3b42] to-[#062A2F]"></div>
-            <div className="relative px-6 lg:px-12 py-10 lg:py-14 text-center">
-          <h2 
-            className="text-4xl lg:text-5xl font-bold text-white mb-8"
-            style={{ fontFamily: '"Gascogne Serial", serif' }}
-          >
-            Prêt à commencer ?
-          </h2>
-          <p 
-            className="text-xl text-white/90 mb-12 max-w-2xl mx-auto"
-            style={{ fontFamily: 'Satoshi, sans-serif' }}
-          >
-            Rejoignez des centaines d'entrepreneurs qui nous font confiance 
-            pour leurs démarches juridiques au Maroc.
-          </p>
-          <Link
-            href="/register"
-            className="inline-block bg-[#F66B4C] text-white px-12 py-4 rounded-2xl font-bold text-xl hover:bg-[#e55a43] transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105"
-            style={{ fontFamily: 'Satoshi, sans-serif' }}
-          >
-            Rejoindre Formalitys
-          </Link>
-          
-          {/* Decorative Elements */}
-          <div className="absolute top-10 left-10 w-64 h-64 bg-[#F66B4C]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 left-0 w-72 h-72 bg-[#F66B4C]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#062A2F]/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#F66B4C]/3 rounded-full blur-2xl"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-4xl">
+            {/* Gradient Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#F66B4C] via-[#e55a43] to-[#F66B4C] p-[2px] rounded-4xl">
+              <div className="w-full h-full bg-gradient-to-br from-[#062A2F] via-[#0a3b42] to-[#062A2F] rounded-4xl"></div>
+            </div>
+            
+            {/* Main Content */}
+            <div className="relative px-6 lg:px-16 py-16 lg:py-20 text-center">
+              {/* Decorative Elements */}
+              <div className="absolute top-0 left-0 w-32 h-32 bg-[#F66B4C]/20 rounded-full blur-2xl"></div>
+              <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-[#F66B4C]/5 to-transparent rounded-full blur-3xl"></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                {/* Badge */}
+                <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
+                  <div className="w-2 h-2 bg-[#F66B4C] rounded-full animate-pulse"></div>
+                  <span className="text-white/90 font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                    +210 clients nous font confiance
+                  </span>
+                </div>
+                
+                <h2 
+                  className="text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight"
+                  style={{ fontFamily: '"Gascogne Serial", serif' }}
+                >
+                  Prêt à commencer
+                  <span className="block text-[#F66B4C]">votre projet ?</span>
+                </h2>
+                
+                <p 
+                  className="text-xl lg:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed"
+                  style={{ fontFamily: 'Satoshi, sans-serif' }}
+                >
+                  Rejoignez des centaines d'entrepreneurs qui nous font confiance 
+                  pour leurs démarches juridiques au Maroc.
+                </p>
+                
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                  <Link
+                    href="/register"
+                    className="group relative bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-10 py-5 rounded-2xl font-bold text-xl hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 overflow-hidden"
+                    style={{ fontFamily: 'Satoshi, sans-serif' }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                    <span className="relative flex items-center space-x-3">
+                      <span>Rejoindre Formalitys</span>
+                      <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </Link>
+                  
+                  <Link
+                    href="#services"
+                    className="group flex items-center space-x-3 text-white/90 hover:text-white transition-colors duration-300"
+                    style={{ fontFamily: 'Satoshi, sans-serif' }}
+                  >
+                    <span className="text-lg font-semibold">Découvrir nos services</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </Link>
+                </div>
+                
+                {/* Trust Indicators */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                  <div className="flex items-center justify-center space-x-3 text-white/80">
+                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                      <svg className="w-6 h-6 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>100% En ligne</div>
+                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>Sans déplacement</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-center space-x-3 text-white/80">
+                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                      <svg className="w-6 h-6 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>Rapide</div>
+                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>Quelques jours</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-center space-x-3 text-white/80">
+                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                      <svg className="w-6 h-6 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>Sécurisé</div>
+                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>Données protégées</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
       {/* Footer */}
       <Footer />
