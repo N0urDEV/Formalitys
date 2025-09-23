@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -12,6 +13,7 @@ export default function Navigation() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setIsServicesOpen(false);
   };
 
   // Close menu on escape key
@@ -36,6 +38,26 @@ export default function Navigation() {
     };
   }, [isMenuOpen]);
 
+  // Close services dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (isServicesOpen) {
+        const target = e.target as Element;
+        if (!target.closest('.services-dropdown')) {
+          setIsServicesOpen(false);
+        }
+      }
+    };
+
+    if (isServicesOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isServicesOpen]);
+
   return (
     <>
       {/* Overlay for mobile menu */}
@@ -46,7 +68,7 @@ export default function Navigation() {
         />
       )}
       
-      <nav className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100/50">
+      <nav className="bg-white/95 backdrop-blur-md relative md:sticky md:top-0 z-50 border-b border-gray-100/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -62,12 +84,86 @@ export default function Navigation() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
+              {/* Services Dropdown */}
+              <div className="relative services-dropdown">
+                <button
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5 flex items-center"
+                  style={{ fontFamily: 'Satoshi, sans-serif' }}
+                >
+                  Services
+                  <svg 
+                    className={`w-4 h-4 ml-1 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Dropdown Menu */}
+                {isServicesOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md border border-gray-100/50 rounded-xl shadow-xl z-50">
+                    <div className="py-2">
+                      <Link
+                        href="/dossiers/company"
+                        className="block px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-[#F66B4C]/5 transition-all duration-200"
+                        style={{ fontFamily: 'Satoshi, sans-serif' }}
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center">
+                          <svg className="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          </svg>
+                          <div>
+                            <div className="font-semibold">Création SARL</div>
+                            <div className="text-sm text-gray-500">Société à Responsabilité Limitée</div>
+                          </div>
+                        </div>
+                      </Link>
+                      <Link
+                        href="/dossiers/tourism"
+                        className="block px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-[#F66B4C]/5 transition-all duration-200"
+                        style={{ fontFamily: 'Satoshi, sans-serif' }}
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center">
+                          <svg className="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
+                          </svg>
+                          <div>
+                            <div className="font-semibold">Formalités location riads</div>
+                            <div className="text-sm text-gray-500">Hébergement touristique</div>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <Link 
+                href="/#faq" 
+                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
+                style={{ fontFamily: 'Satoshi, sans-serif' }}
+              >
+                FAQ
+              </Link>
               <Link 
                 href="/blog" 
                 className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 Blog
+              </Link>
+              <Link 
+                href="/#contact" 
+                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
+                style={{ fontFamily: 'Satoshi, sans-serif' }}
+              >
+                Contact
               </Link>
               <Link 
                 href="/login" 
@@ -116,35 +212,98 @@ export default function Navigation() {
           {/* Mobile Navigation Menu */}
           <div className={`md:hidden transition-all duration-300 ease-in-out ${
             isMenuOpen 
-              ? 'max-h-96 opacity-100 translate-y-0' 
+              ? 'max-h-full opacity-100 translate-y-0' 
               : 'max-h-0 opacity-0 -translate-y-4 pointer-events-none'
           }`}>
             <div className="px-2 pt-4 pb-6 mb-4 space-y-2 bg-white/95 backdrop-blur-md border-t border-gray-100/50 shadow-xl rounded-2xl">
               {/* Menu Items */}
               <div className="space-y-1">
-                <Link
-                  href="/blog"
-                  className="group flex items-center px-4 py-3.5 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
-                  style={{ fontFamily: 'Satoshi, sans-serif' }}
-                  onClick={closeMenu}
-                >
-                  <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                  </svg>
-                  Blog
-                </Link>
-                
-                <Link
-                  href="/login"
-                  className="group flex items-center px-4 py-3.5 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
-                  style={{ fontFamily: 'Satoshi, sans-serif' }}
-                  onClick={closeMenu}
-                >
-                  <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                  </svg>
-                  Se connecter
-                </Link>
+                {/* Services Section */}
+                <div className="px-4 py-2">
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Services</div>
+                  <div className="space-y-1">
+                    <Link
+                      href="/dossiers/company"
+                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      style={{ fontFamily: 'Satoshi, sans-serif' }}
+                      onClick={closeMenu}
+                    >
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                      <div>
+                        <div className="font-semibold">Création SARL</div>
+                        <div className="text-sm text-gray-500">Société à Responsabilité Limitée</div>
+                      </div>
+                    </Link>
+                    <Link
+                      href="/dossiers/tourism"
+                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      style={{ fontFamily: 'Satoshi, sans-serif' }}
+                      onClick={closeMenu}
+                    >
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
+                      </svg>
+                      <div>
+                        <div className="font-semibold">Formalités location riads</div>
+                        <div className="text-sm text-gray-500">Hébergement touristique</div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Other Links */}
+                <div className="px-4 py-2">
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Navigation</div>
+                  <div className="space-y-1">
+                    <Link
+                      href="/#faq"
+                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      style={{ fontFamily: 'Satoshi, sans-serif' }}
+                      onClick={closeMenu}
+                    >
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      FAQ
+                    </Link>
+                    <Link
+                      href="/blog"
+                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      style={{ fontFamily: 'Satoshi, sans-serif' }}
+                      onClick={closeMenu}
+                    >
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                      </svg>
+                      Blog
+                    </Link>
+                    <Link
+                      href="/#contact"
+                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      style={{ fontFamily: 'Satoshi, sans-serif' }}
+                      onClick={closeMenu}
+                    >
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      Contact
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      style={{ fontFamily: 'Satoshi, sans-serif' }}
+                      onClick={closeMenu}
+                    >
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                      </svg>
+                      Se connecter
+                    </Link>
+                  </div>
+                </div>
               </div>
 
               {/* Divider */}

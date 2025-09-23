@@ -5,16 +5,16 @@ import WhatsAppWidget from "./components/WhatsAppWidget";
 
 export const metadata: Metadata = {
   title: "Formalitys - Création Société & Hébergement Touristique au Maroc | 100% En Ligne",
-  description: "Créez votre SARL au Maroc ou régularisez votre Airbnb/Riad en ligne. Service juridique rapide, sécurisé avec accompagnement expert. Devis gratuit.",
-  keywords: "création société Maroc, SARL Maroc, hébergement touristique, Airbnb Maroc, formalités juridiques, OMPIC, registre commerce",
+  description: "Créez votre SARL au Maroc | Formalités légales location de Riads Airbnb en ligne. Accompagnement d'experts",
+  keywords: "création société Maroc, SARL Maroc, hébergement touristique, Airbnb Maroc, formalités juridiques, OMPIC, registre commerce, Formalités location riads",
   openGraph: {
     title: "Formalitys - Démarches Juridiques au Maroc | 100% En Ligne",
     description: "Simplifiez vos démarches juridiques au Maroc. Création société SARL et régularisation hébergement touristique avec nos experts.",
-    url: "https://formalitys.vercel.app",
+    url: "https://formalitys.com",
     siteName: "Formalitys",
     images: [
       {
-        url: "https://formalitys.vercel.app/og-image.jpg",
+        url: "https://formalitys.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Formalitys - Démarches Juridiques au Maroc",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Formalitys - Démarches Juridiques au Maroc",
     description: "Créez votre société ou régularisez votre hébergement touristique en ligne au Maroc.",
-    images: ["https://formalitys.vercel.app/og-image.jpg"],
+    images: ["https://formalitys.com/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://formalitys.vercel.app",
+    canonical: "https://formalitys.com",
   },
   icons: {
     icon: [
@@ -67,6 +67,10 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <link rel="stylesheet" href="/fonts/satoshi.css" />
+        {/* Site icons */}
+        <link rel="icon" type="image/svg+xml" href="/SVG/Asset 2.svg" />
+        <link rel="apple-touch-icon" href="/SVG/Asset 2.svg" />
+        <meta name="theme-color" content="#062A2F" />
       </head>
       <body className="font-sans antialiased" style={{ fontFamily: 'Satoshi, sans-serif' }}>
         {children}
