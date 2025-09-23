@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ImageUpload } from '../../../components/ImageUpload';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
 export default function NewBlogPostPage() {
+  const t = useTranslations('Admin.blog');
   const [formData, setFormData] = useState({
     title: '',
     excerpt: '',
@@ -73,13 +75,13 @@ export default function NewBlogPostPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Nouvel Article
+                {t('newTitle')}
               </h1>
               <p 
                 className="text-xl text-white/90"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Créez un nouvel article de blog
+                {t('newTitle')}
               </p>
             </div>
             <button
@@ -90,7 +92,7 @@ export default function NewBlogPostPage() {
               <svg className="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Retour
+              {t('back')}
             </button>
           </div>
         </div>
@@ -120,7 +122,7 @@ export default function NewBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Titre
+                {t('title')}
               </label>
               <input
                 type="text"
@@ -131,7 +133,7 @@ export default function NewBlogPostPage() {
                 required
                 className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
-                placeholder="Entrez le titre de votre article"
+                placeholder={t('titlePh')}
               />
             </div>
 
@@ -142,7 +144,7 @@ export default function NewBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Résumé
+                {t('excerpt')}
               </label>
               <textarea
                 id="excerpt"
@@ -152,7 +154,7 @@ export default function NewBlogPostPage() {
                 rows={3}
                 className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors resize-none"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
-                placeholder="Résumé court de l'article (optionnel)"
+                placeholder={t('excerptPh')}
               />
             </div>
 
@@ -162,12 +164,12 @@ export default function NewBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Image mise en avant
+                {t('imagePh')}
               </label>
               <ImageUpload
                 onImageUpload={(url) => setFormData(prev => ({ ...prev, featuredImage: url }))}
                 currentImage={formData.featuredImage}
-                placeholder="Téléchargez une image pour votre article"
+                placeholder={t('imagePh')}
               />
               
             </div>
@@ -179,7 +181,7 @@ export default function NewBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Contenu
+                {t('content')}
               </label>
               <textarea
                 id="content"
@@ -190,13 +192,13 @@ export default function NewBlogPostPage() {
                 rows={15}
                 className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors resize-none"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
-                placeholder="Contenu de votre article (HTML autorisé)"
+                placeholder={t('contentPh')}
               />
               <p 
                 className="text-sm text-gray-500 mt-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Vous pouvez utiliser du HTML pour formater votre contenu.
+                {t('htmlHint')}
               </p>
             </div>
 
@@ -215,7 +217,7 @@ export default function NewBlogPostPage() {
                 className="ml-3 text-lg font-semibold text-[#071B1E]"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Publier immédiatement
+                {t('publishNow')}
               </label>
             </div>
 
@@ -230,10 +232,10 @@ export default function NewBlogPostPage() {
                 {loading ? (
                   <div className="flex items-center">
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Création...
+                    {t('creating')}
                   </div>
                 ) : (
-                  'Créer l\'article'
+                  t('create')
                 )}
               </button>
               
@@ -243,7 +245,7 @@ export default function NewBlogPostPage() {
                 className="bg-gray-200 text-gray-700 px-8 py-4 rounded-2xl font-semibold hover:bg-gray-300 transition-colors"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Annuler
+                {t('back')}
               </button>
             </div>
           </form>

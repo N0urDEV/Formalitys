@@ -6,6 +6,8 @@ import { NextIntlClientProvider } from "next-intl";
 import en from "../messages/en.json";
 import Script from "next/script";
 import Analytics from "@/app/components/Analytics";
+import LanguageSwitcher from "@/app/components/LanguageSwitcher";
+import MessagesProvider from "@/app/components/MessagesProvider";
 
 export const metadata: Metadata = {
   title: "Formalitys - Company Formation & Tourist Accommodation in Morocco | 100% Online",
@@ -80,17 +82,22 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G-9KS5C9ZR0M"
           strategy="afterInteractive"
         />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);} 
-            gtag('js', new Date());
-            gtag('config', 'G-9KS5C9ZR0M');
-          `}
-        </Script>
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
+<Script id="gtag-init" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+  `}
+</Script>
+
       </head>
       <body className="font-sans antialiased" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-        <NextIntlClientProvider messages={en} locale="en">
+        <MessagesProvider>
+          <div className="fixed top-4 right-4 z-50">
+            <LanguageSwitcher />
+          </div>
           <Analytics />
           {children}
           
@@ -101,15 +108,8 @@ export default function RootLayout({
             hideOnPages={['/admin']}
           />
           
-          {/* Alternative: WhatsApp Button (uncomment to use instead of widget) */}
-          {/* <WhatsAppButton 
-            phoneNumber="+212620269000"
-            message="Bonjour! Je souhaite obtenir des informations sur vos services Formalitys."
-            position="bottom-right"
-            showAfterDelay={3000}
-            hideOnPages={['/admin']}
-          /> */}
-        </NextIntlClientProvider>
+          
+        </MessagesProvider>
       </body>
     </html>
   );

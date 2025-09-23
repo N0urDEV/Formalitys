@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
 export default function LoginPage() {
   const router = useRouter();
+  const t = useTranslations('Auth');
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +25,7 @@ export default function LoginPage() {
         body: JSON.stringify({ emailOrPhone, password }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Erreur de connexion');
+      if (!res.ok) throw new Error(data.message || t('common.errorLogin'));
       localStorage.setItem('token', data.token);
       router.push('/dashboard');
     } catch (err: any) {
@@ -55,7 +57,7 @@ export default function LoginPage() {
             className="text-white/80 hover:text-white transition-colors"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            ← Retour à l'accueil
+            {t('common.backHome')}
           </Link>
         </div>
       </nav>
@@ -75,13 +77,13 @@ export default function LoginPage() {
                   className="text-3xl font-bold text-[#071B1E] mb-2"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Connexion
+                  {t('login.title')}
                 </h1>
                 <p 
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Accédez à votre espace client
+                  {t('login.subtitle')}
                 </p>
               </div>
 
@@ -92,11 +94,11 @@ export default function LoginPage() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Email ou téléphone
+                    {t('common.emailOrPhone')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="votre@email.com ou +212..."
+                    placeholder={t('common.emailOrPhonePlaceholder')}
                     value={emailOrPhone} 
                     onChange={e => setEmailOrPhone(e.target.value)}
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
@@ -110,19 +112,19 @@ export default function LoginPage() {
                       className="block text-sm font-medium text-gray-700"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Mot de passe
+                      {t('common.password')}
                     </label>
                     <Link 
                       href="/forgot-password"
                       className="text-sm text-[#F66B4C] hover:text-[#e55a43] transition-colors"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Mot de passe oublié ?
+                      {t('login.forgot')}
                     </Link>
                   </div>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="••••••••"
+                    placeholder={t('common.passwordPlaceholder')}
                     type="password" 
                     value={password} 
                     onChange={e => setPassword(e.target.value)}
@@ -147,10 +149,10 @@ export default function LoginPage() {
                   {loading ? (
                     <div className="flex items-center justify-center">
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      Connexion...
+                      {t('login.loading')}
                     </div>
                   ) : (
-                    'Se connecter'
+                    t('login.cta')
                   )}
                 </button>
               </form>
@@ -161,13 +163,13 @@ export default function LoginPage() {
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Pas de compte ?{' '}
+                  {t('login.noAccount')}{' '}
                   <Link 
                     href="/register" 
                     className="text-[#F66B4C] hover:text-[#e55a43] font-semibold transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Créer un compte
+                    {t('login.register')}
                   </Link>
                 </p>
               </div>

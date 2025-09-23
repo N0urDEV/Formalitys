@@ -292,6 +292,24 @@
       "prev": "Previous",
       "saving": "Saving...",
       "next": "Next"
+      ,
+      "Progress": {
+        "stepLabel": "Step {current} of {total}",
+        "titles": {
+          "1": "Associate information",
+          "2": "Registered office",
+          "3": "Payment",
+          "4": "Company details",
+          "5": "Completed"
+        },
+        "descriptions": {
+          "1": "Enter the information of your company's associates",
+          "2": "Select the type of registered office for your company",
+          "3": "Make the payment to proceed",
+          "4": "Complete your company details and options",
+          "5": "Your dossier is being processed"
+        }
+      }
     }
     ,
     "Tourism": {
@@ -309,6 +327,26 @@
       "prev": "Previous",
       "saving": "Saving...",
       "next": "Next"
+      ,
+      "Progress": {
+        "stepLabel": "Step {current} of {total}",
+        "titles": {
+          "1": "Owner information",
+          "2": "Establishment information",
+          "3": "Payment",
+          "4": "Documents and photos",
+          "5": "Questionnaire",
+          "6": "Completed"
+        },
+        "descriptions": {
+          "1": "Enter your personal information",
+          "2": "Enter your establishment details",
+          "3": "Make the payment to continue",
+          "4": "Upload your documents and photos",
+          "5": "Fill out the compliance questionnaire",
+          "6": "Dossier completed"
+        }
+      }
     }
   }
   ,
@@ -322,6 +360,61 @@
       "logout": "Sign out",
       "admin": "Administrator",
       "fallbackEmail": "admin@formalitys.ma"
+    },
+    "blog": {
+      "newTitle": "Create a new blog post",
+      "back": "Back",
+      "title": "Title",
+      "titlePh": "Enter your post title",
+      "excerpt": "Excerpt",
+      "excerptPh": "Short excerpt (optional)",
+      "imagePh": "Upload a featured image",
+      "content": "Content",
+      "contentPh": "Your post content (HTML allowed)",
+      "htmlHint": "You can use HTML to format your content.",
+      "publishNow": "Publish immediately",
+      "creating": "Creating...",
+      "create": "Create post",
+      "editTitle": "Edit Post",
+      "notFound": "Post not found",
+      "backToPosts": "Back to posts",
+      "update": "Update",
+      "updating": "Updating..."
+    }
+  }
+  ,
+  "Auth": {
+    "common": {
+      "backHome": "← Back to home",
+      "emailOrPhone": "Email or phone",
+      "emailOrPhonePlaceholder": "your@email.com or +212...",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "errorLogin": "Login failed",
+      "errorRegister": "Registration failed"
+    },
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Access your account",
+      "forgot": "Forgot password?",
+      "cta": "Sign in",
+      "loading": "Signing in...",
+      "noAccount": "No account?",
+      "register": "Create an account"
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "Join us to simplify your procedures",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+212 6 12 34 56 78",
+      "cta": "Create my account",
+      "loading": "Creating...",
+      "haveAccount": "Already have an account?",
+      "login": "Sign in"
     }
   }
 }

@@ -292,6 +292,24 @@
       "prev": "Précédent",
       "saving": "Enregistrement...",
       "next": "Suivant"
+      ,
+      "Progress": {
+        "stepLabel": "Étape {current} sur {total}",
+        "titles": {
+          "1": "Informations associés",
+          "2": "Siège social",
+          "3": "Paiement",
+          "4": "Détails de l'entreprise",
+          "5": "Terminé"
+        },
+        "descriptions": {
+          "1": "Renseignez les informations des associés de votre société",
+          "2": "Sélectionnez le type de siège social pour votre société",
+          "3": "Effectuez le paiement pour finaliser",
+          "4": "Complétez les détails et options de votre société",
+          "5": "Votre dossier est en cours de traitement"
+        }
+      }
     }
     ,
     "Tourism": {
@@ -309,6 +327,26 @@
       "prev": "Précédent",
       "saving": "Enregistrement...",
       "next": "Suivant"
+      ,
+      "Progress": {
+        "stepLabel": "Étape {current} sur {total}",
+        "titles": {
+          "1": "Informations propriétaire",
+          "2": "Informations établissement",
+          "3": "Paiement",
+          "4": "Documents et photos",
+          "5": "Questionnaire",
+          "6": "Terminé"
+        },
+        "descriptions": {
+          "1": "Renseignez vos informations personnelles",
+          "2": "Renseignez les informations de votre établissement",
+          "3": "Effectuez le paiement pour continuer",
+          "4": "Uploadez vos documents et photos",
+          "5": "Remplissez le questionnaire de conformité",
+          "6": "Dossier terminé"
+        }
+      }
     }
   }
   ,
@@ -322,6 +360,61 @@
       "logout": "Déconnexion",
       "admin": "Administrateur",
       "fallbackEmail": "admin@formalitys.ma"
+    },
+    "blog": {
+      "newTitle": "Créez un nouvel article de blog",
+      "back": "Retour",
+      "title": "Titre",
+      "titlePh": "Entrez le titre de votre article",
+      "excerpt": "Résumé",
+      "excerptPh": "Résumé court de l'article (optionnel)",
+      "imagePh": "Téléchargez une image pour votre article",
+      "content": "Contenu",
+      "contentPh": "Contenu de votre article (HTML autorisé)",
+      "htmlHint": "Vous pouvez utiliser du HTML pour formater votre contenu.",
+      "publishNow": "Publier immédiatement",
+      "creating": "Création...",
+      "create": "Créer l'article",
+      "editTitle": "Modifier l'Article",
+      "notFound": "Article non trouvé",
+      "backToPosts": "Retour aux articles",
+      "update": "Mettre à jour",
+      "updating": "Mise à jour..."
+    }
+  }
+  ,
+  "Auth": {
+    "common": {
+      "backHome": "← Retour à l'accueil",
+      "emailOrPhone": "Email ou téléphone",
+      "emailOrPhonePlaceholder": "votre@email.com ou +212...",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "••••••••",
+      "errorLogin": "Erreur de connexion",
+      "errorRegister": "Erreur inscription"
+    },
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Accédez à votre espace client",
+      "forgot": "Mot de passe oublié ?",
+      "cta": "Se connecter",
+      "loading": "Connexion...",
+      "noAccount": "Pas de compte ?",
+      "register": "Créer un compte"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez-nous pour simplifier vos démarches",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Jean Dupont",
+      "email": "Email",
+      "emailPlaceholder": "jean@exemple.com",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+212 6 12 34 56 78",
+      "cta": "Créer mon compte",
+      "loading": "Création...",
+      "haveAccount": "Déjà inscrit ?",
+      "login": "Se connecter"
     }
   }
 }

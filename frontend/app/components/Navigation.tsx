@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navigation() {
   const t = useTranslations('Nav');
@@ -181,6 +182,7 @@ export default function Navigation() {
               >
                 {t('register')}
               </Link>
+              <LanguageSwitcher />
             </div>
 
             {/* Mobile menu button */}

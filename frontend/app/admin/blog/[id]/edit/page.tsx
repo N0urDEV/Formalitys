@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { ImageUpload } from '../../../../components/ImageUpload';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -27,6 +28,7 @@ interface BlogPost {
 export default function EditBlogPostPage() {
   const params = useParams();
   const router = useRouter();
+  const t = useTranslations('Admin.blog');
   const [blogPost, setBlogPost] = useState<BlogPost | null>(null);
   const [formData, setFormData] = useState({
     title: '',
@@ -60,7 +62,7 @@ export default function EditBlogPostPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Erreur lors du chargement de l\'article');
+        throw new Error(t('notFound'));
       }
 
       const data = await response.json();
@@ -74,7 +76,7 @@ export default function EditBlogPostPage() {
       });
     } catch (error) {
       console.error('Error fetching blog post:', error);
-      setError(error instanceof Error ? error.message : 'Une erreur est survenue');
+      setError(error instanceof Error ? error.message : t('notFound'));
     } finally {
       setLoading(false);
     }
@@ -128,7 +130,7 @@ export default function EditBlogPostPage() {
       <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8] flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-6"></div>
-          <p className="text-[#071B1E] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement de l'article...</p>
+          <p className="text-[#071B1E] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('updating')}</p>
         </div>
       </div>
     );
@@ -139,14 +141,14 @@ export default function EditBlogPostPage() {
       <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-[#071B1E] mb-4" style={{ fontFamily: '"Gascogne Serial", serif' }}>
-            Article non trouvé
+            {t('notFound')}
           </h1>
           <button
             onClick={() => router.push('/admin/blog')}
             className="bg-[#F66B4C] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#e55a43] transition-colors"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            Retour aux articles
+            {t('backToPosts')}
           </button>
         </div>
       </div>
@@ -164,7 +166,7 @@ export default function EditBlogPostPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Modifier l'Article
+                {t('editTitle')}
               </h1>
               <p 
                 className="text-xl text-white/90"
@@ -181,7 +183,7 @@ export default function EditBlogPostPage() {
               <svg className="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Retour
+              {t('back')}
             </button>
           </div>
         </div>
@@ -211,7 +213,7 @@ export default function EditBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Titre
+                {t('title')}
               </label>
               <input
                 type="text"
@@ -222,7 +224,7 @@ export default function EditBlogPostPage() {
                 required
                 className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
-                placeholder="Entrez le titre de votre article"
+                placeholder={t('titlePh')}
               />
             </div>
 
@@ -233,7 +235,7 @@ export default function EditBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Résumé
+                {t('excerpt')}
               </label>
               <textarea
                 id="excerpt"
@@ -243,7 +245,7 @@ export default function EditBlogPostPage() {
                 rows={3}
                 className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors resize-none"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
-                placeholder="Résumé court de l'article (optionnel)"
+                placeholder={t('excerptPh')}
               />
             </div>
 
@@ -253,12 +255,12 @@ export default function EditBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Image mise en avant
+                {t('imagePh')}
               </label>
               <ImageUpload
                 onImageUpload={(url) => setFormData(prev => ({ ...prev, featuredImage: url }))}
                 currentImage={formData.featuredImage}
-                placeholder="Téléchargez une image pour votre article"
+                placeholder={t('imagePh')}
               />
 
             </div>
@@ -270,7 +272,7 @@ export default function EditBlogPostPage() {
                 className="block text-lg font-semibold text-[#071B1E] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Contenu
+                {t('content')}
               </label>
               <textarea
                 id="content"
@@ -281,13 +283,13 @@ export default function EditBlogPostPage() {
                 rows={15}
                 className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors resize-none"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
-                placeholder="Contenu de votre article (HTML autorisé)"
+                placeholder={t('contentPh')}
               />
               <p 
                 className="text-sm text-gray-500 mt-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Vous pouvez utiliser du HTML pour formater votre contenu.
+                {t('htmlHint')}
               </p>
             </div>
 
@@ -306,7 +308,7 @@ export default function EditBlogPostPage() {
                 className="ml-3 text-lg font-semibold text-[#071B1E]"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Publier immédiatement
+                {t('publishNow')}
               </label>
             </div>
 
@@ -321,10 +323,10 @@ export default function EditBlogPostPage() {
                 {saving ? (
                   <div className="flex items-center">
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Sauvegarde...
+                    {t('updating')}
                   </div>
                 ) : (
-                  'Sauvegarder les modifications'
+                  t('update')
                 )}
               </button>
               
@@ -334,7 +336,7 @@ export default function EditBlogPostPage() {
                 className="bg-gray-200 text-gray-700 px-8 py-4 rounded-2xl font-semibold hover:bg-gray-300 transition-colors"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Annuler
+                {t('back')}
               </button>
             </div>
           </form>

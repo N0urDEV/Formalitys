@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const t = useTranslations('Auth');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -25,7 +27,7 @@ export default function RegisterPage() {
         body: JSON.stringify({ name, email, phone, password }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Erreur inscription');
+      if (!res.ok) throw new Error(data.message || t('common.errorRegister'));
       localStorage.setItem('token', data.token);
       router.push('/dashboard');
     } catch (err: any) {
@@ -57,7 +59,7 @@ export default function RegisterPage() {
             className="text-white/80 hover:text-white transition-colors"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            ← Retour à l'accueil
+            {t('common.backHome')}
           </Link>
         </div>
       </nav>
@@ -77,13 +79,13 @@ export default function RegisterPage() {
                   className="text-3xl font-bold text-[#071B1E] mb-2"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Créer un compte
+                  {t('register.title')}
                 </h1>
                 <p 
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Rejoignez-nous pour simplifier vos démarches
+                  {t('register.subtitle')}
                 </p>
               </div>
 
@@ -94,11 +96,11 @@ export default function RegisterPage() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Nom complet
+                    {t('register.fullName')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="Jean Dupont"
+                    placeholder={t('register.fullNamePlaceholder')}
                     value={name} 
                     onChange={e => setName(e.target.value)}
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
@@ -111,11 +113,11 @@ export default function RegisterPage() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Email
+                    {t('register.email')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="jean@exemple.com"
+                    placeholder={t('register.emailPlaceholder')}
                     type="email"
                     value={email} 
                     onChange={e => setEmail(e.target.value)}
@@ -129,11 +131,11 @@ export default function RegisterPage() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Téléphone
+                    {t('register.phone')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="+212 6 12 34 56 78"
+                    placeholder={t('register.phonePlaceholder')}
                     type="tel"
                     value={phone} 
                     onChange={e => setPhone(e.target.value)}
@@ -147,11 +149,11 @@ export default function RegisterPage() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Mot de passe
+                    {t('common.password')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="••••••••"
+                    placeholder={t('common.passwordPlaceholder')}
                     type="password" 
                     value={password} 
                     onChange={e => setPassword(e.target.value)}
@@ -176,10 +178,10 @@ export default function RegisterPage() {
                   {loading ? (
                     <div className="flex items-center justify-center">
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      Création...
+                      {t('register.loading')}
                     </div>
                   ) : (
-                    'Créer mon compte'
+                    t('register.cta')
                   )}
                 </button>
               </form>
@@ -190,13 +192,13 @@ export default function RegisterPage() {
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Déjà inscrit ?{' '}
+                  {t('register.haveAccount')}{' '}
                   <Link 
                     href="/login" 
                     className="text-[#F66B4C] hover:text-[#e55a43] font-semibold transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Se connecter
+                    {t('register.login')}
                   </Link>
                 </p>
               </div>

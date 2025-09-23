@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface ProgressBarProps {
   currentStep: number;
@@ -6,30 +7,15 @@ interface ProgressBarProps {
 }
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep, totalSteps }) => {
+  const t = useTranslations('Dossiers.Tourism.Progress');
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
   
   const getStepTitle = (step: number) => {
-    switch (step) {
-      case 1: return 'Informations propriétaire';
-      case 2: return 'Informations établissement';
-      case 3: return 'Paiement';
-      case 4: return 'Documents et photos';
-      case 5: return 'Questionnaire';
-      case 6: return 'Terminé';
-      default: return 'Terminé';
-    }
+    return t(`titles.${step}` as any);
   };
 
   const getStepDescription = (step: number) => {
-    switch (step) {
-      case 1: return 'Renseignez vos informations personnelles';
-      case 2: return 'Renseignez les informations de votre établissement';
-      case 3: return 'Effectuez le paiement pour continuer';
-      case 4: return 'Uploadez vos documents et photos';
-      case 5: return 'Remplissez le questionnaire de conformité';
-      case 6: return 'Dossier terminé';
-      default: return 'Dossier terminé';
-    }
+    return t(`descriptions.${step}` as any);
   };
 
   return (
@@ -109,7 +95,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep, totalStep
         <div className="inline-flex items-center gap-2 mb-3">
           <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
           <span className="text-sm font-medium text-[#F66B4C] uppercase tracking-wide">
-            Étape {currentStep} sur {totalSteps}
+            {t('stepLabel', { current: currentStep, total: totalSteps })}
           </span>
         </div>
         <h2 
