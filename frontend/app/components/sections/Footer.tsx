@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
   const currentYear = new Date().getFullYear();
 
   return (
@@ -58,7 +60,7 @@ export default function Footer() {
                 className="text-lg font-semibold mb-4"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Suivez-nous
+                {t('followUs')}
               </h4>
               <div className="flex space-x-4">
                 <a
@@ -100,7 +102,7 @@ export default function Footer() {
               className="text-lg font-semibold mb-6"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Services
+              {t('services')}
             </h4>
             <ul className="space-y-3">
               <li>
@@ -109,7 +111,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Création de société
+                  {t('serviceCompany')}
                 </Link>
               </li>
               <li>
@@ -118,7 +120,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Formalités pour hébergements touristiques
+                  {t('serviceTourism')}
                 </Link>
               </li>
               <li>
@@ -127,7 +129,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Mon espace client
+                  {t('dashboard')}
                 </Link>
               </li>
             </ul>
@@ -139,7 +141,7 @@ export default function Footer() {
               className="text-lg font-semibold mb-6"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Ressources
+              {t('resources')}
             </h4>
             <ul className="space-y-3 mb-8">
               <li>
@@ -148,7 +150,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Blog & Actualités
+                  {t('blog')}
                 </Link>
               </li>
               <li>
@@ -157,7 +159,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Guide juridique
+                  {t('guides')}
                 </Link>
               </li>
               <li>
@@ -166,7 +168,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  FAQ
+                  {t('faq')}
                 </Link>
               </li>
             </ul>
@@ -175,7 +177,7 @@ export default function Footer() {
               className="text-lg font-semibold mb-6"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Légal
+              {t('legal')}
             </h4>
             <ul className="space-y-3">
               <li>
@@ -184,7 +186,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Mentions légales
+                  {t('mentions')}
                 </Link>
               </li>
               <li>
@@ -193,7 +195,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Politique de confidentialité
+                  {t('privacy')}
                 </Link>
               </li>
               <li>
@@ -202,7 +204,7 @@ export default function Footer() {
                   className="text-white/80 hover:text-[#F66B4C] transition-colors duration-300 hover:translate-x-1 transform inline-block"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  CGV
+                  {t('terms')}
                 </Link>
               </li>
             </ul>
@@ -219,18 +221,18 @@ export default function Footer() {
                 className="text-2xl font-bold mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Restez informé
+                {t('newsletterTitle')}
               </h3>
               <p 
                 className="text-white/80 mb-8"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Recevez nos dernières actualités et conseils juridiques directement dans votre boîte mail.
+                {t('newsletterSubtitle')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <input
                   type="email"
-                  placeholder="Votre adresse email"
+                  placeholder={t('newsletterPlaceholder')}
                   className="flex-1 px-6 py-4 rounded-2xl border-0 bg-white/10 text-white placeholder-white/60 focus:bg-white/20 focus:outline-none focus:ring-2 focus:ring-[#F66B4C] transition-all duration-300"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
@@ -238,7 +240,7 @@ export default function Footer() {
                   className="bg-[#F66B4C] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  S&apos;abonner
+                  {t('newsletterCta')}
                 </button>
               </div>
             </div>
@@ -255,7 +257,7 @@ export default function Footer() {
                 className="text-white/60"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                © {currentYear} Formalitys. Tous droits réservés.
+                {t('copyright', { year: currentYear })}
               </p>
             </div>
             <div className="flex items-center space-x-6">
@@ -265,7 +267,7 @@ export default function Footer() {
                   className="text-white/60 text-sm"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Service disponible 24/7
+                  {t('status')}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
@@ -276,7 +278,7 @@ export default function Footer() {
                   className="text-white/60 text-sm"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Paiement sécurisé
+                  {t('secure')}
                 </span>
               </div>
             </div>

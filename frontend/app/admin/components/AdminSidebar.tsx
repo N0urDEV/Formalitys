@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface AdminSidebarProps {
   sidebarOpen: boolean;
@@ -18,6 +19,7 @@ interface AdminProfile {
 
 export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: AdminSidebarProps) {
   const router = useRouter();
+  const t = useTranslations('Admin.sidebar');
   const [adminProfile, setAdminProfile] = useState<AdminProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,7 +51,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
 
   const navigationItems = [
     {
-      name: 'Dashboard',
+      name: t('dashboard'),
       href: '/admin',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +61,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
       )
     },
     {
-      name: 'Dossiers',
+      name: t('dossiers'),
       href: '/admin/dossiers',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,7 +70,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
       )
     },
     {
-      name: 'Utilisateurs',
+      name: t('users'),
       href: '/admin/users',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +79,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
       )
     },
     {
-      name: 'Blog',
+      name: t('blog'),
       href: '/admin/blog',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +88,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
       )
     },
     {
-      name: 'Administrateurs',
+      name: t('admins'),
       href: '/admin/admins',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -166,13 +168,13 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
                     className="text-sm font-medium text-[#071B1E]"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    {adminProfile?.name || 'Administrateur'}
+                    {adminProfile?.name || t('admin')}
                   </p>
                   <p 
                     className="text-xs text-gray-500"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    {adminProfile?.email || 'admin@formalitys.ma'}
+                    {adminProfile?.email || t('fallbackEmail')}
                   </p>
                 </>
               )}
@@ -186,7 +188,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
-            <span>Déconnexion</span>
+            <span>{t('logout')}</span>
           </button>
         </div>
       </div>

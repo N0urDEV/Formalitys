@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Footer from '../components/sections/Footer';
 import Navigation from '../components/Navigation';
 import StructuredData from '../components/StructuredData';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 import OptimizedImage from '../components/OptimizedImage';
@@ -28,6 +29,7 @@ interface BlogPost {
 }
 
 export default function BlogPage() {
+  const t = useTranslations('BlogList');
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -48,7 +50,7 @@ export default function BlogPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('fr-FR', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -61,9 +63,7 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto"></div>
-            <p className="mt-4 text-white/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              Chargement des articles...
-            </p>
+            <p className="mt-4 text-white/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </div>
@@ -76,13 +76,13 @@ export default function BlogPage() {
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Accueil",
+          "name": t('breadcrumbHome'),
           "item": "https://formalitys.vercel.app"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Blog",
+          "name": t('breadcrumbBlog'),
           "item": "https://formalitys.vercel.app/blog"
         }
       ]} />
@@ -96,13 +96,13 @@ export default function BlogPage() {
             className="text-5xl lg:text-6xl font-bold mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Actualités & Blog
+            {t('title')}
           </h1>
           <p 
             className="text-xl text-white/90 max-w-3xl mx-auto"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            Découvrez nos dernières actualités, conseils et informations sur les démarches juridiques au Maroc
+            {t('subtitle')}
           </p>
         </div>
       </section>
@@ -121,13 +121,13 @@ export default function BlogPage() {
                 className="text-2xl font-bold text-[#071B1E] mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Aucun article pour le moment
+                {t('emptyTitle')}
               </h3>
               <p 
                 className="text-gray-700 md:text-gray-600 max-w-md mx-auto"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Revenez bientôt pour découvrir nos derniers articles et actualités.
+                {t('emptySubtitle')}
               </p>
             </div>
           ) : (
@@ -142,7 +142,7 @@ export default function BlogPage() {
                     <div className="relative h-48 overflow-hidden">
                       <OptimizedImage
                         src={post.featuredImage}
-                        alt={`Image d'illustration - ${post.title} | Formalitys Blog`}
+                        alt={post.title}
                         width={400}
                         height={192}
                         className="object-cover group-hover:scale-105 transition-transform duration-300 w-full h-full"
@@ -170,7 +170,7 @@ export default function BlogPage() {
                         className="text-sm text-gray-600 md:text-gray-500"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
-                        par {post.author.name || post.author.email}
+                        {t('by', { author: post.author.name || post.author.email })}
                       </span>
                     </div>
                     
@@ -198,7 +198,7 @@ export default function BlogPage() {
                       className="inline-flex items-center text-[#F66B4C] font-medium hover:text-[#e55a43] transition-colors group text-sm"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Lire la suite
+                      {t('readMore')}
                       <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -218,13 +218,13 @@ export default function BlogPage() {
             className="text-3xl lg:text-4xl font-bold text-[#071B1E] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Prêt à simplifier vos démarches ?
+            {t('ctaTitle')}
           </h2>
           <p 
             className="text-lg text-gray-700 md:text-gray-600 mb-8 max-w-2xl mx-auto"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            Découvrez nos services de création de société et régularisation touristique
+            {t('ctaSubtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -232,14 +232,14 @@ export default function BlogPage() {
               className="bg-[#F66B4C] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#e55a43] transition-colors"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Créer une société SARL
+              {t('ctaCompany')}
             </Link>
             <Link
               href="/dossiers/tourism"
               className="border-2 border-[#F66B4C] text-[#F66B4C] px-8 py-3 rounded-xl font-semibold hover:bg-[#F66B4C] hover:text-white transition-colors"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Formalités location riads
+              {t('ctaTourism')}
             </Link>
           </div>
         </div>

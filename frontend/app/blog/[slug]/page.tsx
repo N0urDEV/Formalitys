@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -26,6 +27,7 @@ interface BlogPost {
 }
 
 export default function BlogPostPage() {
+  const t = useTranslations('BlogPost');
   const [blogPost, setBlogPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +56,7 @@ export default function BlogPostPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('fr-FR', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -67,9 +69,7 @@ export default function BlogPostPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto"></div>
-            <p className="mt-4 text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              Chargement de l&apos;article...
-            </p>
+            <p className="mt-4 text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </div>
@@ -90,13 +90,13 @@ export default function BlogPostPage() {
               className="text-3xl font-bold text-[#071B1E] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Article non trouvé
+              {t('notFoundTitle')}
             </h1>
             <p 
               className="text-gray-600 mb-8"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              L&apos;article que vous recherchez n&apos;existe pas ou a été supprimé.
+              {t('notFoundSubtitle')}
             </p>
             <Link
               href="/blog"
@@ -106,7 +106,7 @@ export default function BlogPostPage() {
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Retour au blog
+              {t('back')}
             </Link>
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function BlogPostPage() {
               {formatDate(blogPost.publishedAt || blogPost.createdAt)}
             </span>
             <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              par {blogPost.author.name || blogPost.author.email}
+              {t('by', { author: blogPost.author.name || blogPost.author.email })}
             </span>
           </div>
         </div>
@@ -191,13 +191,13 @@ export default function BlogPostPage() {
             className="text-4xl lg:text-5xl font-bold text-white mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Prêt à simplifier vos démarches ?
+            {t('ctaTitle')}
           </h2>
           <p 
             className="text-xl text-white/90 mb-8 max-w-3xl mx-auto"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            Découvrez nos services de création de société et régularisation touristique
+            {t('ctaSubtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -205,14 +205,14 @@ export default function BlogPostPage() {
               className="bg-white text-[#F66B4C] px-8 py-4 rounded-2xl font-semibold hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Créer une société
+              {t('ctaCompany')}
             </Link>
             <Link
               href="/dossiers/tourism"
               className="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-[#F66B4C] transition-all duration-300"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Formalités location riads
+              {t('ctaTourism')}
             </Link>
           </div>
         </div>

@@ -1,0 +1,328 @@
+{
+  "common": {
+    "siteName": "Formalitys"
+  },
+  "Home": {
+    "hero": {
+      "titleLine1": "Simplify your",
+      "titleEmphasis": "legal procedures",
+      "titleLine2": "in Morocco",
+      "chips": {
+        "simple": "Simple",
+        "fast": "Fast",
+        "affordable": "Affordable"
+      },
+      "subtitle": "LLC company formation in Morocco or legal formalities for tourist accommodations 100% online. Fast, secure, with expert support.",
+      "ctaPrimary": "Start my project",
+      "ctaSecondary": "Explore our solutions"
+    },
+    "how": {
+      "title": "How does it work?",
+      "subtitleLine1": "A simple and transparent process",
+      "subtitleLine2": "in 4 steps for your legal procedures",
+      "steps": {
+        "s1": {
+          "title": "Fill in your information",
+          "description": "Complete the online form with your personal and professional details."
+        },
+        "s2": {
+          "title": "Pay securely",
+          "description": "Make your payment via our secure platform with Stripe."
+        },
+        "s3": {
+          "title": "We handle the formalities",
+          "description": "Our experts take care of all administrative and legal procedures."
+        },
+        "s4": {
+          "title": "Receive your validated documents in a few days",
+          "description": "Download your official documents directly from your client area."
+        }
+      },
+      "stepLabel": "Step {current}/4",
+      "ready": "Ready to simplify your procedures?",
+      "cta": "Let's go!"
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Two complete solutions to support your growth in Morocco",
+      "company": {
+        "price": "3 600 DH",
+        "priceEuro": "(€343)",
+        "title": "LLC Company Formation",
+        "desc": "Incorporate your company online in Morocco with end-to-end support. From preparing files to obtaining all official documents.",
+        "features": {
+          "f1": "Complete LLC incorporation",
+          "f2": "Negative certificate from OMPIC",
+          "f3": "Commercial register, Patente/TP, taxes and CNSS registration",
+          "f4": "Expert legal assistance",
+          "f5": "Bank account introduction"
+        },
+        "cta": "Create my company"
+      },
+      "tourism": {
+        "price": "1 600 DH",
+        "priceEuro": "(€152)",
+        "title": "Tourist accommodation compliance",
+        "desc": "Regularize your Airbnb, Riad or tourist rental. Obtain all authorizations to rent legally.",
+        "features": {
+          "f1": "Complete documents validation",
+          "f2": "Administrative authorizations",
+          "f3": "Tourism classification",
+          "f4": "Regulatory compliance",
+          "f5": "Night declarations / police register / tourist taxes / taxes"
+        },
+        "cta": "Regularize my rentals"
+      }
+    },
+    "benefits": {
+      "title": "Why choose us?",
+      "subtitle": "Recognized expertise and exceptional service for your legal procedures",
+      "rapid": {
+        "title": "Speed & simplicity",
+        "desc": "100% online, no travel. Complete your procedures in just a few clicks from home.",
+        "badge": "100% digital"
+      },
+      "costs": {
+        "title": "Cost transparency",
+        "desc": "Clear and fixed prices, no surprises.",
+        "badge": "No hidden fees"
+      },
+      "security": {
+        "title": "Payment security",
+        "desc": "SSL encryption and banking compliance.",
+        "badge": "SSL & 3D Secure"
+      },
+      "expert": {
+        "title": "Expert guidance",
+        "desc": "Our legal and administrative experts support you at every step.",
+        "badge": "Dedicated support"
+      },
+      "experience": {
+        "title": "Proven experience",
+        "desc": "+210 clients already trust us.",
+        "badge": "Recognized in Morocco"
+      },
+      "bottomCtaBadge": "Customer satisfaction guaranteed"
+    },
+    "blog": {
+      "title": "News & Blog",
+      "subtitle": "Discover our latest articles, tips and news about legal procedures in Morocco",
+      "loading": "Loading articles...",
+      "emptyTitle": "No articles at the moment",
+      "emptySubtitle": "Our blog posts will be available soon.",
+      "soon": "Soon",
+      "by": "by {author}",
+      "readMore": "Read the article",
+      "alt": "Illustration image - {title} | Formalitys Blog",
+      "explore": "Explore the blog"
+    },
+    "ctaSection": {
+      "badge": "+210 clients trust us",
+      "titleLine1": "Ready to start",
+      "titleLine2": "your project?",
+      "subtitle": "Join hundreds of entrepreneurs who trust us for their legal procedures in Morocco.",
+      "join": "Join Formalitys",
+      "discover": "Discover our services",
+      "t1Title": "100% Online",
+      "t1Sub": "No travel",
+      "t2Title": "Fast",
+      "t2Sub": "A few days",
+      "t3Title": "Secure",
+      "t3Sub": "Data protected"
+    }
+  }
+  ,
+  "Nav": {
+    "services": "Services",
+    "company": {
+      "title": "LLC Formation",
+      "subtitle": "Limited Liability Company"
+    },
+    "tourism": {
+      "title": "Tourist rental compliance",
+      "subtitle": "Tourist accommodation"
+    },
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Contact",
+    "login": "Sign in",
+    "register": "Create account",
+    "mobile": {
+      "services": "Services",
+      "nav": "Navigation"
+    }
+  },
+  "BlogList": {
+    "title": "News & Blog",
+    "subtitle": "Discover the latest news, tips and information about legal procedures in Morocco",
+    "loading": "Loading articles...",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "emptyTitle": "No articles for now",
+    "emptySubtitle": "Come back soon to discover our latest posts.",
+    "by": "by {author}",
+    "readMore": "Read more",
+    "ctaTitle": "Ready to simplify your procedures?",
+    "ctaSubtitle": "Discover our company formation and tourism compliance services",
+    "ctaCompany": "Create an LLC",
+    "ctaTourism": "Tourist rental compliance"
+  },
+  "BlogPost": {
+    "loading": "Loading the article...",
+    "notFoundTitle": "Article not found",
+    "notFoundSubtitle": "The article you are looking for does not exist or was removed.",
+    "back": "Back to blog",
+    "by": "by {author}",
+    "ctaTitle": "Ready to simplify your procedures?",
+    "ctaSubtitle": "Discover our company formation and tourism compliance services",
+    "ctaCompany": "Create a company",
+    "ctaTourism": "Tourist rental compliance"
+  },
+  "Footer": {
+    "followUs": "Follow us",
+    "services": "Services",
+    "serviceCompany": "Company formation",
+    "serviceTourism": "Tourist accommodation compliance",
+    "dashboard": "My account",
+    "resources": "Resources",
+    "blog": "Blog & News",
+    "guides": "Legal guide",
+    "faq": "FAQ",
+    "legal": "Legal",
+    "mentions": "Legal notice",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "newsletterTitle": "Stay informed",
+    "newsletterSubtitle": "Receive our latest news and legal tips directly in your inbox.",
+    "newsletterPlaceholder": "Your email address",
+    "newsletterCta": "Subscribe",
+    "copyright": "© {year} Formalitys. All rights reserved.",
+    "status": "Service available 24/7",
+    "secure": "Secure payment"
+  },
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Quickly find answers about our company formation and tourist accommodation services",
+    "all": "All questions",
+    "tourism": "Tourist Accommodation",
+    "company": "Company Formation",
+    "general": "General",
+    "notFoundTitle": "Can't find your answer?",
+    "notFoundSubtitle": "Our team is here to help and answer all your questions",
+    "contactWhatsApp": "Contact on WhatsApp",
+    "callNow": "Call now"
+  },
+  "Meta": {
+    "title": "Formalitys - Company Formation & Tourist Accommodation in Morocco | 100% Online",
+    "description": "Create your LLC in Morocco | Legal formalities for tourist rentals online. Expert support.",
+    "ogTitle": "Formalitys - Legal Procedures in Morocco | 100% Online",
+    "ogDescription": "Simplify your legal procedures in Morocco. LLC formation and tourist accommodation compliance with our experts.",
+    "twitterTitle": "Formalitys - Legal Procedures in Morocco",
+    "twitterDescription": "Create your company or regularize your tourist accommodation online in Morocco.",
+    "ogAlt": "Formalitys - Legal Procedures in Morocco"
+  }
+  ,
+  "Terms": {
+    "title": "Terms of Service",
+    "notice": "Legal: FORMALITYS is a Moroccan website published by Caktus SARL – Hosted by Nindohost – Personal data is used only within the scope of the formalities entrusted by the client and is transmitted only for that purpose. It is never retained or sold for commercial or advertising purposes.",
+    "sections": {
+      "purposeTitle": "Purpose",
+      "purposeBody": "These terms govern the services provided by FORMALITYS."
+    }
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "notice": "Legal: FORMALITYS is a Moroccan website published by Caktus SARL – Hosted by Nindohost – Personal data is used only within the scope of the formalities entrusted by the client and is transmitted only for that purpose. It is never retained or sold for commercial or advertising purposes.",
+    "sections": {
+      "useTitle": "Use of data",
+      "useBody": "Personal data is used exclusively to carry out the entrusted formalities and to communicate with you in connection with these requests.",
+      "shareTitle": "Sharing",
+      "shareBody": "Your data is transmitted only to administrations and partners involved in carrying out the formalities. It is never sold to third parties for commercial purposes."
+    }
+  },
+  "Legal": {
+    "title": "Legal Notice",
+    "notice": "Legal: FORMALITYS is a Moroccan website published by Caktus SARL – Hosted by Nindohost – Personal data is used only within the scope of the formalities entrusted by the client and is transmitted only for that purpose. It is never retained or sold for commercial or advertising purposes.",
+    "sections": {
+      "publisherTitle": "Publisher",
+      "publisherBody": "FORMALITYS – Caktus SARL (Morocco)",
+      "hostingTitle": "Hosting",
+      "hostingBody": "Nindohost",
+      "contactTitle": "Contact",
+      "contactBody": "For any request: {email}",
+      "backHome": "Back to home"
+    }
+  }
+  ,
+  "Dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Manage your dossiers and choose new services",
+    "tabs": {
+      "services": "New services",
+      "dossiers": "My dossiers ({count})"
+    },
+    "services": {
+      "cta": "Start now"
+    }
+  }
+  ,
+  "Payment": {
+    "summary": "Cost summary",
+    "service": "Service",
+    "domiciliation": "Domiciliation (6 months)",
+    "discountApplied": "Discount applied",
+    "total": "Total",
+    "processing": "Processing...",
+    "pay": "Pay {amount} {currency}"
+  }
+  ,
+  "Dossiers": {
+    "Company": {
+      "serviceName": "LLC Company Formation in Morocco",
+      "serviceDescription": "100% online LLC company formation in Morocco with expert support",
+      "offerPrice": "3600 MAD (343€)",
+      "offerDescription": "Complete LLC formation with all official documents",
+      "breadcrumbHome": "Home",
+      "breadcrumbThis": "LLC Company Formation",
+      "title": "LLC Company Formation in Morocco",
+      "subtitle": "LLC company formation service in Morocco with expert support",
+      "badgeOnline": "100% Online",
+      "loading": "Loading your dossier...",
+      "fallback": "Loading dossier...",
+      "prev": "Previous",
+      "saving": "Saving...",
+      "next": "Next"
+    }
+    ,
+    "Tourism": {
+      "serviceName": "Tourist Accommodation Compliance Morocco",
+      "serviceDescription": "100% online service to regularize tourist accommodations in Morocco with expert support",
+      "offerPrice": "1600 MAD (152€)",
+      "offerDescription": "Complete compliance with all required authorizations",
+      "breadcrumbHome": "Home",
+      "breadcrumbThis": "Tourist Accommodation",
+      "title": "Tourist Accommodation Compliance Morocco",
+      "subtitle": "Tourist accommodation compliance in Morocco with expert support",
+      "badgeOnline": "100% Online",
+      "loading": "Loading your dossier...",
+      "fallback": "Loading dossier...",
+      "prev": "Previous",
+      "saving": "Saving...",
+      "next": "Next"
+    }
+  }
+  ,
+  "Admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "dossiers": "Dossiers",
+      "users": "Users",
+      "blog": "Blog",
+      "admins": "Administrators",
+      "logout": "Sign out",
+      "admin": "Administrator",
+      "fallbackEmail": "admin@formalitys.ma"
+    }
+  }
+}
+

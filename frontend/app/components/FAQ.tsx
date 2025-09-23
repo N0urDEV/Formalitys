@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface FAQItem {
   id: string;
@@ -84,11 +85,11 @@ const faqData: FAQItem[] = [
   }
 ];
 
-const categoryLabels = {
-  tourism: 'Hébergement Touristique',
-  company: 'Création de Société',
-  general: 'Général'
-};
+const categoryLabels = (t: (key: string) => string) => ({
+  tourism: t('tourism'),
+  company: t('company'),
+  general: t('general')
+});
 
 const categoryIcons = {
   tourism: (
@@ -115,6 +116,7 @@ const categoryColors = {
 };
 
 export default function FAQ() {
+  const t = useTranslations('FAQ');
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
 
@@ -133,10 +135,10 @@ export default function FAQ() {
   };
 
   const categories = [
-    { id: 'all', label: 'Toutes les questions', icon: '📋', count: faqData.length },
-    { id: 'tourism', label: 'Hébergement Touristique', icon: '🏨', count: faqData.filter(f => f.category === 'tourism').length },
-    { id: 'company', label: 'Création de Société', icon: '🏢', count: faqData.filter(f => f.category === 'company').length },
-    { id: 'general', label: 'Général', icon: '❓', count: faqData.filter(f => f.category === 'general').length }
+    { id: 'all', label: t('all'), icon: '📋', count: faqData.length },
+    { id: 'tourism', label: t('tourism'), icon: '🏨', count: faqData.filter(f => f.category === 'tourism').length },
+    { id: 'company', label: t('company'), icon: '🏢', count: faqData.filter(f => f.category === 'company').length },
+    { id: 'general', label: t('general'), icon: '❓', count: faqData.filter(f => f.category === 'general').length }
   ];
 
   return (
@@ -155,13 +157,13 @@ export default function FAQ() {
             className="text-4xl lg:text-5xl font-bold text-white mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Questions Fréquentes
+            {t('title')}
           </h2>
           <p 
             className="text-xl text-white/90 max-w-3xl mx-auto"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            Trouvez rapidement les réponses à vos questions sur nos services de création de société et d'hébergement touristique
+            {t('subtitle')}
           </p>
         </div>
 
@@ -247,7 +249,7 @@ export default function FAQ() {
                               }`}
                               style={{ fontFamily: 'Satoshi, sans-serif' }}
                             >
-                              {categoryLabels[faq.category]}
+                              {categoryLabels(t)[faq.category]}
                             </span>
                           </div>
                         </div>
@@ -309,13 +311,13 @@ export default function FAQ() {
                 className="text-2xl lg:text-3xl font-bold text-white mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Vous ne trouvez pas votre réponse ?
+                {t('notFoundTitle')}
               </h3>
               <p 
                 className="text-white/90 text-lg mb-8 max-w-2xl mx-auto"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Notre équipe d'experts est là pour vous accompagner et répondre à toutes vos questions
+                {t('notFoundSubtitle')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -328,7 +330,7 @@ export default function FAQ() {
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                   </svg>
-                  Contacter sur WhatsApp
+                  {t('contactWhatsApp')}
                 </a>
                 <a
                   href="tel:+212620269000"
@@ -338,7 +340,7 @@ export default function FAQ() {
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  Appeler maintenant
+                  {t('callNow')}
                 </a>
               </div>
             </div>

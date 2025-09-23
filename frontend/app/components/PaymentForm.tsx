@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import { formatPrice, formatPriceWithBreakdown } from '../utils/currency';
+import { useTranslations } from 'next-intl';
 
 interface PaymentFormProps {
   onSuccess: () => void;
@@ -20,6 +21,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
+  const t = useTranslations('Payment');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,12 +55,12 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="p-4 bg-gray-50 rounded-lg">
         <h3 className="font-medium mb-4" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-          Récapitulatif des coûts
+          {t('summary')}
         </h3>
         <div className="space-y-2 text-sm">
                  <div className="flex justify-between">
                    <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                     {serviceName || 'Service'}
+                     {serviceName || t('service')}
                    </span>
                    <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                      {formatPrice(costBreakdown ? costBreakdown.basePrice : 3600)}
@@ -67,7 +69,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                  {costBreakdown?.domiciliationFee && (
                    <div className="flex justify-between">
                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                       Domiciliation (6 mois)
+                       {t('domiciliation')}
                      </span>
                      <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                        +{formatPrice(costBreakdown.domiciliationFee)}
@@ -77,7 +79,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                  {costBreakdown?.total && costBreakdown.total < (costBreakdown.basePrice + (costBreakdown.domiciliationFee || 0)) && (
                    <div className="flex justify-between text-green-600">
                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                       Réduction appliquée
+                       {t('discountApplied')}
                      </span>
                      <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                        -{formatPrice((costBreakdown.basePrice + (costBreakdown.domiciliationFee || 0)) - costBreakdown.total)}
@@ -86,7 +88,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                  )}
                  <div className="border-t pt-2 flex justify-between font-bold text-lg">
                    <span className="text-gray-900" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                     Total
+                     {t('total')}
                    </span>
                    <span className="text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                      {formatPrice(costBreakdown?.total || amount / 100)}
@@ -105,7 +107,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
         className="w-full px-6 py-3 bg-[#F66B4C] text-white rounded-lg hover:bg-[#e55a43] disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         style={{ fontFamily: 'Satoshi, sans-serif' }}
       >
-        {loading ? 'Traitement...' : `Payer ${amount / 100} ${currency.toUpperCase()}`}
+        {loading ? t('processing') : t('pay', { amount: amount / 100, currency: currency.toUpperCase() })}
       </button>
     </form>
   );

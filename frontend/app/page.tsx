@@ -8,6 +8,7 @@ import StructuredData from './components/StructuredData';
 import OptimizedImage from './components/OptimizedImage';
 import FAQ from './components/FAQ';
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -24,6 +25,7 @@ interface BlogPost {
 }
 
 export default function Home() {
+  const t = useTranslations('Home');
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -44,7 +46,7 @@ export default function Home() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('fr-FR', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -67,9 +69,9 @@ export default function Home() {
               className="text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Simplifiez vos
-              <span className="block text-[#F66B4C]">démarches juridiques</span>
-              au Maroc
+              {t('hero.titleLine1')}
+              <span className="block text-[#F66B4C]">{t('hero.titleEmphasis')}</span>
+              {t('hero.titleLine2')}
             </h1>
             
             {/* Key Benefits Words */}
@@ -77,29 +79,26 @@ export default function Home() {
               <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
                 <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
                 <span className="text-white font-semibold text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  Simple
+                  {t('hero.chips.simple')}
                 </span>
               </div>
               <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
                 <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
                 <span className="text-white font-semibold text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  Rapide
+                  {t('hero.chips.fast')}
                 </span>
               </div>
               <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
                 <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
                 <span className="text-white font-semibold text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  Économique
+                  {t('hero.chips.affordable')}
                 </span>
               </div>
             </div>
-            
-               <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl font-light" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                 <span>
-                   <span className="font-semibold text-[#F66B4C]">Création de société SARL</span> au Maroc ou <span className="font-semibold text-[#F66B4C]">Formalités légales pour locations d'hébergements touristiques 100% en ligne</span>.<br />
-                   <span className="font-semibold text-[#F66B4C]">Rapide</span>, <span className="font-semibold text-[#F66B4C]">sécurisé</span> avec accompagnement <span className="font-semibold text-[#F66B4C]">expert</span>.
-                 </span>
-               </p>
+
+            <p className="text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl font-light" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+              {t('hero.subtitle')}
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start relative z-10">
               <Link 
                 href="/register" 
@@ -107,14 +106,14 @@ export default function Home() {
                 style={{ fontFamily: 'Satoshi, sans-serif', pointerEvents: 'auto' }}
                 onClick={() => console.log('Button clicked!')}
               >
-                Lancer mon projet
+                {t('hero.ctaPrimary')}
               </Link>
               <Link 
                 href="#services" 
                 className="border-2 border-white/30 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white/10 transition-all duration-300 relative z-20 cursor-pointer"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Explorer nos solutions
+                {t('hero.ctaSecondary')}
               </Link>
             </div>
           </div>
@@ -143,14 +142,14 @@ export default function Home() {
               className="text-4xl lg:text-5xl font-bold text-[#071B1E] mb-6"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Comment ça marche ?
+              {t('how.title')}
             </h2>
             <p 
               className="text-xl text-gray-600 max-w-3xl mx-auto"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Un processus simple et transparent<br />
-              en 4 étapes pour vos démarches juridiques
+              {t('how.subtitleLine1')}<br />
+              {t('how.subtitleLine2')}
             </p>
           </div>
 
@@ -159,8 +158,8 @@ export default function Home() {
             {[
               {
                 step: "01",
-                title: "Remplissez vos informations",
-                description: "Complétez le formulaire en ligne avec vos informations personnelles et professionnelles.",
+                title: t('how.steps.s1.title'),
+                description: t('how.steps.s1.description'),
                 icon: (
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -171,8 +170,8 @@ export default function Home() {
               },
               {
                 step: "02", 
-                title: "Payez en toute sécurité",
-                description: "Effectuez votre paiement via notre plateforme sécurisée avec Stripe.",
+                title: t('how.steps.s2.title'),
+                description: t('how.steps.s2.description'),
                 icon: (
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
@@ -183,8 +182,8 @@ export default function Home() {
               },
               {
                 step: "03",
-                title: "Nous gérons les formalités",
-                description: "Nos experts s'occupent de toutes les démarches administratives et juridiques.",
+                title: t('how.steps.s3.title'),
+                description: t('how.steps.s3.description'),
                 icon: (
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -195,8 +194,8 @@ export default function Home() {
               },
               {
                 step: "04",
-                title: "Recevez vos documents validés en quelques jours",
-                description: "Téléchargez vos documents officiels directement depuis votre espace client.",
+                title: t('how.steps.s4.title'),
+                description: t('how.steps.s4.description'),
                 icon: (
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -260,7 +259,7 @@ export default function Home() {
                       <span className={`text-sm font-medium ${
                         step.bgGradient.includes('[#062A2F]') ? 'text-white/80' : 'text-gray-500'
                       }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        Étape {index + 1}/4
+                        {t('how.stepLabel', { current: index + 1 })}
                       </span>
                     </div>
                   </div>
@@ -277,14 +276,14 @@ export default function Home() {
               className="text-lg text-gray-600 mb-8"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Prêt à simplifier vos démarches ?
+              {t('how.ready')}
             </p>
           <Link 
             href="/register"
             className="inline-block bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            C&apos;est parti !
+            {t('how.cta')}
           </Link>
           </div>
         </div>
@@ -298,13 +297,13 @@ export default function Home() {
               className="text-4xl lg:text-5xl font-bold text-[#071B1E] mb-6"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Nos Services
+              {t('services.title')}
             </h2>
             <p 
               className="text-xl text-gray-600 max-w-3xl mx-auto"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Deux solutions complètes pour accompagner votre développement au Maroc
+              {t('services.subtitle')}
             </p>
           </div>
           
@@ -326,8 +325,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <div className="text-right">
-                      <div className="text-3xl font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>3 600 DH</div>
-                      <div className="text-sm text-white/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>(343€)</div>
+                    <div className="text-3xl font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('services.company.price')}</div>
+                    <div className="text-sm text-white/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('services.company.priceEuro')}</div>
                     </div>
                   </div>
                   
@@ -335,24 +334,23 @@ export default function Home() {
                     className="text-3xl font-bold text-white mb-4"
                     style={{ fontFamily: '"Gascogne Serial", serif' }}
                   >
-                    Création de société SARL
+                    {t('services.company.title')}
                   </h3>
                   <p 
                     className="text-white/90 text-lg mb-8 leading-relaxed flex-grow"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Créez votre société en ligne au Maroc avec un accompagnement complet. 
-                    De la constitution des dossiers à l'obtention de tous les documents officiels.
+                    {t('services.company.desc')}
                   </p>
                   
                   {/* Features List */}
                   <div className="space-y-3 mb-8">
                     {[
-                      'Constitution complète de votre SARL',
-                      'Obtention certificat négatif OMPIC',
-                      'Immatriculation au registre du commerce, Patente/TP, impôts et CNSS',
-                      'Accompagnement juridique expert',
-                      'Introduction compte bancaire'
+                      t('services.company.features.f1'),
+                      t('services.company.features.f2'),
+                      t('services.company.features.f3'),
+                      t('services.company.features.f4'),
+                      t('services.company.features.f5')
                     ].map((feature, index) => (
                       <div key={index} className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -368,7 +366,7 @@ export default function Home() {
                       className="inline-flex items-center justify-center w-full bg-white text-[#F66B4C] px-6 py-4 rounded-2xl font-semibold hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Créer ma société
+                      {t('services.company.cta')}
                       <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -393,8 +391,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <div className="text-right">
-                      <div className="text-3xl font-bold text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>1 600 DH</div>
-                      <div className="text-sm text-[#F66B4C]/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>(152€)</div>
+                    <div className="text-3xl font-bold text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('services.tourism.price')}</div>
+                    <div className="text-sm text-[#F66B4C]/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('services.tourism.priceEuro')}</div>
                     </div>
                   </div>
                   
@@ -402,24 +400,23 @@ export default function Home() {
                     className="text-3xl font-bold text-[#071B1E] mb-4 group-hover:text-[#F66B4C] transition-colors"
                     style={{ fontFamily: '"Gascogne Serial", serif' }}
                   >
-                    Formalités pour hébergements touristiques
+                    {t('services.tourism.title')}
                   </h3>
                   <p 
                     className="text-gray-600 text-lg mb-8 leading-relaxed flex-grow"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Régularisez votre Airbnb, Riad ou location touristique. 
-                    <strong> Obtenez toutes les autorisations nécessaires pour louer en toute légalité.</strong>
+                    {t('services.tourism.desc')}
                   </p>
                   
                   {/* Features List */}
                   <div className="space-y-3 mb-8">
                     {[
-                      'Validation complète des documents',
-                      'Autorisations administratives',
-                      'Classement touristique',
-                      'Conformité réglementaire',
-                      'Déclaration nuitées / registre de Police / Taxes de séjour / Impôts'
+                      t('services.tourism.features.f1'),
+                      t('services.tourism.features.f2'),
+                      t('services.tourism.features.f3'),
+                      t('services.tourism.features.f4'),
+                      t('services.tourism.features.f5')
                     ].map((feature, index) => (
                       <div key={index} className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-[#F66B4C] rounded-full"></div>
@@ -435,7 +432,7 @@ export default function Home() {
                       className="inline-flex items-center justify-center w-full bg-[#F66B4C] text-white px-6 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Régulariser mes locations
+                      {t('services.tourism.cta')}
                       
                       <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -459,13 +456,13 @@ export default function Home() {
               className="text-4xl lg:text-5xl font-bold text-[#071B1E] mb-6"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Pourquoi nous choisir ?
+              {t('benefits.title')}
             </h2>
             <p 
               className="text-xl text-gray-600 max-w-3xl mx-auto"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Une expertise reconnue et un service d'exception pour vos démarches juridiques
+              {t('benefits.subtitle')}
             </p>
           </div>
 
@@ -490,19 +487,19 @@ export default function Home() {
                       className="text-3xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Rapidité & simplicité
+                      {t('benefits.rapid.title')}
                     </h3>
                     <p 
                       className="text-white/90 text-lg leading-relaxed"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      100% en ligne, sans déplacement. Complétez vos démarches en quelques clics depuis chez vous.
+                      {t('benefits.rapid.desc')}
                     </p>
                   </div>
                   
                   <div className="mt-8">
                     <div className="inline-flex items-center text-white font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>100% digital</span>
+                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('benefits.rapid.badge')}</span>
                       <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -528,18 +525,18 @@ export default function Home() {
                     className="text-xl font-bold text-[#071B1E] mb-3 group-hover:text-[#F66B4C] transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Transparence des coûts
+                    {t('benefits.costs.title')}
                   </h3>
                   <p 
                     className="text-gray-600 text-sm leading-relaxed flex-grow"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Prix clairs et fixes, sans surprise.
+                    {t('benefits.costs.desc')}
                   </p>
                   
                   <div className="mt-4">
                     <div className="inline-flex items-center text-[#F66B4C] font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
-                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>Sans frais cachés</span>
+                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('benefits.costs.badge')}</span>
                       <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -565,18 +562,18 @@ export default function Home() {
                     className="text-xl font-bold text-[#071B1E] mb-3 group-hover:text-[#F66B4C] transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Sécurité des paiements
+                    {t('benefits.security.title')}
                   </h3>
                   <p 
                     className="text-gray-600 text-sm leading-relaxed flex-grow"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Chiffrement SSL et conformité bancaire.
+                    {t('benefits.security.desc')}
                   </p>
                   
                   <div className="mt-4">
                     <div className="inline-flex items-center text-[#F66B4C] font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
-                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>SSL & 3D Secure</span>
+                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('benefits.security.badge')}</span>
                       <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -603,19 +600,19 @@ export default function Home() {
                       className="text-2xl font-bold text-[#071B1E] mb-2 group-hover:text-[#F66B4C] transition-colors"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Accompagnement expert
+                    {t('benefits.expert.title')}
                     </h3>
                     <p 
                       className="text-gray-600 leading-relaxed"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Nos experts juridiques et administratifs vous accompagnent à chaque étape de vos démarches.
+                      {t('benefits.expert.desc')}
                     </p>
                   </div>
                   
                   <div>
                     <div className="inline-flex items-center text-[#F66B4C] font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>Support dédié</span>
+                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('benefits.expert.badge')}</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -641,17 +638,17 @@ export default function Home() {
                     className="text-xl font-bold text-white mb-2 group-hover:text-white/90 transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Expérience reconnue
+                    {t('benefits.experience.title')}
                   </h3>
                   <p 
                     className="text-white/80 text-sm leading-relaxed mb-4"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    +210 clients nous ont déjà fait confiance.
+                    {t('benefits.experience.desc')}
                   </p>
                   
                   <div className="inline-flex items-center text-white font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
-                    <span style={{ fontFamily: 'Satoshi, sans-serif' }}>Reconnu au Maroc</span>
+                    <span style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('benefits.experience.badge')}</span>
                     <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -668,7 +665,7 @@ export default function Home() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span style={{ fontFamily: 'Satoshi, sans-serif' }}>Satisfaction client garantie</span>
+              <span style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('benefits.bottomCtaBadge')}</span>
             </div>
           </div>
         </div>
@@ -682,22 +679,20 @@ export default function Home() {
               className="text-4xl lg:text-5xl font-bold text-[#071B1E] mb-6"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Actualités & Blog
+              {t('blog.title')}
             </h2>
             <p 
               className="text-xl text-gray-600 max-w-3xl mx-auto"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Découvrez nos derniers articles, conseils et actualités sur les démarches juridiques au Maroc
+              {t('blog.subtitle')}
             </p>
           </div>
 
           {loading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto"></div>
-              <p className="mt-4 text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Chargement des articles...
-              </p>
+              <p className="mt-4 text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('blog.loading')}</p>
             </div>
           ) : blogPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -715,7 +710,7 @@ export default function Home() {
                       {post.featuredImage ? (
                         <OptimizedImage
                           src={post.featuredImage}
-                          alt={`Image d'illustration - ${post.title} | Formalitys Blog`}
+                          alt={t('blog.alt', { title: post.title })}
                           width={400}
                           height={192}
                           className="w-full h-full object-cover"
@@ -733,13 +728,13 @@ export default function Home() {
                           className="text-sm text-[#F66B4C] font-medium"
                           style={{ fontFamily: 'Satoshi, sans-serif' }}
                         >
-                          {post.publishedAt ? formatDate(post.publishedAt) : 'Bientôt'}
+                          {post.publishedAt ? formatDate(post.publishedAt) : t('blog.soon')}
                         </span>
                         <span 
                           className="text-sm text-gray-500"
                           style={{ fontFamily: 'Satoshi, sans-serif' }}
                         >
-                          par {post.author.name || 'Formalitys'}
+                          {t('blog.by', { author: post.author.name || 'Formalitys' })}
                         </span>
                       </div>
                       <h3 
@@ -752,14 +747,14 @@ export default function Home() {
                         className="text-gray-600 mb-6 line-clamp-3"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
-                        {post.excerpt || 'Découvrez cet article sur notre blog...'}
+                        {post.excerpt || ''}
                       </p>
                       <Link
                         href={`/blog/${post.slug}`}
                         className="inline-flex items-center text-[#F66B4C] font-semibold hover:text-[#e55a43] transition-colors group"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
-                        Lire l'article
+                        {t('blog.readMore')}
                         <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
@@ -780,13 +775,13 @@ export default function Home() {
                 className="text-2xl font-bold text-[#071B1E] mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Aucun article pour le moment
+                {t('blog.emptyTitle')}
               </h3>
               <p 
                 className="text-gray-600"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Nos articles de blog seront bientôt disponibles.
+                {t('blog.emptySubtitle')}
               </p>
             </div>
           )}
@@ -797,7 +792,7 @@ export default function Home() {
               className="inline-flex items-center bg-[#F66B4C] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Explorer le blog
+              {t('blog.explore')}
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -836,7 +831,7 @@ export default function Home() {
                 <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
                   <div className="w-2 h-2 bg-[#F66B4C] rounded-full animate-pulse"></div>
                   <span className="text-white/90 font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                    +210 clients nous font confiance
+                    {t('ctaSection.badge')}
                   </span>
                 </div>
                 
@@ -844,16 +839,15 @@ export default function Home() {
                   className="text-5xl lg:text-7xl font-bold text-white mb-8 leading-tight"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Prêt à commencer
-                  <span className="block text-[#F66B4C]">votre projet ?</span>
+                  {t('ctaSection.titleLine1')}
+                  <span className="block text-[#F66B4C]">{t('ctaSection.titleLine2')}</span>
                 </h2>
                 
                 <p 
                   className="text-xl lg:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Rejoignez des centaines d'entrepreneurs qui nous font confiance 
-                  pour leurs démarches juridiques au Maroc.
+                  {t('ctaSection.subtitle')}
                 </p>
                 
                 {/* CTA Buttons */}
@@ -865,7 +859,7 @@ export default function Home() {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                     <span className="relative flex items-center space-x-3">
-                      <span>Rejoindre Formalitys</span>
+                      <span>{t('ctaSection.join')}</span>
                       <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
@@ -877,7 +871,7 @@ export default function Home() {
                     className="group flex items-center space-x-3 text-white/90 hover:text-white transition-colors duration-300"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    <span className="text-lg font-semibold">Découvrir nos services</span>
+                    <span className="text-lg font-semibold">{t('ctaSection.discover')}</span>
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
@@ -893,8 +887,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <div className="text-left">
-                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>100% En ligne</div>
-                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>Sans déplacement</div>
+                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('ctaSection.t1Title')}</div>
+                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('ctaSection.t1Sub')}</div>
                     </div>
                   </div>
                   
@@ -905,8 +899,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <div className="text-left">
-                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>Rapide</div>
-                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>Quelques jours</div>
+                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('ctaSection.t2Title')}</div>
+                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('ctaSection.t2Sub')}</div>
                     </div>
                   </div>
                   
@@ -917,8 +911,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <div className="text-left">
-                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>Sécurisé</div>
-                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>Données protégées</div>
+                      <div className="font-bold text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('ctaSection.t3Title')}</div>
+                      <div className="text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('ctaSection.t3Sub')}</div>
                     </div>
                   </div>
                 </div>

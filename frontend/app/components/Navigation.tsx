@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function Navigation() {
+  const t = useTranslations('Nav');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
@@ -91,7 +93,7 @@ export default function Navigation() {
                   className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5 flex items-center"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Services
+                  {t('services')}
                   <svg 
                     className={`w-4 h-4 ml-1 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} 
                     fill="none" 
@@ -117,8 +119,8 @@ export default function Navigation() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                           </svg>
                           <div>
-                            <div className="font-semibold">Création SARL</div>
-                            <div className="text-sm text-gray-500">Société à Responsabilité Limitée</div>
+                            <div className="font-semibold">{t('company.title')}</div>
+                            <div className="text-sm text-gray-500">{t('company.subtitle')}</div>
                           </div>
                         </div>
                       </Link>
@@ -134,8 +136,8 @@ export default function Navigation() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
                           </svg>
                           <div>
-                            <div className="font-semibold">Formalités location riads</div>
-                            <div className="text-sm text-gray-500">Hébergement touristique</div>
+                            <div className="font-semibold">{t('tourism.title')}</div>
+                            <div className="text-sm text-gray-500">{t('tourism.subtitle')}</div>
                           </div>
                         </div>
                       </Link>
@@ -149,35 +151,35 @@ export default function Navigation() {
                 className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                FAQ
+                {t('faq')}
               </Link>
               <Link 
                 href="/blog" 
                 className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Blog
+                {t('blog')}
               </Link>
               <Link 
                 href="/#contact" 
                 className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Contact
+                {t('contact')}
               </Link>
               <Link 
                 href="/login" 
                 className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Se connecter
+                {t('login')}
               </Link>
               <Link 
                 href="/register" 
                 className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-6 py-2.5 rounded-xl font-semibold hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Créer un compte
+                {t('register')}
               </Link>
             </div>
 
@@ -220,7 +222,7 @@ export default function Navigation() {
               <div className="space-y-1">
                 {/* Services Section */}
                 <div className="px-4 py-2">
-                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Services</div>
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{t('mobile.services')}</div>
                   <div className="space-y-1">
                     <Link
                       href="/dossiers/company"
@@ -232,8 +234,8 @@ export default function Navigation() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
                       <div>
-                        <div className="font-semibold">Création SARL</div>
-                        <div className="text-sm text-gray-500">Société à Responsabilité Limitée</div>
+                        <div className="font-semibold">{t('company.title')}</div>
+                        <div className="text-sm text-gray-500">{t('company.subtitle')}</div>
                       </div>
                     </Link>
                     <Link
@@ -247,8 +249,8 @@ export default function Navigation() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
                       </svg>
                       <div>
-                        <div className="font-semibold">Formalités location riads</div>
-                        <div className="text-sm text-gray-500">Hébergement touristique</div>
+                        <div className="font-semibold">{t('tourism.title')}</div>
+                        <div className="text-sm text-gray-500">{t('tourism.subtitle')}</div>
                       </div>
                     </Link>
                   </div>
@@ -256,7 +258,7 @@ export default function Navigation() {
 
                 {/* Other Links */}
                 <div className="px-4 py-2">
-                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Navigation</div>
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{t('mobile.nav')}</div>
                   <div className="space-y-1">
                     <Link
                       href="/#faq"
@@ -267,7 +269,7 @@ export default function Navigation() {
                       <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      FAQ
+                      {t('faq')}
                     </Link>
                     <Link
                       href="/blog"
@@ -278,7 +280,7 @@ export default function Navigation() {
                       <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                       </svg>
-                      Blog
+                      {t('blog')}
                     </Link>
                     <Link
                       href="/#contact"
@@ -289,7 +291,7 @@ export default function Navigation() {
                       <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
-                      Contact
+                      {t('contact')}
                     </Link>
                     <Link
                       href="/login"
@@ -300,7 +302,7 @@ export default function Navigation() {
                       <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                       </svg>
-                      Se connecter
+                      {t('login')}
                     </Link>
                   </div>
                 </div>
@@ -320,7 +322,7 @@ export default function Navigation() {
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                   </svg>
-                  Créer un compte
+                  {t('register')}
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

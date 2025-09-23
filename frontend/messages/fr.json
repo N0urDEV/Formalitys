@@ -1,0 +1,328 @@
+{
+  "common": {
+    "siteName": "Formalitys"
+  },
+  "Home": {
+    "hero": {
+      "titleLine1": "Simplifiez vos",
+      "titleEmphasis": "démarches juridiques",
+      "titleLine2": "au Maroc",
+      "chips": {
+        "simple": "Simple",
+        "fast": "Rapide",
+        "affordable": "Économique"
+      },
+      "subtitle": "Création de société SARL au Maroc ou Formalités légales pour locations d'hébergements touristiques 100% en ligne. Rapide, sécurisé, avec accompagnement expert.",
+      "ctaPrimary": "Lancer mon projet",
+      "ctaSecondary": "Explorer nos solutions"
+    },
+    "how": {
+      "title": "Comment ça marche ?",
+      "subtitleLine1": "Un processus simple et transparent",
+      "subtitleLine2": "en 4 étapes pour vos démarches juridiques",
+      "steps": {
+        "s1": {
+          "title": "Remplissez vos informations",
+          "description": "Complétez le formulaire en ligne avec vos informations personnelles et professionnelles."
+        },
+        "s2": {
+          "title": "Payez en toute sécurité",
+          "description": "Effectuez votre paiement via notre plateforme sécurisée avec Stripe."
+        },
+        "s3": {
+          "title": "Nous gérons les formalités",
+          "description": "Nos experts s'occupent de toutes les démarches administratives et juridiques."
+        },
+        "s4": {
+          "title": "Recevez vos documents validés en quelques jours",
+          "description": "Téléchargez vos documents officiels directement depuis votre espace client."
+        }
+      },
+      "stepLabel": "Étape {current}/4",
+      "ready": "Prêt à simplifier vos démarches ?",
+      "cta": "C'est parti !"
+    },
+    "services": {
+      "title": "Nos Services",
+      "subtitle": "Deux solutions complètes pour accompagner votre développement au Maroc",
+      "company": {
+        "price": "3 600 DH",
+        "priceEuro": "(343€)",
+        "title": "Création de société SARL",
+        "desc": "Créez votre société en ligne au Maroc avec un accompagnement complet. De la constitution des dossiers à l'obtention de tous les documents officiels.",
+        "features": {
+          "f1": "Constitution complète de votre SARL",
+          "f2": "Obtention certificat négatif OMPIC",
+          "f3": "Immatriculation au registre du commerce, Patente/TP, impôts et CNSS",
+          "f4": "Accompagnement juridique expert",
+          "f5": "Introduction compte bancaire"
+        },
+        "cta": "Créer ma société"
+      },
+      "tourism": {
+        "price": "1 600 DH",
+        "priceEuro": "(152€)",
+        "title": "Formalités pour hébergements touristiques",
+        "desc": "Régularisez votre Airbnb, Riad ou location touristique. Obtenez toutes les autorisations nécessaires pour louer en toute légalité.",
+        "features": {
+          "f1": "Validation complète des documents",
+          "f2": "Autorisations administratives",
+          "f3": "Classement touristique",
+          "f4": "Conformité réglementaire",
+          "f5": "Déclaration nuitées / registre de Police / Taxes de séjour / Impôts"
+        },
+        "cta": "Régulariser mes locations"
+      }
+    },
+    "benefits": {
+      "title": "Pourquoi nous choisir ?",
+      "subtitle": "Une expertise reconnue et un service d'exception pour vos démarches juridiques",
+      "rapid": {
+        "title": "Rapidité & simplicité",
+        "desc": "100% en ligne, sans déplacement. Complétez vos démarches en quelques clics depuis chez vous.",
+        "badge": "100% digital"
+      },
+      "costs": {
+        "title": "Transparence des coûts",
+        "desc": "Prix clairs et fixes, sans surprise.",
+        "badge": "Sans frais cachés"
+      },
+      "security": {
+        "title": "Sécurité des paiements",
+        "desc": "Chiffrement SSL et conformité bancaire.",
+        "badge": "SSL & 3D Secure"
+      },
+      "expert": {
+        "title": "Accompagnement expert",
+        "desc": "Nos experts juridiques et administratifs vous accompagnent à chaque étape de vos démarches.",
+        "badge": "Support dédié"
+      },
+      "experience": {
+        "title": "Expérience reconnue",
+        "desc": "+210 clients nous ont déjà fait confiance.",
+        "badge": "Reconnu au Maroc"
+      },
+      "bottomCtaBadge": "Satisfaction client garantie"
+    },
+    "blog": {
+      "title": "Actualités & Blog",
+      "subtitle": "Découvrez nos derniers articles, conseils et actualités sur les démarches juridiques au Maroc",
+      "loading": "Chargement des articles...",
+      "emptyTitle": "Aucun article pour le moment",
+      "emptySubtitle": "Nos articles de blog seront bientôt disponibles.",
+      "soon": "Bientôt",
+      "by": "par {author}",
+      "readMore": "Lire l'article",
+      "alt": "Image d'illustration - {title} | Formalitys Blog",
+      "explore": "Explorer le blog"
+    },
+    "ctaSection": {
+      "badge": "+210 clients nous font confiance",
+      "titleLine1": "Prêt à commencer",
+      "titleLine2": "votre projet ?",
+      "subtitle": "Rejoignez des centaines d'entrepreneurs qui nous font confiance pour leurs démarches juridiques au Maroc.",
+      "join": "Rejoindre Formalitys",
+      "discover": "Découvrir nos services",
+      "t1Title": "100% En ligne",
+      "t1Sub": "Sans déplacement",
+      "t2Title": "Rapide",
+      "t2Sub": "Quelques jours",
+      "t3Title": "Sécurisé",
+      "t3Sub": "Données protégées"
+    }
+  }
+  ,
+  "Nav": {
+    "services": "Services",
+    "company": {
+      "title": "Création SARL",
+      "subtitle": "Société à Responsabilité Limitée"
+    },
+    "tourism": {
+      "title": "Formalités location riads",
+      "subtitle": "Hébergement touristique"
+    },
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Contact",
+    "login": "Se connecter",
+    "register": "Créer un compte",
+    "mobile": {
+      "services": "Services",
+      "nav": "Navigation"
+    }
+  },
+  "BlogList": {
+    "title": "Actualités & Blog",
+    "subtitle": "Découvrez nos dernières actualités, conseils et informations sur les démarches juridiques au Maroc",
+    "loading": "Chargement des articles...",
+    "breadcrumbHome": "Accueil",
+    "breadcrumbBlog": "Blog",
+    "emptyTitle": "Aucun article pour le moment",
+    "emptySubtitle": "Revenez bientôt pour découvrir nos derniers articles.",
+    "by": "par {author}",
+    "readMore": "Lire la suite",
+    "ctaTitle": "Prêt à simplifier vos démarches ?",
+    "ctaSubtitle": "Découvrez nos services de création de société et régularisation touristique",
+    "ctaCompany": "Créer une SARL",
+    "ctaTourism": "Formalités location riads"
+  },
+  "BlogPost": {
+    "loading": "Chargement de l'article...",
+    "notFoundTitle": "Article non trouvé",
+    "notFoundSubtitle": "L'article que vous recherchez n'existe pas ou a été supprimé.",
+    "back": "Retour au blog",
+    "by": "par {author}",
+    "ctaTitle": "Prêt à simplifier vos démarches ?",
+    "ctaSubtitle": "Découvrez nos services de création de société et régularisation touristique",
+    "ctaCompany": "Créer une société",
+    "ctaTourism": "Formalités location riads"
+  },
+  "Footer": {
+    "followUs": "Suivez-nous",
+    "services": "Services",
+    "serviceCompany": "Création de société",
+    "serviceTourism": "Formalités pour hébergements touristiques",
+    "dashboard": "Mon espace client",
+    "resources": "Ressources",
+    "blog": "Blog & Actualités",
+    "guides": "Guide juridique",
+    "faq": "FAQ",
+    "legal": "Légal",
+    "mentions": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "terms": "CGV",
+    "newsletterTitle": "Restez informé",
+    "newsletterSubtitle": "Recevez nos dernières actualités et conseils juridiques directement dans votre boîte mail.",
+    "newsletterPlaceholder": "Votre adresse email",
+    "newsletterCta": "S'abonner",
+    "copyright": "© {year} Formalitys. Tous droits réservés.",
+    "status": "Service disponible 24/7",
+    "secure": "Paiement sécurisé"
+  },
+  "FAQ": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Trouvez rapidement les réponses à vos questions sur nos services de création de société et d'hébergement touristique",
+    "all": "Toutes les questions",
+    "tourism": "Hébergement Touristique",
+    "company": "Création de Société",
+    "general": "Général",
+    "notFoundTitle": "Vous ne trouvez pas votre réponse ?",
+    "notFoundSubtitle": "Notre équipe d'experts est là pour vous accompagner et répondre à toutes vos questions",
+    "contactWhatsApp": "Contacter sur WhatsApp",
+    "callNow": "Appeler maintenant"
+  },
+  "Meta": {
+    "title": "Formalitys - Création Société & Hébergement Touristique au Maroc | 100% En Ligne",
+    "description": "Créez votre SARL au Maroc | Formalités légales location de Riads Airbnb en ligne. Accompagnement d'experts",
+    "ogTitle": "Formalitys - Démarches Juridiques au Maroc | 100% En Ligne",
+    "ogDescription": "Simplifiez vos démarches juridiques au Maroc. Création société SARL et régularisation hébergement touristique avec nos experts.",
+    "twitterTitle": "Formalitys - Démarches Juridiques au Maroc",
+    "twitterDescription": "Créez votre société ou régularisez votre hébergement touristique en ligne au Maroc.",
+    "ogAlt": "Formalitys - Démarches Juridiques au Maroc"
+  }
+  ,
+  "Terms": {
+    "title": "Conditions Générales de Vente (CGV)",
+    "notice": "Legal : FORMALITYS est un site marocain édité par Caktus sarl  - Hébergé par Nindohost - Les données personnelles ne sont utilisées que dans le cadre des formalités confiées par le client et ne sont transmises qu'à ce titre. Elles ne sont en aucun cas conservées ou cédées à des fins commerciales ou publicitaires.",
+    "sections": {
+      "purposeTitle": "Objet",
+      "purposeBody": "Les présentes conditions régissent les prestations proposées par FORMALITYS."
+    }
+  },
+  "Privacy": {
+    "title": "Politique de confidentialité",
+    "notice": "Legal : FORMALITYS est un site marocain édité par Caktus sarl  - Hébergé par Nindohost - Les données personnelles ne sont utilisées que dans le cadre des formalités confiées par le client et ne sont transmises qu'à ce titre. Elles ne sont en aucun cas conservées ou cédées à des fins commerciales ou publicitaires.",
+    "sections": {
+      "useTitle": "Utilisation des données",
+      "useBody": "Les données personnelles sont utilisées exclusivement pour exécuter les formalités confiées et pour communiquer avec vous dans le cadre de ces demandes.",
+      "shareTitle": "Partage",
+      "shareBody": "Vos données ne sont transmises qu'aux administrations et partenaires impliqués dans la réalisation des formalités. Elles ne sont jamais cédées à des tiers à des fins commerciales."
+    }
+  },
+  "Legal": {
+    "title": "Mentions légales",
+    "notice": "Legal : FORMALITYS est un site marocain édité par Caktus sarl  - Hébergé par Nindohost - Les données personnelles ne sont utilisées que dans le cadre des formalités confiées par le client et ne sont transmises qu'à ce titre. Elles ne sont en aucun cas conservées ou cédées à des fins commerciales ou publicitaires.",
+    "sections": {
+      "publisherTitle": "Éditeur",
+      "publisherBody": "FORMALITYS – Caktus sarl (Maroc)",
+      "hostingTitle": "Hébergement",
+      "hostingBody": "Nindohost",
+      "contactTitle": "Contact",
+      "contactBody": "Pour toute demande : {email}",
+      "backHome": "Retour à l'accueil"
+    }
+  }
+  ,
+  "Dashboard": {
+    "title": "Tableau de bord",
+    "subtitle": "Gérez vos dossiers et choisissez de nouveaux services",
+    "tabs": {
+      "services": "Nouveaux services",
+      "dossiers": "Mes dossiers ({count})"
+    },
+    "services": {
+      "cta": "Commencer maintenant"
+    }
+  }
+  ,
+  "Payment": {
+    "summary": "Récapitulatif des coûts",
+    "service": "Service",
+    "domiciliation": "Domiciliation (6 mois)",
+    "discountApplied": "Réduction appliquée",
+    "total": "Total",
+    "processing": "Traitement...",
+    "pay": "Payer {amount} {currency}"
+  }
+  ,
+  "Dossiers": {
+    "Company": {
+      "serviceName": "Création Société SARL au Maroc",
+      "serviceDescription": "Service de création de société SARL au Maroc 100% en ligne avec accompagnement expert",
+      "offerPrice": "3600 MAD (343€)",
+      "offerDescription": "Création complète SARL avec tous les documents officiels",
+      "breadcrumbHome": "Accueil",
+      "breadcrumbThis": "Création Société SARL",
+      "title": "Création Société SARL au Maroc",
+      "subtitle": "Service de création de société SARL au Maroc avec accompagnement expert",
+      "badgeOnline": "100% En Ligne",
+      "loading": "Chargement de votre dossier...",
+      "fallback": "Chargement du dossier...",
+      "prev": "Précédent",
+      "saving": "Enregistrement...",
+      "next": "Suivant"
+    }
+    ,
+    "Tourism": {
+      "serviceName": "Régularisation Hébergement Touristique Maroc",
+      "serviceDescription": "Service de régularisation d'hébergements touristiques au Maroc 100% en ligne avec accompagnement expert",
+      "offerPrice": "1600 MAD (152€)",
+      "offerDescription": "Régularisation complète avec toutes les autorisations nécessaires",
+      "breadcrumbHome": "Accueil",
+      "breadcrumbThis": "Hébergement Touristique",
+      "title": "Régularisation Hébergement Touristique Maroc",
+      "subtitle": "Service de régularisation d'hébergements touristiques au Maroc avec accompagnement expert",
+      "badgeOnline": "100% En Ligne",
+      "loading": "Chargement de votre dossier...",
+      "fallback": "Chargement du dossier...",
+      "prev": "Précédent",
+      "saving": "Enregistrement...",
+      "next": "Suivant"
+    }
+  }
+  ,
+  "Admin": {
+    "sidebar": {
+      "dashboard": "Tableau de bord",
+      "dossiers": "Dossiers",
+      "users": "Utilisateurs",
+      "blog": "Blog",
+      "admins": "Administrateurs",
+      "logout": "Déconnexion",
+      "admin": "Administrateur",
+      "fallbackEmail": "admin@formalitys.ma"
+    }
+  }
+}
+

@@ -12,17 +12,22 @@ import { Step2CompanyDetails } from './components/steps/Step2CompanyDetails';
 import { Step2Headquarters } from './components/steps/Step2Headquarters';
 import { Step3Payment } from './components/steps/Step3Payment';
 import { Step4Final } from './components/steps/Step4Final';
+import { useTranslations } from 'next-intl';
 
-const serviceData = {
-  name: "Création Société SARL au Maroc",
-  description: "Service de création de société SARL au Maroc 100% en ligne avec accompagnement expert",
-  offers: {
-    price: "3600 MAD (343€)",
-    description: "Création complète SARL avec tous les documents officiels"
-  }
-};
+function useServiceData() {
+  const t = useTranslations('Dossiers.Company');
+  return {
+    name: t('serviceName'),
+    description: t('serviceDescription'),
+    offers: {
+      price: t('offerPrice'),
+      description: t('offerDescription')
+    }
+  };
+}
 
 function CompanyDossierPageContent() {
+  const t = useTranslations('Dossiers.Company');
   const {
     dossier,
     currentStep,
@@ -170,9 +175,7 @@ function CompanyDossierPageContent() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto mb-4"></div>
-          <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-            Chargement de votre dossier...
-          </p>
+          <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
         </div>
       </div>
     );
@@ -180,18 +183,18 @@ function CompanyDossierPageContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <StructuredData type="service" data={serviceData} />
+      <StructuredData type="service" data={useServiceData()} />
       <StructuredData type="breadcrumb" data={[
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Accueil",
+          "name": t('breadcrumbHome'),
           "item": "https://formalitys.vercel.app"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Création Société SARL",
+          "name": t('breadcrumbThis'),
           "item": "https://formalitys.vercel.app/dossiers/company"
         }
       ]} />
@@ -211,19 +214,19 @@ function CompanyDossierPageContent() {
               className="text-4xl font-bold text-[#071B1E] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Création Société SARL au Maroc
+            {t('title')}
             </h1>
             <p 
               className="text-xl text-gray-600 mb-6"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Service de création de société SARL au Maroc avec accompagnement expert
+            {t('subtitle')}
             </p>
             <div className="inline-flex items-center bg-[#F66B4C] text-white px-6 py-3 rounded-full font-semibold">
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              100% En Ligne
+            {t('badgeOnline')}
             </div>
           </div>
 
@@ -248,7 +251,7 @@ function CompanyDossierPageContent() {
                 }`}
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Précédent
+                {t('prev')}
               </button>
 
               <button
@@ -260,10 +263,10 @@ function CompanyDossierPageContent() {
                 {isSubmitting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Enregistrement...
+                    {t('saving')}
                   </>
                 ) : (
-                  'Suivant'
+                  t('next')
                 )}
               </button>
             </div>
@@ -282,7 +285,7 @@ export default function CompanyDossierPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement du dossier...</p>
+          <p className="text-gray-600">Loading dossier...</p>
         </div>
       </div>
     }>

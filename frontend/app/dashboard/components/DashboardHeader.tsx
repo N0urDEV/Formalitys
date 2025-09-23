@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActiveTab } from '../types';
+import { useTranslations } from 'next-intl';
 
 interface DashboardHeaderProps {
   activeTab: ActiveTab;
@@ -12,19 +13,20 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   onTabChange, 
   dossiersCount 
 }) => {
+  const t = useTranslations('Dashboard');
   return (
     <div className="text-center mb-12">
       <h1 
         className="text-4xl lg:text-5xl font-bold text-[#071B1E] mb-6"
         style={{ fontFamily: '"Gascogne Serial", serif' }}
       >
-        Tableau de bord
+        {t('title')}
       </h1>
       <p 
         className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
         style={{ fontFamily: 'Satoshi, sans-serif' }}
       >
-        Gérez vos dossiers et choisissez de nouveaux services
+        {t('subtitle')}
       </p>
 
       {/* Tab Navigation */}
@@ -38,7 +40,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           }`}
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
-          Nouveaux services
+          {t('tabs.services')}
         </button>
         <button
           onClick={() => onTabChange('dossiers')}
@@ -49,7 +51,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           }`}
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
-          Mes dossiers ({dossiersCount})
+          {t('tabs.dossiers', { count: dossiersCount })}
         </button>
       </div>
     </div>

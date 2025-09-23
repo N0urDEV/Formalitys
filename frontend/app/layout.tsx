@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 import WhatsAppButton from "./components/WhatsAppButton";
 import WhatsAppWidget from "./components/WhatsAppWidget";
+import { NextIntlClientProvider } from "next-intl";
+import en from "../messages/en.json";
+import Script from "next/script";
+import Analytics from "@/app/components/Analytics";
 
 export const metadata: Metadata = {
-  title: "Formalitys - Création Société & Hébergement Touristique au Maroc | 100% En Ligne",
-  description: "Créez votre SARL au Maroc | Formalités légales location de Riads Airbnb en ligne. Accompagnement d'experts",
-  keywords: "création société Maroc, SARL Maroc, hébergement touristique, Airbnb Maroc, formalités juridiques, OMPIC, registre commerce, Formalités location riads",
+  title: "Formalitys - Company Formation & Tourist Accommodation in Morocco | 100% Online",
+  description: "Create your LLC in Morocco | Legal formalities for tourist rentals online. Expert support.",
+  keywords: "company formation Morocco, LLC Morocco, tourist accommodation, Airbnb Morocco, legal formalities, OMPIC, commercial register, tourist rental formalities",
   openGraph: {
-    title: "Formalitys - Démarches Juridiques au Maroc | 100% En Ligne",
-    description: "Simplifiez vos démarches juridiques au Maroc. Création société SARL et régularisation hébergement touristique avec nos experts.",
+    title: "Formalitys - Legal Procedures in Morocco | 100% Online",
+    description: "Simplify your legal procedures in Morocco. LLC formation and tourist accommodation compliance with our experts.",
     url: "https://formalitys.com",
     siteName: "Formalitys",
     images: [
@@ -20,13 +24,13 @@ export const metadata: Metadata = {
         alt: "Formalitys - Démarches Juridiques au Maroc",
       },
     ],
-    locale: "fr_FR",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Formalitys - Démarches Juridiques au Maroc",
-    description: "Créez votre société ou régularisez votre hébergement touristique en ligne au Maroc.",
+    title: "Formalitys - Legal Procedures in Morocco",
+    description: "Create your company or regularize your tourist accommodation online in Morocco.",
     images: ["https://formalitys.com/og-image.jpg"],
   },
   robots: {
@@ -64,32 +68,48 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="en">
       <head>
         <link rel="stylesheet" href="/fonts/satoshi.css" />
         {/* Site icons */}
         <link rel="icon" type="image/svg+xml" href="/SVG/Asset 2.svg" />
         <link rel="apple-touch-icon" href="/SVG/Asset 2.svg" />
         <meta name="theme-color" content="#062A2F" />
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-9KS5C9ZR0M"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);} 
+            gtag('js', new Date());
+            gtag('config', 'G-9KS5C9ZR0M');
+          `}
+        </Script>
       </head>
       <body className="font-sans antialiased" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-        {children}
-        
-        {/* WhatsApp Chat Widget */}
-        <WhatsAppWidget 
-          phoneNumber="+212620269000"
-          position="bottom-right"
-          hideOnPages={['/admin']}
-        />
-        
-        {/* Alternative: WhatsApp Button (uncomment to use instead of widget) */}
-        {/* <WhatsAppButton 
-          phoneNumber="+212620269000"
-          message="Bonjour! Je souhaite obtenir des informations sur vos services Formalitys."
-          position="bottom-right"
-          showAfterDelay={3000}
-          hideOnPages={['/admin']}
-        /> */}
+        <NextIntlClientProvider messages={en} locale="en">
+          <Analytics />
+          {children}
+          
+          {/* WhatsApp Chat Widget */}
+          <WhatsAppWidget 
+            phoneNumber="+212620269000"
+            position="bottom-right"
+            hideOnPages={['/admin']}
+          />
+          
+          {/* Alternative: WhatsApp Button (uncomment to use instead of widget) */}
+          {/* <WhatsAppButton 
+            phoneNumber="+212620269000"
+            message="Bonjour! Je souhaite obtenir des informations sur vos services Formalitys."
+            position="bottom-right"
+            showAfterDelay={3000}
+            hideOnPages={['/admin']}
+          /> */}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

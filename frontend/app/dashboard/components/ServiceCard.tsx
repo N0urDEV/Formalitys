@@ -1,12 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { Service } from '../types';
+import { useTranslations } from 'next-intl';
 
 interface ServiceCardProps {
   service: Service;
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
+  const t = useTranslations('Dashboard');
   const isWhiteBackground = service.id === 'tourism';
   
   return (
@@ -112,7 +114,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           {/* CTA Button */}
           <div className="mt-auto">
             <div className={`${service.buttonStyle} inline-flex items-center justify-center w-full px-6 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group`}>
-              <span style={{ fontFamily: 'Satoshi, sans-serif' }}>Commencer maintenant</span>
+              <span style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('services.cta')}</span>
               <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
