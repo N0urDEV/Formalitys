@@ -2,6 +2,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -9,6 +10,7 @@ function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
+  const t = useTranslations('Auth.Reset');
   
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -19,7 +21,7 @@ function ResetPasswordContent() {
 
   useEffect(() => {
     if (!email) {
-      setError('Email manquant');
+      setError(t('errors.emailMissing'));
       setVerifying(false);
       return;
     }
@@ -30,12 +32,12 @@ function ResetPasswordContent() {
     e.preventDefault();
     
     if (password !== confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
+      setError(t('errors.passwordsMismatch'));
       return;
     }
 
     if (password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères');
+      setError(t('errors.passwordMin'));
       return;
     }
 
@@ -52,7 +54,7 @@ function ResetPasswordContent() {
       const data = await res.json();
       
       if (!res.ok) {
-        throw new Error(data.message || 'Erreur lors de la réinitialisation');
+        throw new Error(data.message || t('errors.errorReset'));
       }
       
       setSuccess(true);
@@ -69,7 +71,7 @@ function ResetPasswordContent() {
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-            Vérification du token...
+            {t('verifying')}
           </p>
         </div>
       </div>
@@ -91,20 +93,20 @@ function ResetPasswordContent() {
                 className="text-3xl font-bold text-[#071B1E] mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                Mot de passe réinitialisé
+                {t('successTitle')}
               </h1>
               <p 
                 className="text-gray-600 mb-8"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.
+                {t('successBody')}
               </p>
               <Link 
                 href="/login"
                 className="inline-block bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-8 py-3 rounded-2xl font-semibold hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Se connecter
+                {t('backToLogin')}
               </Link>
             </div>
           </div>
@@ -135,7 +137,7 @@ function ResetPasswordContent() {
             className="text-white/80 hover:text-white transition-colors"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            ← Retour à la connexion
+            {t('backToLogin')}
           </Link>
         </div>
       </nav>
@@ -160,13 +162,13 @@ function ResetPasswordContent() {
                   className="text-3xl font-bold text-[#071B1E] mb-2"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Nouveau mot de passe
+                  {t('title')}
                 </h1>
                 <p 
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {email ? `Pour ${email}` : 'Entrez votre nouveau mot de passe'}
+                  {email ? t('forEmail', { email }) : t('enterNewPassword')}
                 </p>
               </div>
 
@@ -177,7 +179,7 @@ function ResetPasswordContent() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Nouveau mot de passe
+                    {t('newPassword')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
@@ -196,7 +198,7 @@ function ResetPasswordContent() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Confirmer le mot de passe
+                    {t('confirmPassword')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
@@ -226,10 +228,10 @@ function ResetPasswordContent() {
                   {loading ? (
                     <div className="flex items-center justify-center">
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      Réinitialisation...
+                      {t('resetting')}
                     </div>
                   ) : (
-                    'Réinitialiser le mot de passe'
+                    t('resetPassword')
                   )}
                 </button>
               </form>
@@ -240,13 +242,13 @@ function ResetPasswordContent() {
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Vous vous souvenez de votre mot de passe ?{' '}
+                  {t('remember')} 
                   <Link 
                     href="/login" 
                     className="text-[#F66B4C] hover:text-[#e55a43] font-semibold transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Se connecter
+                    {t('backToLogin')}
                   </Link>
                 </p>
               </div>

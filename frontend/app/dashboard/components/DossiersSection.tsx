@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Dossier } from '../types';
 import { DossierStats } from './DossierStats';
 import { DossierCard } from './DossierCard';
+import { useTranslations } from 'next-intl';
 
 interface DossiersSectionProps {
   dossiers: Dossier[];
@@ -23,12 +24,13 @@ export const DossiersSection: React.FC<DossiersSectionProps> = ({
   onDownloadPdf,
   stats 
 }) => {
+  const t = useTranslations('DashboardComponents.DossiersSection');
   if (loading) {
     return (
       <div className="text-center py-12">
         <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
         <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-          Chargement de vos dossiers...
+          {t('loading')}
         </p>
       </div>
     );
@@ -52,13 +54,13 @@ export const DossiersSection: React.FC<DossiersSectionProps> = ({
               className="text-2xl font-bold text-[#071B1E] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Aucun dossier créé
+              {t('emptyTitle')}
             </h3>
             <p 
               className="text-gray-600 mb-8 max-w-md mx-auto"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Commencez par créer votre premier dossier. Vous pouvez créer autant de dossiers que nécessaire pour différentes entreprises ou activités.
+              {t('emptySubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -66,14 +68,14 @@ export const DossiersSection: React.FC<DossiersSectionProps> = ({
                 className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-8 py-4 rounded-2xl font-semibold hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Créer une société
+                {t('ctaCompany')}
               </Link>
               <Link
                 href="/dossiers/tourism"
                 className="bg-gradient-to-r from-[#062A2F] to-[#0a3b42] text-white px-8 py-4 rounded-2xl font-semibold hover:from-[#0a3b42] hover:to-[#062A2F] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Régulariser une activité
+                {t('ctaTourism')}
               </Link>
             </div>
           </div>

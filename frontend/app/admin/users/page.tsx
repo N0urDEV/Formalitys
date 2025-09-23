@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AdminLayout } from '../components/AdminLayout';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -26,6 +27,7 @@ interface UsersResponse {
 
 export default function AdminUsers() {
   const router = useRouter();
+  const t = useTranslations('Admin.users');
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -270,7 +272,7 @@ export default function AdminUsers() {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement des utilisateurs...</p>
+            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -291,7 +293,7 @@ export default function AdminUsers() {
                   <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
-                  <span>Rechercher des utilisateurs</span>
+                  <span>{t('searchLabel')}</span>
                 </div>
               </label>
               <div className="relative">
@@ -299,7 +301,7 @@ export default function AdminUsers() {
                   type="text"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  placeholder="Rechercher par nom, email ou téléphone..."
+                  placeholder={t('searchPh')}
                   className="w-full pl-4 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent bg-gray-50/50 transition-all duration-300 hover:bg-white"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
@@ -334,7 +336,7 @@ export default function AdminUsers() {
               <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
               </svg>
-              <span>Liste des Utilisateurs</span>
+              <span>{t('listTitle')}</span>
             </h3>
             <button
               onClick={() => setShowCreateModal(true)}
@@ -344,7 +346,7 @@ export default function AdminUsers() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              <span className="font-semibold">Nouvel Utilisateur</span>
+              <span className="font-semibold">{t('newUser')}</span>
             </button>
           </div>
         </div>
@@ -357,7 +359,7 @@ export default function AdminUsers() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span>Utilisateur</span>
+                    <span>{t('colUser')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -365,7 +367,7 @@ export default function AdminUsers() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <span>Contact</span>
+                    <span>{t('colContact')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -373,7 +375,7 @@ export default function AdminUsers() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <span>Dossiers</span>
+                    <span>{t('colDossiers')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -381,7 +383,7 @@ export default function AdminUsers() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-3 3m3-3l3 3m-3-3v10a2 2 0 002 2h4a2 2 0 002-2V7" />
                     </svg>
-                    <span>Inscription</span>
+                    <span>{t('colRegistered')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -390,7 +392,7 @@ export default function AdminUsers() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span>Actions</span>
+                    <span>{t('colActions')}</span>
                   </div>
                 </th>
               </tr>
@@ -443,7 +445,7 @@ export default function AdminUsers() {
                           {user._count.companyDossiers}
                         </div>
                         <div className="text-xs text-gray-500 font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                          Société
+                          {t('company')}
                         </div>
                       </div>
                       <div className="text-center">
@@ -451,7 +453,7 @@ export default function AdminUsers() {
                           {user._count.tourismDossiers}
                         </div>
                         <div className="text-xs text-gray-500 font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                          Tourisme
+                          {t('tourism')}
                         </div>
                       </div>
                     </div>
@@ -462,7 +464,7 @@ export default function AdminUsers() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-3 3m3-3l3 3m-3-3v10a2 2 0 002 2h4a2 2 0 002-2V7" />
                       </svg>
                       <span className="text-[#071B1E] font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        {new Date(user.createdAt).toLocaleDateString('fr-FR')}
+                        {new Date(user.createdAt).toLocaleDateString('en-US')}
                       </span>
                     </div>
                   </td>
@@ -471,7 +473,7 @@ export default function AdminUsers() {
                       <button
                         onClick={() => handleUserClick(user)}
                         className="p-2 text-[#F66B4C] hover:text-white hover:bg-[#F66B4C] rounded-xl transition-all duration-300 hover:scale-110"
-                        title="Voir les détails"
+                        title={t('detailsTitle')}
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -481,7 +483,7 @@ export default function AdminUsers() {
                       <button
                         onClick={() => handleEditUser(user)}
                         className="p-2 text-blue-600 hover:text-white hover:bg-blue-600 rounded-xl transition-all duration-300 hover:scale-110"
-                        title="Modifier"
+                        title={t('editTitle')}
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -490,7 +492,7 @@ export default function AdminUsers() {
                       <button
                         onClick={() => handleDeleteUser(user)}
                         className="p-2 text-red-600 hover:text-white hover:bg-red-600 rounded-xl transition-all duration-300 hover:scale-110"
-                        title="Supprimer"
+                        title={t('delete')}
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -509,10 +511,10 @@ export default function AdminUsers() {
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-8 py-6 flex items-center justify-between border-t border-gray-200">
             <div className="flex items-center space-x-4">
               <div className="text-sm text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                <span className="font-semibold text-[#071B1E]">Page {currentPage}</span> sur <span className="font-semibold">{totalPages}</span>
+                <span className="font-semibold text-[#071B1E]">{t('pageXofY', { current: currentPage, total: totalPages })}</span>
               </div>
               <div className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                {totalUsers} utilisateurs au total
+                {t('totalUsers', { total: totalUsers })}
               </div>
             </div>
             <div className="flex items-center space-x-2">
@@ -525,7 +527,7 @@ export default function AdminUsers() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
-                <span>Première</span>
+                <span>{t('first')}</span>
               </button>
               <button
                 onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
@@ -536,7 +538,7 @@ export default function AdminUsers() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-                <span>Précédent</span>
+                <span>{t('prev')}</span>
               </button>
               
               {/* Page numbers */}
@@ -576,7 +578,7 @@ export default function AdminUsers() {
                 className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#F66B4C] hover:text-[#F66B4C] transition-all duration-300 flex items-center space-x-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                <span>Suivant</span>
+                <span>{t('next')}</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -587,7 +589,7 @@ export default function AdminUsers() {
                 className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#F66B4C] hover:text-[#F66B4C] transition-all duration-300 flex items-center space-x-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                <span>Dernière</span>
+                <span>{t('last')}</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                 </svg>
@@ -607,7 +609,7 @@ export default function AdminUsers() {
                   className="text-2xl font-bold text-[#071B1E]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Détails de l'utilisateur
+                  {t('detailsTitle')}
                 </h3>
                 <button
                   onClick={() => setShowUserDetails(false)}
@@ -630,15 +632,15 @@ export default function AdminUsers() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        Nom complet
+                        {t('fullName')}
                       </label>
                       <p className="text-lg text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        {userDetails.name || 'Non renseigné'}
+                        {userDetails.name || '—'}
                       </p>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        Email
+                        {t('email')}
                       </label>
                       <p className="text-lg text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                         {userDetails.email}
@@ -646,7 +648,7 @@ export default function AdminUsers() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        Téléphone
+                        {t('phone')}
                       </label>
                       <p className="text-lg text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                         {userDetails.phone || 'Non renseigné'}
@@ -654,10 +656,10 @@ export default function AdminUsers() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        Date d'inscription
+                        {t('registeredAt')}
                       </label>
                       <p className="text-lg text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        {new Date(userDetails.createdAt).toLocaleDateString('fr-FR')}
+                        {new Date(userDetails.createdAt).toLocaleDateString('en-US')}
                       </p>
                     </div>
                   </div>
@@ -665,7 +667,7 @@ export default function AdminUsers() {
                   {userDetails.companyDossiers && userDetails.companyDossiers.length > 0 && (
                     <div>
                       <h4 className="text-lg font-semibold text-[#071B1E] mb-4" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        Dossiers de création de société
+                        {t('companyDossiers')}
                       </h4>
                       <div className="space-y-2">
                         {userDetails.companyDossiers.map((dossier: any) => (
@@ -676,7 +678,7 @@ export default function AdminUsers() {
                                   Dossier #{dossier.id}
                                 </p>
                                 <p className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                                  Étape {dossier.currentStep}/5 • {dossier.status}
+                                  {t('stepStatus', { step: dossier.currentStep, status: dossier.status })}
                                 </p>
                               </div>
                               <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
@@ -696,7 +698,7 @@ export default function AdminUsers() {
                   {userDetails.tourismDossiers && userDetails.tourismDossiers.length > 0 && (
                     <div>
                       <h4 className="text-lg font-semibold text-[#071B1E] mb-4" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        Dossiers de régularisation touristique
+                        {t('tourismDossiers')}
                       </h4>
                       <div className="space-y-2">
                         {userDetails.tourismDossiers.map((dossier: any) => (
@@ -707,7 +709,7 @@ export default function AdminUsers() {
                                   Dossier #{dossier.id}
                                 </p>
                                 <p className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                                  Étape {dossier.currentStep}/5 • {dossier.status}
+                                  {t('stepStatus', { step: dossier.currentStep, status: dossier.status })}
                                 </p>
                               </div>
                               <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
@@ -725,9 +727,7 @@ export default function AdminUsers() {
                   )}
                 </div>
               ) : (
-                <p className="text-gray-500 text-center py-8" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  Erreur lors du chargement des détails
-                </p>
+                <p className="text-gray-500 text-center py-8" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('detailsError')}</p>
               )}
             </div>
           </div>
@@ -744,7 +744,7 @@ export default function AdminUsers() {
                   className="text-2xl font-bold text-[#071B1E]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Modifier l'utilisateur
+                  {t('editTitle')}
                 </h3>
                 <button
                   onClick={() => setShowEditModal(false)}
@@ -763,14 +763,14 @@ export default function AdminUsers() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Nom complet
+                  {t('fullName')}
                 </label>
                 <input
                   type="text"
                   value={editForm.name}
                   onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="Nom de l'utilisateur"
+                  placeholder={t('namePh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
               </div>
@@ -780,14 +780,14 @@ export default function AdminUsers() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Email
+                  {t('email')}
                 </label>
                 <input
                   type="email"
                   value={editForm.email}
                   onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="email@example.com"
+                  placeholder={t('emailPh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
               </div>
@@ -797,14 +797,14 @@ export default function AdminUsers() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Téléphone
+                  {t('phone')}
                 </label>
                 <input
                   type="tel"
                   value={editForm.phone}
                   onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="+212 6XX XXX XXX"
+                  placeholder={t('phonePh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
               </div>
@@ -816,7 +816,7 @@ export default function AdminUsers() {
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Annuler
+                  {t('cancel')}
                 </button>
                 <button
                   type="submit"
@@ -824,7 +824,7 @@ export default function AdminUsers() {
                   className="flex-1 px-6 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {updating ? 'Mise à jour...' : 'Mettre à jour'}
+                  {updating ? t('updating') : t('update')}
                 </button>
               </div>
             </form>
@@ -842,7 +842,7 @@ export default function AdminUsers() {
                   className="text-2xl font-bold text-[#071B1E]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Supprimer l'utilisateur
+                  {t('deleteTitle')}
                 </h3>
                 <button
                   onClick={() => setShowDeleteModal(false)}
@@ -860,7 +860,7 @@ export default function AdminUsers() {
                 className="text-gray-600 mb-6"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Êtes-vous sûr de vouloir supprimer l'utilisateur <strong>{userToDelete.name || userToDelete.email}</strong> ? Cette action est irréversible.
+                {t('deleteConfirm', { name: userToDelete.name || userToDelete.email })}
               </p>
               
               <div className="flex space-x-4">
@@ -869,7 +869,7 @@ export default function AdminUsers() {
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Annuler
+                  {t('cancel')}
                 </button>
                 <button
                   onClick={confirmDeleteUser}
@@ -877,7 +877,7 @@ export default function AdminUsers() {
                   className="flex-1 px-6 py-3 bg-red-600 text-white rounded-2xl hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {deleting ? 'Suppression...' : 'Supprimer'}
+                  {deleting ? t('deleting') : t('delete')}
                 </button>
               </div>
             </div>
@@ -895,7 +895,7 @@ export default function AdminUsers() {
                   className="text-2xl font-bold text-[#071B1E]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Créer un utilisateur
+                  {t('createTitle')}
                 </h3>
                 <button
                   onClick={() => setShowCreateModal(false)}
@@ -915,14 +915,14 @@ export default function AdminUsers() {
                     className="block text-sm font-medium text-[#071B1E] mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Nom complet *
+                    {t('nameReq')}
                   </label>
                   <input
                     type="text"
                     value={createForm.name}
                     onChange={(e) => setCreateForm({ ...createForm, name: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                    placeholder="Nom de l'utilisateur"
+                    placeholder={t('namePh')}
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   />
                 </div>
@@ -932,14 +932,14 @@ export default function AdminUsers() {
                     className="block text-sm font-medium text-[#071B1E] mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Email *
+                    {t('emailReq')}
                   </label>
                   <input
                     type="email"
                     value={createForm.email}
                     onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                    placeholder="email@exemple.com"
+                    placeholder={t('emailPh')}
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   />
                 </div>
@@ -949,14 +949,14 @@ export default function AdminUsers() {
                     className="block text-sm font-medium text-[#071B1E] mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Téléphone
+                    {t('phone')}
                   </label>
                   <input
                     type="tel"
                     value={createForm.phone}
                     onChange={(e) => setCreateForm({ ...createForm, phone: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                    placeholder="+212 6 12 34 56 78"
+                    placeholder={t('phonePh')}
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   />
                 </div>
@@ -966,14 +966,14 @@ export default function AdminUsers() {
                     className="block text-sm font-medium text-[#071B1E] mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Mot de passe *
+                    {t('passwordReq')}
                   </label>
                   <input
                     type="password"
                     value={createForm.password}
                     onChange={(e) => setCreateForm({ ...createForm, password: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                    placeholder="Mot de passe"
+                    placeholder={t('passwordPh')}
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   />
                 </div>
@@ -985,7 +985,7 @@ export default function AdminUsers() {
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Annuler
+                  {t('cancel')}
                 </button>
                 <button
                   onClick={createUser}
@@ -993,7 +993,7 @@ export default function AdminUsers() {
                   className="flex-1 px-6 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {creating ? 'Création...' : 'Créer'}
+                  {creating ? t('creating') : t('create')}
                 </button>
               </div>
             </div>

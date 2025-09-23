@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AdminLayout } from '../components/AdminLayout';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -17,6 +18,7 @@ interface Admin {
 
 export default function AdminAdmins() {
   const router = useRouter();
+  const t = useTranslations('Admin.Admins');
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateAdmin, setShowCreateAdmin] = useState(false);
@@ -88,7 +90,7 @@ export default function AdminAdmins() {
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.message || 'Erreur lors de la création de l\'administrateur');
+        throw new Error(error.message || t('errors.create'));
       }
 
       // Reset form and close modal
@@ -99,10 +101,10 @@ export default function AdminAdmins() {
       fetchAdmins();
       
       // Show success message
-      alert('Administrateur créé avec succès!');
+      alert(t('toasts.created'));
     } catch (err) {
       console.error('Error creating admin:', err);
-      alert(err instanceof Error ? err.message : 'Erreur lors de la création de l\'administrateur');
+      alert(err instanceof Error ? err.message : t('errors.create'));
     } finally {
       setCreatingAdmin(false);
     }
@@ -137,14 +139,14 @@ export default function AdminAdmins() {
       if (res.ok) {
         setShowEditModal(false);
         fetchAdmins(); // Refresh the list
-        alert('Administrateur mis à jour avec succès!');
+        alert(t('toasts.updated'));
       } else {
         const error = await res.json();
-        alert(error.message || 'Erreur lors de la mise à jour');
+        alert(error.message || t('errors.update'));
       }
     } catch (err) {
       console.error('Error updating admin:', err);
-      alert('Erreur lors de la mise à jour');
+      alert(t('errors.update'));
     } finally {
       setUpdating(false);
     }
@@ -170,14 +172,14 @@ export default function AdminAdmins() {
         setShowDeleteModal(false);
         setSelectedAdmin(null);
         fetchAdmins(); // Refresh the list
-        alert('Administrateur supprimé avec succès!');
+        alert(t('toasts.deleted'));
       } else {
         const error = await res.json();
-        alert(error.message || 'Erreur lors de la suppression');
+        alert(error.message || t('errors.delete'));
       }
     } catch (err) {
       console.error('Error deleting admin:', err);
-      alert('Erreur lors de la suppression');
+      alert(t('errors.delete'));
     } finally {
       setDeleting(false);
     }
@@ -189,7 +191,7 @@ export default function AdminAdmins() {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement des administrateurs...</p>
+            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -209,7 +211,7 @@ export default function AdminAdmins() {
               <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
-              <span>Liste des Administrateurs</span>
+              <span>{t('listTitle')}</span>
             </h3>
             <button
               onClick={() => setShowCreateAdmin(true)}
@@ -219,7 +221,7 @@ export default function AdminAdmins() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              <span className="font-semibold">Nouvel Administrateur</span>
+              <span className="font-semibold">{t('newAdmin')}</span>
             </button>
           </div>
         </div>
@@ -232,7 +234,7 @@ export default function AdminAdmins() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span>Administrateur</span>
+                    <span>{t('table.admin')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -240,7 +242,7 @@ export default function AdminAdmins() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <span>Contact</span>
+                    <span>{t('table.contact')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -248,7 +250,7 @@ export default function AdminAdmins() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
-                    <span>Rôle</span>
+                    <span>{t('table.role')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -256,7 +258,7 @@ export default function AdminAdmins() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-3 3m3-3l3 3m-3-3v10a2 2 0 002 2h4a2 2 0 002-2V7" />
                     </svg>
-                    <span>Création</span>
+                    <span>{t('table.created')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -265,7 +267,7 @@ export default function AdminAdmins() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span>Actions</span>
+                    <span>{t('table.actions')}</span>
                   </div>
                 </th>
               </tr>
@@ -331,7 +333,7 @@ export default function AdminAdmins() {
                       <button
                         onClick={() => handleEditAdmin(admin)}
                         className="p-2 text-blue-600 hover:text-white hover:bg-blue-600 rounded-xl transition-all duration-300 hover:scale-110"
-                        title="Modifier"
+                        title={t('actions.edit')}
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -340,7 +342,7 @@ export default function AdminAdmins() {
                       <button
                         onClick={() => handleDeleteAdmin(admin)}
                         className="p-2 text-red-600 hover:text-white hover:bg-red-600 rounded-xl transition-all duration-300 hover:scale-110"
-                        title="Supprimer"
+                        title={t('actions.delete')}
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -365,7 +367,7 @@ export default function AdminAdmins() {
                   className="text-2xl font-bold text-[#071B1E]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Créer un administrateur
+                  {t('create.title')}
                 </h3>
                 <button
                   onClick={() => setShowCreateAdmin(false)}
@@ -384,7 +386,7 @@ export default function AdminAdmins() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Nom complet *
+                  {t('create.nameReq')}
                 </label>
                 <input
                   type="text"
@@ -392,7 +394,7 @@ export default function AdminAdmins() {
                   value={adminForm.name}
                   onChange={(e) => setAdminForm({ ...adminForm, name: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="Nom de l'administrateur"
+                  placeholder={t('create.namePh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
               </div>
@@ -402,7 +404,7 @@ export default function AdminAdmins() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Email *
+                  {t('create.emailReq')}
                 </label>
                 <input
                   type="email"
@@ -420,7 +422,7 @@ export default function AdminAdmins() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Téléphone
+                  {t('create.phone')}
                 </label>
                 <input
                   type="tel"
@@ -437,7 +439,7 @@ export default function AdminAdmins() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Mot de passe *
+                  {t('create.passwordReq')}
                 </label>
                 <input
                   type="password"
@@ -445,7 +447,7 @@ export default function AdminAdmins() {
                   value={adminForm.password}
                   onChange={(e) => setAdminForm({ ...adminForm, password: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="Mot de passe sécurisé"
+                  placeholder={t('create.passwordPh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
               </div>
@@ -457,7 +459,7 @@ export default function AdminAdmins() {
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Annuler
+                  {t('create.cancel')}
                 </button>
                 <button
                   type="submit"
@@ -465,7 +467,7 @@ export default function AdminAdmins() {
                   className="flex-1 px-6 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {creatingAdmin ? 'Création...' : 'Créer'}
+                  {creatingAdmin ? t('create.creating') : t('create.create')}
                 </button>
               </div>
             </form>
@@ -483,7 +485,7 @@ export default function AdminAdmins() {
                   className="text-2xl font-bold text-[#071B1E]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Modifier l'administrateur
+                  {t('edit.title')}
                 </h3>
                 <button
                   onClick={() => setShowEditModal(false)}
@@ -502,14 +504,14 @@ export default function AdminAdmins() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Nom complet
+                  {t('edit.name')}
                 </label>
                 <input
                   type="text"
                   value={editForm.name}
                   onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="Nom de l'administrateur"
+                  placeholder={t('edit.namePh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
               </div>
@@ -519,7 +521,7 @@ export default function AdminAdmins() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Email
+                  {t('edit.email')}
                 </label>
                 <input
                   type="email"
@@ -536,7 +538,7 @@ export default function AdminAdmins() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Téléphone
+                  {t('edit.phone')}
                 </label>
                 <input
                   type="tel"
@@ -555,7 +557,7 @@ export default function AdminAdmins() {
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Annuler
+                  {t('edit.cancel')}
                 </button>
                 <button
                   type="submit"
@@ -563,7 +565,7 @@ export default function AdminAdmins() {
                   className="flex-1 px-6 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {updating ? 'Mise à jour...' : 'Mettre à jour'}
+                  {updating ? t('edit.updating') : t('edit.update')}
                 </button>
               </div>
             </form>
@@ -581,7 +583,7 @@ export default function AdminAdmins() {
                   className="text-2xl font-bold text-[#071B1E]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Supprimer l'administrateur
+                  {t('delete.title')}
                 </h3>
                 <button
                   onClick={() => setShowDeleteModal(false)}
@@ -606,13 +608,13 @@ export default function AdminAdmins() {
                     className="text-lg font-semibold text-red-800 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Attention
+                    {t('delete.warningTitle')}
                   </h5>
                   <p 
                     className="text-sm text-red-700"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Cette action est irréversible. L'administrateur sera définitivement supprimé. Vous ne pouvez pas supprimer le dernier administrateur du système.
+                    {t('delete.warningBody')}
                   </p>
                 </div>
               </div>
@@ -623,7 +625,7 @@ export default function AdminAdmins() {
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Annuler
+                  {t('delete.cancel')}
                 </button>
                 <button
                   onClick={confirmDeleteAdmin}
@@ -631,7 +633,7 @@ export default function AdminAdmins() {
                   className="flex-1 px-6 py-3 bg-red-600 text-white rounded-2xl hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {deleting ? 'Suppression...' : 'Supprimer'}
+                  {deleting ? t('delete.deleting') : t('delete.delete')}
                 </button>
               </div>
             </div>

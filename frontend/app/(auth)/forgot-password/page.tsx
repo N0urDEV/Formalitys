@@ -2,11 +2,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
+  const t = useTranslations('Auth.Forgot');
+  const tCommon = useTranslations('Auth.common');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -29,7 +32,7 @@ export default function ForgotPasswordPage() {
       const data = await res.json();
       
       if (!res.ok) {
-        throw new Error(data.message || 'Email non trouvé');
+        throw new Error(data.message || t('errors.emailNotFound'));
       }
       
       // Redirect to reset page with email
@@ -63,7 +66,7 @@ export default function ForgotPasswordPage() {
             className="text-white/80 hover:text-white transition-colors"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            ← Retour à la connexion
+            {t('backToLogin')}
           </Link>
         </div>
       </nav>
@@ -88,13 +91,13 @@ export default function ForgotPasswordPage() {
                   className="text-3xl font-bold text-[#071B1E] mb-2"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Mot de passe oublié
+                  {t('title')}
                 </h1>
                 <p 
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Entrez votre email pour réinitialiser votre mot de passe
+                  {t('subtitle')}
                 </p>
               </div>
 
@@ -105,11 +108,11 @@ export default function ForgotPasswordPage() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Adresse email
+                    {tCommon('email')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="votre@email.com"
+                    placeholder={tCommon('emailPlaceholder')}
                     type="email"
                     value={email} 
                     onChange={e => setEmail(e.target.value)}
@@ -142,10 +145,10 @@ export default function ForgotPasswordPage() {
                   {loading ? (
                     <div className="flex items-center justify-center">
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      Envoi en cours...
+                      {t('sending')}
                     </div>
                   ) : (
-                    'Envoyer le lien de réinitialisation'
+                    t('sendLink')
                   )}
                 </button>
               </form>
@@ -156,13 +159,13 @@ export default function ForgotPasswordPage() {
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Vous vous souvenez de votre mot de passe ?{' '}
+                  {t('remember')} 
                   <Link 
                     href="/login" 
                     className="text-[#F66B4C] hover:text-[#e55a43] font-semibold transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Se connecter
+                    {t('backToLogin')}
                   </Link>
                 </p>
               </div>

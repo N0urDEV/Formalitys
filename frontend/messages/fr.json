@@ -129,6 +129,123 @@
       "t2Sub": "Quelques jours",
       "t3Title": "Sécurisé",
       "t3Sub": "Données protégées"
+    },
+    "users": {
+      "loading": "Chargement des utilisateurs...",
+      "searchLabel": "Rechercher des utilisateurs",
+      "searchPh": "Rechercher par nom, email ou téléphone...",
+      "listTitle": "Liste des Utilisateurs",
+      "newUser": "Nouvel Utilisateur",
+      "colUser": "Utilisateur",
+      "colContact": "Contact",
+      "colDossiers": "Dossiers",
+      "colRegistered": "Inscription",
+      "colActions": "Actions",
+      "company": "Société",
+      "tourism": "Tourisme",
+      "pageXofY": "Page {current} sur {total}",
+      "totalUsers": "{total} utilisateurs au total",
+      "first": "Première",
+      "prev": "Précédent",
+      "next": "Suivant",
+      "last": "Dernière",
+      "detailsTitle": "Détails de l'utilisateur",
+      "fullName": "Nom complet",
+      "phone": "Téléphone",
+      "email": "Email",
+      "registeredAt": "Date d'inscription",
+      "companyDossiers": "Dossiers de création de société",
+      "tourismDossiers": "Dossiers de régularisation touristique",
+      "stepStatus": "Étape {step}/5 • {status}",
+      "detailsError": "Erreur lors du chargement des détails",
+      "editTitle": "Modifier l'utilisateur",
+      "namePh": "Nom de l'utilisateur",
+      "emailPh": "email@example.com",
+      "phonePh": "+212 6XX XXX XXX",
+      "cancel": "Annuler",
+      "update": "Mettre à jour",
+      "updating": "Mise à jour...",
+      "deleteTitle": "Supprimer l'utilisateur",
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer l'utilisateur {name} ? Cette action est irréversible.",
+      "delete": "Supprimer",
+      "deleting": "Suppression...",
+      "createTitle": "Créer un utilisateur",
+      "nameReq": "Nom complet *",
+      "emailReq": "Email *",
+      "passwordReq": "Mot de passe *",
+      "passwordPh": "Mot de passe",
+      "creating": "Création...",
+      "create": "Créer"
+    }
+    ,
+    "dossiers": {
+      "loading": "Chargement des dossiers...",
+      "filters": {
+        "typeLabel": "Type de dossier",
+        "typeAll": "Tous les dossiers",
+        "typeCompany": "Création SARL",
+        "typeTourism": "Hébergement touristique",
+        "statusLabel": "Statut",
+        "statusAll": "Tous les statuts",
+        "statusPending": "En attente",
+        "statusPaid": "Payé",
+        "statusInProgress": "En cours",
+        "statusCompleted": "Terminé",
+        "statusCancelled": "Annulé",
+        "apply": "Filtrer"
+      },
+      "stats": {
+        "total": "Total dossiers",
+        "completed": "Terminés",
+        "inProgress": "En cours"
+      },
+      "table": {
+        "title": "Liste des Dossiers",
+        "user": "Utilisateur",
+        "type": "Type",
+        "status": "Statut",
+        "amount": "Montant",
+        "files": "Fichiers",
+        "date": "Date",
+        "actions": "Actions",
+        "typeCompany": "Création SARL",
+        "typeTourism": "Hébergement touristique",
+        "statusDraft": "Brouillon",
+        "statusPaid": "Payé",
+        "statusCompleted": "Terminé"
+      },
+      "pagination": {
+        "pageOf": "Page {current} sur {total}",
+        "total": "{count} dossiers au total",
+        "first": "Première",
+        "prev": "Précédent",
+        "next": "Suivant",
+        "last": "Dernière"
+      },
+      "filesModal": {
+        "title": "Fichiers du dossier - {name}",
+        "count": "{count} fichier(s) disponible(s)",
+        "uploadedBy": "Documents uploadés par {name}",
+        "pdf": "PDF Dossier",
+        "all": "Tous les fichiers",
+        "none": "Aucun fichier uploadé pour ce dossier",
+        "close": "Fermer",
+        "fileMeta": "{type} • {size} • {date}",
+        "download": "Télécharger"
+      },
+      "toasts": {
+        "pdfGenerating": "Génération du PDF en cours...",
+        "pdfSuccess": "PDF téléchargé avec succès!",
+        "pdfError": "Erreur lors de la génération du PDF",
+        "filesDownloading": "Téléchargement des fichiers...",
+        "filesSuccess": "{count} fichier(s) téléchargé(s)!",
+        "filesError": "Erreur lors du téléchargement"
+      },
+      "tooltips": {
+        "viewFiles": "Voir les fichiers",
+        "downloadPdf": "Télécharger le PDF du dossier",
+        "downloadAll": "Télécharger tous les fichiers"
+      }
     }
   }
   ,
@@ -263,6 +380,15 @@
     },
     "services": {
       "cta": "Commencer maintenant"
+    },
+    "stats": {
+      "title": "Mes Dossiers",
+      "subtitle": "Gérez tous vos dossiers juridiques en un seul endroit",
+      "total": "Total",
+      "completed": "Terminés",
+      "inProgress": "En cours",
+      "newCompany": "Nouvelle société",
+      "newTourism": "Nouvel hébergement"
     }
   }
   ,
@@ -361,6 +487,17 @@
       "admin": "Administrateur",
       "fallbackEmail": "admin@formalitys.ma"
     },
+    "Login": {
+      "title": "Administration",
+      "subtitle": "Accès administrateur sécurisé",
+      "emailOrPhonePlaceholder": "admin@formalitys.ma ou +212...",
+      "forgot": "Mot de passe oublié ?",
+      "loading": "Connexion...",
+      "cta": "Accéder à l'administration",
+      "onlyAdmins": "Accès réservé aux administrateurs autorisés",
+      "errorLogin": "Erreur de connexion",
+      "adminRequired": "Accès administrateur requis"
+    },
     "blog": {
       "newTitle": "Créez un nouvel article de blog",
       "back": "Retour",
@@ -380,6 +517,102 @@
       "backToPosts": "Retour aux articles",
       "update": "Mettre à jour",
       "updating": "Mise à jour..."
+    },
+    "Dashboard": {
+      "loadingStats": "Chargement des statistiques...",
+      "loadingDashboard": "Chargement du tableau de bord...",
+      "quickActions": {
+        "title": "Actions rapides",
+        "newCompany": "Nouveau dossier société",
+        "newTourism": "Nouveau dossier tourisme",
+        "newBlog": "Nouvel article de blog",
+        "newAdmin": "Créer administrateur",
+        "directAccess": "Accès direct"
+      },
+      "stats": {
+        "users": "Utilisateurs",
+        "usersDesc": "Total des comptes créés",
+        "dossiers": "Dossiers",
+        "dossiersDesc": "Tous types confondus",
+        "company": "Sociétés",
+        "companyDesc": "Créations de sociétés",
+        "tourism": "Tourisme",
+        "tourismDesc": "Régularisations touristiques"
+      }
+    },
+    "BlogList": {
+      "loading": "Chargement des articles...",
+      "errorLoading": "Erreur lors du chargement des articles",
+      "newPost": "Nouvel article",
+      "emptyTitle": "Aucun article pour le moment",
+      "emptySubtitle": "Commencez par créer votre premier article de blog.",
+      "createPost": "Créer un article",
+      "published": "Publié",
+      "draft": "Brouillon",
+      "byAuthor": "par {author}",
+      "edit": "Modifier",
+      "publish": "Publier",
+      "unpublish": "Dépublier",
+      "delete": "Supprimer",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet article ?",
+      "errorDelete": "Erreur lors de la suppression de l'article",
+      "errorUpdate": "Erreur lors de la mise à jour"
+    },
+    "Admins": {
+      "loading": "Chargement des administrateurs...",
+      "listTitle": "Liste des Administrateurs",
+      "newAdmin": "Nouvel Administrateur",
+      "table": {
+        "admin": "Administrateur",
+        "contact": "Contact",
+        "role": "Rôle",
+        "created": "Création",
+        "actions": "Actions"
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "create": {
+        "title": "Créer un administrateur",
+        "nameReq": "Nom complet *",
+        "namePh": "Nom de l'administrateur",
+        "emailReq": "Email *",
+        "phone": "Téléphone",
+        "passwordReq": "Mot de passe *",
+        "passwordPh": "Mot de passe sécurisé",
+        "cancel": "Annuler",
+        "creating": "Création...",
+        "create": "Créer"
+      },
+      "edit": {
+        "title": "Modifier l'administrateur",
+        "name": "Nom complet",
+        "namePh": "Nom de l'administrateur",
+        "email": "Email",
+        "phone": "Téléphone",
+        "cancel": "Annuler",
+        "updating": "Mise à jour...",
+        "update": "Mettre à jour"
+      },
+      "delete": {
+        "title": "Supprimer l'administrateur",
+        "warningTitle": "Attention",
+        "warningBody": "Cette action est irréversible. L'administrateur sera définitivement supprimé. Vous ne pouvez pas supprimer le dernier administrateur du système.",
+        "cancel": "Annuler",
+        "deleting": "Suppression...",
+        "delete": "Supprimer"
+      },
+      "toasts": {
+        "created": "Administrateur créé avec succès!",
+        "updated": "Administrateur mis à jour avec succès!",
+        "deleted": "Administrateur supprimé avec succès!"
+      },
+      "errors": {
+        "create": "Erreur lors de la création de l'administrateur",
+        "update": "Erreur lors de la mise à jour",
+        "delete": "Erreur lors de la suppression"
+      }
     }
   }
   ,

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AdminLayout } from '../components/AdminLayout';
+import { useTranslations } from 'next-intl';
 
 interface DossierFile {
   id: string;
@@ -85,6 +86,7 @@ interface DossiersResponse {
 
 export default function AdminDossiersPage() {
   const router = useRouter();
+  const t = useTranslations('Admin.dossiers');
   const [dossiers, setDossiers] = useState<Dossier[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -198,9 +200,9 @@ export default function AdminDossiersPage() {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'DRAFT': return 'Brouillon';
-      case 'PAID': return 'Payé';
-      case 'COMPLETED': return 'Terminé';
+      case 'DRAFT': return t('table.statusDraft');
+      case 'PAID': return t('table.statusPaid');
+      case 'COMPLETED': return t('table.statusCompleted');
       default: return status;
     }
   };
@@ -229,7 +231,7 @@ export default function AdminDossiersPage() {
       loadingToast.innerHTML = `
         <div class="flex items-center space-x-2">
           <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          <span>Génération du PDF en cours...</span>
+          <span>${t('toasts.pdfGenerating')}</span>
         </div>
       `;
       document.body.appendChild(loadingToast);
@@ -322,7 +324,7 @@ export default function AdminDossiersPage() {
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
           </svg>
-          <span>PDF téléchargé avec succès!</span>
+          <span>${t('toasts.pdfSuccess')}</span>
         </div>
       `;
       document.body.appendChild(successToast);
@@ -345,7 +347,7 @@ export default function AdminDossiersPage() {
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
-          <span>Erreur lors de la génération du PDF</span>
+          <span>${t('toasts.pdfError')}</span>
         </div>
       `;
       document.body.appendChild(errorToast);
@@ -366,7 +368,7 @@ export default function AdminDossiersPage() {
       loadingToast.innerHTML = `
         <div class="flex items-center space-x-2">
           <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          <span>Téléchargement des fichiers...</span>
+          <span>${t('toasts.filesDownloading')}</span>
         </div>
       `;
       document.body.appendChild(loadingToast);
@@ -399,7 +401,7 @@ export default function AdminDossiersPage() {
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
           </svg>
-          <span>${dossier.uploadedFiles.length} fichier(s) téléchargé(s)!</span>
+          <span>${t('toasts.filesSuccess', { count: dossier.uploadedFiles.length })}</span>
         </div>
       `;
       document.body.appendChild(successToast);
@@ -422,7 +424,7 @@ export default function AdminDossiersPage() {
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
-          <span>Erreur lors du téléchargement</span>
+          <span>${t('toasts.filesError')}</span>
         </div>
       `;
       document.body.appendChild(errorToast);
@@ -436,7 +438,7 @@ export default function AdminDossiersPage() {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement des dossiers...</p>
+            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -458,7 +460,7 @@ export default function AdminDossiersPage() {
                   <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
-                  <span>Type de dossier</span>
+                  <span>{t('filters.typeLabel')}</span>
                 </div>
               </label>
               <select
@@ -467,9 +469,9 @@ export default function AdminDossiersPage() {
                 className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent bg-gray-50/50 transition-all duration-300 hover:bg-white"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                <option value="all">Tous les dossiers</option>
-                <option value="company">Création SARL</option>
-                <option value="tourism">Hébergement touristique</option>
+                <option value="all">{t('filters.typeAll')}</option>
+                <option value="company">{t('filters.typeCompany')}</option>
+                <option value="tourism">{t('filters.typeTourism')}</option>
               </select>
             </div>
             
@@ -479,7 +481,7 @@ export default function AdminDossiersPage() {
                   <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Statut</span>
+                  <span>{t('filters.statusLabel')}</span>
                 </div>
               </label>
               <select
@@ -488,12 +490,12 @@ export default function AdminDossiersPage() {
                 className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent bg-gray-50/50 transition-all duration-300 hover:bg-white"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                <option value="all">Tous les statuts</option>
-                <option value="PENDING">En attente</option>
-                <option value="PAID">Payé</option>
-                <option value="IN_PROGRESS">En cours</option>
-                <option value="COMPLETED">Terminé</option>
-                <option value="CANCELLED">Annulé</option>
+                <option value="all">{t('filters.statusAll')}</option>
+                <option value="PENDING">{t('filters.statusPending')}</option>
+                <option value="PAID">{t('filters.statusPaid')}</option>
+                <option value="IN_PROGRESS">{t('filters.statusInProgress')}</option>
+                <option value="COMPLETED">{t('filters.statusCompleted')}</option>
+                <option value="CANCELLED">{t('filters.statusCancelled')}</option>
               </select>
             </div>
 
@@ -507,7 +509,7 @@ export default function AdminDossiersPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
                   </svg>
-                  <span>Filtrer</span>
+                  <span>{t('filters.apply')}</span>
                 </div>
               </button>
             </div>
@@ -529,7 +531,7 @@ export default function AdminDossiersPage() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>Total dossiers</p>
+                <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('stats.total')}</p>
                 <p className="text-3xl font-bold text-[#071B1E]" style={{ fontFamily: '"Gascogne Serial", serif' }}>{total}</p>
               </div>
             </div>
@@ -548,7 +550,7 @@ export default function AdminDossiersPage() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>Terminés</p>
+                <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('stats.completed')}</p>
                 <p className="text-3xl font-bold text-[#071B1E]" style={{ fontFamily: '"Gascogne Serial", serif' }}>
                   {dossiers.filter(d => d.status === 'COMPLETED').length}
                 </p>
@@ -569,7 +571,7 @@ export default function AdminDossiersPage() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>En cours</p>
+                <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('stats.inProgress')}</p>
                 <p className="text-3xl font-bold text-[#071B1E]" style={{ fontFamily: '"Gascogne Serial", serif' }}>
                   {dossiers.filter(d => d.status === 'IN_PROGRESS').length}
                 </p>
@@ -590,7 +592,7 @@ export default function AdminDossiersPage() {
               <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <span>Liste des Dossiers</span>
+              <span>{t('table.title')}</span>
             </h3>
           </div>
         </div>
@@ -603,7 +605,7 @@ export default function AdminDossiersPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span>Utilisateur</span>
+                    <span>{t('table.user')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -611,7 +613,7 @@ export default function AdminDossiersPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <span>Type</span>
+                    <span>{t('table.type')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -619,7 +621,7 @@ export default function AdminDossiersPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>Statut</span>
+                    <span>{t('table.status')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -627,7 +629,7 @@ export default function AdminDossiersPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                     </svg>
-                    <span>Montant</span>
+                    <span>{t('table.amount')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -635,7 +637,7 @@ export default function AdminDossiersPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
-                    <span>Fichiers</span>
+                    <span>{t('table.files')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -643,7 +645,7 @@ export default function AdminDossiersPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-3 3m3-3l3 3m-3-3v10a2 2 0 002 2h4a2 2 0 002-2V7" />
                     </svg>
-                    <span>Date</span>
+                    <span>{t('table.date')}</span>
                   </div>
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -652,7 +654,7 @@ export default function AdminDossiersPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span>Actions</span>
+                    <span>{t('table.actions')}</span>
                   </div>
                 </th>
               </tr>
@@ -682,7 +684,7 @@ export default function AdminDossiersPage() {
                   </td>
                   <td className="px-6 py-6 whitespace-nowrap">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#062A2F]/10 to-[#0a3b42]/10 text-[#062A2F] border border-[#062A2F]/20" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                      {dossier.type === 'company' ? 'Création SARL' : 'Hébergement touristique'}
+                      {dossier.type === 'company' ? t('table.typeCompany') : t('table.typeTourism')}
                     </span>
                   </td>
                   <td className="px-6 py-6 whitespace-nowrap">
@@ -706,7 +708,7 @@ export default function AdminDossiersPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                       </svg>
                       <span className="text-[#071B1E] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        {dossier.uploadedFiles.length} fichier{dossier.uploadedFiles.length > 1 ? 's' : ''}
+                        {dossier.uploadedFiles.length} file{dossier.uploadedFiles.length > 1 ? 's' : ''}
                       </span>
                     </div>
                   </td>
@@ -716,7 +718,7 @@ export default function AdminDossiersPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-3 3m3-3l3 3m-3-3v10a2 2 0 002 2h4a2 2 0 002-2V7" />
                       </svg>
                       <span className="text-[#071B1E] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                        {new Date(dossier.createdAt).toLocaleDateString('fr-FR')}
+                        {new Date(dossier.createdAt).toLocaleDateString('en-US')}
                       </span>
                     </div>
                   </td>
@@ -725,7 +727,7 @@ export default function AdminDossiersPage() {
                       <button
                         onClick={() => handleViewFiles(dossier)}
                         className="p-2 text-[#F66B4C] hover:text-white hover:bg-[#F66B4C] rounded-xl transition-all duration-300 hover:scale-110"
-                        title="Voir les fichiers"
+                        title={t('tooltips.viewFiles')}
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -737,7 +739,7 @@ export default function AdminDossiersPage() {
                         <button
                           onClick={() => handleDownloadDossierPDF(dossier)}
                           className="p-2 text-green-600 hover:text-white hover:bg-green-600 rounded-xl transition-all duration-300 hover:scale-110"
-                          title="Télécharger le PDF du dossier"
+                          title={t('tooltips.downloadPdf')}
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -749,7 +751,7 @@ export default function AdminDossiersPage() {
                         <button
                           onClick={() => handleDownloadAllFiles(dossier)}
                           className="p-2 text-blue-600 hover:text-white hover:bg-blue-600 rounded-xl transition-all duration-300 hover:scale-110"
-                          title="Télécharger tous les fichiers"
+                          title={t('tooltips.downloadAll')}
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />

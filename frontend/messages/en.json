@@ -129,6 +129,123 @@
       "t2Sub": "A few days",
       "t3Title": "Secure",
       "t3Sub": "Data protected"
+    },
+    "users": {
+      "loading": "Loading users...",
+      "searchLabel": "Search users",
+      "searchPh": "Search by name, email or phone...",
+      "listTitle": "Users list",
+      "newUser": "New User",
+      "colUser": "User",
+      "colContact": "Contact",
+      "colDossiers": "Dossiers",
+      "colRegistered": "Registered",
+      "colActions": "Actions",
+      "company": "Company",
+      "tourism": "Tourism",
+      "pageXofY": "Page {current} of {total}",
+      "totalUsers": "{total} users in total",
+      "first": "First",
+      "prev": "Previous",
+      "next": "Next",
+      "last": "Last",
+      "detailsTitle": "User details",
+      "fullName": "Full name",
+      "phone": "Phone",
+      "email": "Email",
+      "registeredAt": "Registered at",
+      "companyDossiers": "Company creation dossiers",
+      "tourismDossiers": "Tourism regularization dossiers",
+      "stepStatus": "Step {step}/5 • {status}",
+      "detailsError": "Error loading details",
+      "editTitle": "Edit user",
+      "namePh": "User name",
+      "emailPh": "email@example.com",
+      "phonePh": "+212 6XX XXX XXX",
+      "cancel": "Cancel",
+      "update": "Update",
+      "updating": "Updating...",
+      "deleteTitle": "Delete user",
+      "deleteConfirm": "Are you sure you want to delete user {name}? This action is irreversible.",
+      "delete": "Delete",
+      "deleting": "Deleting...",
+      "createTitle": "Create a user",
+      "nameReq": "Full name *",
+      "emailReq": "Email *",
+      "passwordReq": "Password *",
+      "passwordPh": "Password",
+      "creating": "Creating...",
+      "create": "Create"
+    }
+    ,
+    "dossiers": {
+      "loading": "Loading dossiers...",
+      "filters": {
+        "typeLabel": "Dossier type",
+        "typeAll": "All dossiers",
+        "typeCompany": "LLC creation",
+        "typeTourism": "Tourist accommodation",
+        "statusLabel": "Status",
+        "statusAll": "All statuses",
+        "statusPending": "Pending",
+        "statusPaid": "Paid",
+        "statusInProgress": "In progress",
+        "statusCompleted": "Completed",
+        "statusCancelled": "Cancelled",
+        "apply": "Apply"
+      },
+      "stats": {
+        "total": "Total dossiers",
+        "completed": "Completed",
+        "inProgress": "In progress"
+      },
+      "table": {
+        "title": "Dossiers list",
+        "user": "User",
+        "type": "Type",
+        "status": "Status",
+        "amount": "Amount",
+        "files": "Files",
+        "date": "Date",
+        "actions": "Actions",
+        "typeCompany": "LLC creation",
+        "typeTourism": "Tourist accommodation",
+        "statusDraft": "Draft",
+        "statusPaid": "Paid",
+        "statusCompleted": "Completed"
+      },
+      "pagination": {
+        "pageOf": "Page {current} of {total}",
+        "total": "{count} dossiers in total",
+        "first": "First",
+        "prev": "Previous",
+        "next": "Next",
+        "last": "Last"
+      },
+      "filesModal": {
+        "title": "Dossier files - {name}",
+        "count": "{count} file(s) available",
+        "uploadedBy": "Documents uploaded by {name}",
+        "pdf": "Dossier PDF",
+        "all": "All files",
+        "none": "No files uploaded for this dossier",
+        "close": "Close",
+        "fileMeta": "{type} • {size} • {date}",
+        "download": "Download"
+      },
+      "toasts": {
+        "pdfGenerating": "Generating PDF...",
+        "pdfSuccess": "PDF downloaded successfully!",
+        "pdfError": "Error generating PDF",
+        "filesDownloading": "Downloading files...",
+        "filesSuccess": "{count} file(s) downloaded!",
+        "filesError": "Error downloading files"
+      },
+      "tooltips": {
+        "viewFiles": "View files",
+        "downloadPdf": "Download dossier PDF",
+        "downloadAll": "Download all files"
+      }
     }
   }
   ,
@@ -263,6 +380,28 @@
     },
     "services": {
       "cta": "Start now"
+    },
+    "stats": {
+      "title": "My Dossiers",
+      "subtitle": "Manage all your legal dossiers in one place",
+      "total": "Total",
+      "completed": "Completed",
+      "inProgress": "In progress",
+      "newCompany": "New company",
+      "newTourism": "New accommodation"
+    }
+  }
+  ,
+  "DashboardComponents": {
+    "Layout": {
+      "loading": "Loading..."
+    },
+    "DossiersSection": {
+      "loading": "Loading your dossiers...",
+      "emptyTitle": "No dossier created",
+      "emptySubtitle": "Start by creating your first dossier. You can create as many as needed for different companies or activities.",
+      "ctaCompany": "Create a company",
+      "ctaTourism": "Regularize an activity"
     }
   }
   ,
@@ -361,6 +500,17 @@
       "admin": "Administrator",
       "fallbackEmail": "admin@formalitys.ma"
     },
+    "Login": {
+      "title": "Administration",
+      "subtitle": "Secure administrator access",
+      "emailOrPhonePlaceholder": "admin@formalitys.ma or +212...",
+      "forgot": "Forgot password?",
+      "loading": "Signing in...",
+      "cta": "Access administration",
+      "onlyAdmins": "Access restricted to authorized administrators",
+      "errorLogin": "Login error",
+      "adminRequired": "Administrator access required"
+    },
     "blog": {
       "newTitle": "Create a new blog post",
       "back": "Back",
@@ -380,6 +530,102 @@
       "backToPosts": "Back to posts",
       "update": "Update",
       "updating": "Updating..."
+    },
+    "Dashboard": {
+      "loadingStats": "Loading statistics...",
+      "loadingDashboard": "Loading dashboard...",
+      "quickActions": {
+        "title": "Quick actions",
+        "newCompany": "New company dossier",
+        "newTourism": "New tourism dossier",
+        "newBlog": "New blog post",
+        "newAdmin": "Create administrator",
+        "directAccess": "Direct access"
+      },
+      "stats": {
+        "users": "Users",
+        "usersDesc": "Total accounts created",
+        "dossiers": "Dossiers",
+        "dossiersDesc": "All types combined",
+        "company": "Companies",
+        "companyDesc": "Company creations",
+        "tourism": "Tourism",
+        "tourismDesc": "Tourism regularizations"
+      }
+    },
+    "BlogList": {
+      "loading": "Loading posts...",
+      "errorLoading": "Error loading posts",
+      "newPost": "New post",
+      "emptyTitle": "No posts yet",
+      "emptySubtitle": "Start by creating your first blog post.",
+      "createPost": "Create a post",
+      "published": "Published",
+      "draft": "Draft",
+      "byAuthor": "by {author}",
+      "edit": "Edit",
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this post?",
+      "errorDelete": "Error while deleting the post",
+      "errorUpdate": "Error while updating"
+    },
+    "Admins": {
+      "loading": "Loading administrators...",
+      "listTitle": "Administrators list",
+      "newAdmin": "New Administrator",
+      "table": {
+        "admin": "Administrator",
+        "contact": "Contact",
+        "role": "Role",
+        "created": "Created",
+        "actions": "Actions"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "create": {
+        "title": "Create an administrator",
+        "nameReq": "Full name *",
+        "namePh": "Administrator full name",
+        "emailReq": "Email *",
+        "phone": "Phone",
+        "passwordReq": "Password *",
+        "passwordPh": "Secure password",
+        "cancel": "Cancel",
+        "creating": "Creating...",
+        "create": "Create"
+      },
+      "edit": {
+        "title": "Edit administrator",
+        "name": "Full name",
+        "namePh": "Administrator full name",
+        "email": "Email",
+        "phone": "Phone",
+        "cancel": "Cancel",
+        "updating": "Updating...",
+        "update": "Update"
+      },
+      "delete": {
+        "title": "Delete administrator",
+        "warningTitle": "Warning",
+        "warningBody": "This action is irreversible. The administrator will be permanently deleted. You cannot delete the last administrator of the system.",
+        "cancel": "Cancel",
+        "deleting": "Deleting...",
+        "delete": "Delete"
+      },
+      "toasts": {
+        "created": "Administrator created successfully!",
+        "updated": "Administrator updated successfully!",
+        "deleted": "Administrator deleted successfully!"
+      },
+      "errors": {
+        "create": "Error creating administrator",
+        "update": "Error while updating",
+        "delete": "Error while deleting"
+      }
     }
   }
   ,
@@ -415,6 +661,37 @@
       "loading": "Creating...",
       "haveAccount": "Already have an account?",
       "login": "Sign in"
+    },
+    "Forgot": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email to reset your password",
+      "backToLogin": "← Back to login",
+      "sending": "Sending...",
+      "sendLink": "Send reset link",
+      "remember": "Remember your password?",
+      "errors": {
+        "emailNotFound": "Email not found"
+      }
+    },
+    "Reset": {
+      "verifying": "Verifying token...",
+      "successTitle": "Password reset",
+      "successBody": "Your password has been reset successfully. You can now sign in.",
+      "backToLogin": "Sign in",
+      "title": "New password",
+      "forEmail": "For {email}",
+      "enterNewPassword": "Enter your new password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "resetting": "Resetting...",
+      "resetPassword": "Reset password",
+      "remember": "Remember your password?",
+      "errors": {
+        "emailMissing": "Missing email",
+        "passwordsMismatch": "Passwords do not match",
+        "passwordMin": "Password must be at least 6 characters",
+        "errorReset": "Error during reset"
+      }
     }
   }
 }

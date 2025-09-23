@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AdminLayout } from './components/AdminLayout';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -19,6 +20,8 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [showCreateAdmin, setShowCreateAdmin] = useState(false);
+  const t = useTranslations('Admin.Dashboard');
+  const tAdmins = useTranslations('Admin.Admins');
   const [adminForm, setAdminForm] = useState({
     name: '',
     email: '',
@@ -68,7 +71,7 @@ export default function AdminDashboard() {
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.message || 'Erreur lors de la création de l\'administrateur');
+        throw new Error(error.message || tAdmins('errors.create'));
       }
 
       // Reset form and close modal
@@ -76,10 +79,10 @@ export default function AdminDashboard() {
       setShowCreateAdmin(false);
       
       // Show success message (you could add a toast notification here)
-      alert('Administrateur créé avec succès!');
+      alert(tAdmins('toasts.created'));
     } catch (err) {
       console.error('Error creating admin:', err);
-      alert(err instanceof Error ? err.message : 'Erreur lors de la création de l\'administrateur');
+      alert(err instanceof Error ? err.message : tAdmins('errors.create'));
     } finally {
       setCreatingAdmin(false);
     }
@@ -91,7 +94,7 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-center h-64">
         <div className="text-center">
             <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement des statistiques...</p>
+            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loadingStats')}</p>
         </div>
       </div>
       </AdminLayout>
@@ -108,7 +111,7 @@ export default function AdminDashboard() {
     color: string;
   }> = [
     {
-      name: 'Nouveau dossier société',
+      name: t('quickActions.newCompany'),
       href: '/dossiers/company',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +121,7 @@ export default function AdminDashboard() {
       color: 'from-[#F66B4C] to-[#e55a43]'
     },
     {
-      name: 'Nouveau dossier tourisme',
+      name: t('quickActions.newTourism'),
       href: '/dossiers/tourism',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,7 +131,7 @@ export default function AdminDashboard() {
       color: 'from-[#F66B4C] to-[#e55a43]'
     },
     {
-      name: 'Nouvel article blog',
+      name: t('quickActions.newBlog'),
       href: '/admin/blog/new',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +141,7 @@ export default function AdminDashboard() {
       color: 'from-[#F66B4C] to-[#e55a43]'
     },
     {
-      name: 'Créer administrateur',
+      name: t('quickActions.newAdmin'),
       onClick: () => setShowCreateAdmin(true),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +163,7 @@ export default function AdminDashboard() {
               className="text-2xl font-bold text-[#071B1E] mb-6"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Actions rapides
+              {t('quickActions.title')}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {quickActions.map((action) => (
@@ -183,7 +186,7 @@ export default function AdminDashboard() {
                     className="text-gray-600 text-sm"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Accès direct
+                    {t('quickActions.directAccess')}
                   </p>
                 </Link>
             ) : (
@@ -205,7 +208,7 @@ export default function AdminDashboard() {
                   className="text-gray-600 text-sm"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Accès direct
+                  {t('quickActions.directAccess')}
                 </p>
               </button>
             )
@@ -228,12 +231,12 @@ export default function AdminDashboard() {
                     {stats.totalUsers}
                   </div>
                   <div className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                    Utilisateurs
+                    {t('stats.users')}
                   </div>
                 </div>
               </div>
               <div className="text-sm text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Total des comptes créés
+                {t('stats.usersDesc')}
               </div>
             </div>
 
@@ -250,12 +253,12 @@ export default function AdminDashboard() {
                     {stats.totalDossiers}
                   </div>
                   <div className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                    Dossiers
+                    {t('stats.dossiers')}
                   </div>
                 </div>
               </div>
               <div className="text-sm text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Tous types confondus
+                {t('stats.dossiersDesc')}
               </div>
             </div>
 
@@ -272,12 +275,12 @@ export default function AdminDashboard() {
                     {stats.totalCompanyDossiers}
                   </div>
                   <div className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                    Sociétés
+                    {t('stats.company')}
                   </div>
                 </div>
               </div>
               <div className="text-sm text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Créations de sociétés
+                {t('stats.companyDesc')}
               </div>
             </div>
 
@@ -294,12 +297,12 @@ export default function AdminDashboard() {
                     {stats.totalTourismDossiers}
                   </div>
                   <div className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                    Tourisme
+                    {t('stats.tourism')}
                   </div>
                 </div>
               </div>
               <div className="text-sm text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Régularisations touristiques
+                {t('stats.tourismDesc')}
               </div>
             </div>
           </div>
@@ -316,7 +319,7 @@ export default function AdminDashboard() {
                 className="text-2xl font-bold text-[#071B1E]"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
-                  Créer un administrateur
+                  {tAdmins('create.title')}
               </h3>
                 <button
                   onClick={() => setShowCreateAdmin(false)}
@@ -335,7 +338,7 @@ export default function AdminDashboard() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                  Nom complet *
+                  {tAdmins('create.nameReq')}
                 </label>
                 <input
                   type="text"
@@ -343,7 +346,7 @@ export default function AdminDashboard() {
                   value={adminForm.name}
                   onChange={(e) => setAdminForm({ ...adminForm, name: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="Nom de l'administrateur"
+                  placeholder={tAdmins('create.namePh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
             </div>
@@ -353,7 +356,7 @@ export default function AdminDashboard() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Email *
+                  {tAdmins('create.emailReq')}
                 </label>
                 <input
                   type="email"
@@ -371,7 +374,7 @@ export default function AdminDashboard() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                  Téléphone
+                  {tAdmins('create.phone')}
                 </label>
                 <input
                   type="tel"
@@ -388,7 +391,7 @@ export default function AdminDashboard() {
                   className="block text-sm font-medium text-[#071B1E] mb-2"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                  Mot de passe *
+                  {tAdmins('create.passwordReq')}
                 </label>
                 <input
                   type="password"
@@ -396,7 +399,7 @@ export default function AdminDashboard() {
                   value={adminForm.password}
                   onChange={(e) => setAdminForm({ ...adminForm, password: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent"
-                  placeholder="Mot de passe sécurisé"
+                  placeholder={tAdmins('create.passwordPh')}
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 />
                   </div>
@@ -408,7 +411,7 @@ export default function AdminDashboard() {
                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-colors"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Annuler
+                  {tAdmins('create.cancel')}
                 </button>
                 <button
                   type="submit"
@@ -416,7 +419,7 @@ export default function AdminDashboard() {
                   className="flex-1 px-6 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  {creatingAdmin ? 'Création...' : 'Créer'}
+                  {creatingAdmin ? tAdmins('create.creating') : tAdmins('create.create')}
                 </button>
                 </div>
             </form>

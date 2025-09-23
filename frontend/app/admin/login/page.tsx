@@ -2,11 +2,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const t = useTranslations('Admin.Login');
+  const tAuthCommon = useTranslations('Auth.common');
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +28,7 @@ export default function AdminLoginPage() {
       });
       
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Erreur de connexion');
+      if (!res.ok) throw new Error(data.message || t('errorLogin'));
       
       // Check if user is admin
       const profileRes = await fetch(`${API}/auth/profile`, {
@@ -34,7 +37,7 @@ export default function AdminLoginPage() {
       const profile = await profileRes.json();
       
       if (profile.role !== 'ADMIN') {
-        throw new Error('Accès administrateur requis');
+        throw new Error(t('adminRequired'));
       }
       
       localStorage.setItem('adminToken', data.token);
@@ -68,7 +71,7 @@ export default function AdminLoginPage() {
             className="text-white/80 hover:text-white transition-colors"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            ← Retour au site
+            {tAuthCommon('backHome')}
           </Link>
         </div>
       </nav>
@@ -93,13 +96,13 @@ export default function AdminLoginPage() {
                   className="text-3xl font-bold text-[#071B1E] mb-2"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
-                  Administration
+                  {t('title')}
                 </h1>
                 <p 
                   className="text-gray-600"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Accès administrateur sécurisé
+                  {t('subtitle')}
                 </p>
               </div>
 
@@ -110,11 +113,11 @@ export default function AdminLoginPage() {
                     className="block text-sm font-medium text-gray-700 mb-2"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
-                    Email ou téléphone
+                    {tAuthCommon('emailOrPhone')}
                   </label>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="admin@syndic.ma"
+                  placeholder={t('emailOrPhonePlaceholder')}
                     value={emailOrPhone} 
                     onChange={e => setEmailOrPhone(e.target.value)}
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
@@ -128,19 +131,19 @@ export default function AdminLoginPage() {
                       className="block text-sm font-medium text-gray-700"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Mot de passe
+                      {tAuthCommon('password')}
                     </label>
                     <Link 
                       href="/forgot-password"
                       className="text-sm text-[#F66B4C] hover:text-[#e55a43] transition-colors"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Mot de passe oublié ?
+                      {t('forgot')}
                     </Link>
                   </div>
                   <input 
                     className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    placeholder="••••••••"
+                  placeholder={tAuthCommon('passwordPlaceholder')}
                     type="password" 
                     value={password} 
                     onChange={e => setPassword(e.target.value)}
@@ -165,10 +168,10 @@ export default function AdminLoginPage() {
                   {loading ? (
                     <div className="flex items-center justify-center">
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      Connexion...
+                      {t('loading')}
                     </div>
                   ) : (
-                    'Accéder à l\'administration'
+                    t('cta')
                   )}
                 </button>
               </form>
@@ -179,7 +182,7 @@ export default function AdminLoginPage() {
                   className="text-gray-600 text-sm"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Accès réservé aux administrateurs autorisés
+                  {t('onlyAdmins')}
                 </p>
               </div>
             </div>

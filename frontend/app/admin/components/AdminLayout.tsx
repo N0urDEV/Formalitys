@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { AdminSidebar } from './AdminSidebar';
 import { AdminTopBar } from './AdminTopBar';
+import { useTranslations } from 'next-intl';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const t = useTranslations('Admin.Dashboard');
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
@@ -28,7 +30,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-6"></div>
-          <p className="text-[#071B1E] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement du tableau de bord...</p>
+          <p className="text-[#071B1E] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loadingDashboard')}</p>
         </div>
       </div>
     );

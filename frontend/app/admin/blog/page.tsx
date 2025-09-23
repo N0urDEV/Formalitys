@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AdminLayout } from '../components/AdminLayout';
+import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
@@ -30,6 +31,7 @@ export default function AdminBlogPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const t = useTranslations('Admin.BlogList');
 
   useEffect(() => {
     fetchBlogPosts();
@@ -50,21 +52,21 @@ export default function AdminBlogPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Erreur lors du chargement des articles');
+        throw new Error(t('errorLoading'));
       }
 
       const data = await response.json();
       setBlogPosts(data);
     } catch (error) {
       console.error('Error fetching blog posts:', error);
-      setError(error instanceof Error ? error.message : 'Une erreur est survenue');
+      setError(error instanceof Error ? error.message : t('errorLoading'));
     } finally {
       setLoading(false);
     }
   };
 
   const deleteBlogPost = async (id: number) => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+    if (!confirm(t('confirmDelete'))) {
       return;
     }
 
@@ -78,13 +80,13 @@ export default function AdminBlogPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Erreur lors de la suppression');
+        throw new Error(t('errorDelete'));
       }
 
       setBlogPosts(blogPosts.filter(post => post.id !== id));
     } catch (error) {
       console.error('Error deleting blog post:', error);
-      alert('Erreur lors de la suppression de l\'article');
+      alert(t('errorDelete'));
     }
   };
 
@@ -101,7 +103,7 @@ export default function AdminBlogPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Erreur lors de la mise à jour');
+        throw new Error(t('errorUpdate'));
       }
 
       const updatedPost = await response.json();
@@ -110,7 +112,7 @@ export default function AdminBlogPage() {
       ));
     } catch (error) {
       console.error('Error updating blog post:', error);
-      alert('Erreur lors de la mise à jour de l\'article');
+      alert(t('errorUpdate'));
     }
   };
 
@@ -130,7 +132,7 @@ export default function AdminBlogPage() {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>Chargement des articles...</p>
+            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -156,7 +158,7 @@ export default function AdminBlogPage() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            <span>Nouvel article</span>
+            <span>{t('newPost')}</span>
           </Link>
         </div>
         {error && (
@@ -183,13 +185,13 @@ export default function AdminBlogPage() {
               className="text-2xl font-bold text-[#071B1E] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Aucun article pour le moment
+              {t('emptyTitle')}
             </h3>
             <p 
               className="text-gray-600 mb-8"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Commencez par créer votre premier article de blog.
+              {t('emptySubtitle')}
             </p>
             <Link
               href="/admin/blog/new"
@@ -199,7 +201,7 @@ export default function AdminBlogPage() {
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
-              Créer un article
+              {t('createPost')}
             </Link>
           </div>
         ) : (
@@ -225,7 +227,7 @@ export default function AdminBlogPage() {
                         }`}
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
-                        {post.published ? 'Publié' : 'Brouillon'}
+                        {post.published ? t('published') : t('draft')}
                       </span>
                     </div>
                   </div>
@@ -253,7 +255,7 @@ export default function AdminBlogPage() {
                       {formatDate(post.createdAt)}
                     </span>
                     <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                      par {post.author.name || post.author.email}
+                      {t('byAuthor', { author: post.author.name || post.author.email })}
                     </span>
                   </div>
                   
@@ -263,7 +265,7 @@ export default function AdminBlogPage() {
                       className="flex-1 bg-[#062A2F] text-white px-4 py-2 rounded-xl font-semibold hover:bg-[#071B1E] transition-colors text-center"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Modifier
+                      {t('edit')}
                     </Link>
                     
                     <button
@@ -275,7 +277,7 @@ export default function AdminBlogPage() {
                       }`}
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      {post.published ? 'Dépublier' : 'Publier'}
+                      {post.published ? t('unpublish') : t('publish')}
                     </button>
                     
                     <button
@@ -283,7 +285,7 @@ export default function AdminBlogPage() {
                       className="bg-red-100 text-red-800 px-4 py-2 rounded-xl font-semibold hover:bg-red-200 transition-colors"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Supprimer
+                      {t('delete')}
                     </button>
                   </div>
                 </div>
