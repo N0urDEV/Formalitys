@@ -4,7 +4,12 @@ import { Dossier, User, DashboardStats, UserDiscountStatus } from '../types';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
-export const useDashboard = () => {
+interface UseDashboardProps {
+  t?: (key: string) => string;
+}
+
+export const useDashboard = (props?: UseDashboardProps) => {
+  const { t } = props || {};
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [dossiers, setDossiers] = useState<Dossier[]>([]);
@@ -114,7 +119,7 @@ export const useDashboard = () => {
   };
 
   const deleteDossier = async (dossierId: number, type: 'company' | 'tourism') => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer ce dossier ? Cette action est irréversible.')) {
+    if (!confirm(t?.('deleteConfirm') || 'Êtes-vous sûr de vouloir supprimer ce dossier ? Cette action est irréversible.')) {
       return;
     }
 
@@ -154,7 +159,7 @@ export const useDashboard = () => {
       // Find the dossier in the current list
       const dossier = dossiers.find(d => d.id === dossierId && d.type === type);
       if (!dossier) {
-        throw new Error('Dossier non trouvé');
+        throw new Error(t?.('dossierNotFound') || 'Dossier non trouvé');
       }
 
       // Get user data
@@ -221,7 +226,7 @@ export const useDashboard = () => {
       }
     } catch (error) {
       console.error('Error downloading PDF:', error);
-      alert('Erreur lors du téléchargement du PDF');
+      alert(t?.('pdfDownloadError') || 'Erreur lors du téléchargement du PDF');
     }
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Service } from '../types';
 import { useTranslations } from 'next-intl';
+import { Service } from '../types';
 
 interface ServiceCardProps {
   service: Service;
@@ -56,7 +56,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
                   <div className={`text-sm font-semibold ${
                     isWhiteBackground ? 'text-green-600' : 'text-green-300'
                   }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                    -{service.discountPercentage}% de réduction
+                    -{service.discountPercentage}% {t('ServiceCard.discount')}
                   </div>
                 </div>
               ) : (

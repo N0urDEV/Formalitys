@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { UserDiscountStatus } from '../types';
 
 interface DiscountStatusProps {
@@ -6,6 +7,7 @@ interface DiscountStatusProps {
 }
 
 export const DiscountStatus: React.FC<DiscountStatusProps> = ({ discountStatus }) => {
+  const t = useTranslations('Dashboard.DiscountStatus');
   const { completedDossiers, currentTier, nextTier, dossiersToNextTier, availableDiscounts } = discountStatus;
   
   // Only show if there are tourism discounts available
@@ -27,7 +29,7 @@ export const DiscountStatus: React.FC<DiscountStatusProps> = ({ discountStatus }
               className="text-xl font-bold"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
-              Programme de fidélité
+{t('loyaltyProgram')}
             </h3>
             <p 
               className="text-white/90"
@@ -43,7 +45,7 @@ export const DiscountStatus: React.FC<DiscountStatusProps> = ({ discountStatus }
             {completedDossiers}
           </div>
           <div className="text-white/80 text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-            Dossiers terminés
+{t('completedDossiers')}
           </div>
         </div>
       </div>
@@ -56,7 +58,7 @@ export const DiscountStatus: React.FC<DiscountStatusProps> = ({ discountStatus }
                 className="text-sm text-white/90"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Prochain niveau: {nextTier.description}
+{t('nextLevel')}: {nextTier.description}
               </p>
             </div>
             <div className="flex items-center space-x-2">
@@ -70,7 +72,7 @@ export const DiscountStatus: React.FC<DiscountStatusProps> = ({ discountStatus }
                 className="text-sm font-semibold"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                {dossiersToNextTier} de plus
+{t('moreNeeded', { count: dossiersToNextTier })}
               </span>
             </div>
           </div>

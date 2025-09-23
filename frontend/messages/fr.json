@@ -389,7 +389,36 @@
       "inProgress": "En cours",
       "newCompany": "Nouvelle société",
       "newTourism": "Nouvel hébergement"
-    }
+    },
+    "Navigation": {
+      "logout": "Déconnexion"
+    },
+    "DossierCard": {
+      "statusCompleted": "Terminé",
+      "statusPaid": "Payé",
+      "statusDraft": "Brouillon",
+      "typeCompany": "Création société",
+      "typeTourism": "Régularisation touristique",
+      "progress": "Progression",
+      "companyName": "Nom de la société",
+      "owner": "Propriétaire",
+      "createdOn": "Créé le",
+      "amountPaid": "Montant payé",
+      "downloadPdf": "Télécharger PDF",
+      "continue": "Continuer"
+    },
+    "ServiceCard": {
+      "discount": "de réduction"
+    },
+    "DiscountStatus": {
+      "loyaltyProgram": "Programme de fidélité",
+      "completedDossiers": "Dossiers terminés",
+      "nextLevel": "Prochain niveau",
+      "moreNeeded": "{count} de plus"
+    },
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce dossier ? Cette action est irréversible.",
+    "dossierNotFound": "Dossier non trouvé",
+    "pdfDownloadError": "Erreur lors du téléchargement du PDF"
   }
   ,
   "Payment": {

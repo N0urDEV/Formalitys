@@ -27,7 +27,7 @@ interface UsersResponse {
 
 export default function AdminUsers() {
   const router = useRouter();
-  const t = useTranslations('Admin.users');
+  const t = useTranslations('Home.users');
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

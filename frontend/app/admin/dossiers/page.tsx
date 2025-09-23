@@ -86,7 +86,7 @@ interface DossiersResponse {
 
 export default function AdminDossiersPage() {
   const router = useRouter();
-  const t = useTranslations('Admin.dossiers');
+  const t = useTranslations('Home.dossiers');
   const [dossiers, setDossiers] = useState<Dossier[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

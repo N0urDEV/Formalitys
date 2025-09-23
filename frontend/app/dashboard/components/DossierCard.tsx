@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Dossier } from '../types';
 
 interface DossierCardProps {
@@ -10,17 +11,18 @@ interface DossierCardProps {
 
 export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onDownloadPdf }) => {
   const router = useRouter();
+  const t = useTranslations('Dashboard.DossierCard');
 
   const getStatusInfo = (status: string) => {
     console.log('DossierCard - Status received:', status, 'for dossier:', dossier.id);
     switch (status) {
       case 'COMPLETED':
-        return { text: 'Terminé', class: 'bg-green-100 text-green-800' };
+        return { text: t('statusCompleted'), class: 'bg-green-100 text-green-800' };
       case 'PAID':
-        return { text: 'Payé', class: 'bg-blue-100 text-blue-800' };
+        return { text: t('statusPaid'), class: 'bg-blue-100 text-blue-800' };
       case 'DRAFT':
       default:
-        return { text: 'Brouillon', class: 'bg-gray-100 text-gray-800' };
+        return { text: t('statusDraft'), class: 'bg-gray-100 text-gray-800' };
     }
   };
 
@@ -67,7 +69,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                 className="font-bold text-[#071B1E] text-lg"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                {dossier.type === 'company' ? 'Création société' : 'Régularisation touristique'}
+                {dossier.type === 'company' ? t('typeCompany') : t('typeTourism')}
               </h3>
               <p 
                 className="text-sm text-gray-500"
@@ -89,7 +91,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
               className="text-sm font-medium text-gray-600"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Progression
+              {t('progress')}
             </span>
             <span 
               className="text-sm font-medium text-[#F66B4C]"
@@ -114,7 +116,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                 className="text-xs text-gray-500 mb-1"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Nom de la société
+                {t('companyName')}
               </p>
               <p 
                 className="font-semibold text-[#071B1E]"
@@ -131,7 +133,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                 className="text-xs text-gray-500 mb-1"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Propriétaire
+                {t('owner')}
               </p>
               <p 
                 className="font-semibold text-[#071B1E]"
@@ -148,7 +150,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                 className="text-xs text-gray-500"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Créé le
+                {t('createdOn')}
               </p>
               <p 
                 className="font-medium text-[#071B1E]"
@@ -164,7 +166,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                   className="text-xs text-gray-500"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
-                  Montant payé
+                  {t('amountPaid')}
                 </p>
                 <p 
                   className="font-bold text-[#F66B4C]"
@@ -188,7 +190,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <span>Télécharger PDF</span>
+              <span>{t('downloadPdf')}</span>
             </button>
           ) : (
             <button
@@ -199,7 +201,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
-              <span>Continuer</span>
+              <span>{t('continue')}</span>
             </button>
           )}
           

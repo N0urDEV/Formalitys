@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { useDashboard } from './hooks/useDashboard';
 import { DashboardLayout } from './components/DashboardLayout';
 import { DashboardNavigation } from './components/DashboardNavigation';
@@ -9,6 +10,7 @@ import { DossiersSection } from './components/DossiersSection';
 import { DiscountStatus } from './components/DiscountStatus';
 
 export default function DashboardPage() {
+  const t = useTranslations('Dashboard');
   const {
     user,
     dossiers,
@@ -22,7 +24,7 @@ export default function DashboardPage() {
     getStats,
     discountStatus,
     downloadPdf,
-  } = useDashboard();
+  } = useDashboard({ t });
 
   // Refresh dossiers when user returns to dashboard (e.g., after payment)
   useEffect(() => {

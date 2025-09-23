@@ -389,7 +389,36 @@
       "inProgress": "In progress",
       "newCompany": "New company",
       "newTourism": "New accommodation"
-    }
+    },
+    "Navigation": {
+      "logout": "Sign out"
+    },
+    "DossierCard": {
+      "statusCompleted": "Completed",
+      "statusPaid": "Paid",
+      "statusDraft": "Draft",
+      "typeCompany": "Company creation",
+      "typeTourism": "Tourism regularization",
+      "progress": "Progress",
+      "companyName": "Company name",
+      "owner": "Owner",
+      "createdOn": "Created on",
+      "amountPaid": "Amount paid",
+      "downloadPdf": "Download PDF",
+      "continue": "Continue"
+    },
+    "ServiceCard": {
+      "discount": "discount"
+    },
+    "DiscountStatus": {
+      "loyaltyProgram": "Loyalty program",
+      "completedDossiers": "Completed dossiers",
+      "nextLevel": "Next level",
+      "moreNeeded": "{count} more needed"
+    },
+    "deleteConfirm": "Are you sure you want to delete this dossier? This action is irreversible.",
+    "dossierNotFound": "Dossier not found",
+    "pdfDownloadError": "Error downloading PDF"
   }
   ,
   "DashboardComponents": {
