@@ -168,7 +168,7 @@ export default function BlogPostPage() {
           {blogPost.excerpt && (
             <div className="mb-8 p-6 bg-gradient-to-r from-[#F66B4C]/10 to-[#e55a43]/10 rounded-2xl border-l-4 border-[#F66B4C]">
               <p 
-                className="text-lg text-gray-700 italic"
+                className="text-lg text-[#071B1E]/70 italic"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {blogPost.excerpt}
@@ -177,7 +177,7 @@ export default function BlogPostPage() {
           )}
           
           <div 
-            className="prose prose-lg max-w-none"
+            className="prose prose-lg max-w-none text-[#071B1E]"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
             dangerouslySetInnerHTML={{ __html: blogPost.content }}
           />
@@ -212,7 +212,7 @@ export default function BlogPostPage() {
               className="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-[#F66B4C] transition-all duration-300"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Régularisation touristique
+              Formalités location riads
             </Link>
           </div>
         </div>

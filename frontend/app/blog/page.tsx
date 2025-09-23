@@ -239,7 +239,7 @@ export default function BlogPage() {
               className="border-2 border-[#F66B4C] text-[#F66B4C] px-8 py-3 rounded-xl font-semibold hover:bg-[#F66B4C] hover:text-white transition-colors"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Formalités touristiques
+              Formalités location riads
             </Link>
           </div>
         </div>

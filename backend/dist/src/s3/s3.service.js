@@ -59,20 +59,11 @@ let S3Service = class S3Service {
         await this.s3Client.send(command);
     }
     async getSignedUrl(key, expiresIn = 3600) {
-        console.log('S3Service: Generating signed URL for key:', key, 'bucket:', this.bucketName);
         const command = new client_s3_1.GetObjectCommand({
             Bucket: this.bucketName,
             Key: key,
         });
-        try {
-            const signedUrl = await (0, s3_request_presigner_1.getSignedUrl)(this.s3Client, command, { expiresIn });
-            console.log('S3Service: Generated signed URL:', signedUrl);
-            return signedUrl;
-        }
-        catch (error) {
-            console.error('S3Service: Error generating signed URL:', error);
-            throw error;
-        }
+        return await (0, s3_request_presigner_1.getSignedUrl)(this.s3Client, command, { expiresIn });
     }
     generateKey(userName, documentType, originalName) {
         const timestamp = Date.now();

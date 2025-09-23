@@ -153,24 +153,18 @@ let BlogService = class BlogService {
     async convertS3UrlToSignedUrl(url) {
         if (!url)
             return null;
-        console.log('Converting S3 URL to signed URL:', url);
         const s3Endpoint = process.env.S3_ENDPOINT;
         const bucketName = process.env.S3_BUCKET_NAME || 'formalitys-uploads';
-        console.log('S3 Config:', { s3Endpoint, bucketName });
         if (url.includes(`${s3Endpoint}/${bucketName}/`)) {
             const key = url.replace(`${s3Endpoint}/${bucketName}/`, '');
-            console.log('Extracted S3 key:', key);
             try {
-                const signedUrl = await this.s3Service.getSignedUrl(key, 3600);
-                console.log('Generated signed URL:', signedUrl);
-                return signedUrl;
+                return await this.s3Service.getSignedUrl(key, 3600);
             }
             catch (error) {
                 console.error('Error generating signed URL:', error);
                 return url;
             }
         }
-        console.log('URL is not an S3 URL, returning original');
         return url;
     }
     async processBlogPost(blogPost) {
