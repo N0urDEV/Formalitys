@@ -118,7 +118,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
                       className="text-sm text-gray-600 mt-1"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Utiliser l'adresse de domicile d'un des associés
+                      Domicile du gérant
                     </div>
                   )}
                   {option.value === 'contrat_domiciliation' && (
