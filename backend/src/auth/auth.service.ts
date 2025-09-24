@@ -24,13 +24,7 @@ export class AuthService {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await this.prisma.user.create({ data: { name, email, phone, passwordHash } });
 
-    // Send welcome email
-    try {
-      await this.emailService.sendWelcomeEmail(email, name || 'Utilisateur');
-    } catch (error) {
-      console.error('Failed to send welcome email:', error);
-      // Don't fail registration if email fails
-    }
+    // Welcome email disabled by request
 
     const token = await this.jwt.signAsync({ sub: user.id, email: user.email });
     return { token, user: this.sanitize(user) };

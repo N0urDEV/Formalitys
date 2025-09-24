@@ -24,10 +24,12 @@ export default function LoginPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ emailOrPhone, password }),
       });
-      const data = await res.json();
+      // Avoid hanging on empty bodies
+      const raw = await res.text();
+      const data = raw ? JSON.parse(raw) : {};
       if (!res.ok) throw new Error(data.message || t('common.errorLogin'));
       localStorage.setItem('token', data.token);
-      router.push('/dashboard');
+      router.replace('/dashboard');
     } catch (err: any) {
       setError(err.message);
     } finally {

@@ -67,12 +67,6 @@ let AuthService = class AuthService {
             throw new common_1.BadRequestException('Email or phone already in use');
         const passwordHash = await bcrypt.hash(password, 10);
         const user = await this.prisma.user.create({ data: { name, email, phone, passwordHash } });
-        try {
-            await this.emailService.sendWelcomeEmail(email, name || 'Utilisateur');
-        }
-        catch (error) {
-            console.error('Failed to send welcome email:', error);
-        }
         const token = await this.jwt.signAsync({ sub: user.id, email: user.email });
         return { token, user: this.sanitize(user) };
     }
