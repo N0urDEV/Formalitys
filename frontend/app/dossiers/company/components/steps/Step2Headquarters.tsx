@@ -18,7 +18,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
 }) => {
   const headquartersOptions = [
     { value: 'domicile', label: 'Domicile (gratuit)' },
-    { value: 'contrat_domiciliation', label: 'Contrat de domiciliation (+2100 MAD pour 6 mois)' },
+    { value: 'contrat_domiciliation', label: 'Contrat de domiciliation (+900 MAD pour 6 mois)' },
     { value: 'location_local', label: 'Location d\'un local' }
   ];
 
@@ -209,7 +209,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
                 className="font-medium"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                +{formatPrice(2100)}
+                +{formatPrice(900)}
               </span>
             </div>
           )}

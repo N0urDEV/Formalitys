@@ -154,7 +154,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
       case 'domicile':
         return 'Domicile (gratuit)';
       case 'contrat_domiciliation':
-        return 'Contrat de domiciliation (+2100 MAD)';
+        return 'Contrat de domiciliation (+900 MAD)';
       case 'location_local':
         return 'Location d\'un local';
       default:
@@ -165,7 +165,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
   const calculateTotalPrice = () => {
     let total = 3600; // Base price
     if (dossier.headquarters === 'contrat_domiciliation') {
-      total += 2100;
+      total += 900;
     }
     return total;
   };
@@ -407,7 +407,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
                      {dossier.headquarters === 'contrat_domiciliation' && (
                        <View style={styles.row}>
                          <Text style={styles.label}>Domiciliation (6 mois):</Text>
-                         <Text style={styles.value}>+{formatPrice(2100)}</Text>
+                         <Text style={styles.value}>+{formatPrice(900)}</Text>
                        </View>
                      )}
             </View>

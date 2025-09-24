@@ -40,8 +40,8 @@ export class PaymentsService {
       
       // Add domiciliation fee if selected
       if (companyDossier?.headquarters === 'contrat_domiciliation') {
-        console.log('Adding domiciliation fee: +2100 MAD');
-        baseAmount += 210000; // +2100 MAD for domiciliation
+        console.log('Adding domiciliation fee: +900 MAD');
+        baseAmount += 90000; // +900 MAD for domiciliation
       } else {
         console.log('No domiciliation fee - headquarters:', companyDossier?.headquarters);
       }

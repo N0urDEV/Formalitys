@@ -48,7 +48,7 @@ function CompanyDossierPageContent() {
     
     // Add domiciliation fee if selected
     if (companyData.headquarters === 'contrat_domiciliation') {
-      total += 2100; // +2100 MAD for domiciliation
+      total += 900; // +900 MAD for domiciliation
     }
     
     return total;

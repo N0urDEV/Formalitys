@@ -397,7 +397,7 @@ export const useCompanyDossier = () => {
   const calculateTotalPrice = () => {
     let total = 3600; // Base price
     if (companyData.headquarters === 'contrat_domiciliation') {
-      total += 2100; // Domiciliation fee
+      total += 900; // Domiciliation fee
     }
     return total;
   };
