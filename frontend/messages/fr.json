@@ -446,8 +446,148 @@
       "fallback": "Chargement du dossier...",
       "prev": "Précédent",
       "saving": "Enregistrement...",
-      "next": "Suivant"
-      ,
+      "next": "Suivant",
+      "Form": {
+        "capital": {
+          "option10k": "10 000 MAD",
+          "option100k": "100 000 MAD"
+        },
+        "activities": {
+          "commerce": "Commerce",
+          "services": "Services",
+          "importExport": "Import/Export",
+          "consulting": "Conseil",
+          "it": "Informatique",
+          "construction": "BTP",
+          "transport": "Transport",
+          "restaurant": "Restauration"
+        },
+        "errors": {
+          "fixFollowing": "Veuillez corriger les erreurs suivantes :"
+        },
+        "sections": {
+          "companyDetails": "Détails de la société",
+          "additionalInfo": "Informations complémentaires de la société",
+          "taxInfo": "Informations fiscales et administratives",
+          "files": "Justificatifs requis"
+        },
+        "labels": {
+          "companyName": "Nom de la société",
+          "proposedNames": "3 noms proposés pour validation OMPIC",
+          "proposedNameN": "Nom {n}",
+          "activities": "Activités (max 3)",
+          "capital": "Capital social",
+          "raisonSociale": "Raison sociale",
+          "formeJuridique": "Forme juridique",
+          "nationalite": "Nationalité",
+          "adresseSiege": "Adresse du siège social ou du principal établissement",
+          "villeSiege": "Ville du siège social",
+          "professionActivite": "Profession ou activité principale",
+          "telephone": "Téléphone",
+          "fax": "Fax",
+          "email": "E-mail",
+          "numeroArticleTaxeProfessionnelle": "N° Taxe professionnelle",
+          "numeroArticleTaxeServicesCommunaux": "N° Taxe de Services Communaux",
+          "numeroAffiliationCNSS": "N° affiliation CNSS",
+          "numeroRegistreCommerce": "N° Registre de Commerce",
+          "villeRegistreCommerce": "Ville du registre de commerce",
+          "referenceDepotDeclaration": "Références de dépôt de la déclaration",
+          "dateDepotDeclaration": "Date de dépôt de la déclaration"
+        },
+        "placeholders": {
+          "companyName": "Nom de votre société",
+          "proposedNameN": "Nom {n}",
+          "raisonSociale": "Raison sociale de la société",
+          "nationalite": "Nationalité de la société",
+          "adresseSiege": "Adresse complète du siège social",
+          "villeSiege": "Ville du siège social",
+          "professionActivite": "Activité principale de la société",
+          "telephone": "+212 6 12 34 56 78",
+          "fax": "+212 5 22 33 44 55",
+          "email": "contact@societe.ma",
+          "numeroArticleTaxeProfessionnelle": "Numéro taxe professionnelle",
+          "numeroArticleTaxeServicesCommunaux": "Numéro taxe services communaux",
+          "numeroAffiliationCNSS": "Numéro d'affiliation CNSS",
+          "numeroRegistreCommerce": "Numéro de registre de commerce",
+          "villeRegistreCommerce": "Ville du registre de commerce",
+          "referenceDepotDeclaration": "Référence de dépôt",
+          "formeJuridique": "Sélectionner une forme juridique"
+        },
+        "formeOptions": {
+          "sarl": "SARL (Société à Responsabilité Limitée)",
+          "sa": "SA (Société Anonyme)",
+          "snc": "SNC (Société en Nom Collectif)",
+          "sas": "SAS (Société par Actions Simplifiée)",
+          "eurl": "EURL (Entreprise Unipersonnelle à Responsabilité Limitée)",
+          "auto": "Auto-entrepreneur",
+          "individuelle": "Entreprise individuelle"
+        },
+        "files": {
+          "cniAssocies": "CNI des associés",
+          "manager": "(Gérant)",
+          "uploadCNI": "Téléchargez la CNI de cet associé (PDF uniquement)",
+          "siegeSocial": "Siège social",
+          "justifDomicile": "Justificatif de domicile du gérant",
+          "contratDomiciliation": "Contrat de domiciliation",
+          "contratLocation": "Contrat de location du local",
+          "uploadJustif": "Téléchargez le document justificatif (PDF uniquement)",
+          "justifDomicileAssocies": "Justificatifs de domicile des associés",
+          "uploadJustifDomicile": "Téléchargez le justificatif de domicile (PDF uniquement)",
+          "otherDocs": "Autres documents",
+          "otherDocsDesc": "Statuts, procès-verbaux, autres justificatifs",
+          "uploadOtherDocs": "Téléchargez les autres documents requis (PDF uniquement)"
+        }
+      },
+      "Validation": {
+        "associate": {
+          "lastNameRequired": "Le nom est requis",
+          "lastNameStep": "Associé {index} : Le nom est requis",
+          "firstNameRequired": "Le prénom est requis",
+          "firstNameStep": "Associé {index} : Le prénom est requis",
+          "idNumberRequired": "Le numéro de pièce est requis",
+          "idNumberStep": "Associé {index} : Le numéro de pièce est requis",
+          "addressRequired": "L'adresse est requise",
+          "addressStep": "Associé {index} : L'adresse est requise",
+          "phoneRequired": "Le téléphone est requis",
+          "phoneStep": "Associé {index} : Le téléphone est requis",
+          "phoneInvalid": "Format de téléphone invalide",
+          "phoneInvalidStep": "Associé {index} : Format de téléphone invalide",
+          "emailRequired": "L'email est requis",
+          "emailStep": "Associé {index} : L'email est requis",
+          "emailInvalid": "Format d'email invalide",
+          "emailInvalidStep": "Associé {index} : Format d'email invalide",
+          "managerRequired": "Au moins un associé doit être désigné comme gérant"
+        },
+        "step2": {
+          "selectHeadquarters": "Veuillez sélectionner un type de siège social",
+          "selectBank": "Veuillez sélectionner une banque pour la domiciliation"
+        },
+        "step4": {
+          "companyNameRequired": "Le nom de la société est requis",
+          "activitiesRequired": "Au moins une activité doit être sélectionnée",
+          "proposedNamesRequired": "Trois noms proposés sont requis",
+          "raisonSocialeRequired": "La raison sociale est requise",
+          "formeJuridiqueRequired": "La forme juridique est requise",
+          "nationaliteRequired": "La nationalité est requise",
+          "adresseSiegeRequired": "L'adresse du siège social est requise",
+          "villeSiegeRequired": "La ville du siège social est requise",
+          "professionActiviteRequired": "La profession ou activité principale est requise",
+          "telephoneRequired": "Le téléphone est requis",
+          "telephoneInvalid": "Format de téléphone invalide",
+          "emailRequired": "L'email est requis",
+          "emailInvalid": "Format d'email invalide"
+        },
+        "payment": {
+          "dossierNotFound": "Dossier non trouvé",
+          "required": "Le paiement doit être effectué pour continuer"
+        },
+        "docs": {
+          "cni": "CNI",
+          "justifDomicile": "Justificatif de domicile",
+          "statuts": "Statuts",
+          "required": "{name} est requis"
+        }
+      },
       "Progress": {
         "stepLabel": "Étape {current} sur {total}",
         "titles": {
@@ -481,8 +621,92 @@
       "fallback": "Chargement du dossier...",
       "prev": "Précédent",
       "saving": "Enregistrement...",
-      "next": "Suivant"
-      ,
+      "next": "Suivant",
+      "Form": {
+        "Step2": {
+          "title": "Informations de l'établissement",
+          "subtitle": "Renseignez les informations de votre établissement d'hébergement touristique",
+          "group": {
+            "typeAndCategorie": "Type et catégorie de l'établissement",
+            "generalData": "Données générales"
+          },
+          "type": {
+            "select": "Sélectionnez le type",
+            "hotel": "Hôtel",
+            "hotelClub": "Hôtel club",
+            "residenceTourisme": "Résidence de tourisme",
+            "residenceImmobiliere": "Résidence Immobilière de Promotion Touristique",
+            "maisonHotes": "Maison d'hôtes",
+            "riad": "Riad",
+            "kasbah": "Kasbah",
+            "camping": "Camping",
+            "gite": "Gîte",
+            "pension": "Pension"
+          },
+          "categorie": {
+            "select": "Sélectionnez la catégorie",
+            "luxe": "Luxe",
+            "5": "Cinq étoiles",
+            "4": "Quatre étoiles",
+            "3": "Trois étoiles",
+            "2": "Deux étoiles",
+            "1": "Une étoile",
+            "unique": "Catégorie unique"
+          },
+          "region": {
+            "select": "Sélectionnez la région"
+          },
+          "labels": {
+            "type": "Type d'établissement",
+            "categorie": "Catégorie d'établissement",
+            "enseigne": "Enseigne commerciale",
+            "dateOuverture": "Date d'ouverture prévue",
+            "registreCommerce": "N° de registre de commerce",
+            "ice": "ICE (Identifiant commun de l'entreprise)",
+            "cnss": "N° d'affiliation à la CNSS",
+            "telephone": "Téléphone",
+            "email": "Email",
+            "siteWeb": "Site web (optionnel)",
+            "region": "Région",
+            "province": "Province/Préfecture"
+          },
+          "placeholders": {
+            "enseigne": "Nom commercial de l'établissement",
+            "registreCommerce": "Numéro de registre de commerce",
+            "ice": "ICE de l'entreprise",
+            "cnss": "Numéro CNSS",
+            "telephone": "Téléphone de l'établissement",
+            "email": "Email de l'établissement",
+            "siteWeb": "https://www.exemple.com",
+            "province": "Province ou préfecture"
+          }
+        }
+      },
+      "Validation": {
+        "owner": {
+          "lastNameRequired": "Le nom est requis",
+          "firstNameRequired": "Le prénom est requis",
+          "idNumberRequired": "Le numéro de pièce est requis",
+          "addressRequired": "L'adresse est requise",
+          "phoneRequired": "Le téléphone est requis",
+          "phoneInvalid": "Format de téléphone invalide",
+          "emailRequired": "L'email est requis",
+          "emailInvalid": "Format d'email invalide",
+          "roleRequired": "La qualité est requise"
+        },
+        "establishment": {
+          "typeRequired": "Le type d'établissement est requis",
+          "categorieRequired": "La catégorie d'établissement est requise",
+          "enseigneRequired": "L'enseigne commerciale est requise",
+          "dateRequired": "La date d'ouverture prévue est requise",
+          "phoneRequired": "Le téléphone est requis",
+          "phoneInvalid": "Format de téléphone invalide",
+          "emailRequired": "L'email est requis",
+          "emailInvalid": "Format d'email invalide",
+          "regionRequired": "La région est requise",
+          "provinceRequired": "La province/préfecture est requise"
+        }
+      },
       "Progress": {
         "stepLabel": "Étape {current} sur {total}",
         "titles": {

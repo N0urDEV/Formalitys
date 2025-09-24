@@ -390,7 +390,7 @@ export const useCompanyDossier = () => {
       await PDFService.generateAndDownloadCompanyDossier(userData, dossierData);
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Erreur lors de la génération du PDF');
+      alert('Error generating PDF');
     }
   };
 

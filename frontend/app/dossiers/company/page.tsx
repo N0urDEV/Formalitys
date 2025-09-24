@@ -14,9 +14,11 @@ import { Step3Payment } from './components/steps/Step3Payment';
 import { Step4Final } from './components/steps/Step4Final';
 import { useTranslations } from 'next-intl';
 
-function useServiceData() {
+// Removed custom hook usage during render to avoid changing hook order between renders
+
+function CompanyDossierPageContent() {
   const t = useTranslations('Dossiers.Company');
-  return {
+  const serviceData = {
     name: t('serviceName'),
     description: t('serviceDescription'),
     offers: {
@@ -24,10 +26,6 @@ function useServiceData() {
       description: t('offerDescription')
     }
   };
-}
-
-function CompanyDossierPageContent() {
-  const t = useTranslations('Dossiers.Company');
   const {
     dossier,
     currentStep,
@@ -183,7 +181,7 @@ function CompanyDossierPageContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <StructuredData type="service" data={useServiceData()} />
+      <StructuredData type="service" data={serviceData} />
       <StructuredData type="breadcrumb" data={[
         {
           "@type": "ListItem",

@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Associate, CompanyData, UploadedFiles, FormErrors, StepErrors } from '../types';
 
 export const useValidation = () => {
+  const t = useTranslations('Dossiers.Company.Validation');
   const [errors, setErrors] = useState<FormErrors>({});
   const [stepErrors, setStepErrors] = useState<StepErrors>({});
 
@@ -14,46 +16,46 @@ export const useValidation = () => {
       const prefix = `associate_${index}`;
       
       if (!associate.nom.trim()) {
-        newErrors[`${prefix}_nom`] = 'Le nom est requis';
-        stepErrorsList.push(`Associé ${index + 1}: Le nom est requis`);
+        newErrors[`${prefix}_nom`] = t('associate.lastNameRequired');
+        stepErrorsList.push(t('associate.lastNameStep', { index: index + 1 }));
       }
       
       if (!associate.prenom.trim()) {
-        newErrors[`${prefix}_prenom`] = 'Le prénom est requis';
-        stepErrorsList.push(`Associé ${index + 1}: Le prénom est requis`);
+        newErrors[`${prefix}_prenom`] = t('associate.firstNameRequired');
+        stepErrorsList.push(t('associate.firstNameStep', { index: index + 1 }));
       }
       
       if (!associate.numero.trim()) {
-        newErrors[`${prefix}_numero`] = 'Le numéro de pièce est requis';
-        stepErrorsList.push(`Associé ${index + 1}: Le numéro de pièce est requis`);
+        newErrors[`${prefix}_numero`] = t('associate.idNumberRequired');
+        stepErrorsList.push(t('associate.idNumberStep', { index: index + 1 }));
       }
       
       if (!associate.adresse.trim()) {
-        newErrors[`${prefix}_adresse`] = 'L\'adresse est requise';
-        stepErrorsList.push(`Associé ${index + 1}: L'adresse est requise`);
+        newErrors[`${prefix}_adresse`] = t('associate.addressRequired');
+        stepErrorsList.push(t('associate.addressStep', { index: index + 1 }));
       }
       
       if (!associate.telephone.trim()) {
-        newErrors[`${prefix}_telephone`] = 'Le téléphone est requis';
-        stepErrorsList.push(`Associé ${index + 1}: Le téléphone est requis`);
+        newErrors[`${prefix}_telephone`] = t('associate.phoneRequired');
+        stepErrorsList.push(t('associate.phoneStep', { index: index + 1 }));
       } else if (!/^[0-9+\-\s()]+$/.test(associate.telephone)) {
-        newErrors[`${prefix}_telephone`] = 'Format de téléphone invalide';
-        stepErrorsList.push(`Associé ${index + 1}: Format de téléphone invalide`);
+        newErrors[`${prefix}_telephone`] = t('associate.phoneInvalid');
+        stepErrorsList.push(t('associate.phoneInvalidStep', { index: index + 1 }));
       }
       
       if (!associate.email.trim()) {
-        newErrors[`${prefix}_email`] = 'L\'email est requis';
-        stepErrorsList.push(`Associé ${index + 1}: L'email est requis`);
+        newErrors[`${prefix}_email`] = t('associate.emailRequired');
+        stepErrorsList.push(t('associate.emailStep', { index: index + 1 }));
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(associate.email)) {
-        newErrors[`${prefix}_email`] = 'Format d\'email invalide';
-        stepErrorsList.push(`Associé ${index + 1}: Format d'email invalide`);
+        newErrors[`${prefix}_email`] = t('associate.emailInvalid');
+        stepErrorsList.push(t('associate.emailInvalidStep', { index: index + 1 }));
       }
     });
 
     // Check if at least one associate is marked as manager
     const hasManager = associates.some(associate => associate.isGerant);
     if (!hasManager) {
-      stepErrorsList.push('Au moins un associé doit être désigné comme gérant');
+      stepErrorsList.push(t('associate.managerRequired'));
     }
 
     setErrors(newErrors);
@@ -66,11 +68,11 @@ export const useValidation = () => {
     const stepErrorsList: string[] = [];
     
     if (!companyData.headquarters) {
-      stepErrorsList.push('Veuillez sélectionner un type de siège social');
+      stepErrorsList.push(t('step2.selectHeadquarters'));
     }
     
     if (companyData.headquarters === 'contrat_domiciliation' && !companyData.selectedBank) {
-      stepErrorsList.push('Veuillez sélectionner une banque pour la domiciliation');
+      stepErrorsList.push(t('step2.selectBank'));
     }
 
     setStepErrors(prev => ({ ...prev, 2: stepErrorsList }));
@@ -81,52 +83,52 @@ export const useValidation = () => {
     const stepErrorsList: string[] = [];
     
     if (!companyData.companyName.trim()) {
-      stepErrorsList.push('Le nom de la société est requis');
+      stepErrorsList.push(t('step4.companyNameRequired'));
     }
     
     if (companyData.activities.length === 0) {
-      stepErrorsList.push('Au moins une activité doit être sélectionnée');
+      stepErrorsList.push(t('step4.activitiesRequired'));
     }
     
     if (companyData.proposedNames.filter(name => name.trim()).length < 3) {
-      stepErrorsList.push('Trois noms proposés sont requis');
+      stepErrorsList.push(t('step4.proposedNamesRequired'));
     }
 
     // Additional company information validation
     if (!companyData.raisonSociale.trim()) {
-      stepErrorsList.push('La raison sociale est requise');
+      stepErrorsList.push(t('step4.raisonSocialeRequired'));
     }
     
     if (!companyData.formeJuridique.trim()) {
-      stepErrorsList.push('La forme juridique est requise');
+      stepErrorsList.push(t('step4.formeJuridiqueRequired'));
     }
     
     if (!companyData.nationalite.trim()) {
-      stepErrorsList.push('La nationalité est requise');
+      stepErrorsList.push(t('step4.nationaliteRequired'));
     }
     
     if (!companyData.adresseSiege.trim()) {
-      stepErrorsList.push('L\'adresse du siège social est requise');
+      stepErrorsList.push(t('step4.adresseSiegeRequired'));
     }
     
     if (!companyData.villeSiege.trim()) {
-      stepErrorsList.push('La ville du siège social est requise');
+      stepErrorsList.push(t('step4.villeSiegeRequired'));
     }
     
     if (!companyData.professionActivite.trim()) {
-      stepErrorsList.push('La profession ou activité principale est requise');
+      stepErrorsList.push(t('step4.professionActiviteRequired'));
     }
     
     if (!companyData.telephone.trim()) {
-      stepErrorsList.push('Le téléphone est requis');
+      stepErrorsList.push(t('step4.telephoneRequired'));
     } else if (!/^[0-9+\-\s()]+$/.test(companyData.telephone)) {
-      stepErrorsList.push('Format de téléphone invalide');
+      stepErrorsList.push(t('step4.telephoneInvalid'));
     }
     
     if (!companyData.email.trim()) {
-      stepErrorsList.push('L\'email est requis');
+      stepErrorsList.push(t('step4.emailRequired'));
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(companyData.email)) {
-      stepErrorsList.push('Format d\'email invalide');
+      stepErrorsList.push(t('step4.emailInvalid'));
     }
 
     setStepErrors(prev => ({ ...prev, 4: stepErrorsList }));
@@ -154,9 +156,9 @@ export const useValidation = () => {
     const stepErrorsList: string[] = [];
     
     if (!dossier) {
-      stepErrorsList.push('Dossier non trouvé');
+      stepErrorsList.push(t('payment.dossierNotFound'));
     } else if (dossier.paymentStatus !== 'succeeded') {
-      stepErrorsList.push('Le paiement doit être effectué pour continuer');
+      stepErrorsList.push(t('payment.required'));
     }
     
     setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
@@ -188,12 +190,12 @@ export const useValidation = () => {
     
     requiredDocuments.forEach(docType => {
       if (!uploadedTypes.includes(docType)) {
-        const docNames = {
-          'cni': 'CNI',
-          'justificatif_domicile': 'Justificatif de domicile',
-          'autre': 'Statuts'
+        const docNames: any = {
+          'cni': t('docs.cni'),
+          'justificatif_domicile': t('docs.justifDomicile'),
+          'autre': t('docs.statuts')
         };
-        stepErrorsList.push(`${docNames[docType as keyof typeof docNames]} est requis`);
+        stepErrorsList.push(t('docs.required', { name: docNames[docType] }));
       }
     });
     

@@ -459,8 +459,148 @@
       "fallback": "Loading dossier...",
       "prev": "Previous",
       "saving": "Saving...",
-      "next": "Next"
-      ,
+      "next": "Next",
+      "Form": {
+        "capital": {
+          "option10k": "10,000 MAD",
+          "option100k": "100,000 MAD"
+        },
+        "activities": {
+          "commerce": "Commerce",
+          "services": "Services",
+          "importExport": "Import/Export",
+          "consulting": "Consulting",
+          "it": "IT",
+          "construction": "Construction",
+          "transport": "Transport",
+          "restaurant": "Restaurant"
+        },
+        "errors": {
+          "fixFollowing": "Please correct the following errors:"
+        },
+        "sections": {
+          "companyDetails": "Company details",
+          "additionalInfo": "Additional company information",
+          "taxInfo": "Tax and administrative information",
+          "files": "Required documents"
+        },
+        "labels": {
+          "companyName": "Company name",
+          "proposedNames": "3 proposed names for OMPIC validation",
+          "proposedNameN": "Name {n}",
+          "activities": "Activities (max 3)",
+          "capital": "Share capital",
+          "raisonSociale": "Corporate name",
+          "formeJuridique": "Legal form",
+          "nationalite": "Nationality",
+          "adresseSiege": "Registered office address or main establishment",
+          "villeSiege": "Registered office city",
+          "professionActivite": "Profession or main activity",
+          "telephone": "Phone",
+          "fax": "Fax",
+          "email": "E-mail",
+          "numeroArticleTaxeProfessionnelle": "Professional tax number",
+          "numeroArticleTaxeServicesCommunaux": "Municipal services tax number",
+          "numeroAffiliationCNSS": "CNSS affiliation number",
+          "numeroRegistreCommerce": "Trade register number",
+          "villeRegistreCommerce": "Trade register city",
+          "referenceDepotDeclaration": "Declaration deposit reference",
+          "dateDepotDeclaration": "Declaration deposit date"
+        },
+        "placeholders": {
+          "companyName": "Your company name",
+          "proposedNameN": "Name {n}",
+          "raisonSociale": "Company corporate name",
+          "nationalite": "Company nationality",
+          "adresseSiege": "Complete registered office address",
+          "villeSiege": "Registered office city",
+          "professionActivite": "Company main activity",
+          "telephone": "+212 6 12 34 56 78",
+          "fax": "+212 5 22 33 44 55",
+          "email": "contact@company.ma",
+          "numeroArticleTaxeProfessionnelle": "Professional tax number",
+          "numeroArticleTaxeServicesCommunaux": "Municipal services tax number",
+          "numeroAffiliationCNSS": "CNSS affiliation number",
+          "numeroRegistreCommerce": "Trade register number",
+          "villeRegistreCommerce": "Trade register city",
+          "referenceDepotDeclaration": "Deposit reference",
+          "formeJuridique": "Select a legal form"
+        },
+        "formeOptions": {
+          "sarl": "SARL (Limited Liability Company)",
+          "sa": "SA (Public Limited Company)",
+          "snc": "SNC (General Partnership)",
+          "sas": "SAS (Simplified Joint Stock Company)",
+          "eurl": "EURL (Single Member Limited Liability Company)",
+          "auto": "Self-employed",
+          "individuelle": "Individual business"
+        },
+        "files": {
+          "cniAssocies": "Associates' ID cards",
+          "manager": "(Manager)",
+          "uploadCNI": "Upload this associate's ID card (PDF only)",
+          "siegeSocial": "Registered office",
+          "justifDomicile": "Manager's residence proof",
+          "contratDomiciliation": "Domiciliation contract",
+          "contratLocation": "Premises rental contract",
+          "uploadJustif": "Upload supporting document (PDF only)",
+          "justifDomicileAssocies": "Associates' residence proofs",
+          "uploadJustifDomicile": "Upload residence proof (PDF only)",
+          "otherDocs": "Other documents",
+          "otherDocsDesc": "Articles of association, minutes, other supporting documents",
+          "uploadOtherDocs": "Upload other required documents (PDF only)"
+        }
+      },
+      "Validation": {
+        "associate": {
+          "lastNameRequired": "Last name is required",
+          "lastNameStep": "Associate {index}: Last name is required",
+          "firstNameRequired": "First name is required",
+          "firstNameStep": "Associate {index}: First name is required",
+          "idNumberRequired": "ID number is required",
+          "idNumberStep": "Associate {index}: ID number is required",
+          "addressRequired": "Address is required",
+          "addressStep": "Associate {index}: Address is required",
+          "phoneRequired": "Phone is required",
+          "phoneStep": "Associate {index}: Phone is required",
+          "phoneInvalid": "Invalid phone format",
+          "phoneInvalidStep": "Associate {index}: Invalid phone format",
+          "emailRequired": "Email is required",
+          "emailStep": "Associate {index}: Email is required",
+          "emailInvalid": "Invalid email format",
+          "emailInvalidStep": "Associate {index}: Invalid email format",
+          "managerRequired": "At least one associate must be designated as manager"
+        },
+        "step2": {
+          "selectHeadquarters": "Please select a registered office type",
+          "selectBank": "Please select a bank for domiciliation"
+        },
+        "step4": {
+          "companyNameRequired": "Company name is required",
+          "activitiesRequired": "At least one activity must be selected",
+          "proposedNamesRequired": "Three proposed names are required",
+          "raisonSocialeRequired": "Corporate name is required",
+          "formeJuridiqueRequired": "Legal form is required",
+          "nationaliteRequired": "Nationality is required",
+          "adresseSiegeRequired": "Registered office address is required",
+          "villeSiegeRequired": "Registered office city is required",
+          "professionActiviteRequired": "Profession or main activity is required",
+          "telephoneRequired": "Phone is required",
+          "telephoneInvalid": "Invalid phone format",
+          "emailRequired": "Email is required",
+          "emailInvalid": "Invalid email format"
+        },
+        "payment": {
+          "dossierNotFound": "Dossier not found",
+          "required": "Payment must be completed to continue"
+        },
+        "docs": {
+          "cni": "ID card",
+          "justifDomicile": "Residence proof",
+          "statuts": "Articles of association",
+          "required": "{name} is required"
+        }
+      },
       "Progress": {
         "stepLabel": "Step {current} of {total}",
         "titles": {
@@ -494,8 +634,92 @@
       "fallback": "Loading dossier...",
       "prev": "Previous",
       "saving": "Saving...",
-      "next": "Next"
-      ,
+      "next": "Next",
+      "Form": {
+        "Step2": {
+          "title": "Establishment information",
+          "subtitle": "Enter your tourist accommodation establishment details",
+          "group": {
+            "typeAndCategorie": "Establishment type and category",
+            "generalData": "General data"
+          },
+          "type": {
+            "select": "Select the type",
+            "hotel": "Hotel",
+            "hotelClub": "Hotel club",
+            "residenceTourisme": "Tourist residence",
+            "residenceImmobiliere": "Real Estate Tourist Promotion Residence",
+            "maisonHotes": "Guest house",
+            "riad": "Riad",
+            "kasbah": "Kasbah",
+            "camping": "Camping",
+            "gite": "Gîte",
+            "pension": "Pension"
+          },
+          "categorie": {
+            "select": "Select the category",
+            "luxe": "Luxury",
+            "5": "Five stars",
+            "4": "Four stars",
+            "3": "Three stars",
+            "2": "Two stars",
+            "1": "One star",
+            "unique": "Unique category"
+          },
+          "region": {
+            "select": "Select the region"
+          },
+          "labels": {
+            "type": "Establishment type",
+            "categorie": "Establishment category",
+            "enseigne": "Commercial sign",
+            "dateOuverture": "Expected opening date",
+            "registreCommerce": "Trade register number",
+            "ice": "ICE (Common business identifier)",
+            "cnss": "CNSS affiliation number",
+            "telephone": "Phone",
+            "email": "Email",
+            "siteWeb": "Website (optional)",
+            "region": "Region",
+            "province": "Province/Prefecture"
+          },
+          "placeholders": {
+            "enseigne": "Establishment commercial name",
+            "registreCommerce": "Trade register number",
+            "ice": "Company ICE",
+            "cnss": "CNSS number",
+            "telephone": "Establishment phone",
+            "email": "Establishment email",
+            "siteWeb": "https://www.example.com",
+            "province": "Province or prefecture"
+          }
+        }
+      },
+      "Validation": {
+        "owner": {
+          "lastNameRequired": "Last name is required",
+          "firstNameRequired": "First name is required",
+          "idNumberRequired": "ID number is required",
+          "addressRequired": "Address is required",
+          "phoneRequired": "Phone is required",
+          "phoneInvalid": "Invalid phone format",
+          "emailRequired": "Email is required",
+          "emailInvalid": "Invalid email format",
+          "roleRequired": "Role is required"
+        },
+        "establishment": {
+          "typeRequired": "Establishment type is required",
+          "categorieRequired": "Establishment category is required",
+          "enseigneRequired": "Commercial sign is required",
+          "dateRequired": "Expected opening date is required",
+          "phoneRequired": "Phone is required",
+          "phoneInvalid": "Invalid phone format",
+          "emailRequired": "Email is required",
+          "emailInvalid": "Invalid email format",
+          "regionRequired": "Region is required",
+          "provinceRequired": "Province/prefecture is required"
+        }
+      },
       "Progress": {
         "stepLabel": "Step {current} of {total}",
         "titles": {

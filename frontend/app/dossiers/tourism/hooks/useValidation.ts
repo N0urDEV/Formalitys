@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { OwnerInfo, EstablishmentInfo, UploadedFiles, QuestionnaireAnswers, FormErrors, StepErrors } from '../types';
 
 export const useValidation = () => {
+  const t = useTranslations('Dossiers.Tourism.Validation');
   const [errors, setErrors] = useState<FormErrors>({});
   const [stepErrors, setStepErrors] = useState<StepErrors>({});
 
@@ -10,44 +12,44 @@ export const useValidation = () => {
     const stepErrorsList: string[] = [];
 
     if (!ownerInfo.nom.trim()) {
-      newErrors['nom'] = 'Le nom est requis';
-      stepErrorsList.push('Le nom est requis');
+      newErrors['nom'] = t('owner.lastNameRequired');
+      stepErrorsList.push(t('owner.lastNameRequired'));
     }
     
     if (!ownerInfo.prenom.trim()) {
-      newErrors['prenom'] = 'Le prénom est requis';
-      stepErrorsList.push('Le prénom est requis');
+      newErrors['prenom'] = t('owner.firstNameRequired');
+      stepErrorsList.push(t('owner.firstNameRequired'));
     }
     
     if (!ownerInfo.numero.trim()) {
-      newErrors['numero'] = 'Le numéro de pièce est requis';
-      stepErrorsList.push('Le numéro de pièce est requis');
+      newErrors['numero'] = t('owner.idNumberRequired');
+      stepErrorsList.push(t('owner.idNumberRequired'));
     }
     
     if (!ownerInfo.adresse.trim()) {
-      newErrors['adresse'] = 'L\'adresse est requise';
-      stepErrorsList.push('L\'adresse est requise');
+      newErrors['adresse'] = t('owner.addressRequired');
+      stepErrorsList.push(t('owner.addressRequired'));
     }
     
     if (!ownerInfo.telephone.trim()) {
-      newErrors['telephone'] = 'Le téléphone est requis';
-      stepErrorsList.push('Le téléphone est requis');
+      newErrors['telephone'] = t('owner.phoneRequired');
+      stepErrorsList.push(t('owner.phoneRequired'));
     } else if (!/^[0-9+\-\s()]+$/.test(ownerInfo.telephone)) {
-      newErrors['telephone'] = 'Format de téléphone invalide';
-      stepErrorsList.push('Format de téléphone invalide');
+      newErrors['telephone'] = t('owner.phoneInvalid');
+      stepErrorsList.push(t('owner.phoneInvalid'));
     }
     
     if (!ownerInfo.email.trim()) {
-      newErrors['email'] = 'L\'email est requis';
-      stepErrorsList.push('L\'email est requis');
+      newErrors['email'] = t('owner.emailRequired');
+      stepErrorsList.push(t('owner.emailRequired'));
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerInfo.email)) {
-      newErrors['email'] = 'Format d\'email invalide';
-      stepErrorsList.push('Format d\'email invalide');
+      newErrors['email'] = t('owner.emailInvalid');
+      stepErrorsList.push(t('owner.emailInvalid'));
     }
 
     if (!ownerInfo.qualite.trim()) {
-      newErrors['qualite'] = 'La qualité est requise';
-      stepErrorsList.push('La qualité est requise');
+      newErrors['qualite'] = t('owner.roleRequired');
+      stepErrorsList.push(t('owner.roleRequired'));
     }
 
 
@@ -62,51 +64,51 @@ export const useValidation = () => {
     const stepErrorsList: string[] = [];
 
     if (!establishmentInfo.type.trim()) {
-      newErrors['type'] = 'Le type d\'établissement est requis';
-      stepErrorsList.push('Le type d\'établissement est requis');
+      newErrors['type'] = t('establishment.typeRequired');
+      stepErrorsList.push(t('establishment.typeRequired'));
     }
 
     if (!establishmentInfo.categorie.trim()) {
-      newErrors['categorie'] = 'La catégorie d\'établissement est requise';
-      stepErrorsList.push('La catégorie d\'établissement est requise');
+      newErrors['categorie'] = t('establishment.categorieRequired');
+      stepErrorsList.push(t('establishment.categorieRequired'));
     }
 
     if (!establishmentInfo.enseigneCommerciale.trim()) {
-      newErrors['enseigneCommerciale'] = 'L\'enseigne commerciale est requise';
-      stepErrorsList.push('L\'enseigne commerciale est requise');
+      newErrors['enseigneCommerciale'] = t('establishment.enseigneRequired');
+      stepErrorsList.push(t('establishment.enseigneRequired'));
     }
 
     if (!establishmentInfo.dateOuverturePrevue.trim()) {
-      newErrors['dateOuverturePrevue'] = 'La date d\'ouverture prévue est requise';
-      stepErrorsList.push('La date d\'ouverture prévue est requise');
+      newErrors['dateOuverturePrevue'] = t('establishment.dateRequired');
+      stepErrorsList.push(t('establishment.dateRequired'));
     }
 
 
 
     if (!establishmentInfo.telephone.trim()) {
-      newErrors['telephone'] = 'Le téléphone est requis';
-      stepErrorsList.push('Le téléphone est requis');
+      newErrors['telephone'] = t('establishment.phoneRequired');
+      stepErrorsList.push(t('establishment.phoneRequired'));
     } else if (!/^[0-9+\-\s()]+$/.test(establishmentInfo.telephone)) {
-      newErrors['telephone'] = 'Format de téléphone invalide';
-      stepErrorsList.push('Format de téléphone invalide');
+      newErrors['telephone'] = t('establishment.phoneInvalid');
+      stepErrorsList.push(t('establishment.phoneInvalid'));
     }
 
     if (!establishmentInfo.email.trim()) {
-      newErrors['email'] = 'L\'email est requis';
-      stepErrorsList.push('L\'email est requis');
+      newErrors['email'] = t('establishment.emailRequired');
+      stepErrorsList.push(t('establishment.emailRequired'));
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(establishmentInfo.email)) {
-      newErrors['email'] = 'Format d\'email invalide';
-      stepErrorsList.push('Format d\'email invalide');
+      newErrors['email'] = t('establishment.emailInvalid');
+      stepErrorsList.push(t('establishment.emailInvalid'));
     }
 
     if (!establishmentInfo.region.trim()) {
-      newErrors['region'] = 'La région est requise';
-      stepErrorsList.push('La région est requise');
+      newErrors['region'] = t('establishment.regionRequired');
+      stepErrorsList.push(t('establishment.regionRequired'));
     }
 
     if (!establishmentInfo.province.trim()) {
-      newErrors['province'] = 'La province/préfecture est requise';
-      stepErrorsList.push('La province/préfecture est requise');
+      newErrors['province'] = t('establishment.provinceRequired');
+      stepErrorsList.push(t('establishment.provinceRequired'));
     }
 
     setErrors(newErrors);

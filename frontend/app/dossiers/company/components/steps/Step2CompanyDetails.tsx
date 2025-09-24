@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { CompanyData, StepErrors, Associate } from '../../types';
 import { FormInput } from '../FormInput';
 import { FormSelect } from '../FormSelect';
@@ -32,15 +33,16 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
   associates,
   uploadedFiles = []
 }) => {
+  const t = useTranslations('Dossiers.Company.Form');
 
   const capitalOptions = [
-    { value: '10000', label: '10,000 MAD' },
-    { value: '100000', label: '100,000 MAD' }
+    { value: '10000', label: t('capital.option10k') },
+    { value: '100000', label: t('capital.option100k') }
   ];
 
   const activityOptions = [
-    'Commerce', 'Services', 'Import/Export', 'Consulting', 
-    'IT', 'Construction', 'Transport', 'Restauration'
+    t('activities.commerce'), t('activities.services'), t('activities.importExport'), t('activities.consulting'), 
+    t('activities.it'), t('activities.construction'), t('activities.transport'), t('activities.restaurant')
   ];
 
   const handleActivityChange = (activity: string, checked: boolean) => {
@@ -79,7 +81,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                 className="text-lg font-semibold text-red-800 mb-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Veuillez corriger les erreurs suivantes :
+                {t('errors.fixFollowing')}
               </h3>
               <ul className="space-y-1">
                 {stepErrors[4]?.map((error, index) => (
@@ -102,14 +104,14 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
           className="text-xl font-semibold text-[#071B1E]"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
-          Détails de la société
+          {t('sections.companyDetails')}
         </h2>
         
         {/* Company Name */}
         <FormInput
-          label="Nom de la société"
+          label={t('labels.companyName')}
           name="companyName"
-          placeholder="Nom de votre société"
+          placeholder={t('placeholders.companyName')}
           value={companyData.companyName}
           onChange={(value) => setCompanyData({...companyData, companyName: value})}
           required
@@ -121,16 +123,16 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             className="block text-sm font-medium text-gray-700 mb-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            3 noms proposés pour validation OMPIC
+            {t('labels.proposedNames')}
             <span className="text-red-500 ml-1">*</span>
           </label>
           <div className="space-y-3">
             {companyData.proposedNames.map((name, index) => (
               <FormInput
                 key={index}
-                label={`Nom ${index + 1}`}
+                label={t('labels.proposedNameN', { n: index + 1 })}
                 name={`proposedName_${index}`}
-                placeholder={`Nom ${index + 1}`}
+                placeholder={t('placeholders.proposedNameN', { n: index + 1 })}
                 value={name}
                 onChange={(value) => handleProposedNameChange(index, value)}
                 required
@@ -145,7 +147,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             className="block text-sm font-medium text-gray-700 mb-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            Activités (max 3)
+            {t('labels.activities')}
             <span className="text-red-500 ml-1">*</span>
           </label>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -172,7 +174,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
         {/* Capital */}
         <FormSelect
-          label="Capital social"
+          label={t('labels.capital')}
           name="capital"
           value={companyData.capital.toString()}
           onChange={(value) => setCompanyData({...companyData, capital: parseInt(value)})}
@@ -186,15 +188,15 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             className="text-lg font-semibold text-[#071B1E] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Informations complémentaires de la société
+            {t('sections.additionalInfo')}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Raison sociale */}
             <FormInput
-              label="Raison sociale"
+              label={t('labels.raisonSociale')}
               name="raisonSociale"
-              placeholder="Raison sociale de la société"
+              placeholder={t('placeholders.raisonSociale')}
               value={companyData.raisonSociale}
               onChange={(value) => setCompanyData({...companyData, raisonSociale: value})}
               required
@@ -202,28 +204,28 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
             {/* Forme juridique */}
             <FormSelect
-              label="Forme juridique"
+              label={t('labels.formeJuridique')}
               name="formeJuridique"
               value={companyData.formeJuridique}
               onChange={(value) => setCompanyData({...companyData, formeJuridique: value})}
               options={[
-                { value: 'SARL', label: 'SARL (Société à Responsabilité Limitée)' },
-                { value: 'SA', label: 'SA (Société Anonyme)' },
-                { value: 'SNC', label: 'SNC (Société en Nom Collectif)' },
-                { value: 'SAS', label: 'SAS (Société par Actions Simplifiée)' },
-                { value: 'EURL', label: 'EURL (Entreprise Unipersonnelle à Responsabilité Limitée)' },
-                { value: 'Auto-entrepreneur', label: 'Auto-entrepreneur' },
-                { value: 'Entreprise individuelle', label: 'Entreprise individuelle' }
+                { value: 'SARL', label: t('formeOptions.sarl') },
+                { value: 'SA', label: t('formeOptions.sa') },
+                { value: 'SNC', label: t('formeOptions.snc') },
+                { value: 'SAS', label: t('formeOptions.sas') },
+                { value: 'EURL', label: t('formeOptions.eurl') },
+                { value: 'Auto-entrepreneur', label: t('formeOptions.auto') },
+                { value: 'Entreprise individuelle', label: t('formeOptions.individuelle') }
               ]}
-              placeholder="Sélectionner une forme juridique"
+              placeholder={t('placeholders.formeJuridique')}
               required
             />
 
             {/* Nationalité */}
             <FormInput
-              label="Nationalité"
+              label={t('labels.nationalite')}
               name="nationalite"
-              placeholder="Nationalité de la société"
+              placeholder={t('placeholders.nationalite')}
               value={companyData.nationalite}
               onChange={(value) => setCompanyData({...companyData, nationalite: value})}
               required
@@ -232,9 +234,9 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             {/* Adresse du siège social */}
             <div className="md:col-span-2">
               <FormInput
-                label="Adresse du siège social ou du principal établissement"
+                label={t('labels.adresseSiege')}
                 name="adresseSiege"
-                placeholder="Adresse complète du siège social"
+                placeholder={t('placeholders.adresseSiege')}
                 value={companyData.adresseSiege}
                 onChange={(value) => setCompanyData({...companyData, adresseSiege: value})}
                 required
@@ -243,9 +245,9 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
             {/* Ville du siège */}
             <FormInput
-              label="Ville du siège social"
+              label={t('labels.villeSiege')}
               name="villeSiege"
-              placeholder="Ville du siège social"
+              placeholder={t('placeholders.villeSiege')}
               value={companyData.villeSiege}
               onChange={(value) => setCompanyData({...companyData, villeSiege: value})}
               required
@@ -253,9 +255,9 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
             {/* Profession ou activité principale */}
             <FormInput
-              label="Profession ou activité principale"
+              label={t('labels.professionActivite')}
               name="professionActivite"
-              placeholder="Activité principale de la société"
+              placeholder={t('placeholders.professionActivite')}
               value={companyData.professionActivite}
               onChange={(value) => setCompanyData({...companyData, professionActivite: value})}
               required
@@ -263,10 +265,10 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
             {/* Téléphone */}
             <FormInput
-              label="Téléphone"
+              label={t('labels.telephone')}
               name="telephone"
               type="tel"
-              placeholder="+212 6 12 34 56 78"
+              placeholder={t('placeholders.telephone')}
               value={companyData.telephone}
               onChange={(value) => setCompanyData({...companyData, telephone: value})}
               required
@@ -274,20 +276,20 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
             {/* Fax */}
             <FormInput
-              label="Fax"
+              label={t('labels.fax')}
               name="fax"
               type="tel"
-              placeholder="+212 5 22 33 44 55"
+              placeholder={t('placeholders.fax')}
               value={companyData.fax}
               onChange={(value) => setCompanyData({...companyData, fax: value})}
             />
 
             {/* Email */}
             <FormInput
-              label="E-mail"
+              label={t('labels.email')}
               name="email"
               type="email"
-              placeholder="contact@societe.ma"
+              placeholder={t('placeholders.email')}
               value={companyData.email}
               onChange={(value) => setCompanyData({...companyData, email: value})}
               required
@@ -301,67 +303,67 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             className="text-lg font-semibold text-[#071B1E] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Informations fiscales et administratives
+            {t('sections.taxInfo')}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* N° Taxe professionnelle */}
             <FormInput
-              label="N° Taxe professionnelle"
+              label={t('labels.numeroArticleTaxeProfessionnelle')}
               name="numeroArticleTaxeProfessionnelle"
-              placeholder="Numéro taxe professionnelle"
+              placeholder={t('placeholders.numeroArticleTaxeProfessionnelle')}
               value={companyData.numeroArticleTaxeProfessionnelle}
               onChange={(value) => setCompanyData({...companyData, numeroArticleTaxeProfessionnelle: value})}
             />
 
             {/* N° Taxe de Services Communaux */}
             <FormInput
-              label="N° Taxe de Services Communaux"
+              label={t('labels.numeroArticleTaxeServicesCommunaux')}
               name="numeroArticleTaxeServicesCommunaux"
-              placeholder="Numéro taxe services communaux"
+              placeholder={t('placeholders.numeroArticleTaxeServicesCommunaux')}
               value={companyData.numeroArticleTaxeServicesCommunaux}
               onChange={(value) => setCompanyData({...companyData, numeroArticleTaxeServicesCommunaux: value})}
             />
 
             {/* N° affiliation CNSS */}
             <FormInput
-              label="N° affiliation CNSS"
+              label={t('labels.numeroAffiliationCNSS')}
               name="numeroAffiliationCNSS"
-              placeholder="Numéro d&apos;affiliation CNSS"
+              placeholder={t('placeholders.numeroAffiliationCNSS')}
               value={companyData.numeroAffiliationCNSS}
               onChange={(value) => setCompanyData({...companyData, numeroAffiliationCNSS: value})}
             />
 
             {/* N° Registre de Commerce */}
             <FormInput
-              label="N° Registre de Commerce"
+              label={t('labels.numeroRegistreCommerce')}
               name="numeroRegistreCommerce"
-              placeholder="Numéro de registre de commerce"
+              placeholder={t('placeholders.numeroRegistreCommerce')}
               value={companyData.numeroRegistreCommerce}
               onChange={(value) => setCompanyData({...companyData, numeroRegistreCommerce: value})}
             />
 
             {/* Ville du registre de commerce */}
             <FormInput
-              label="Ville du registre de commerce"
+              label={t('labels.villeRegistreCommerce')}
               name="villeRegistreCommerce"
-              placeholder="Ville du registre de commerce"
+              placeholder={t('placeholders.villeRegistreCommerce')}
               value={companyData.villeRegistreCommerce}
               onChange={(value) => setCompanyData({...companyData, villeRegistreCommerce: value})}
             />
 
             {/* Références de dépôt de la déclaration */}
             <FormInput
-              label="Références de dépôt de la déclaration"
+              label={t('labels.referenceDepotDeclaration')}
               name="referenceDepotDeclaration"
-              placeholder="Référence de dépôt"
+              placeholder={t('placeholders.referenceDepotDeclaration')}
               value={companyData.referenceDepotDeclaration}
               onChange={(value) => setCompanyData({...companyData, referenceDepotDeclaration: value})}
             />
 
             {/* Date de dépôt */}
             <FormInput
-              label="Date de dépôt de la déclaration"
+              label={t('labels.dateDepotDeclaration')}
               name="dateDepotDeclaration"
               type="date"
               value={companyData.dateDepotDeclaration}
@@ -376,7 +378,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             className="text-lg font-semibold text-[#071B1E]"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Justificatifs requis
+            {t('sections.files')}
           </h3>
 
           {/* CNI des associés */}
@@ -385,17 +387,17 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               className="text-md font-medium text-gray-700"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              CNI des associés
+              {t('files.cniAssocies')}
             </h4>
             {associates.map((associate, index) => (
               <div key={index} className="bg-gray-50 rounded-lg p-4">
                 <p className="text-sm font-medium text-gray-600 mb-2">
-                  {associate.prenom} {associate.nom} {associate.isGerant ? '(Gérant)' : ''}
+                  {associate.prenom} {associate.nom} {associate.isGerant ? t('files.manager') : ''}
                 </p>
                 <FileUpload
                   key={`cni-${index}`}
                   title=""
-                  description="Téléchargez la CNI de cet associé (PDF uniquement)"
+                  description={t('files.uploadCNI')}
                   onUpload={(files) => onFileUpload(files, 'cni')}
                   acceptedTypes={['.pdf']}
                   maxFiles={1}
@@ -412,18 +414,18 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               className="text-md font-medium text-gray-700"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Siège social
+              {t('files.siegeSocial')}
             </h4>
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="text-sm font-medium text-gray-600 mb-2">
-                {companyData.headquarters === 'domicile' && 'Justificatif de domicile du gérant'}
-                {companyData.headquarters === 'contrat_domiciliation' && 'Contrat de domiciliation'}
-                {companyData.headquarters === 'location_local' && 'Contrat de location du local'}
+                {companyData.headquarters === 'domicile' && t('files.justifDomicile')}
+                {companyData.headquarters === 'contrat_domiciliation' && t('files.contratDomiciliation')}
+                {companyData.headquarters === 'location_local' && t('files.contratLocation')}
               </p>
               <FileUpload
                 key="headquarters"
                 title=""
-                description="Téléchargez le document justificatif (PDF uniquement)"
+                description={t('files.uploadJustif')}
                 onUpload={(files) => onFileUpload(files, companyData.headquarters === 'domicile' ? 'justificatif_domicile_gerant' : companyData.headquarters === 'contrat_domiciliation' ? 'contrat_domiciliation' : 'location_local')}
                 acceptedTypes={['.pdf']}
                 maxFiles={1}
@@ -443,17 +445,17 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               className="text-md font-medium text-gray-700"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Justificatifs de domicile des associés
+              {t('files.justifDomicileAssocies')}
             </h4>
             {associates.map((associate, index) => (
               <div key={index} className="bg-gray-50 rounded-lg p-4">
                 <p className="text-sm font-medium text-gray-600 mb-2">
-                  {associate.prenom} {associate.nom} {associate.isGerant ? '(Gérant)' : ''}
+                  {associate.prenom} {associate.nom} {associate.isGerant ? t('files.manager') : ''}
                 </p>
                 <FileUpload
                   key={`domicile-${index}`}
                   title=""
-                  description="Téléchargez le justificatif de domicile (PDF uniquement)"
+                  description={t('files.uploadJustifDomicile')}
                   onUpload={(files) => onFileUpload(files, 'justificatif_domicile')}
                   acceptedTypes={['.pdf']}
                   maxFiles={1}
@@ -470,16 +472,16 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               className="text-md font-medium text-gray-700"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              Autres documents
+              {t('files.otherDocs')}
             </h4>
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="text-sm font-medium text-gray-600 mb-2">
-                Statuts, procès-verbaux, autres justificatifs
+                {t('files.otherDocsDesc')}
               </p>
               <FileUpload
                 key="autres"
                 title=""
-                description="Téléchargez les autres documents requis (PDF uniquement)"
+                description={t('files.uploadOtherDocs')}
                 onUpload={(files) => onFileUpload(files, 'autre')}
                 acceptedTypes={['.pdf']}
                 maxFiles={5}

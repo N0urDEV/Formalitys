@@ -1,4 +1,4 @@
-module.exports = {
+ wentmodule.exports = {
   siteUrl: 'https://formalitys.vercel.app',
   generateRobotsTxt: true,
   robotsTxtOptions: {

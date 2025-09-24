@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { EstablishmentInfo, FormErrors, StepErrors } from '../../types';
 import { FormInput } from '../FormInput';
 import { FormSelect } from '../FormSelect';
@@ -18,6 +19,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
   stepErrors,
   clearFieldError
 }) => {
+  const t = useTranslations('Dossiers.Tourism.Form.Step2');
   const updateEstablishmentInfo = (field: string, value: string) => {
     setEstablishmentInfo({ ...establishmentInfo, [field]: value });
     if (errors[field]) {
@@ -26,32 +28,32 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
   };
 
   const typeOptions = [
-    { value: '', label: 'Sélectionnez le type' },
-    { value: 'Hotel', label: 'Hôtel' },
-    { value: 'HotelClub', label: 'Hôtel club' },
-    { value: 'ResidenceTourisme', label: 'Résidence de tourisme' },
-    { value: 'ResidenceImmobiliere', label: 'Résidence Immobilière de Promotion Touristique' },
-    { value: 'MaisonHotes', label: 'Maison d\'hôtes' },
-    { value: 'Riad', label: 'Riad' },
-    { value: 'Kasbah', label: 'Kasbah' },
-    { value: 'Camping', label: 'Camping' },
-    { value: 'Gite', label: 'Gîte' },
-    { value: 'Pension', label: 'Pension' }
+    { value: '', label: t('type.select') },
+    { value: 'Hotel', label: t('type.hotel') },
+    { value: 'HotelClub', label: t('type.hotelClub') },
+    { value: 'ResidenceTourisme', label: t('type.residenceTourisme') },
+    { value: 'ResidenceImmobiliere', label: t('type.residenceImmobiliere') },
+    { value: 'MaisonHotes', label: t('type.maisonHotes') },
+    { value: 'Riad', label: t('type.riad') },
+    { value: 'Kasbah', label: t('type.kasbah') },
+    { value: 'Camping', label: t('type.camping') },
+    { value: 'Gite', label: t('type.gite') },
+    { value: 'Pension', label: t('type.pension') }
   ];
 
   const categorieOptions = [
-    { value: '', label: 'Sélectionnez la catégorie' },
-    { value: 'luxe', label: 'Luxe' },
-    { value: '5etoiles', label: 'Cinq étoiles' },
-    { value: '4etoiles', label: 'Quatre étoiles' },
-    { value: '3etoiles', label: 'Trois étoiles' },
-    { value: '2etoiles', label: 'Deux étoiles' },
-    { value: '1etoile', label: 'Une étoile' },
-    { value: 'categorieUnique', label: 'Catégorie unique' }
+    { value: '', label: t('categorie.select') },
+    { value: 'luxe', label: t('categorie.luxe') },
+    { value: '5etoiles', label: t('categorie.5') },
+    { value: '4etoiles', label: t('categorie.4') },
+    { value: '3etoiles', label: t('categorie.3') },
+    { value: '2etoiles', label: t('categorie.2') },
+    { value: '1etoile', label: t('categorie.1') },
+    { value: 'categorieUnique', label: t('categorie.unique') }
   ];
 
   const regionOptions = [
-    { value: '', label: 'Sélectionnez la région' },
+    { value: '', label: t('region.select') },
     { value: 'Casablanca-Settat', label: 'Casablanca-Settat' },
     { value: 'Rabat-Salé-Kénitra', label: 'Rabat-Salé-Kénitra' },
     { value: 'Marrakech-Safi', label: 'Marrakech-Safi' },
@@ -73,13 +75,13 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
           className="text-2xl font-bold text-[#071B1E] mb-4"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
-          Informations de l'établissement
+          {t('title')}
         </h2>
         <p 
           className="text-gray-600"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
-          Renseignez les informations de votre établissement d'hébergement touristique
+          {t('subtitle')}
         </p>
       </div>
 
@@ -124,12 +126,12 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             className="text-xl font-bold text-[#071B1E] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Type et catégorie de l'établissement
+            {t('group.typeAndCategorie')}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormSelect
-              label="Type d'établissement"
+              label={t('labels.type')}
               value={establishmentInfo.type}
               onChange={(value) => updateEstablishmentInfo('type', value)}
               options={typeOptions}
@@ -138,7 +140,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormSelect
-              label="Catégorie d'établissement"
+              label={t('labels.categorie')}
               value={establishmentInfo.categorie}
               onChange={(value) => updateEstablishmentInfo('categorie', value)}
               options={categorieOptions}
@@ -158,13 +160,13 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             className="text-xl font-bold text-[#071B1E] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            Données générales
+            {t('group.generalData')}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormInput
-              label="Enseigne commerciale"
-              placeholder="Nom commercial de l'établissement"
+              label={t('labels.enseigne')}
+              placeholder={t('placeholders.enseigne')}
               value={establishmentInfo.enseigneCommerciale}
               onChange={(value) => updateEstablishmentInfo('enseigneCommerciale', value)}
               error={errors['enseigneCommerciale']}
@@ -172,7 +174,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormInput
-              label="Date d'ouverture prévue"
+              label={t('labels.dateOuverture')}
               type="date"
               value={establishmentInfo.dateOuverturePrevue}
               onChange={(value) => updateEstablishmentInfo('dateOuverturePrevue', value)}
@@ -181,31 +183,31 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormInput
-              label="N° de registre de commerce"
-              placeholder="Numéro de registre de commerce"
+              label={t('labels.registreCommerce')}
+              placeholder={t('placeholders.registreCommerce')}
               value={establishmentInfo.registreCommerce}
               onChange={(value) => updateEstablishmentInfo('registreCommerce', value)}
               error={errors['registreCommerce']}
             />
             
             <FormInput
-              label="ICE (Identifiant commun de l'entreprise)"
-              placeholder="ICE de l'entreprise"
+              label={t('labels.ice')}
+              placeholder={t('placeholders.ice')}
               value={establishmentInfo.ice}
               onChange={(value) => updateEstablishmentInfo('ice', value)}
               error={errors['ice']}
             />
             
             <FormInput
-              label="N° d'affiliation à la CNSS"
-              placeholder="Numéro CNSS"
+              label={t('labels.cnss')}
+              placeholder={t('placeholders.cnss')}
               value={establishmentInfo.numeroCNSS}
               onChange={(value) => updateEstablishmentInfo('numeroCNSS', value)}
             />
             
             <FormInput
-              label="Téléphone"
-              placeholder="Téléphone de l'établissement"
+              label={t('labels.telephone')}
+              placeholder={t('placeholders.telephone')}
               value={establishmentInfo.telephone}
               onChange={(value) => updateEstablishmentInfo('telephone', value)}
               error={errors['telephone']}
@@ -213,9 +215,9 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormInput
-              label="Email"
+              label={t('labels.email')}
               type="email"
-              placeholder="Email de l'établissement"
+              placeholder={t('placeholders.email')}
               value={establishmentInfo.email}
               onChange={(value) => updateEstablishmentInfo('email', value)}
               error={errors['email']}
@@ -223,15 +225,15 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormInput
-              label="Site web (optionnel)"
+              label={t('labels.siteWeb')}
               type="url"
-              placeholder="https://www.exemple.com"
+              placeholder={t('placeholders.siteWeb')}
               value={establishmentInfo.siteWeb || ''}
               onChange={(value) => updateEstablishmentInfo('siteWeb', value)}
             />
             
             <FormSelect
-              label="Région"
+              label={t('labels.region')}
               value={establishmentInfo.region}
               onChange={(value) => updateEstablishmentInfo('region', value)}
               options={regionOptions}
@@ -240,8 +242,8 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
             />
             
             <FormInput
-              label="Province/Préfecture"
-              placeholder="Province ou préfecture"
+              label={t('labels.province')}
+              placeholder={t('placeholders.province')}
               value={establishmentInfo.province}
               onChange={(value) => updateEstablishmentInfo('province', value)}
               error={errors['province']}
