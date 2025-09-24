@@ -26,10 +26,33 @@ export default function RegisterPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, password }),
       });
-      const data = await res.json();
+      // Safely parse JSON; don't hang if backend returns empty body
+      const raw = await res.text();
+      let data: any = {};
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {}
       if (!res.ok) throw new Error(data.message || t('common.errorRegister'));
-      localStorage.setItem('token', data.token);
-      router.push('/dashboard');
+      let token: string | undefined = data.token;
+      // If register didn't return a token, perform a login to obtain one
+      if (!token) {
+        const loginRes = await fetch(`${API}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ emailOrPhone: email || phone, password })
+        });
+        const loginRaw = await loginRes.text();
+        let loginData: any = {};
+        try { loginData = loginRaw ? JSON.parse(loginRaw) : {}; } catch {}
+        if (!loginRes.ok) {
+          throw new Error(loginData.message || t('common.errorRegister'));
+        }
+        token = loginData.token;
+      }
+      if (token) {
+        localStorage.setItem('token', token);
+      }
+      router.replace('/dashboard');
     } catch (err: any) {
       setError(err.message);
     } finally {
