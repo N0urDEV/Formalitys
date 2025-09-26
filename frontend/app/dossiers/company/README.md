@@ -113,8 +113,8 @@ The main page component (`page.tsx`) orchestrates the entire flow:
 ## Styling
 
 Uses Tailwind CSS with custom design system:
-- Primary color: `#F66B4C` (orange)
-- Secondary color: `#071B1E` (dark blue)
+- Primary color: `#007ea7` (blue)
+- Secondary color: `#00171f` (dark blue)
 - Custom fonts: Gascogne Serial (serif) and Satoshi (sans-serif)
 - Glassmorphism effects with backdrop blur
 - Smooth transitions and hover effects

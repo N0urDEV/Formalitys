@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import * as express from 'express';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -11,6 +12,9 @@ async function bootstrap(): Promise<void> {
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
   });
+
+  // Raw body middleware for Stripe webhooks
+  app.use('/payments/webhook', express.raw({ type: 'application/json' }));
   
   // Build CORS origin list from env, always include localhost for dev
   const envOrigins = (process.env.CORS_ORIGINS || '')

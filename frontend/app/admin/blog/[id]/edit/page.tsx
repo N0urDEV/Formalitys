@@ -129,8 +129,8 @@ export default function EditBlogPostPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-6"></div>
-          <p className="text-[#071B1E] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('updating')}</p>
+          <div className="w-16 h-16 border-4 border-[#007ea7]/30 border-t-[#007ea7] rounded-full animate-spin mx-auto mb-6"></div>
+          <p className="text-[#00171f] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('updating')}</p>
         </div>
       </div>
     );
@@ -140,12 +140,12 @@ export default function EditBlogPostPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-[#071B1E] mb-4" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+          <h1 className="text-2xl font-bold text-[#00171f] mb-4" style={{ fontFamily: '"Gascogne Serial", serif' }}>
             {t('notFound')}
           </h1>
           <button
             onClick={() => router.push('/admin/blog')}
-            className="bg-[#F66B4C] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#e55a43] transition-colors"
+            className="bg-[#007ea7] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#00a8e8] transition-colors"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             {t('backToPosts')}
@@ -158,7 +158,7 @@ export default function EditBlogPostPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#062A2F] to-[#071B1E] text-white py-10">
+      <div className="bg-gradient-to-r from-[#00171f] to-[#00171f] text-white py-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div>
@@ -210,7 +210,7 @@ export default function EditBlogPostPage() {
             <div>
               <label 
                 htmlFor="title"
-                className="block text-lg font-semibold text-[#071B1E] mb-3"
+                className="block text-lg font-semibold text-[#00171f] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
                 {t('title')}
@@ -222,7 +222,7 @@ export default function EditBlogPostPage() {
                 value={formData.title}
                 onChange={handleChange}
                 required
-                className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors"
+                className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#007ea7] focus:outline-none transition-colors"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
                 placeholder={t('titlePh')}
               />
@@ -232,7 +232,7 @@ export default function EditBlogPostPage() {
             <div>
               <label 
                 htmlFor="excerpt"
-                className="block text-lg font-semibold text-[#071B1E] mb-3"
+                className="block text-lg font-semibold text-[#00171f] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
                 {t('excerpt')}
@@ -243,7 +243,7 @@ export default function EditBlogPostPage() {
                 value={formData.excerpt}
                 onChange={handleChange}
                 rows={3}
-                className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors resize-none"
+                className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#007ea7] focus:outline-none transition-colors resize-none"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
                 placeholder={t('excerptPh')}
               />
@@ -252,7 +252,7 @@ export default function EditBlogPostPage() {
             {/* Featured Image */}
             <div>
               <label 
-                className="block text-lg font-semibold text-[#071B1E] mb-3"
+                className="block text-lg font-semibold text-[#00171f] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
                 {t('imagePh')}
@@ -269,7 +269,7 @@ export default function EditBlogPostPage() {
             <div>
               <label 
                 htmlFor="content"
-                className="block text-lg font-semibold text-[#071B1E] mb-3"
+                className="block text-lg font-semibold text-[#00171f] mb-3"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
                 {t('content')}
@@ -281,7 +281,7 @@ export default function EditBlogPostPage() {
                 onChange={handleChange}
                 required
                 rows={15}
-                className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#F66B4C] focus:outline-none transition-colors resize-none"
+                className="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-[#007ea7] focus:outline-none transition-colors resize-none"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
                 placeholder={t('contentPh')}
               />
@@ -301,11 +301,11 @@ export default function EditBlogPostPage() {
                 name="published"
                 checked={formData.published}
                 onChange={handleChange}
-                className="w-5 h-5 text-[#F66B4C] border-2 border-gray-300 rounded focus:ring-[#F66B4C] focus:ring-2"
+                className="w-5 h-5 text-[#007ea7] border-2 border-gray-300 rounded focus:ring-[#007ea7] focus:ring-2"
               />
               <label 
                 htmlFor="published"
-                className="ml-3 text-lg font-semibold text-[#071B1E]"
+                className="ml-3 text-lg font-semibold text-[#00171f]"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
                 {t('publishNow')}
@@ -317,7 +317,7 @@ export default function EditBlogPostPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="bg-[#F66B4C] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="bg-[#007ea7] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#00a8e8] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {saving ? (

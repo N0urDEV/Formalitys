@@ -88,7 +88,7 @@ export default function WhatsAppButton({
             >
               <button
                 onClick={() => handleWhatsAppClick(item.message)}
-                className="text-left w-full text-sm text-gray-700 hover:text-[#F66B4C] transition-colors"
+                className="text-left w-full text-sm text-gray-700 hover:text-[#007ea7] transition-colors"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {item.text}
@@ -128,7 +128,7 @@ export default function WhatsAppButton({
         {/* Expand Button */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="absolute -top-2 -right-2 w-6 h-6 bg-[#F66B4C] text-white rounded-full flex items-center justify-center text-xs font-bold hover:bg-[#e55a43] transition-colors duration-200"
+          className="absolute -top-2 -right-2 w-6 h-6 bg-[#007ea7] text-white rounded-full flex items-center justify-center text-xs font-bold hover:bg-[#00a8e8] transition-colors duration-200"
         >
           {isExpanded ? '×' : '+'}
         </button>

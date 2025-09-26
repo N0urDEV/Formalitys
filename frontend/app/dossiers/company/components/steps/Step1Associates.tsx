@@ -54,7 +54,7 @@ export const Step1Associates: React.FC<Step1AssociatesProps> = ({
     <div className="space-y-8">
       <div className="text-center mb-8">
         <h2 
-          className="text-2xl font-bold text-[#071B1E] mb-4"
+          className="text-2xl font-bold text-[#00171f] mb-4"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
           Informations des associés
@@ -102,12 +102,12 @@ export const Step1Associates: React.FC<Step1AssociatesProps> = ({
       {associates.map((associate, index) => (
         <div key={index} className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
           {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#F66B4C]/10 rounded-full blur-xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
           
           <div className="relative z-10">
             <div className="flex justify-between items-center mb-6">
               <h3 
-                className="text-lg font-bold text-[#071B1E]"
+                className="text-lg font-bold text-[#00171f]"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 Associé {index + 1}
@@ -237,7 +237,7 @@ export const Step1Associates: React.FC<Step1AssociatesProps> = ({
                   type="checkbox"
                   checked={associate.isGerant}
                   onChange={(e) => updateAssociate(index, 'isGerant', e.target.checked)}
-                  className="w-5 h-5 text-[#F66B4C] border-gray-300 rounded focus:ring-[#F66B4C] focus:ring-2"
+                  className="w-5 h-5 text-[#007ea7] border-gray-300 rounded focus:ring-[#007ea7] focus:ring-2"
                 />
                 <span 
                   className="text-gray-700 font-medium"
@@ -255,7 +255,7 @@ export const Step1Associates: React.FC<Step1AssociatesProps> = ({
         <div className="text-center">
           <button
             onClick={addAssociate}
-            className="inline-flex items-center px-6 py-3 border-2 border-[#F66B4C] text-[#F66B4C] rounded-2xl font-semibold hover:bg-[#F66B4C] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            className="inline-flex items-center px-6 py-3 border-2 border-[#007ea7] text-[#007ea7] rounded-2xl font-semibold hover:bg-[#007ea7] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

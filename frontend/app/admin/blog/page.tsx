@@ -131,8 +131,8 @@ export default function AdminBlogPage() {
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
+            <div className="w-12 h-12 border-4 border-[#007ea7]/30 border-t-[#007ea7] rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-[#00171f]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -145,14 +145,14 @@ export default function AdminBlogPage() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
           <h1 
-            className="text-3xl font-bold text-[#071B1E]"
+            className="text-3xl font-bold text-[#00171f]"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Blogs
           </h1>
           <Link
             href="/admin/blog/new"
-            className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-6 py-3 rounded-2xl font-semibold hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2"
+            className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-6 py-3 rounded-2xl font-semibold hover:from-[#00a8e8] hover:to-[#d14a3a] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,7 +182,7 @@ export default function AdminBlogPage() {
               </svg>
             </div>
             <h3 
-              className="text-2xl font-bold text-[#071B1E] mb-4"
+              className="text-2xl font-bold text-[#00171f] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
               {t('emptyTitle')}
@@ -195,7 +195,7 @@ export default function AdminBlogPage() {
             </p>
             <Link
               href="/admin/blog/new"
-              className="inline-flex items-center bg-[#F66B4C] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+              className="inline-flex items-center bg-[#007ea7] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#00a8e8] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -235,7 +235,7 @@ export default function AdminBlogPage() {
                 
                 <div className="p-6">
                   <h3 
-                    className="text-xl font-bold text-[#071B1E] mb-3 line-clamp-2"
+                    className="text-xl font-bold text-[#00171f] mb-3 line-clamp-2"
                     style={{ fontFamily: '"Gascogne Serial", serif' }}
                   >
                     {post.title}
@@ -262,7 +262,7 @@ export default function AdminBlogPage() {
                   <div className="flex items-center space-x-3">
                     <Link
                       href={`/admin/blog/${post.id}/edit`}
-                      className="flex-1 bg-[#062A2F] text-white px-4 py-2 rounded-xl font-semibold hover:bg-[#071B1E] transition-colors text-center"
+                      className="flex-1 bg-[#00171f] text-white px-4 py-2 rounded-xl font-semibold hover:bg-[#00171f] transition-colors text-center"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
                       {t('edit')}

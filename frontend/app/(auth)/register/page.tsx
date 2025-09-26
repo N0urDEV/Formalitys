@@ -61,11 +61,11 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#062A2F] to-[#0a3b42] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#00171f] to-[#003459] relative overflow-hidden">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-[#F66B4C]/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 left-0 w-72 h-72 bg-[#007ea7]/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#F66B4C]/5 rounded-full blur-2xl"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#007ea7]/5 rounded-full blur-2xl"></div>
       
       {/* Navigation */}
       <nav className="relative z-10 p-6">
@@ -92,14 +92,14 @@ export default function RegisterPage() {
           {/* Register Card */}
           <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 relative overflow-hidden">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#F66B4C]/10 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#062A2F]/5 rounded-full blur-xl"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#007ea7]/10 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#00171f]/5 rounded-full blur-xl"></div>
             
             <div className="relative z-10">
               {/* Header */}
               <div className="text-center mb-8">
                 <h1 
-                  className="text-3xl font-bold text-[#071B1E] mb-2"
+                  className="text-3xl font-bold text-[#00171f] mb-2"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
                   {t('register.title')}
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                     {t('register.fullName')}
                   </label>
                   <input 
-                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#007ea7] focus:ring-2 focus:ring-[#007ea7]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     placeholder={t('register.fullNamePlaceholder')}
                     value={name} 
                     onChange={e => setName(e.target.value)}
@@ -139,7 +139,7 @@ export default function RegisterPage() {
                     {t('register.email')}
                   </label>
                   <input 
-                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#007ea7] focus:ring-2 focus:ring-[#007ea7]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     placeholder={t('register.emailPlaceholder')}
                     type="email"
                     value={email} 
@@ -157,7 +157,7 @@ export default function RegisterPage() {
                     {t('register.phone')}
                   </label>
                   <input 
-                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#007ea7] focus:ring-2 focus:ring-[#007ea7]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     placeholder={t('register.phonePlaceholder')}
                     type="tel"
                     value={phone} 
@@ -175,7 +175,7 @@ export default function RegisterPage() {
                     {t('common.password')}
                   </label>
                   <input 
-                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#007ea7] focus:ring-2 focus:ring-[#007ea7]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     placeholder={t('common.passwordPlaceholder')}
                     type="password" 
                     value={password} 
@@ -195,7 +195,7 @@ export default function RegisterPage() {
 
                 <button 
                   disabled={loading} 
-                  className="w-full bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-6 py-4 rounded-2xl font-semibold text-lg hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-6 py-4 rounded-2xl font-semibold text-lg hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
                   {loading ? (
@@ -218,7 +218,7 @@ export default function RegisterPage() {
                   {t('register.haveAccount')}{' '}
                   <Link 
                     href="/login" 
-                    className="text-[#F66B4C] hover:text-[#e55a43] font-semibold transition-colors"
+                    className="text-[#007ea7] hover:text-[#00a8e8] font-semibold transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
                     {t('register.login')}

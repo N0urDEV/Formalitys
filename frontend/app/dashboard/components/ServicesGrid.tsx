@@ -30,8 +30,8 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ discountStatus }) =>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
         </svg>
       ),
-      gradient: 'bg-gradient-to-br from-[#F66B4C] to-[#e55a43]',
-      buttonStyle: 'bg-white text-[#F66B4C] hover:bg-white/90'
+      gradient: 'bg-gradient-to-br from-[#007ea7] to-[#00a8e8]',
+      buttonStyle: 'bg-white text-[#007ea7] hover:bg-white/90'
     },
     {
       id: 'tourism',
@@ -52,8 +52,8 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ discountStatus }) =>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
       ),
-      gradient: 'bg-white/90 backdrop-blur-sm border border-white/20 hover:border-[#F66B4C]/20',
-      buttonStyle: 'bg-[#F66B4C] text-white hover:bg-[#e55a43]'
+      gradient: 'bg-white/90 backdrop-blur-sm border border-white/20 hover:border-[#007ea7]/20',
+      buttonStyle: 'bg-[#007ea7] text-white hover:bg-[#00a8e8]'
     }
   ];
   // Update services with discount information (only for tourism)

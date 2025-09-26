@@ -9,7 +9,7 @@ interface DossierStatsProps {
 export const DossierStats: React.FC<DossierStatsProps> = ({ stats }) => {
   const t = useTranslations('Dashboard.stats');
   return (
-    <div className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] rounded-3xl p-8 text-white relative overflow-hidden">
+    <div className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] rounded-3xl p-8 text-white relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
       <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
       

@@ -16,17 +16,17 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
       <div className={`${service.gradient} rounded-3xl p-8 lg:p-10 shadow-2xl hover:shadow-3xl transition-all duration-500 relative overflow-hidden h-full`}>
         {/* Decorative Elements */}
         <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl ${
-          isWhiteBackground ? 'bg-[#F66B4C]/10' : 'bg-white/10'
+          isWhiteBackground ? 'bg-[#007ea7]/10' : 'bg-white/10'
         }`}></div>
         <div className={`absolute bottom-0 left-0 w-24 h-24 rounded-full blur-xl ${
-          isWhiteBackground ? 'bg-[#F66B4C]/5' : 'bg-white/5'
+          isWhiteBackground ? 'bg-[#007ea7]/5' : 'bg-white/5'
         }`}></div>
         
         <div className="relative z-10 h-full flex flex-col">
           {/* Header with Icon */}
           <div className="flex items-start justify-between mb-6">
             <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 ${
-              isWhiteBackground ? 'bg-gradient-to-br from-[#F66B4C] to-[#e55a43]' : 'bg-white/20'
+              isWhiteBackground ? 'bg-gradient-to-br from-[#007ea7] to-[#00a8e8]' : 'bg-white/20'
             }`}>
               {service.icon}
             </div>
@@ -42,7 +42,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
                     )}
                   </div>
                   <div className={`text-3xl font-bold ${
-                    isWhiteBackground ? 'text-[#F66B4C]' : 'text-white'
+                    isWhiteBackground ? 'text-[#007ea7]' : 'text-white'
                   }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
                     {service.price}
                   </div>
@@ -62,7 +62,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
               ) : (
                 <>
                   <div className={`text-3xl font-bold ${
-                    isWhiteBackground ? 'text-[#F66B4C]' : 'text-white'
+                    isWhiteBackground ? 'text-[#007ea7]' : 'text-white'
                   }`} style={{ fontFamily: 'Satoshi, sans-serif' }}>
                     {service.price}
                   </div>
@@ -80,7 +80,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           
           <h2 
             className={`text-3xl font-bold mb-4 ${
-              isWhiteBackground ? 'text-[#071B1E] group-hover:text-[#F66B4C] transition-colors' : 'text-white'
+              isWhiteBackground ? 'text-[#00171f] group-hover:text-[#007ea7] transition-colors' : 'text-white'
             }`}
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
@@ -100,7 +100,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
             {service.features.map((feature, index) => (
               <div key={index} className="flex items-center space-x-3">
                 <div className={`w-2 h-2 rounded-full ${
-                  isWhiteBackground ? 'bg-[#F66B4C]' : 'bg-white'
+                  isWhiteBackground ? 'bg-[#007ea7]' : 'bg-white'
                 }`}></div>
                 <span className={`${
                   isWhiteBackground ? 'text-gray-700' : 'text-white/90'

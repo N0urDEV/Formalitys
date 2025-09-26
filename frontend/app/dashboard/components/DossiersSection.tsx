@@ -28,7 +28,7 @@ export const DossiersSection: React.FC<DossiersSectionProps> = ({
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
+        <div className="w-12 h-12 border-4 border-[#007ea7]/30 border-t-[#007ea7] rounded-full animate-spin mx-auto mb-4"></div>
         <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
           {t('loading')}
         </p>
@@ -45,13 +45,13 @@ export const DossiersSection: React.FC<DossiersSectionProps> = ({
         {/* Dossiers Content */}
         {dossiers.length === 0 ? (
           <div className="text-center py-16 bg-white/50 backdrop-blur-sm rounded-3xl border border-white/20">
-            <div className="w-24 h-24 bg-gradient-to-br from-[#F66B4C]/20 to-[#e55a43]/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-12 h-12 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-24 h-24 bg-gradient-to-br from-[#007ea7]/20 to-[#00a8e8]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-12 h-12 text-[#007ea7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
             <h3 
-              className="text-2xl font-bold text-[#071B1E] mb-4"
+              className="text-2xl font-bold text-[#00171f] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
               {t('emptyTitle')}
@@ -65,14 +65,14 @@ export const DossiersSection: React.FC<DossiersSectionProps> = ({
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/dossiers/company"
-                className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-8 py-4 rounded-2xl font-semibold hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-8 py-4 rounded-2xl font-semibold hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('ctaCompany')}
               </Link>
               <Link
                 href="/dossiers/tourism"
-                className="bg-gradient-to-r from-[#062A2F] to-[#0a3b42] text-white px-8 py-4 rounded-2xl font-semibold hover:from-[#0a3b42] hover:to-[#062A2F] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                className="bg-gradient-to-r from-[#00171f] to-[#003459] text-white px-8 py-4 rounded-2xl font-semibold hover:from-[#003459] hover:to-[#00171f] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('ctaTourism')}

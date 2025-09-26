@@ -59,10 +59,10 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#062A2F]">
+      <div className="min-h-screen bg-[#00171f]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#007ea7] mx-auto"></div>
             <p className="mt-4 text-white/80" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#062A2F]">
+    <div className="min-h-screen bg-[#00171f]">
       <StructuredData type="breadcrumb" data={[
         {
           "@type": "ListItem",
@@ -90,7 +90,7 @@ export default function BlogPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#062A2F] to-[#071B1E] text-white py-20">
+      <section className="bg-gradient-to-br from-[#00171f] to-[#00171f] text-white py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h1 
             className="text-5xl lg:text-6xl font-bold mb-6"
@@ -118,7 +118,7 @@ export default function BlogPage() {
                 </svg>
               </div>
               <h3 
-                className="text-2xl font-bold text-[#071B1E] mb-4"
+                className="text-2xl font-bold text-[#00171f] mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
                 {t('emptyTitle')}
@@ -150,7 +150,7 @@ export default function BlogPage() {
                       />
                     </div>
                   ) : (
-                    <div className="h-48 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] flex items-center justify-center">
+                    <div className="h-48 bg-gradient-to-br from-[#007ea7] to-[#00a8e8] flex items-center justify-center">
                       <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                       </svg>
@@ -161,7 +161,7 @@ export default function BlogPage() {
                     {/* Meta Information */}
                     <div className="flex items-center space-x-4 mb-3">
                       <span 
-                        className="text-sm text-[#F66B4C] font-medium"
+                        className="text-sm text-[#007ea7] font-medium"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
                         {formatDate(post.publishedAt || post.createdAt)}
@@ -176,7 +176,7 @@ export default function BlogPage() {
                     
                     {/* Title */}
                     <h2 
-                      className="text-xl font-bold text-[#071B1E] md:text-[#071B1E] mb-3 group-hover:text-[#F66B4C] transition-colors line-clamp-2"
+                      className="text-xl font-bold text-[#00171f] md:text-[#00171f] mb-3 group-hover:text-[#007ea7] transition-colors line-clamp-2"
                       style={{ fontFamily: '"Gascogne Serial", serif' }}
                     >
                       {post.title}
@@ -195,7 +195,7 @@ export default function BlogPage() {
                     {/* Read More Link */}
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center text-[#F66B4C] font-medium hover:text-[#e55a43] transition-colors group text-sm"
+                      className="inline-flex items-center text-[#007ea7] font-medium hover:text-[#00a8e8] transition-colors group text-sm"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
                       {t('readMore')}
@@ -215,7 +215,7 @@ export default function BlogPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h2 
-            className="text-3xl lg:text-4xl font-bold text-[#071B1E] mb-6"
+            className="text-3xl lg:text-4xl font-bold text-[#00171f] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             {t('ctaTitle')}
@@ -229,14 +229,14 @@ export default function BlogPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/dossiers/company"
-              className="bg-[#F66B4C] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#e55a43] transition-colors"
+              className="bg-[#007ea7] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#00a8e8] transition-colors"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               {t('ctaCompany')}
             </Link>
             <Link
               href="/dossiers/tourism"
-              className="border-2 border-[#F66B4C] text-[#F66B4C] px-8 py-3 rounded-xl font-semibold hover:bg-[#F66B4C] hover:text-white transition-colors"
+              className="border-2 border-[#007ea7] text-[#007ea7] px-8 py-3 rounded-xl font-semibold hover:bg-[#007ea7] hover:text-white transition-colors"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               {t('ctaTourism')}

@@ -47,7 +47,7 @@ export default function DossierNavigation({
             {/* Back to Dashboard */}
             <Link
               href="/dashboard"
-              className="flex items-center space-x-2 text-gray-600 hover:text-[#F66B4C] transition-colors duration-300"
+              className="flex items-center space-x-2 text-gray-600 hover:text-[#007ea7] transition-colors duration-300"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -65,7 +65,7 @@ export default function DossierNavigation({
               <button
                 onClick={onFinish}
                 disabled={isSubmitting}
-                className="bg-[#F66B4C] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#e55a43] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                className="bg-[#007ea7] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#00a8e8] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {isSubmitting ? (

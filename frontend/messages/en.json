@@ -16,6 +16,15 @@
       "ctaPrimary": "Start my project",
       "ctaSecondary": "Explore our solutions"
     },
+    "keywords": {
+      "subtitle": "Why choose us?",
+      "k1": "Simple",
+      "k2": "Fast", 
+      "k3": "Affordable",
+      "k4": "Reliable",
+      "k5": "Expert",
+      "note": "Discover our advantages"
+    },
     "how": {
       "title": "How does it work?",
       "subtitleLine1": "A simple and transparent process",

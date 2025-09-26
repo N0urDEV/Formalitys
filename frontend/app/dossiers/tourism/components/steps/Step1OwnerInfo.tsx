@@ -41,7 +41,7 @@ export const Step1OwnerInfo: React.FC<Step1OwnerInfoProps> = ({
     <div className="space-y-8">
       <div className="text-center mb-8">
         <h2 
-          className="text-2xl font-bold text-[#071B1E] mb-4"
+          className="text-2xl font-bold text-[#00171f] mb-4"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
           Informations du propriétaire
@@ -88,7 +88,7 @@ export const Step1OwnerInfo: React.FC<Step1OwnerInfoProps> = ({
       
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
         {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-20 h-20 bg-[#F66B4C]/10 rounded-full blur-xl"></div>
+        <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
         
         <div className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

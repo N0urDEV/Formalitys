@@ -192,7 +192,7 @@ export default function AdminDossiersPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'DRAFT': return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800';
-      case 'PAID': return 'bg-gradient-to-r from-[#F66B4C]/10 to-[#e55a43]/10 text-[#F66B4C] border border-[#F66B4C]/20';
+      case 'PAID': return 'bg-gradient-to-r from-[#007ea7]/10 to-[#00a8e8]/10 text-[#007ea7] border border-[#007ea7]/20';
       case 'COMPLETED': return 'bg-gradient-to-r from-green-100 to-green-200 text-green-800';
       default: return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800';
     }
@@ -227,7 +227,7 @@ export default function AdminDossiersPage() {
     try {
       // Show loading state
       const loadingToast = document.createElement('div');
-      loadingToast.className = 'fixed top-4 right-4 bg-[#F66B4C] text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      loadingToast.className = 'fixed top-4 right-4 bg-[#007ea7] text-white px-6 py-3 rounded-lg shadow-lg z-50';
       loadingToast.innerHTML = `
         <div class="flex items-center space-x-2">
           <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -364,7 +364,7 @@ export default function AdminDossiersPage() {
     try {
       // Show loading state
       const loadingToast = document.createElement('div');
-      loadingToast.className = 'fixed top-4 right-4 bg-[#F66B4C] text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      loadingToast.className = 'fixed top-4 right-4 bg-[#007ea7] text-white px-6 py-3 rounded-lg shadow-lg z-50';
       loadingToast.innerHTML = `
         <div class="flex items-center space-x-2">
           <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -437,8 +437,8 @@ export default function AdminDossiersPage() {
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
+            <div className="w-12 h-12 border-4 border-[#007ea7]/30 border-t-[#007ea7] rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-[#00171f]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -451,13 +451,13 @@ export default function AdminDossiersPage() {
 
       {/* Search and filters */}
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 mb-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#F66B4C]/10 to-[#e55a43]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#007ea7]/10 to-[#00a8e8]/10 rounded-full blur-3xl"></div>
         <div className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-sm font-medium text-[#071B1E] mb-3" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+              <label className="block text-sm font-medium text-[#00171f] mb-3" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                 <div className="flex items-center space-x-2">
-                  <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[#007ea7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   <span>{t('filters.typeLabel')}</span>
@@ -466,7 +466,7 @@ export default function AdminDossiersPage() {
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value as 'all' | 'company' | 'tourism')}
-                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent bg-gray-50/50 transition-all duration-300 hover:bg-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#007ea7] focus:border-transparent bg-gray-50/50 transition-all duration-300 hover:bg-white"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 <option value="all">{t('filters.typeAll')}</option>
@@ -476,9 +476,9 @@ export default function AdminDossiersPage() {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-[#071B1E] mb-3" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+              <label className="block text-sm font-medium text-[#00171f] mb-3" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                 <div className="flex items-center space-x-2">
-                  <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[#007ea7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>{t('filters.statusLabel')}</span>
@@ -487,7 +487,7 @@ export default function AdminDossiersPage() {
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#F66B4C] focus:border-transparent bg-gray-50/50 transition-all duration-300 hover:bg-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#007ea7] focus:border-transparent bg-gray-50/50 transition-all duration-300 hover:bg-white"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 <option value="all">{t('filters.statusAll')}</option>
@@ -502,7 +502,7 @@ export default function AdminDossiersPage() {
             <div className="flex items-end">
               <button
                 onClick={fetchDossiers}
-                className="w-full bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-6 py-3 rounded-2xl hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105 transform"
+                className="w-full bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-6 py-3 rounded-2xl hover:from-[#00a8e8] hover:to-[#d14a3a] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105 transform"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 <div className="flex items-center justify-center space-x-2">
@@ -520,11 +520,11 @@ export default function AdminDossiersPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#F66B4C]/10 to-[#e55a43]/10 rounded-full blur-2xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#007ea7]/10 to-[#00a8e8]/10 rounded-full blur-2xl"></div>
           <div className="relative z-10">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#007ea7] to-[#00a8e8] rounded-2xl flex items-center justify-center shadow-lg">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
@@ -532,18 +532,18 @@ export default function AdminDossiersPage() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('stats.total')}</p>
-                <p className="text-3xl font-bold text-[#071B1E]" style={{ fontFamily: '"Gascogne Serial", serif' }}>{total}</p>
+                <p className="text-3xl font-bold text-[#00171f]" style={{ fontFamily: '"Gascogne Serial", serif' }}>{total}</p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#062A2F]/10 to-[#0a3b42]/10 rounded-full blur-2xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#00171f]/10 to-[#003459]/10 rounded-full blur-2xl"></div>
           <div className="relative z-10">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-gradient-to-br from-[#062A2F] to-[#0a3b42] rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#00171f] to-[#003459] rounded-2xl flex items-center justify-center shadow-lg">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -551,7 +551,7 @@ export default function AdminDossiersPage() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('stats.completed')}</p>
-                <p className="text-3xl font-bold text-[#071B1E]" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+                <p className="text-3xl font-bold text-[#00171f]" style={{ fontFamily: '"Gascogne Serial", serif' }}>
                   {dossiers.filter(d => d.status === 'COMPLETED').length}
                 </p>
               </div>
@@ -560,11 +560,11 @@ export default function AdminDossiersPage() {
         </div>
 
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#F66B4C]/20 to-[#e55a43]/20 rounded-full blur-2xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#007ea7]/20 to-[#00a8e8]/20 rounded-full blur-2xl"></div>
           <div className="relative z-10">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#007ea7] to-[#00a8e8] rounded-2xl flex items-center justify-center shadow-lg">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -572,7 +572,7 @@ export default function AdminDossiersPage() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('stats.inProgress')}</p>
-                <p className="text-3xl font-bold text-[#071B1E]" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+                <p className="text-3xl font-bold text-[#00171f]" style={{ fontFamily: '"Gascogne Serial", serif' }}>
                   {dossiers.filter(d => d.status === 'IN_PROGRESS').length}
                 </p>
               </div>
@@ -586,10 +586,10 @@ export default function AdminDossiersPage() {
         <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
           <div className="flex items-center justify-between">
             <h3 
-              className="text-lg font-semibold text-[#071B1E] flex items-center space-x-2"
+              className="text-lg font-semibold text-[#00171f] flex items-center space-x-2"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              <svg className="w-5 h-5 text-[#F66B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-[#007ea7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               <span>{t('table.title')}</span>
@@ -598,9 +598,9 @@ export default function AdminDossiersPage() {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gradient-to-r from-[#F66B4C]/5 to-[#e55a43]/5">
+            <thead className="bg-gradient-to-r from-[#007ea7]/5 to-[#00a8e8]/5">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#00171f] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                   <div className="flex items-center space-x-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -608,7 +608,7 @@ export default function AdminDossiersPage() {
                     <span>{t('table.user')}</span>
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#00171f] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                   <div className="flex items-center space-x-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -616,7 +616,7 @@ export default function AdminDossiersPage() {
                     <span>{t('table.type')}</span>
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#00171f] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                   <div className="flex items-center space-x-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -624,7 +624,7 @@ export default function AdminDossiersPage() {
                     <span>{t('table.status')}</span>
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#00171f] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                   <div className="flex items-center space-x-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
@@ -632,7 +632,7 @@ export default function AdminDossiersPage() {
                     <span>{t('table.amount')}</span>
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#00171f] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                   <div className="flex items-center space-x-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -640,7 +640,7 @@ export default function AdminDossiersPage() {
                     <span>{t('table.files')}</span>
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#00171f] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                   <div className="flex items-center space-x-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-3 3m3-3l3 3m-3-3v10a2 2 0 002 2h4a2 2 0 002-2V7" />
@@ -648,7 +648,7 @@ export default function AdminDossiersPage() {
                     <span>{t('table.date')}</span>
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-[#071B1E] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#00171f] uppercase tracking-wider" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                   <div className="flex items-center space-x-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -661,11 +661,11 @@ export default function AdminDossiersPage() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {dossiers.map((dossier, index) => (
-                <tr key={`${dossier.type}-${dossier.id}`} className={`hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#e55a43]/5 transition-all duration-300 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
+                <tr key={`${dossier.type}-${dossier.id}`} className={`hover:bg-gradient-to-r hover:from-[#007ea7]/5 hover:to-[#00a8e8]/5 transition-all duration-300 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
                   <td className="px-6 py-6 whitespace-nowrap">
                     <div className="flex items-center space-x-4">
                       <div className="relative">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#007ea7] to-[#00a8e8] rounded-2xl flex items-center justify-center shadow-lg">
                           <span className="text-white font-bold text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                             {dossier.user.name ? dossier.user.name.charAt(0).toUpperCase() : dossier.user.email.charAt(0).toUpperCase()}
                           </span>
@@ -673,7 +673,7 @@ export default function AdminDossiersPage() {
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                       </div>
                       <div>
-                        <div className="text-lg font-semibold text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                        <div className="text-lg font-semibold text-[#00171f]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                           {dossier.user.name || 'Non renseigné'}
                         </div>
                         <div className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -683,7 +683,7 @@ export default function AdminDossiersPage() {
                     </div>
                   </td>
                   <td className="px-6 py-6 whitespace-nowrap">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#062A2F]/10 to-[#0a3b42]/10 text-[#062A2F] border border-[#062A2F]/20" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#00171f]/10 to-[#003459]/10 text-[#00171f] border border-[#00171f]/20" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                       {dossier.type === 'company' ? t('table.typeCompany') : t('table.typeTourism')}
                     </span>
                   </td>
@@ -697,7 +697,7 @@ export default function AdminDossiersPage() {
                       <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                       </svg>
-                      <span className="text-[#071B1E] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                      <span className="text-[#00171f] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                         {formatAmount(dossier.amountPaid)}
                       </span>
                     </div>
@@ -707,7 +707,7 @@ export default function AdminDossiersPage() {
                       <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                       </svg>
-                      <span className="text-[#071B1E] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                      <span className="text-[#00171f] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                         {dossier.uploadedFiles.length} file{dossier.uploadedFiles.length > 1 ? 's' : ''}
                       </span>
                     </div>
@@ -717,7 +717,7 @@ export default function AdminDossiersPage() {
                       <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-3 3m3-3l3 3m-3-3v10a2 2 0 002 2h4a2 2 0 002-2V7" />
                       </svg>
-                      <span className="text-[#071B1E] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                      <span className="text-[#00171f] font-semibold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                         {new Date(dossier.createdAt).toLocaleDateString('en-US')}
                       </span>
                     </div>
@@ -726,7 +726,7 @@ export default function AdminDossiersPage() {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => handleViewFiles(dossier)}
-                        className="p-2 text-[#F66B4C] hover:text-white hover:bg-[#F66B4C] rounded-xl transition-all duration-300 hover:scale-110"
+                        className="p-2 text-[#007ea7] hover:text-white hover:bg-[#007ea7] rounded-xl transition-all duration-300 hover:scale-110"
                         title={t('tooltips.viewFiles')}
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -771,7 +771,7 @@ export default function AdminDossiersPage() {
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-8 py-6 flex items-center justify-between border-t border-gray-200">
             <div className="flex items-center space-x-4">
               <div className="text-sm text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                <span className="font-semibold text-[#071B1E]">Page {currentPage}</span> sur <span className="font-semibold">{totalPages}</span>
+                <span className="font-semibold text-[#00171f]">Page {currentPage}</span> sur <span className="font-semibold">{totalPages}</span>
               </div>
               <div className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                 {total} dossiers au total
@@ -781,7 +781,7 @@ export default function AdminDossiersPage() {
               <button
                 onClick={() => setCurrentPage(1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#F66B4C] hover:text-[#F66B4C] transition-all duration-300 flex items-center space-x-2"
+                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#007ea7] hover:text-[#007ea7] transition-all duration-300 flex items-center space-x-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -792,7 +792,7 @@ export default function AdminDossiersPage() {
               <button
                 onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
-                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#F66B4C] hover:text-[#F66B4C] transition-all duration-300 flex items-center space-x-2"
+                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#007ea7] hover:text-[#007ea7] transition-all duration-300 flex items-center space-x-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -821,8 +821,8 @@ export default function AdminDossiersPage() {
                       onClick={() => setCurrentPage(pageNum)}
                       className={`px-4 py-2 text-sm rounded-xl transition-all duration-300 font-semibold ${
                         currentPage === pageNum
-                          ? 'bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white shadow-lg'
-                          : 'border border-gray-300 hover:bg-white hover:border-[#F66B4C] hover:text-[#F66B4C]'
+                          ? 'bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white shadow-lg'
+                          : 'border border-gray-300 hover:bg-white hover:border-[#007ea7] hover:text-[#007ea7]'
                       }`}
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
@@ -835,7 +835,7 @@ export default function AdminDossiersPage() {
               <button
                 onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#F66B4C] hover:text-[#F66B4C] transition-all duration-300 flex items-center space-x-2"
+                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#007ea7] hover:text-[#007ea7] transition-all duration-300 flex items-center space-x-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 <span>Suivant</span>
@@ -846,7 +846,7 @@ export default function AdminDossiersPage() {
               <button
                 onClick={() => setCurrentPage(totalPages)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#F66B4C] hover:text-[#F66B4C] transition-all duration-300 flex items-center space-x-2"
+                className="px-4 py-2 text-sm border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:border-[#007ea7] hover:text-[#007ea7] transition-all duration-300 flex items-center space-x-2"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 <span>Dernière</span>
@@ -866,7 +866,7 @@ export default function AdminDossiersPage() {
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <h3 
-                  className="text-2xl font-bold text-[#071B1E]"
+                  className="text-2xl font-bold text-[#00171f]"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
                   Fichiers du dossier - {selectedDossier.user.name}
@@ -886,7 +886,7 @@ export default function AdminDossiersPage() {
               {selectedDossier.uploadedFiles.length > 0 && (
                 <div className="mb-6 flex justify-between items-center">
                   <div>
-                    <h4 className="text-lg font-semibold text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                    <h4 className="text-lg font-semibold text-[#00171f]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                       {selectedDossier.uploadedFiles.length} fichier{selectedDossier.uploadedFiles.length > 1 ? 's' : ''} disponible{selectedDossier.uploadedFiles.length > 1 ? 's' : ''}
                     </h4>
                     <p className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -937,14 +937,14 @@ export default function AdminDossiersPage() {
                     <div key={file.id} className="flex items-center justify-between p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all duration-300">
                       <div className="flex items-center space-x-4">
                         <div className="flex-shrink-0">
-                          <div className="w-12 h-12 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] rounded-2xl flex items-center justify-center shadow-lg">
+                          <div className="w-12 h-12 bg-gradient-to-br from-[#007ea7] to-[#00a8e8] rounded-2xl flex items-center justify-center shadow-lg">
                             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-lg font-semibold text-[#071B1E] truncate" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                          <p className="text-lg font-semibold text-[#00171f] truncate" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                             {file.originalName}
                           </p>
                           <p className="text-sm text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -954,7 +954,7 @@ export default function AdminDossiersPage() {
                       </div>
                       <button
                         onClick={() => handleDownloadFile(file)}
-                        className="ml-4 inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl hover:from-[#e55a43] hover:to-[#d14a3a] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105 transform"
+                        className="ml-4 inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white rounded-2xl hover:from-[#00a8e8] hover:to-[#d14a3a] transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105 transform"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                       >
                         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

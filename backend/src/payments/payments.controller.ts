@@ -19,11 +19,11 @@ class ConfirmPaymentDto {
 }
 
 @Controller('payments')
-@UseGuards(AuthGuard('jwt'))
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Post('create-intent')
+  @UseGuards(AuthGuard('jwt'))
   createPaymentIntent(@Body() dto: CreatePaymentIntentDto, @Req() req: any) {
     return this.paymentsService.createPaymentIntent(
       dto.dossierId,
@@ -33,6 +33,7 @@ export class PaymentsController {
   }
 
   @Post('confirm')
+  @UseGuards(AuthGuard('jwt'))
   confirmPayment(@Body() dto: ConfirmPaymentDto) {
     return this.paymentsService.confirmPayment(dto.paymentIntentId);
   }

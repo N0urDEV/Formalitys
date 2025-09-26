@@ -67,7 +67,7 @@ function ResetPasswordContent() {
 
   if (verifying) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#062A2F] to-[#0a3b42] relative overflow-hidden flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#00171f] to-[#003459] relative overflow-hidden flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-white" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -80,7 +80,7 @@ function ResetPasswordContent() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#062A2F] to-[#0a3b42] relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-[#00171f] to-[#003459] relative overflow-hidden">
         <div className="relative z-10 flex items-center justify-center min-h-screen px-6">
           <div className="w-full max-w-md">
             <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 text-center">
@@ -90,7 +90,7 @@ function ResetPasswordContent() {
                 </svg>
               </div>
               <h1 
-                className="text-3xl font-bold text-[#071B1E] mb-4"
+                className="text-3xl font-bold text-[#00171f] mb-4"
                 style={{ fontFamily: '"Gascogne Serial", serif' }}
               >
                 {t('successTitle')}
@@ -103,7 +103,7 @@ function ResetPasswordContent() {
               </p>
               <Link 
                 href="/login"
-                className="inline-block bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-8 py-3 rounded-2xl font-semibold hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                className="inline-block bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-8 py-3 rounded-2xl font-semibold hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('backToLogin')}
@@ -116,11 +116,11 @@ function ResetPasswordContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#062A2F] to-[#0a3b42] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#00171f] to-[#003459] relative overflow-hidden">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-[#F66B4C]/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 left-0 w-72 h-72 bg-[#007ea7]/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#F66B4C]/5 rounded-full blur-2xl"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#007ea7]/5 rounded-full blur-2xl"></div>
       
       {/* Navigation */}
       <nav className="relative z-10 p-6">
@@ -147,19 +147,19 @@ function ResetPasswordContent() {
           {/* Reset Password Card */}
           <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 relative overflow-hidden">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#F66B4C]/10 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#062A2F]/5 rounded-full blur-xl"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#007ea7]/10 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#00171f]/5 rounded-full blur-xl"></div>
             
             <div className="relative z-10">
               {/* Header */}
               <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#007ea7] to-[#00a8e8] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
                 <h1 
-                  className="text-3xl font-bold text-[#071B1E] mb-2"
+                  className="text-3xl font-bold text-[#00171f] mb-2"
                   style={{ fontFamily: '"Gascogne Serial", serif' }}
                 >
                   {t('title')}
@@ -182,7 +182,7 @@ function ResetPasswordContent() {
                     {t('newPassword')}
                   </label>
                   <input 
-                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#007ea7] focus:ring-2 focus:ring-[#007ea7]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     placeholder="••••••••"
                     type="password"
                     value={password} 
@@ -201,7 +201,7 @@ function ResetPasswordContent() {
                     {t('confirmPassword')}
                   </label>
                   <input 
-                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                    className="w-full px-4 py-3 text-black rounded-2xl border border-gray-200 focus:border-[#007ea7] focus:ring-2 focus:ring-[#007ea7]/20 transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     placeholder="••••••••"
                     type="password"
                     value={confirmPassword} 
@@ -222,7 +222,7 @@ function ResetPasswordContent() {
 
                 <button 
                   disabled={loading} 
-                  className="w-full bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-6 py-4 rounded-2xl font-semibold text-lg hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-6 py-4 rounded-2xl font-semibold text-lg hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
                   {loading ? (
@@ -245,7 +245,7 @@ function ResetPasswordContent() {
                   {t('remember')} 
                   <Link 
                     href="/login" 
-                    className="text-[#F66B4C] hover:text-[#e55a43] font-semibold transition-colors"
+                    className="text-[#007ea7] hover:text-[#00a8e8] font-semibold transition-colors"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
                     {t('backToLogin')}

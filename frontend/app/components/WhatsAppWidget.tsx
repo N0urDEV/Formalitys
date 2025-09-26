@@ -192,7 +192,7 @@ export default function WhatsAppWidget({
         <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></div>
         
         {/* Notification Badge */}
-        <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#F66B4C] text-white rounded-full flex items-center justify-center text-xs font-bold">
+        <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#007ea7] text-white rounded-full flex items-center justify-center text-xs font-bold">
           !
         </div>
       </button>

@@ -17,7 +17,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   return (
     <div className="text-center mb-12">
       <h1 
-        className="text-4xl lg:text-5xl font-bold text-[#071B1E] mb-6"
+        className="text-4xl lg:text-5xl font-bold text-[#00171f] mb-6"
         style={{ fontFamily: '"Gascogne Serial", serif' }}
       >
         {t('title')}
@@ -35,8 +35,8 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           onClick={() => onTabChange('services')}
           className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
             activeTab === 'services'
-              ? 'bg-[#F66B4C] text-white shadow-lg'
-              : 'text-gray-600 hover:text-[#F66B4C] hover:bg-[#F66B4C]/10'
+              ? 'bg-[#007ea7] text-white shadow-lg'
+              : 'text-gray-600 hover:text-[#007ea7] hover:bg-[#007ea7]/10'
           }`}
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
@@ -46,8 +46,8 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           onClick={() => onTabChange('dossiers')}
           className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
             activeTab === 'dossiers'
-              ? 'bg-[#F66B4C] text-white shadow-lg'
-              : 'text-gray-600 hover:text-[#F66B4C] hover:bg-[#F66B4C]/10'
+              ? 'bg-[#007ea7] text-white shadow-lg'
+              : 'text-gray-600 hover:text-[#007ea7] hover:bg-[#007ea7]/10'
           }`}
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >

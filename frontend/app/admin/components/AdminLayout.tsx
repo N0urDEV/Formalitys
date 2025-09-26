@@ -29,8 +29,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin mx-auto mb-6"></div>
-          <p className="text-[#071B1E] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loadingDashboard')}</p>
+          <div className="w-16 h-16 border-4 border-[#007ea7]/30 border-t-[#007ea7] rounded-full animate-spin mx-auto mb-6"></div>
+          <p className="text-[#00171f] text-lg" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loadingDashboard')}</p>
         </div>
       </div>
     );

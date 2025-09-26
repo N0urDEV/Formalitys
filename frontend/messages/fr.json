@@ -16,6 +16,15 @@
       "ctaPrimary": "Lancer mon projet",
       "ctaSecondary": "Explorer nos solutions"
     },
+    "keywords": {
+      "subtitle": "Pourquoi nous choisir ?",
+      "k1": "Simple",
+      "k2": "Rapide", 
+      "k3": "Économique",
+      "k4": "Fiable",
+      "k5": "Expert",
+      "note": "Découvrez nos avantages"
+    },
     "how": {
       "title": "Comment ça marche ?",
       "subtitleLine1": "Un processus simple et transparent",

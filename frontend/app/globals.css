@@ -2,7 +2,15 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #00171f;
+  
+  /* New Brand Colors */
+  --primary: #007ea7;
+  --primary-hover: #00a8e8;
+  --primary-dark: #00171f;
+  --primary-dark-secondary: #003459;
+  --accent: #00a8e8;
+  --accent-dark: #003459;
 }
 
 @theme inline {
@@ -23,8 +31,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #00171f;
+    --foreground: #ffffff;
   }
 }
 

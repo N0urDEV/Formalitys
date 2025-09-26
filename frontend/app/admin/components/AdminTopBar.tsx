@@ -39,7 +39,7 @@ export function AdminTopBar({ setSidebarOpen, currentPath }: AdminTopBarProps) {
           </button>
           <div>
             <h2 
-              className="text-2xl font-bold text-[#071B1E]"
+              className="text-2xl font-bold text-[#00171f]"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
               {getPageTitle(currentPath)}

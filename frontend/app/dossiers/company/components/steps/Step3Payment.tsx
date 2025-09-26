@@ -72,7 +72,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
   if (loading) {
     return (
       <div className="text-center space-y-6">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto mb-4"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#007ea7] mx-auto mb-4"></div>
         <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
           Préparation du paiement...
         </p>
@@ -119,7 +119,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
     <div className="space-y-6">
       <div className="text-center">
         <h2 
-          className="text-xl font-semibold text-[#071B1E] mb-2"
+          className="text-xl font-semibold text-[#00171f] mb-2"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
           Paiement sécurisé

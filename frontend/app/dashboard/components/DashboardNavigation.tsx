@@ -31,7 +31,7 @@ export const DashboardNavigation: React.FC<DashboardNavigationProps> = ({
             
             <button
               onClick={onLogout}
-              className="text-gray-500 hover:text-[#F66B4C] transition-colors"
+              className="text-gray-500 hover:text-[#007ea7] transition-colors"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
 {t('logout')}

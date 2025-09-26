@@ -16,7 +16,7 @@ export const DiscountStatus: React.FC<DiscountStatusProps> = ({ discountStatus }
   }
 
   return (
-    <div className="bg-gradient-to-r from-[#062A2F] to-[#071B1E] rounded-3xl p-6 text-white mb-8">
+    <div className="bg-gradient-to-r from-[#00171f] to-[#00171f] rounded-3xl p-6 text-white mb-8">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">

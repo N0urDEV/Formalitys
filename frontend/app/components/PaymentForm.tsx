@@ -90,7 +90,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                    <span className="text-gray-900" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                      {t('total')}
                    </span>
-                   <span className="text-[#F66B4C]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                   <span className="text-[#007ea7]" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                      {formatPrice(costBreakdown?.total || amount / 100)}
                    </span>
                  </div>
@@ -104,7 +104,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
       <button
         type="submit"
         disabled={!stripe || loading}
-        className="w-full px-6 py-3 bg-[#F66B4C] text-white rounded-lg hover:bg-[#e55a43] disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+        className="w-full px-6 py-3 bg-[#007ea7] text-white rounded-lg hover:bg-[#00a8e8] disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         style={{ fontFamily: 'Satoshi, sans-serif' }}
       >
         {loading ? t('processing') : t('pay', { amount: amount / 100, currency: currency.toUpperCase() })}

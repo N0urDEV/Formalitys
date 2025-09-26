@@ -10,7 +10,7 @@ export default function TermsPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8]">
       <Navigation />
 
-      <section className="bg-gradient-to-r from-[#062A2F] to-[#071B1E] text-white py-16">
+      <section className="bg-gradient-to-r from-[#00171f] to-[#00171f] text-white py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h1
             className="text-4xl lg:text-5xl font-bold"
@@ -24,12 +24,12 @@ export default function TermsPage() {
       <section className="py-14">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100">
-            <div className="mb-6 p-6 rounded-2xl bg-gradient-to-r from-[#F66B4C]/10 to-[#e55a43]/10 border-l-4 border-[#F66B4C]">
-              <p className="text-[#071B1E]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('notice')}</p>
+            <div className="mb-6 p-6 rounded-2xl bg-gradient-to-r from-[#007ea7]/10 to-[#00a8e8]/10 border-l-4 border-[#007ea7]">
+              <p className="text-[#00171f]" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('notice')}</p>
             </div>
 
             <div className="prose max-w-none text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              <h2 className="text-xl font-bold text-[#071B1E]">{t('sections.purposeTitle')}</h2>
+              <h2 className="text-xl font-bold text-[#00171f]">{t('sections.purposeTitle')}</h2>
               <p>{t('sections.purposeBody')}</p>
             </div>
           </div>

@@ -43,8 +43,8 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
       {/* Decorative Elements */}
       <div className={`absolute top-0 right-0 w-20 h-20 rounded-full blur-xl group-hover:scale-110 transition-transform duration-300 ${
         dossier.type === 'company' 
-          ? 'bg-[#F66B4C]/10' 
-          : 'bg-[#062A2F]/10'
+          ? 'bg-[#007ea7]/10' 
+          : 'bg-[#00171f]/10'
       }`}></div>
       
       <div className="relative z-10">
@@ -53,8 +53,8 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
           <div className="flex items-center space-x-4">
             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg ${
               dossier.type === 'company' 
-                ? 'bg-gradient-to-br from-[#F66B4C] to-[#e55a43]' 
-                : 'bg-gradient-to-br from-[#062A2F] to-[#0a3b42]'
+                ? 'bg-gradient-to-br from-[#007ea7] to-[#00a8e8]' 
+                : 'bg-gradient-to-br from-[#00171f] to-[#003459]'
             }`}>
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {dossier.type === 'company' ? (
@@ -66,7 +66,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
             </div>
             <div>
               <h3 
-                className="font-bold text-[#071B1E] text-lg"
+                className="font-bold text-[#00171f] text-lg"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {dossier.type === 'company' ? t('typeCompany') : t('typeTourism')}
@@ -94,7 +94,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
               {t('progress')}
             </span>
             <span 
-              className="text-sm font-medium text-[#F66B4C]"
+              className="text-sm font-medium text-[#007ea7]"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               {dossier.currentStep}/{dossier.type === 'company' ? 5 : 6}
@@ -102,7 +102,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
-              className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] h-2 rounded-full transition-all duration-500"
+              className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] h-2 rounded-full transition-all duration-500"
               style={{ width: `${(dossier.currentStep / (dossier.type === 'company' ? 5 : 6)) * 100}%` }}
             ></div>
           </div>
@@ -119,7 +119,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                 {t('companyName')}
               </p>
               <p 
-                className="font-semibold text-[#071B1E]"
+                className="font-semibold text-[#00171f]"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {dossier.companyName}
@@ -136,7 +136,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                 {t('owner')}
               </p>
               <p 
-                className="font-semibold text-[#071B1E]"
+                className="font-semibold text-[#00171f]"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {dossier.ownerInfo.nom} {dossier.ownerInfo.prenom}
@@ -153,7 +153,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                 {t('createdOn')}
               </p>
               <p 
-                className="font-medium text-[#071B1E]"
+                className="font-medium text-[#00171f]"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {new Date(dossier.createdAt).toLocaleDateString('fr-FR')}
@@ -169,7 +169,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
                   {t('amountPaid')}
                 </p>
                 <p 
-                  className="font-bold text-[#F66B4C]"
+                  className="font-bold text-[#007ea7]"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
                   {dossier.amountPaid / 100} MAD
@@ -184,7 +184,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
           {isCompleted ? (
             <button
               onClick={() => onDownloadPdf?.(dossier.id, dossier.type)}
-              className="flex-1 bg-gradient-to-r from-[#062A2F] to-[#071B1E] text-white px-4 py-3 rounded-xl font-semibold text-sm hover:from-[#071B1E] hover:to-[#062A2F] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
+              className="flex-1 bg-gradient-to-r from-[#00171f] to-[#00171f] text-white px-4 py-3 rounded-xl font-semibold text-sm hover:from-[#00171f] hover:to-[#00171f] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
           ) : (
             <button
               onClick={() => router.push(`/dossiers/${dossier.type}?edit=${dossier.id}`)}
-              className="flex-1 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-4 py-3 rounded-xl font-semibold text-sm hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
+              className="flex-1 bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-4 py-3 rounded-xl font-semibold text-sm hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

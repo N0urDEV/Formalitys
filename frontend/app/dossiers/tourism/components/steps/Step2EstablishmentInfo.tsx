@@ -72,7 +72,7 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
     <div className="space-y-8">
       <div className="text-center mb-8">
         <h2 
-          className="text-2xl font-bold text-[#071B1E] mb-4"
+          className="text-2xl font-bold text-[#00171f] mb-4"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
           {t('title')}
@@ -119,11 +119,11 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
       
       {/* Type et catégorie d'établissement */}
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-20 h-20 bg-[#F66B4C]/10 rounded-full blur-xl"></div>
+        <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
         
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#071B1E] mb-6"
+            className="text-xl font-bold text-[#00171f] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             {t('group.typeAndCategorie')}
@@ -153,11 +153,11 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
 
       {/* Données générales */}
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-20 h-20 bg-[#062A2F]/10 rounded-full blur-xl"></div>
+        <div className="absolute top-0 right-0 w-20 h-20 bg-[#00171f]/10 rounded-full blur-xl"></div>
         
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#071B1E] mb-6"
+            className="text-xl font-bold text-[#00171f] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             {t('group.generalData')}

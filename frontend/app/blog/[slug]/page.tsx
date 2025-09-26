@@ -68,7 +68,7 @@ export default function BlogPostPage() {
       <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#007ea7] mx-auto"></div>
             <p className="mt-4 text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function BlogPostPage() {
               </svg>
             </div>
             <h1 
-              className="text-3xl font-bold text-[#071B1E] mb-4"
+              className="text-3xl font-bold text-[#00171f] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
               {t('notFoundTitle')}
@@ -100,7 +100,7 @@ export default function BlogPostPage() {
             </p>
             <Link
               href="/blog"
-              className="inline-flex items-center bg-[#F66B4C] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#e55a43] transition-colors"
+              className="inline-flex items-center bg-[#007ea7] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#00a8e8] transition-colors"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +117,7 @@ export default function BlogPostPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F8F9FA] via-white to-[#E8F4F8]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#062A2F] to-[#071B1E] text-white py-20">
+      <div className="bg-gradient-to-r from-[#00171f] to-[#00171f] text-white py-20">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Link
             href="/blog"
@@ -166,9 +166,9 @@ export default function BlogPostPage() {
       <div className="max-w-4xl mx-auto px-6 lg:px-8 py-20">
         <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
           {blogPost.excerpt && (
-            <div className="mb-8 p-6 bg-gradient-to-r from-[#F66B4C]/10 to-[#e55a43]/10 rounded-2xl border-l-4 border-[#F66B4C]">
+            <div className="mb-8 p-6 bg-gradient-to-r from-[#007ea7]/10 to-[#00a8e8]/10 rounded-2xl border-l-4 border-[#007ea7]">
               <p 
-                className="text-lg text-[#071B1E]/70 italic"
+                className="text-lg text-[#00171f]/70 italic"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {blogPost.excerpt}
@@ -177,7 +177,7 @@ export default function BlogPostPage() {
           )}
           
           <div 
-            className="prose prose-lg max-w-none text-[#071B1E]"
+            className="prose prose-lg max-w-none text-[#00171f]"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
             dangerouslySetInnerHTML={{ __html: blogPost.content }}
           />
@@ -185,7 +185,7 @@ export default function BlogPostPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] py-20">
+      <div className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h2 
             className="text-4xl lg:text-5xl font-bold text-white mb-6"
@@ -202,14 +202,14 @@ export default function BlogPostPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/dossiers/company"
-              className="bg-white text-[#F66B4C] px-8 py-4 rounded-2xl font-semibold hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+              className="bg-white text-[#007ea7] px-8 py-4 rounded-2xl font-semibold hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               {t('ctaCompany')}
             </Link>
             <Link
               href="/dossiers/tourism"
-              className="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-[#F66B4C] transition-all duration-300"
+              className="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-[#007ea7] transition-all duration-300"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
               {t('ctaTourism')}

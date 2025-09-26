@@ -101,7 +101,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
       <div className="space-y-6">
         <h2 
-          className="text-xl font-semibold text-[#071B1E]"
+          className="text-xl font-semibold text-[#00171f]"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
           {t('sections.companyDetails')}
@@ -158,7 +158,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                   checked={companyData.activities.includes(activity)}
                   onChange={(e) => handleActivityChange(activity, e.target.checked)}
                   disabled={!companyData.activities.includes(activity) && companyData.activities.length >= 3}
-                  className="w-4 h-4 text-[#F66B4C] border-gray-300 rounded focus:ring-[#F66B4C] focus:ring-2"
+                  className="w-4 h-4 text-[#007ea7] border-gray-300 rounded focus:ring-[#007ea7] focus:ring-2"
                 />
                 <span 
                   className="text-sm text-gray-700"
@@ -185,7 +185,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
         {/* Additional Company Information Section */}
         <div className="border-t pt-8 mt-8">
           <h3 
-            className="text-lg font-semibold text-[#071B1E] mb-6"
+            className="text-lg font-semibold text-[#00171f] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             {t('sections.additionalInfo')}
@@ -300,7 +300,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
         {/* Tax and Registration Information Section */}
         <div className="border-t pt-8 mt-8">
           <h3 
-            className="text-lg font-semibold text-[#071B1E] mb-6"
+            className="text-lg font-semibold text-[#00171f] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             {t('sections.taxInfo')}
@@ -375,7 +375,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
         {/* File Uploads */}
         <div className="space-y-8">
           <h3 
-            className="text-lg font-semibold text-[#071B1E]"
+            className="text-lg font-semibold text-[#00171f]"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             {t('sections.files')}

@@ -35,7 +35,7 @@ export const Navigation: React.FC<NavigationProps> = ({
       <div className="flex space-x-4">
         <button
           onClick={() => router.push('/dashboard')}
-          className="px-6 py-3 border-2 border-gray-300 text-gray-600 rounded-2xl font-semibold hover:border-[#F66B4C] hover:text-[#F66B4C] transition-all duration-300"
+          className="px-6 py-3 border-2 border-gray-300 text-gray-600 rounded-2xl font-semibold hover:border-[#007ea7] hover:text-[#007ea7] transition-all duration-300"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           ← Tableau de bord
@@ -44,7 +44,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         {canGoBack && currentStep < 6 && (
           <button
             onClick={onPrevious}
-            className="px-6 py-3 border-2 border-[#062A2F] text-[#062A2F] rounded-2xl font-semibold hover:bg-[#062A2F] hover:text-white transition-all duration-300"
+            className="px-6 py-3 border-2 border-[#00171f] text-[#00171f] rounded-2xl font-semibold hover:bg-[#00171f] hover:text-white transition-all duration-300"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             ← Précédent
@@ -56,7 +56,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         <button
           onClick={onNext}
           disabled={loading}
-          className="px-6 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl font-semibold text-lg hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="px-6 py-3 bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white rounded-2xl font-semibold text-lg hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           {loading ? (
@@ -73,7 +73,7 @@ export const Navigation: React.FC<NavigationProps> = ({
       {currentStep === 6 && (
         <button
           onClick={() => router.push('/dashboard')}
-          className="px-8 py-3 bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white rounded-2xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+          className="px-8 py-3 bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white rounded-2xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           Terminer

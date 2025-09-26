@@ -34,7 +34,7 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
       <div className="space-y-8">
         <div className="text-center mb-8">
           <h2 
-            className="text-2xl font-bold text-[#071B1E] mb-4"
+            className="text-2xl font-bold text-[#00171f] mb-4"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Documents et photos requis
@@ -81,7 +81,7 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
 
         {/* CNI Upload */}
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#F66B4C]/10 rounded-full blur-xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
           <div className="relative z-10">
             <FileUpload
               title="CNI du propriétaire *"
@@ -102,7 +102,7 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
 
         {/* Titre Foncier Upload */}
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#062A2F]/10 rounded-full blur-xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[#00171f]/10 rounded-full blur-xl"></div>
           <div className="relative z-10">
             <FileUpload
               title="Titre foncier *"
@@ -123,7 +123,7 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
 
         {/* Permis d'habiter Upload */}
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#F66B4C]/10 rounded-full blur-xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
           <div className="relative z-10">
             <FileUpload
               title="Permis d'habiter ou attestation architecte *"
@@ -144,7 +144,7 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
 
         {/* Assurance Upload */}
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#062A2F]/10 rounded-full blur-xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[#00171f]/10 rounded-full blur-xl"></div>
           <div className="relative z-10">
             <FileUpload
               title="Assurance habitation *"
@@ -165,7 +165,7 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
 
         {/* Photos Upload */}
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#F66B4C]/10 rounded-full blur-xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
           <div className="relative z-10">
             <FileUpload
               title="Photos de la propriété *"

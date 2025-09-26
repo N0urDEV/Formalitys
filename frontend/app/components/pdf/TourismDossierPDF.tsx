@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F66B4C',
+    color: '#007ea7',
     marginBottom: 8,
     fontFamily: 'Helvetica-Bold',
   },
@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#071B1E',
+    color: '#00171f',
     marginBottom: 8,
-    borderBottom: '1px solid #F66B4C',
+    borderBottom: '1px solid #007ea7',
     paddingBottom: 3,
   },
   row: {
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E5E5E5',
   },
   tableHeader: {
-    backgroundColor: '#F66B4C',
+    backgroundColor: '#007ea7',
     color: '#ffffff',
     fontWeight: 'bold',
   },
@@ -550,7 +550,7 @@ export const TourismDossierPDF: React.FC<TourismDossierPDFProps> = ({ user, doss
             <View style={styles.rightColumn}>
               <View style={[styles.row, { borderTop: '1px solid #E5E5E5', paddingTop: 4, marginTop: 4 }]}>
                 <Text style={[styles.label, { fontWeight: 'bold', fontSize: 10 }]}>Total:</Text>
-                <Text style={[styles.value, { fontWeight: 'bold', fontSize: 10, color: '#F66B4C' }]}>
+                <Text style={[styles.value, { fontWeight: 'bold', fontSize: 10, color: '#007ea7' }]}>
                   {formatPrice(1600)}
                 </Text>
               </View>

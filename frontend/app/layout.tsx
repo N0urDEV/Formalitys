@@ -76,7 +76,7 @@ export default function RootLayout({
         {/* Site icons */}
         <link rel="icon" type="image/svg+xml" href="/SVG/Asset 2.svg" />
         <link rel="apple-touch-icon" href="/SVG/Asset 2.svg" />
-        <meta name="theme-color" content="#062A2F" />
+        <meta name="theme-color" content="#00171f" />
         {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-9KS5C9ZR0M"

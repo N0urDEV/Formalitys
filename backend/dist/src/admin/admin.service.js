@@ -548,20 +548,6 @@ let AdminService = class AdminService {
             if (existingUser.role === 'ADMIN') {
                 throw new common_1.BadRequestException('Impossible de supprimer un administrateur');
             }
-            const userDossiers = await this.prisma.user.findUnique({
-                where: { id },
-                select: {
-                    _count: {
-                        select: {
-                            companyDossiers: true,
-                            tourismDossiers: true,
-                        },
-                    },
-                },
-            });
-            if (userDossiers && (userDossiers._count.companyDossiers > 0 || userDossiers._count.tourismDossiers > 0)) {
-                throw new common_1.BadRequestException('Impossible de supprimer un utilisateur avec des dossiers existants');
-            }
             await this.prisma.user.delete({
                 where: { id }
             });

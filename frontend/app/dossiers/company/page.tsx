@@ -172,7 +172,7 @@ function CompanyDossierPageContent() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#007ea7] mx-auto mb-4"></div>
           <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>{t('loading')}</p>
         </div>
       </div>
@@ -209,7 +209,7 @@ function CompanyDossierPageContent() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 
-              className="text-4xl font-bold text-[#071B1E] mb-4"
+              className="text-4xl font-bold text-[#00171f] mb-4"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
             {t('title')}
@@ -220,7 +220,7 @@ function CompanyDossierPageContent() {
             >
             {t('subtitle')}
             </p>
-            <div className="inline-flex items-center bg-[#F66B4C] text-white px-6 py-3 rounded-full font-semibold">
+            <div className="inline-flex items-center bg-[#007ea7] text-white px-6 py-3 rounded-full font-semibold">
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -255,7 +255,7 @@ function CompanyDossierPageContent() {
               <button
                 onClick={handleNext}
                 disabled={isSubmitting}
-                className="bg-[#F66B4C] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#e55a43] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                className="bg-[#007ea7] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#00a8e8] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {isSubmitting ? (
@@ -282,7 +282,7 @@ export default function CompanyDossierPage() {
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F66B4C] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#007ea7] mx-auto mb-4"></div>
           <p className="text-gray-600">Loading dossier...</p>
         </div>
       </div>

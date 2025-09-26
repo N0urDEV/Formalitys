@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
+import { animateHeroSection } from '@/app/utils/gsap';
 
 export default function Navigation() {
   const t = useTranslations('Nav');
@@ -41,6 +42,15 @@ export default function Navigation() {
     };
   }, [isMenuOpen]);
 
+  // Initialize navbar animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      animateHeroSection();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   // Close services dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -71,7 +81,7 @@ export default function Navigation() {
         />
       )}
       
-      <nav className="bg-white/95 backdrop-blur-md relative md:sticky md:top-0 z-50 border-b border-gray-100/50">
+      <nav className="navbar bg-white/95 backdrop-blur-md relative md:sticky md:top-0 z-50 border-b border-gray-100/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -91,7 +101,7 @@ export default function Navigation() {
               <div className="relative services-dropdown">
                 <button
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5 flex items-center"
+                  className="text-[#00171f] hover:text-[#007ea7] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#007ea7]/5 flex items-center"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
                   {t('services')}
@@ -111,7 +121,7 @@ export default function Navigation() {
                     <div className="py-2">
                       <Link
                         href="/dossiers/company"
-                        className="block px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-[#F66B4C]/5 transition-all duration-200"
+                        className="block px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-[#007ea7]/5 transition-all duration-200"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                         onClick={closeMenu}
                       >
@@ -127,7 +137,7 @@ export default function Navigation() {
                       </Link>
                       <Link
                         href="/dossiers/tourism"
-                        className="block px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-[#F66B4C]/5 transition-all duration-200"
+                        className="block px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-[#007ea7]/5 transition-all duration-200"
                         style={{ fontFamily: 'Satoshi, sans-serif' }}
                         onClick={closeMenu}
                       >
@@ -149,35 +159,35 @@ export default function Navigation() {
 
               <Link 
                 href="/#faq" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
+                className="text-[#00171f] hover:text-[#007ea7] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#007ea7]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('faq')}
               </Link>
               <Link 
                 href="/blog" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
+                className="text-[#00171f] hover:text-[#007ea7] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#007ea7]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('blog')}
               </Link>
               <Link 
                 href="/#contact" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
+                className="text-[#00171f] hover:text-[#007ea7] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#007ea7]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('contact')}
               </Link>
               <Link 
                 href="/login" 
-                className="text-[#071B1E] hover:text-[#F66B4C] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#F66B4C]/5"
+                className="text-[#00171f] hover:text-[#007ea7] px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-[#007ea7]/5"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('login')}
               </Link>
               <Link 
                 href="/register" 
-                className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-6 py-2.5 rounded-xl font-semibold hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-6 py-2.5 rounded-xl font-semibold hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
                 {t('register')}
@@ -189,7 +199,7 @@ export default function Navigation() {
             <div className="md:hidden">
               <button
                 onClick={toggleMenu}
-                className="relative w-10 h-10 flex items-center justify-center text-[#071B1E] hover:text-[#F66B4C] focus:outline-none focus:ring-2 focus:ring-[#F66B4C] focus:ring-offset-2 rounded-xl transition-all duration-200 hover:bg-[#F66B4C]/5"
+                className="relative w-10 h-10 flex items-center justify-center text-[#00171f] hover:text-[#007ea7] focus:outline-none focus:ring-2 focus:ring-[#007ea7] focus:ring-offset-2 rounded-xl transition-all duration-200 hover:bg-[#007ea7]/5"
                 aria-label="Toggle menu"
               >
                 <div className="relative w-6 h-6">
@@ -228,11 +238,11 @@ export default function Navigation() {
                   <div className="space-y-1">
                     <Link
                       href="/dossiers/company"
-                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      className="group flex items-center px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-gradient-to-r hover:from-[#007ea7]/5 hover:to-[#007ea7]/10 rounded-xl font-medium transition-all duration-200"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                       onClick={closeMenu}
                     >
-                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#007ea7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
                       <div>
@@ -242,11 +252,11 @@ export default function Navigation() {
                     </Link>
                     <Link
                       href="/dossiers/tourism"
-                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      className="group flex items-center px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-gradient-to-r hover:from-[#007ea7]/5 hover:to-[#007ea7]/10 rounded-xl font-medium transition-all duration-200"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                       onClick={closeMenu}
                     >
-                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#007ea7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
                       </svg>
@@ -264,44 +274,44 @@ export default function Navigation() {
                   <div className="space-y-1">
                     <Link
                       href="/#faq"
-                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      className="group flex items-center px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-gradient-to-r hover:from-[#007ea7]/5 hover:to-[#007ea7]/10 rounded-xl font-medium transition-all duration-200"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                       onClick={closeMenu}
                     >
-                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#007ea7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       {t('faq')}
                     </Link>
                     <Link
                       href="/blog"
-                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      className="group flex items-center px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-gradient-to-r hover:from-[#007ea7]/5 hover:to-[#007ea7]/10 rounded-xl font-medium transition-all duration-200"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                       onClick={closeMenu}
                     >
-                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#007ea7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                       </svg>
                       {t('blog')}
                     </Link>
                     <Link
                       href="/#contact"
-                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      className="group flex items-center px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-gradient-to-r hover:from-[#007ea7]/5 hover:to-[#007ea7]/10 rounded-xl font-medium transition-all duration-200"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                       onClick={closeMenu}
                     >
-                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#007ea7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                       {t('contact')}
                     </Link>
                     <Link
                       href="/login"
-                      className="group flex items-center px-4 py-3 text-[#071B1E] hover:text-[#F66B4C] hover:bg-gradient-to-r hover:from-[#F66B4C]/5 hover:to-[#F66B4C]/10 rounded-xl font-medium transition-all duration-200"
+                      className="group flex items-center px-4 py-3 text-[#00171f] hover:text-[#007ea7] hover:bg-gradient-to-r hover:from-[#007ea7]/5 hover:to-[#007ea7]/10 rounded-xl font-medium transition-all duration-200"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                       onClick={closeMenu}
                     >
-                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#F66B4C] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-[#007ea7] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                       </svg>
                       {t('login')}
@@ -317,7 +327,7 @@ export default function Navigation() {
               <div className="px-2">
                 <Link
                   href="/register"
-                  className="group flex items-center justify-center w-full bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white px-6 py-4 rounded-xl font-semibold hover:from-[#e55a43] hover:to-[#F66B4C] transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="group flex items-center justify-center w-full bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white px-6 py-4 rounded-xl font-semibold hover:from-[#00a8e8] hover:to-[#007ea7] transition-all duration-300 shadow-lg hover:shadow-xl"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                   onClick={closeMenu}
                 >

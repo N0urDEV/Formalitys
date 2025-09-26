@@ -135,8 +135,8 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
                 href={item.href}
                 className={`flex items-center space-x-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#F66B4C] to-[#e55a43] text-white shadow-lg'
-                    : 'text-gray-600 hover:text-[#F66B4C] hover:bg-[#F66B4C]/10'
+                    ? 'bg-gradient-to-r from-[#007ea7] to-[#00a8e8] text-white shadow-lg'
+                    : 'text-gray-600 hover:text-[#007ea7] hover:bg-[#007ea7]/10'
                 }`}
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
                 onClick={() => setSidebarOpen(false)}
@@ -151,7 +151,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
         {/* User section */}
         <div className="p-4 border-t border-gray-200">
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#F66B4C] to-[#e55a43] rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#007ea7] to-[#00a8e8] rounded-full flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
@@ -165,7 +165,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
               ) : (
                 <>
                   <p 
-                    className="text-sm font-medium text-[#071B1E]"
+                    className="text-sm font-medium text-[#00171f]"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
                     {adminProfile?.name || t('admin')}
@@ -182,7 +182,7 @@ export function AdminSidebar({ sidebarOpen, setSidebarOpen, currentPath }: Admin
           </div>
           <button
             onClick={logout}
-            className="w-full flex items-center space-x-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-600 hover:text-[#F66B4C] hover:bg-[#F66B4C]/10 transition-all duration-300"
+            className="w-full flex items-center space-x-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-600 hover:text-[#007ea7] hover:bg-[#007ea7]/10 transition-all duration-300"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

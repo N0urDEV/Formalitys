@@ -76,10 +76,10 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
 
       {/* Headquarters Selection */}
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-20 h-20 bg-[#F66B4C]/10 rounded-full blur-xl"></div>
+        <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#071B1E] mb-6"
+            className="text-xl font-bold text-[#00171f] mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Sélection du siège social
@@ -95,7 +95,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
             {headquartersOptions.map((option) => (
               <label key={option.value} className={`flex items-center p-4 border-2 rounded-2xl cursor-pointer transition-all duration-200 hover:bg-gray-50 ${
                 companyData.headquarters === option.value 
-                  ? 'border-[#F66B4C] bg-[#F66B4C]/5' 
+                  ? 'border-[#007ea7] bg-[#007ea7]/5' 
                   : 'border-gray-200'
               }`}>
                 <input
@@ -104,11 +104,11 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
                   value={option.value}
                   checked={companyData.headquarters === option.value}
                   onChange={(e) => handleHeadquartersChange(e.target.value)}
-                  className="w-5 h-5 text-[#F66B4C] border-gray-300 focus:ring-[#F66B4C] focus:ring-2"
+                  className="w-5 h-5 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2"
                 />
                 <div className="ml-4 flex-1">
                   <div 
-                    className="font-medium text-[#071B1E]"
+                    className="font-medium text-[#00171f]"
                     style={{ fontFamily: 'Satoshi, sans-serif' }}
                   >
                     {option.label}
@@ -147,10 +147,10 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
       {/* Bank Selection - Only show if domiciliation is selected */}
       {companyData.headquarters === 'contrat_domiciliation' && (
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#062A2F]/10 rounded-full blur-xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[#00171f]/10 rounded-full blur-xl"></div>
           <div className="relative z-10">
             <h3 
-              className="text-xl font-bold text-[#071B1E] mb-6"
+              className="text-xl font-bold text-[#00171f] mb-6"
               style={{ fontFamily: '"Gascogne Serial", serif' }}
             >
               Banque pour la domiciliation
@@ -175,7 +175,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
       )}
 
       {/* Price Summary */}
-      <div className="bg-gradient-to-r from-[#F66B4C] to-[#e55a43] rounded-3xl p-8 text-white">
+      <div className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] rounded-3xl p-8 text-white">
         <h3 
           className="text-xl font-bold mb-4"
           style={{ fontFamily: '"Gascogne Serial", serif' }}

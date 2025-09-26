@@ -110,9 +110,9 @@ const categoryIcons = {
 };
 
 const categoryColors = {
-  tourism: 'from-[#F66B4C] to-[#e55a43]',
-  company: 'from-[#062A2F] to-[#0a3b42]',
-  general: 'from-[#0a3b42] to-[#F66B4C]'
+  tourism: 'from-[#007ea7] to-[#00a8e8]',
+  company: 'from-[#00171f] to-[#003459]',
+  general: 'from-[#003459] to-[#007ea7]'
 };
 
 export default function FAQ() {
@@ -142,7 +142,7 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-24 bg-gradient-to-br from-[#F66B4C] via-[#e55a43] to-[#F66B4C] relative overflow-hidden">
+    <section id="faq" className="faq-section py-24 bg-gradient-to-br from-[#007ea7] via-[#00a8e8] to-[#007ea7] relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
@@ -154,13 +154,13 @@ export default function FAQ() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 
-            className="text-4xl lg:text-5xl font-bold text-white mb-6"
+            className="section-title text-4xl lg:text-5xl font-bold text-white mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             {t('title')}
           </h2>
           <p 
-            className="text-xl text-white/90 max-w-3xl mx-auto"
+            className="section-subtitle text-xl text-white/90 max-w-3xl mx-auto"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             {t('subtitle')}
@@ -175,7 +175,7 @@ export default function FAQ() {
               onClick={() => setActiveCategory(category.id)}
               className={`group relative px-6 py-3 rounded-2xl font-semibold transition-all duration-300 ${
                 activeCategory === category.id
-                  ? 'bg-white text-[#F66B4C] shadow-lg'
+                  ? 'bg-white text-[#007ea7] shadow-lg'
                   : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 hover:shadow-lg border border-white/30'
               }`}
               style={{ fontFamily: 'Satoshi, sans-serif' }}
@@ -184,7 +184,7 @@ export default function FAQ() {
                 <span>{category.label}</span>
                 <span className={`px-2 py-1 rounded-full text-xs ${
                   activeCategory === category.id 
-                    ? 'bg-[#F66B4C]/10 text-[#F66B4C]' 
+                    ? 'bg-[#007ea7]/10 text-[#007ea7]' 
                     : 'bg-white/20 text-white'
                 }`}>
                   {category.count}
@@ -196,7 +196,7 @@ export default function FAQ() {
 
         {/* FAQ Items */}
         <div className="max-w-4xl mx-auto">
-          <div className="space-y-4">
+          <div className="faq-items space-y-4">
             {filteredFAQs.map((faq, index) => {
               const isOpen = openItems.has(faq.id);
               const categoryColor = categoryColors[faq.category];
@@ -204,7 +204,7 @@ export default function FAQ() {
               return (
                 <div
                   key={faq.id}
-                  className="group bg-white/95 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/30 hover:border-white/50 overflow-hidden"
+                  className="faq-item group bg-white/95 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/30 hover:border-white/50 overflow-hidden"
                   style={{
                     animationDelay: `${index * 100}ms`,
                     animationName: 'fadeInUp',
@@ -215,7 +215,7 @@ export default function FAQ() {
                 >
                   <button
                     onClick={() => toggleItem(faq.id)}
-                    className="w-full p-6 lg:p-8 text-left focus:outline-none focus:ring-2 focus:ring-[#F66B4C]/20 focus:ring-inset"
+                    className="w-full p-6 lg:p-8 text-left focus:outline-none focus:ring-2 focus:ring-[#007ea7]/20 focus:ring-inset"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-4 flex-1">
@@ -229,8 +229,8 @@ export default function FAQ() {
                         {/* Question */}
                         <div className="flex-1 min-w-0">
                           <h3 
-                            className={`text-lg lg:text-xl font-bold mb-2 group-hover:text-[#F66B4C] transition-colors ${
-                              isOpen ? 'text-[#F66B4C]' : 'text-[#071B1E]'
+                            className={`text-lg lg:text-xl font-bold mb-2 group-hover:text-[#007ea7] transition-colors ${
+                              isOpen ? 'text-[#007ea7]' : 'text-[#00171f]'
                             }`}
                             style={{ fontFamily: 'Satoshi, sans-serif' }}
                           >
@@ -242,10 +242,10 @@ export default function FAQ() {
                             <span 
                               className={`px-3 py-1 rounded-full text-xs font-medium ${
                                 faq.category === 'tourism' 
-                                  ? 'bg-[#F66B4C]/10 text-[#F66B4C]' 
+                                  ? 'bg-[#007ea7]/10 text-[#007ea7]' 
                                   : faq.category === 'company'
-                                  ? 'bg-[#062A2F]/10 text-[#062A2F]'
-                                  : 'bg-[#0a3b42]/10 text-[#0a3b42]'
+                                  ? 'bg-[#00171f]/10 text-[#00171f]'
+                                  : 'bg-[#003459]/10 text-[#003459]'
                               }`}
                               style={{ fontFamily: 'Satoshi, sans-serif' }}
                             >
@@ -259,8 +259,8 @@ export default function FAQ() {
                       <div className="ml-4 flex-shrink-0">
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                           isOpen 
-                            ? 'bg-[#F66B4C] text-white rotate-180' 
-                            : 'bg-gray-100 text-gray-600 group-hover:bg-[#F66B4C] group-hover:text-white'
+                            ? 'bg-[#007ea7] text-white rotate-180' 
+                            : 'bg-gray-100 text-gray-600 group-hover:bg-[#007ea7] group-hover:text-white'
                         }`}>
                           <svg 
                             className="w-5 h-5 transition-transform duration-300" 
@@ -281,7 +281,7 @@ export default function FAQ() {
                   }`}>
                     <div className="px-6 lg:px-8 pb-6 lg:pb-8">
                       <div className="ml-16">
-                        <div className="h-px bg-gradient-to-r from-[#F66B4C]/20 to-transparent mb-4"></div>
+                        <div className="h-px bg-gradient-to-r from-[#007ea7]/20 to-transparent mb-4"></div>
                         <p 
                           className="text-gray-700 leading-relaxed"
                           style={{ fontFamily: 'Satoshi, sans-serif' }}
@@ -297,15 +297,15 @@ export default function FAQ() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="rounded-3xl p-[1px] bg-gradient-to-r from-[#F66B4C] via-[#e55a43] to-transparent relative overflow-hidden">
-            <div className="bg-gradient-to-r from-[#062A2F] to-[#0a3b42] rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+        <div className="faq-cta text-center mt-16">
+          <div className="rounded-3xl p-[1px] bg-gradient-to-r from-[#007ea7] via-[#00a8e8] to-transparent relative overflow-hidden">
+            <div className="bg-gradient-to-r from-[#00171f] to-[#003459] rounded-3xl p-8 lg:p-12 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
               <div className="absolute inset-0 rounded-3xl ring-1 ring-white/10"></div>
-              <div className="absolute -top-10 -left-10 w-56 h-56 bg-[#F66B4C]/20 rounded-full blur-3xl"></div>
+              <div className="absolute -top-10 -left-10 w-56 h-56 bg-[#007ea7]/20 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-16 -right-16 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
               <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(600px at 0% 0%, rgba(255,255,255,0.25), transparent 40%)' }}></div>
-              <div className="absolute inset-0 opacity-15" style={{ backgroundImage: 'radial-gradient(600px at 100% 100%, rgba(246,107,76,0.25), transparent 40%)' }}></div>
+              <div className="absolute inset-0 opacity-15" style={{ backgroundImage: 'radial-gradient(600px at 100% 100%, rgba(0,126,167,0.25), transparent 40%)' }}></div>
             <div className="relative z-10">
               <h3 
                 className="text-2xl lg:text-3xl font-bold text-white mb-4"
@@ -324,7 +324,7 @@ export default function FAQ() {
                   href="https://wa.me/212620269000"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center bg-[#F66B4C] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#e55a43] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                  className="faq-cta-button inline-flex items-center justify-center bg-[#007ea7] text-white px-8 py-4 rounded-2xl font-semibold hover:bg-[#00a8e8] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -334,7 +334,7 @@ export default function FAQ() {
                 </a>
                 <a
                   href="tel:+212620269000"
-                  className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-[#062A2F] transition-all duration-300"
+                  className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-[#00171f] transition-all duration-300"
                   style={{ fontFamily: 'Satoshi, sans-serif' }}
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

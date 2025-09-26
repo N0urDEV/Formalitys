@@ -80,8 +80,8 @@ export function ImageUpload({ onImageUpload, currentImage, className = '', place
         className={`
           border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-300
           ${currentImage 
-            ? 'border-[#F66B4C] bg-[#F66B4C]/5' 
-            : 'border-gray-300 hover:border-[#F66B4C] hover:bg-[#F66B4C]/5'
+            ? 'border-[#007ea7] bg-[#007ea7]/5' 
+            : 'border-gray-300 hover:border-[#007ea7] hover:bg-[#007ea7]/5'
           }
           ${uploading ? 'opacity-50 cursor-not-allowed' : ''}
         `}
@@ -94,7 +94,7 @@ export function ImageUpload({ onImageUpload, currentImage, className = '', place
               alt="Image sélectionnée"
               className="w-full h-48 object-cover rounded-xl mx-auto"
             />
-            <div className="text-[#F66B4C] font-semibold">
+            <div className="text-[#007ea7] font-semibold">
               ✓ Image sélectionnée
             </div>
             <div className="text-sm text-gray-600">
@@ -105,7 +105,7 @@ export function ImageUpload({ onImageUpload, currentImage, className = '', place
           <div className="space-y-4">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
               {uploading ? (
-                <div className="w-8 h-8 border-4 border-[#F66B4C]/30 border-t-[#F66B4C] rounded-full animate-spin"></div>
+                <div className="w-8 h-8 border-4 border-[#007ea7]/30 border-t-[#007ea7] rounded-full animate-spin"></div>
               ) : (
                 <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />

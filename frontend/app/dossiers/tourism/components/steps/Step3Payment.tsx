@@ -74,7 +74,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
     return (
       <div className="space-y-6">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-[#071B1E] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+          <h2 className="text-xl font-semibold text-[#00171f] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
             Préparation du paiement
           </h2>
           <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -95,7 +95,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
     return (
       <div className="space-y-6">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-[#071B1E] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+          <h2 className="text-xl font-semibold text-[#00171f] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
             Erreur de paiement
           </h2>
           <p className="text-red-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -110,7 +110,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
     return (
       <div className="space-y-6">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-[#071B1E] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+          <h2 className="text-xl font-semibold text-[#00171f] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
             Impossible de créer le paiement
           </h2>
           <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
@@ -124,7 +124,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-xl font-semibold text-[#071B1E] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
+        <h2 className="text-xl font-semibold text-[#00171f] mb-2" style={{ fontFamily: '"Gascogne Serial", serif' }}>
           Paiement sécurisé
         </h2>
         <p className="text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>

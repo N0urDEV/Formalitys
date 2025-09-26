@@ -39,7 +39,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         className={`w-full px-4 py-3 text-black rounded-2xl border transition-all duration-300 bg-white/80 backdrop-blur-sm ${
           error 
             ? 'border-red-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' 
-            : 'border-gray-200 focus:border-[#F66B4C] focus:ring-2 focus:ring-[#F66B4C]/20'
+            : 'border-gray-200 focus:border-[#007ea7] focus:ring-2 focus:ring-[#007ea7]/20'
         }`}
         value={value}
         onChange={(e) => onChange(e.target.value)}

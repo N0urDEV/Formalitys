@@ -8,7 +8,7 @@ export const Step4Final: React.FC<Step4FinalProps> = ({ onDownloadPdf }) => {
   return (
     <div className="text-center space-y-6">
       <h2 
-        className="text-xl font-semibold text-[#071B1E]"
+        className="text-xl font-semibold text-[#00171f]"
         style={{ fontFamily: '"Gascogne Serial", serif' }}
       >
         Dossier en cours de traitement
@@ -22,7 +22,7 @@ export const Step4Final: React.FC<Step4FinalProps> = ({ onDownloadPdf }) => {
       
       <div className="bg-blue-50 p-6 rounded-2xl border border-blue-200">
         <h3 
-          className="font-medium mb-4 text-[#071B1E]"
+          className="font-medium mb-4 text-[#00171f]"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           Prochaines étapes:
@@ -32,35 +32,35 @@ export const Step4Final: React.FC<Step4FinalProps> = ({ onDownloadPdf }) => {
             className="flex items-center space-x-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            <span className="w-2 h-2 bg-[#F66B4C] rounded-full"></span>
+            <span className="w-2 h-2 bg-[#007ea7] rounded-full"></span>
             <span>Validation des documents</span>
           </li>
           <li 
             className="flex items-center space-x-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            <span className="w-2 h-2 bg-[#F66B4C] rounded-full"></span>
+            <span className="w-2 h-2 bg-[#007ea7] rounded-full"></span>
             <span>Création des statuts</span>
           </li>
           <li 
             className="flex items-center space-x-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            <span className="w-2 h-2 bg-[#F66B4C] rounded-full"></span>
+            <span className="w-2 h-2 bg-[#007ea7] rounded-full"></span>
             <span>Enregistrement au registre de commerce</span>
           </li>
           <li 
             className="flex items-center space-x-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            <span className="w-2 h-2 bg-[#F66B4C] rounded-full"></span>
+            <span className="w-2 h-2 bg-[#007ea7] rounded-full"></span>
             <span>Déclarations CNSS et impôts</span>
           </li>
           <li 
             className="flex items-center space-x-2"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
-            <span className="w-2 h-2 bg-[#F66B4C] rounded-full"></span>
+            <span className="w-2 h-2 bg-[#007ea7] rounded-full"></span>
             <span>Réception des documents finaux</span>
           </li>
         </ul>
@@ -70,7 +70,7 @@ export const Step4Final: React.FC<Step4FinalProps> = ({ onDownloadPdf }) => {
       <div className="mt-8">
         <button
           onClick={onDownloadPdf}
-          className="px-8 py-4 bg-gradient-to-r from-[#062A2F] to-[#071B1E] text-white rounded-2xl font-semibold text-lg hover:from-[#071B1E] hover:to-[#062A2F] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-3 mx-auto"
+          className="px-8 py-4 bg-gradient-to-r from-[#00171f] to-[#00171f] text-white rounded-2xl font-semibold text-lg hover:from-[#00171f] hover:to-[#00171f] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-3 mx-auto"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
