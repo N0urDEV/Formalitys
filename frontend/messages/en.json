@@ -885,6 +885,8 @@
   "Auth": {
     "common": {
       "backHome": "← Back to home",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
       "emailOrPhone": "Email or phone",
       "emailOrPhonePlaceholder": "your@email.com or +212...",
       "password": "Password",
