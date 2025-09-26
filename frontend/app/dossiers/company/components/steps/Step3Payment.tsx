@@ -141,8 +141,8 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
             currency={paymentIntent?.currency || 'mad'}
             serviceName="Création de société"
             costBreakdown={{
-              basePrice: 3600,
-              domiciliationFee: (paymentIntent?.amount || 0) > 360000 ? 900 : undefined,
+              basePrice: 3300,
+              domiciliationFee: (paymentIntent?.amount || 0) > 330000 ? 900 : undefined,
               total: (paymentIntent?.amount || 0) / 100
             }}
           />

@@ -63,7 +63,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                      {serviceName || t('service')}
                    </span>
                    <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                     {formatPrice(costBreakdown ? costBreakdown.basePrice : 3600)}
+                     {formatPrice(costBreakdown ? costBreakdown.basePrice : 3300)}
                    </span>
                  </div>
                  {costBreakdown?.domiciliationFee && (

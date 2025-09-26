@@ -163,7 +163,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
   };
 
   const calculateTotalPrice = () => {
-    let total = 3600; // Base price
+    let total = 3300; // Base price
     if (dossier.headquarters === 'contrat_domiciliation') {
       total += 900;
     }
@@ -402,7 +402,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
             <View style={styles.leftColumn}>
                      <View style={styles.row}>
                        <Text style={styles.label}>Création de société:</Text>
-                       <Text style={styles.value}>{formatPrice(3600)}</Text>
+                       <Text style={styles.value}>{formatPrice(3300)}</Text>
                      </View>
                      {dossier.headquarters === 'contrat_domiciliation' && (
                        <View style={styles.row}>

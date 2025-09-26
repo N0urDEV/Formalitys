@@ -44,7 +44,7 @@ function CompanyDossierPageContent() {
 
   // Calculate total price function
   const calculateTotalPrice = () => {
-    let total = 3600; // Base price for company creation
+    let total = 3300; // Base price for company creation
     
     // Add domiciliation fee if selected
     if (companyData.headquarters === 'contrat_domiciliation') {

@@ -26,7 +26,7 @@ export class DiscountService {
   ];
 
   private readonly BASE_PRICES = {
-    company: 360000, // 3600 DH in cents
+    company: 330000, // 3300 DH in cents
     tourism: 160000  // 1600 DH in cents
   };
 

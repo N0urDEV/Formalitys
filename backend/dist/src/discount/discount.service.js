@@ -20,7 +20,7 @@ let DiscountService = class DiscountService {
         { tier: 3, minDossiers: 2, discountPercentage: 25, description: 'Troisième dossier et plus - 25% de réduction' }
     ];
     BASE_PRICES = {
-        company: 360000,
+        company: 330000,
         tourism: 160000
     };
     constructor(prisma) {

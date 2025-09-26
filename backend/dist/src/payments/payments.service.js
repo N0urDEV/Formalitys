@@ -43,7 +43,7 @@ let PaymentsService = class PaymentsService {
                 headquarters: companyDossier?.headquarters,
                 currentStep: companyDossier?.currentStep
             });
-            baseAmount = 360000;
+            baseAmount = 330000;
             if (companyDossier?.headquarters === 'contrat_domiciliation') {
                 console.log('Adding domiciliation fee: +900 MAD');
                 baseAmount += 90000;

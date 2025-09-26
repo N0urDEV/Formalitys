@@ -194,7 +194,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
               className="font-medium"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              {formatPrice(3600)}
+              {formatPrice(3300)}
             </span>
           </div>
           {companyData.headquarters === 'contrat_domiciliation' && (

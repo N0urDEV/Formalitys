@@ -435,7 +435,7 @@
     "Company": {
       "serviceName": "Création Société SARL au Maroc",
       "serviceDescription": "Service de création de société SARL au Maroc 100% en ligne avec accompagnement expert",
-      "offerPrice": "3600 MAD (343€)",
+      "offerPrice": "3300 MAD (314€)",
       "offerDescription": "Création complète SARL avec tous les documents officiels",
       "breadcrumbHome": "Accueil",
       "breadcrumbThis": "Création Société SARL",
@@ -901,6 +901,37 @@
       "loading": "Création...",
       "haveAccount": "Déjà inscrit ?",
       "login": "Se connecter"
+    },
+    "Forgot": {
+      "title": "Mot de passe oublié",
+      "subtitle": "Entrez votre email pour réinitialiser votre mot de passe",
+      "backToLogin": "← Retour à la connexion",
+      "sending": "Envoi en cours...",
+      "sendLink": "Envoyer le lien de réinitialisation",
+      "remember": "Vous vous souvenez de votre mot de passe ?",
+      "errors": {
+        "emailNotFound": "Email non trouvé"
+      }
+    },
+    "Reset": {
+      "verifying": "Vérification du token...",
+      "successTitle": "Mot de passe réinitialisé",
+      "successBody": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.",
+      "backToLogin": "Se connecter",
+      "title": "Nouveau mot de passe",
+      "forEmail": "Pour {email}",
+      "enterNewPassword": "Entrez votre nouveau mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "resetting": "Réinitialisation...",
+      "resetPassword": "Réinitialiser le mot de passe",
+      "remember": "Vous vous souvenez de votre mot de passe ?",
+      "errors": {
+        "emailMissing": "Email manquant",
+        "passwordsMismatch": "Les mots de passe ne correspondent pas",
+        "passwordMin": "Le mot de passe doit contenir au moins 6 caractères",
+        "errorReset": "Erreur lors de la réinitialisation"
+      }
     }
   }
 }

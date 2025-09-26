@@ -42,7 +42,7 @@ export class DiscountController {
         { tier: 3, minDossiers: 2, discountPercentage: 25, description: 'Troisième dossier et plus - 25% de réduction' }
       ],
       basePrices: {
-        company: 360000, // 3600 DH in cents
+        company: 330000, // 3300 DH in cents
         tourism: 160000  // 1600 DH in cents
       }
     };

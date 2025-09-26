@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Création Société SARL au Maroc | Formalitys - 3600 DH | 100% En Ligne",
+  title: "Création Société SARL au Maroc | Formalitys - 3300 DH | 100% En Ligne",
   description: "Créez votre SARL au Maroc en ligne. Constitution complète, OMPIC, registre commerce, CNSS. Accompagnement expert. Devis gratuit.",
   keywords: "création SARL Maroc, constitution société, OMPIC, registre commerce, CNSS, formalités création entreprise",
   openGraph: {

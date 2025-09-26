@@ -69,7 +69,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
               "name": "Combien coûte la création d'une SARL au Maroc ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "La création d'une SARL au Maroc coûte 3600 DH avec Formalitys, incluant tous les documents officiels et l'accompagnement expert."
+                "text": "La création d'une SARL au Maroc coûte 3300 DH avec Formalitys, incluant tous les documents officiels et l'accompagnement expert."
               }
             },
             {

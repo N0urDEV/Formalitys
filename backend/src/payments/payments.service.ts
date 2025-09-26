@@ -36,7 +36,7 @@ export class PaymentsService {
         currentStep: companyDossier?.currentStep
       });
       
-      baseAmount = 360000; // 3600 MAD base price
+      baseAmount = 330000; // 3300 MAD base price
       
       // Add domiciliation fee if selected
       if (companyDossier?.headquarters === 'contrat_domiciliation') {

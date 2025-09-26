@@ -38,7 +38,7 @@ let DiscountController = class DiscountController {
                 { tier: 3, minDossiers: 2, discountPercentage: 25, description: 'Troisième dossier et plus - 25% de réduction' }
             ],
             basePrices: {
-                company: 360000,
+                company: 330000,
                 tourism: 160000
             }
         };
