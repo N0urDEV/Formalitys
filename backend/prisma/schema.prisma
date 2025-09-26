@@ -46,7 +46,7 @@ enum DossierStatus {
 model CompanyDossier {
   id                Int           @id @default(autoincrement())
   userId            Int
-  user              User          @relation(fields: [userId], references: [id])
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   status            DossierStatus @default(DRAFT)
   currentStep       Int           @default(1)
   
@@ -100,7 +100,7 @@ model CompanyDossier {
 model TourismDossier {
   id                Int           @id @default(autoincrement())
   userId            Int
-  user              User          @relation(fields: [userId], references: [id])
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   status            DossierStatus @default(DRAFT)
   currentStep       Int           @default(1)
   
@@ -136,7 +136,7 @@ model TourismDossier {
 model DiscountHistory {
   id                Int           @id @default(autoincrement())
   userId            Int
-  user              User          @relation(fields: [userId], references: [id])
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   dossierId         Int?          // Can be null for general discount tracking
   dossierType       String?       // "company" or "tourism"
   discountPercentage Int
@@ -161,7 +161,7 @@ model BlogPost {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   authorId    Int
-  author      User     @relation(fields: [authorId], references: [id])
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   
   @@map("blog_posts")
 }

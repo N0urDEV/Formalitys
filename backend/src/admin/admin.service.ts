@@ -602,24 +602,7 @@ export class AdminService {
         throw new BadRequestException('Impossible de supprimer un administrateur');
       }
 
-      // Check if user has any dossiers
-      const userDossiers = await this.prisma.user.findUnique({
-        where: { id },
-        select: {
-          _count: {
-            select: {
-              companyDossiers: true,
-              tourismDossiers: true,
-            },
-          },
-        },
-      });
-
-      if (userDossiers && (userDossiers._count.companyDossiers > 0 || userDossiers._count.tourismDossiers > 0)) {
-        throw new BadRequestException('Impossible de supprimer un utilisateur avec des dossiers existants');
-      }
-
-      // Delete user
+      // Delete user (cascade delete will automatically remove associated dossiers, blog posts, and discount history)
       await this.prisma.user.delete({
         where: { id }
       });
