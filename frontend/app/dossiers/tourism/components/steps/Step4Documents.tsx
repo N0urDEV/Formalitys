@@ -79,26 +79,6 @@ export const Step4Documents: React.FC<Step4DocumentsProps> = ({
           </div>
         )}
 
-        {/* CNI Upload */}
-        <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
-          <div className="relative z-10">
-            <FileUpload
-              title="CNI du propriétaire *"
-              description="Carte nationale d'identité du propriétaire (PDF uniquement)"
-              onUpload={(files) => onDocumentUpload(files, 'cni')}
-              acceptedTypes={['.pdf']}
-              maxFiles={1}
-              maxSize={5}
-              currentFiles={uploadedFiles.cni}
-            />
-            {uploadedFiles.cni.length > 0 && (
-              <div className="mt-3 text-green-600 text-sm">
-                ✓ {uploadedFiles.cni.length} fichier(s) uploadé(s)
-              </div>
-            )}
-          </div>
-        </div>
 
         {/* Titre Foncier Upload */}
         <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">

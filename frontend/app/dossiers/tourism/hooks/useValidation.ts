@@ -59,7 +59,9 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateStep2 = (establishmentInfo: EstablishmentInfo): boolean => {
+  const validateStep2 = (data: any): boolean => {
+    const establishmentInfo = data.establishmentInfo;
+    const uploadedFiles = data.uploadedFiles;
     const newErrors: FormErrors = {};
     const stepErrorsList: string[] = [];
 
@@ -82,8 +84,6 @@ export const useValidation = () => {
       newErrors['dateOuverturePrevue'] = t('establishment.dateRequired');
       stepErrorsList.push(t('establishment.dateRequired'));
     }
-
-
 
     if (!establishmentInfo.telephone.trim()) {
       newErrors['telephone'] = t('establishment.phoneRequired');
@@ -111,6 +111,11 @@ export const useValidation = () => {
       stepErrorsList.push(t('establishment.provinceRequired'));
     }
 
+    // Check CNI upload
+    if (uploadedFiles.cni.length === 0) {
+      stepErrorsList.push('La CNI est requise avant de procéder au paiement');
+    }
+
     setErrors(newErrors);
     setStepErrors(prev => ({ ...prev, 2: stepErrorsList }));
     
@@ -119,10 +124,6 @@ export const useValidation = () => {
 
   const validateStep4 = (uploadedFiles: UploadedFiles): boolean => {
     const stepErrorsList: string[] = [];
-
-    if (uploadedFiles.cni.length === 0) {
-      stepErrorsList.push('La CNI est requise');
-    }
 
     if (uploadedFiles.titreFoncier.length === 0) {
       stepErrorsList.push('Le titre foncier est requis');
@@ -195,13 +196,13 @@ export const useValidation = () => {
       case 1:
         return validateStep1(data.ownerInfo);
       case 2:
-        return validateStep2(data.establishmentInfo);
+        return validateStep2(data);
       case 3:
-        return validateStep3Payment(data.dossier);
-      case 4:
-        return validateStep4(data.uploadedFiles);
-      case 5:
         return validateStep5(data.questionnaireAnswers);
+      case 4:
+        return validateStep3Payment(data.dossier);
+      case 5:
+        return validateStep4(data.uploadedFiles);
       case 6:
         return true; // Final step - no validation needed
       default:

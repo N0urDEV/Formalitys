@@ -602,16 +602,18 @@
         "titles": {
           "1": "Informations associés",
           "2": "Siège social",
-          "3": "Paiement",
-          "4": "Détails de l'entreprise",
-          "5": "Terminé"
+          "3": "Détails de l'entreprise",
+          "4": "Paiement",
+          "5": "Documents restants",
+          "6": "Terminé"
         },
         "descriptions": {
           "1": "Renseignez les informations des associés de votre société",
           "2": "Sélectionnez le type de siège social pour votre société",
-          "3": "Effectuez le paiement pour finaliser",
-          "4": "Complétez les détails et options de votre société",
-          "5": "Votre dossier est en cours de traitement"
+          "3": "Complétez les détails et options de votre société",
+          "4": "Effectuez le paiement pour finaliser",
+          "5": "Uploadez les documents restants",
+          "6": "Votre dossier est en cours de traitement"
         }
       }
     }
@@ -720,18 +722,18 @@
         "stepLabel": "Étape {current} sur {total}",
         "titles": {
           "1": "Informations propriétaire",
-          "2": "Informations établissement",
-          "3": "Paiement",
-          "4": "Documents et photos",
-          "5": "Questionnaire",
+          "2": "Informations établissement + CNI",
+          "3": "Questionnaire",
+          "4": "Paiement",
+          "5": "Documents restants",
           "6": "Terminé"
         },
         "descriptions": {
           "1": "Renseignez vos informations personnelles",
-          "2": "Renseignez les informations de votre établissement",
-          "3": "Effectuez le paiement pour continuer",
-          "4": "Uploadez vos documents et photos",
-          "5": "Remplissez le questionnaire de conformité",
+          "2": "Renseignez les informations de votre établissement et uploadez votre CNI",
+          "3": "Remplissez le questionnaire de conformité",
+          "4": "Effectuez le paiement pour continuer",
+          "5": "Uploadez les documents restants",
           "6": "Dossier terminé"
         }
       }
@@ -943,6 +945,18 @@
         "passwordMin": "Le mot de passe doit contenir au moins 6 caractères",
         "errorReset": "Erreur lors de la réinitialisation"
       }
+    }
+  },
+  "DashboardComponents": {
+    "Layout": {
+      "loading": "Chargement..."
+    },
+    "DossiersSection": {
+      "loading": "Chargement de vos dossiers...",
+      "emptyTitle": "Aucun dossier créé",
+      "emptySubtitle": "Commencez par créer votre premier dossier. Vous pouvez en créer autant que nécessaire pour différentes sociétés ou activités.",
+      "ctaCompany": "Créer une société",
+      "ctaTourism": "Régulariser une activité"
     }
   }
 }

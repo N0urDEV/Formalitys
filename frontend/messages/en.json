@@ -615,16 +615,18 @@
         "titles": {
           "1": "Associate information",
           "2": "Registered office",
-          "3": "Payment",
-          "4": "Company details",
-          "5": "Completed"
+          "3": "Company details",
+          "4": "Payment",
+          "5": "Remaining documents",
+          "6": "Completed"
         },
         "descriptions": {
           "1": "Enter the information of your company's associates",
           "2": "Select the type of registered office for your company",
-          "3": "Make the payment to proceed",
-          "4": "Complete your company details and options",
-          "5": "Your dossier is being processed"
+          "3": "Complete your company details and options",
+          "4": "Make the payment to proceed",
+          "5": "Upload remaining documents",
+          "6": "Your dossier is being processed"
         }
       }
     }
@@ -733,18 +735,18 @@
         "stepLabel": "Step {current} of {total}",
         "titles": {
           "1": "Owner information",
-          "2": "Establishment information",
-          "3": "Payment",
-          "4": "Documents and photos",
-          "5": "Questionnaire",
+          "2": "Establishment info + ID",
+          "3": "Questionnaire",
+          "4": "Payment",
+          "5": "Remaining documents",
           "6": "Completed"
         },
         "descriptions": {
           "1": "Enter your personal information",
-          "2": "Enter your establishment details",
-          "3": "Make the payment to continue",
-          "4": "Upload your documents and photos",
-          "5": "Fill out the compliance questionnaire",
+          "2": "Enter your establishment details and upload your ID",
+          "3": "Fill out the compliance questionnaire",
+          "4": "Make the payment to continue",
+          "5": "Upload remaining documents",
           "6": "Dossier completed"
         }
       }

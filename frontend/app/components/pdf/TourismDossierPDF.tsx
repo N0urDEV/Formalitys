@@ -127,16 +127,36 @@ interface TourismDossierPDFProps {
   };
   dossier: {
     id: number;
-    establishmentName: string;
-    establishmentType: string;
-    address: string;
-    city: string;
-    capacity: number;
-    ownerInfo: any;
-    establishmentInfo?: any;
+    ownerInfo: {
+      nom: string;
+      prenom: string;
+      typePiece: string;
+      numero: string;
+      telephone: string;
+      email: string;
+      adresse: string;
+      qualite: string;
+      registreCommerce?: string;
+    };
+    establishmentInfo: {
+      type: string;
+      categorie: string;
+      enseigneCommerciale: string;
+      dateOuverturePrevue: string;
+      registreCommerce: string;
+      ice: string;
+      numeroCNSS: string;
+      telephone: string;
+      email: string;
+      siteWeb?: string;
+      region: string;
+      province: string;
+    };
+    uploadedFiles?: any;
     questionnaireAnswers?: any;
     createdAt: string;
     status: string;
+    currentStep: number;
   };
 }
 
@@ -321,92 +341,116 @@ export const TourismDossierPDF: React.FC<TourismDossierPDFProps> = ({ user, doss
           <Text style={styles.sectionTitle}>Informations de l'Établissement</Text>
           <View style={styles.twoColumnRow}>
             <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Nom de l'établissement:</Text>
-                <Text style={styles.value}>{dossier.establishmentName || 'Non spécifié'}</Text>
-              </View>
+              {dossier.establishmentInfo.enseigneCommerciale && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Enseigne commerciale:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.enseigneCommerciale}</Text>
+                </View>
+              )}
               <View style={styles.row}>
                 <Text style={styles.label}>Type d'établissement:</Text>
-                <Text style={styles.value}>{getEstablishmentTypeLabel(dossier.establishmentType)}</Text>
+                <Text style={styles.value}>{getEstablishmentTypeLabel(dossier.establishmentInfo.type)}</Text>
               </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Catégorie:</Text>
-                <Text style={styles.value}>
-                  {dossier.establishmentInfo?.categorie ? 
-                    getEstablishmentCategoryLabel(dossier.establishmentInfo.categorie) : 'Non spécifié'}
-                </Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Enseigne commerciale:</Text>
-                <Text style={styles.value}>{dossier.establishmentInfo?.enseigneCommerciale || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Date d'ouverture prévue:</Text>
-                <Text style={styles.value}>
-                  {dossier.establishmentInfo?.dateOuverturePrevue ? 
-                    formatDate(dossier.establishmentInfo.dateOuverturePrevue) : 'Non spécifié'}
-                </Text>
-              </View>
+              {dossier.establishmentInfo.categorie && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Catégorie:</Text>
+                  <Text style={styles.value}>{getEstablishmentCategoryLabel(dossier.establishmentInfo.categorie)}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.dateOuverturePrevue && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Date d'ouverture prévue:</Text>
+                  <Text style={styles.value}>{formatDate(dossier.establishmentInfo.dateOuverturePrevue)}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.registreCommerce && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Registre de commerce:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.registreCommerce}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.ice && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>ICE:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.ice}</Text>
+                </View>
+              )}
             </View>
             <View style={styles.rightColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Adresse:</Text>
-                <Text style={styles.value}>{dossier.address || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Ville:</Text>
-                <Text style={styles.value}>{dossier.city || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Région:</Text>
-                <Text style={styles.value}>{dossier.establishmentInfo?.region || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Province:</Text>
-                <Text style={styles.value}>{dossier.establishmentInfo?.province || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Capacité:</Text>
-                <Text style={styles.value}>{dossier.capacity || 'Non spécifié'} personnes</Text>
-              </View>
+              {dossier.establishmentInfo.region && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Région:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.region}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.province && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Province:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.province}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.telephone && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Téléphone:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.telephone}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.email && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Email:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.email}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.siteWeb && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Site web:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.siteWeb}</Text>
+                </View>
+              )}
+              {dossier.establishmentInfo.numeroCNSS && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>N° CNSS:</Text>
+                  <Text style={styles.value}>{dossier.establishmentInfo.numeroCNSS}</Text>
+                </View>
+              )}
             </View>
           </View>
         </View>
 
-        {/* Establishment Business Information */}
-        {dossier.establishmentInfo && (
+        {/* Uploaded Documents */}
+        {dossier.uploadedFiles && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Informations Commerciales</Text>
-            <View style={styles.twoColumnRow}>
-              <View style={styles.leftColumn}>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Registre de commerce:</Text>
-                  <Text style={styles.value}>{dossier.establishmentInfo.registreCommerce || 'Non spécifié'}</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.label}>ICE:</Text>
-                  <Text style={styles.value}>{dossier.establishmentInfo.ice || 'Non spécifié'}</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.label}>N° CNSS:</Text>
-                  <Text style={styles.value}>{dossier.establishmentInfo.numeroCNSS || 'Non spécifié'}</Text>
-                </View>
+            <Text style={styles.sectionTitle}>Documents Uploadés</Text>
+            {dossier.uploadedFiles.cni && dossier.uploadedFiles.cni.length > 0 && (
+              <View style={styles.row}>
+                <Text style={styles.label}>CNI:</Text>
+                <Text style={styles.value}>{dossier.uploadedFiles.cni.map(file => file.originalName).join(', ')}</Text>
               </View>
-              <View style={styles.rightColumn}>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Téléphone:</Text>
-                  <Text style={styles.value}>{dossier.establishmentInfo.telephone || 'Non spécifié'}</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Email:</Text>
-                  <Text style={styles.value}>{dossier.establishmentInfo.email || 'Non spécifié'}</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Site web:</Text>
-                  <Text style={styles.value}>{dossier.establishmentInfo.siteWeb || 'Non spécifié'}</Text>
-                </View>
+            )}
+            {dossier.uploadedFiles.titreFoncier && dossier.uploadedFiles.titreFoncier.length > 0 && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Titre foncier:</Text>
+                <Text style={styles.value}>{dossier.uploadedFiles.titreFoncier.map(file => file.originalName).join(', ')}</Text>
               </View>
-            </View>
+            )}
+            {dossier.uploadedFiles.permisHabiter && dossier.uploadedFiles.permisHabiter.length > 0 && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Permis d'habiter:</Text>
+                <Text style={styles.value}>{dossier.uploadedFiles.permisHabiter.map(file => file.originalName).join(', ')}</Text>
+              </View>
+            )}
+            {dossier.uploadedFiles.assurance && dossier.uploadedFiles.assurance.length > 0 && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Assurance:</Text>
+                <Text style={styles.value}>{dossier.uploadedFiles.assurance.map(file => file.originalName).join(', ')}</Text>
+              </View>
+            )}
+            {dossier.uploadedFiles.photos && dossier.uploadedFiles.photos.length > 0 && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Photos:</Text>
+                <Text style={styles.value}>{dossier.uploadedFiles.photos.map(file => file.originalName).join(', ')}</Text>
+              </View>
+            )}
           </View>
         )}
 

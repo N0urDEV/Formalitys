@@ -11,6 +11,7 @@ import { Step1Associates } from './components/steps/Step1Associates';
 import { Step2CompanyDetails } from './components/steps/Step2CompanyDetails';
 import { Step2Headquarters } from './components/steps/Step2Headquarters';
 import { Step3Payment } from './components/steps/Step3Payment';
+import { Step5RemainingDocuments } from './components/steps/Step5RemainingDocuments';
 import { Step4Final } from './components/steps/Step4Final';
 import { useTranslations } from 'next-intl';
 
@@ -126,27 +127,6 @@ function CompanyDossierPageContent() {
         );
       case 3:
         return (
-          <Step3Payment
-            dossier={dossier}
-            onPaymentSuccess={async () => {
-              // Update dossier status to PAID and advance to step 4
-              if (dossier) {
-                const token = localStorage.getItem('token');
-                await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001'}/dossiers/company/${dossier.id}`, {
-                  method: 'PUT',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                  },
-                  body: JSON.stringify({ currentStep: 4, status: 'PAID' })
-                });
-              }
-              setCurrentStep(4);
-            }}
-          />
-        );
-      case 4:
-        return (
           <Step2CompanyDetails
             companyData={companyData}
             setCompanyData={setCompanyData}
@@ -157,7 +137,38 @@ function CompanyDossierPageContent() {
             uploadedFiles={Object.values(uploadedFiles).flat()}
           />
         );
+      case 4:
+        return (
+          <Step3Payment
+            dossier={dossier}
+            onPaymentSuccess={async () => {
+              // Update dossier status to PAID and advance to step 5
+              if (dossier) {
+                const token = localStorage.getItem('token');
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001'}/dossiers/company/${dossier.id}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                  },
+                  body: JSON.stringify({ currentStep: 5, status: 'PAID' })
+                });
+              }
+              setCurrentStep(5);
+            }}
+          />
+        );
       case 5:
+        return (
+          <Step5RemainingDocuments
+            companyData={companyData}
+            onFileUpload={handleFileUpload}
+            associates={associates}
+            uploadedFiles={Object.values(uploadedFiles).flat()}
+            stepErrors={stepErrors}
+          />
+        );
+      case 6:
         return (
           <Step4Final
             onDownloadPdf={downloadPdf}
@@ -229,7 +240,7 @@ function CompanyDossierPageContent() {
           </div>
 
           {/* Progress Bar */}
-          <ProgressBar currentStep={currentStep} totalSteps={5} />
+          <ProgressBar currentStep={currentStep} totalSteps={6} />
 
           {/* Step Content */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
@@ -237,7 +248,7 @@ function CompanyDossierPageContent() {
           </div>
 
           {/* Navigation Buttons */}
-          {currentStep < 5 && (
+          {currentStep < 6 && (
             <div className="flex justify-between items-center">
               <button
                 onClick={handlePrevious}

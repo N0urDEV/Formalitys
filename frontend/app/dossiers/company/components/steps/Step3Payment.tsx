@@ -131,6 +131,31 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
           Effectuez votre paiement en toute sécurité via Stripe
         </p>
       </div>
+
+      {/* Payment Confirmation Message */}
+      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+        <div className="flex items-start">
+          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 
+              className="text-blue-800 font-medium mb-2"
+              style={{ fontFamily: 'Satoshi, sans-serif' }}
+            >
+              Après paiement
+            </h3>
+            <p 
+              className="text-blue-700 text-sm"
+              style={{ fontFamily: 'Satoshi, sans-serif' }}
+            >
+              Téléchargement des justificatifs, votre dossier sera complet et traité immédiatement. Vous pourrez ensuite uploader les documents restants.
+            </p>
+          </div>
+        </div>
+      </div>
       
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
         <Elements stripe={stripePromise} options={{ clientSecret }}>

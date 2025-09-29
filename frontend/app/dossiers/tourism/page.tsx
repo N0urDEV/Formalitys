@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useEffect, useRef, Suspense } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useTourismDossier } from './hooks/useTourismDossier';
 import { useValidation } from './hooks/useValidation';
 import DossierNavigation from '../components/DossierNavigation';
@@ -15,8 +15,7 @@ import { Step5Questionnaire } from './components/steps/Step5Questionnaire';
 import { Step6Final } from './components/steps/Step6Final';
 import { useTranslations } from 'next-intl';
 
-function useServiceData() {
-  const t = useTranslations('Dossiers.Tourism');
+function getServiceData(t: any) {
   return {
     name: t('serviceName'),
     description: t('serviceDescription'),
@@ -29,6 +28,8 @@ function useServiceData() {
 
 function TourismDossierPageContent() {
   const t = useTranslations('Dossiers.Tourism');
+  const serviceData = getServiceData(t);
+  
   const {
     dossier,
     currentStep,
@@ -147,14 +148,26 @@ function TourismDossierPageContent() {
             errors={errors}
             stepErrors={stepErrors}
             clearFieldError={clearFieldError}
+            uploadedFiles={uploadedFiles}
+            onDocumentUpload={handleDocumentUpload}
           />
         );
       case 3:
         return (
+          <Step5Questionnaire
+            questionnaireAnswers={questionnaireAnswers}
+            setQuestionnaireAnswers={setQuestionnaireAnswers}
+            errors={errors}
+            stepErrors={stepErrors}
+            clearFieldError={clearFieldError}
+          />
+        );
+      case 4:
+        return (
           <Step3Payment
             dossier={dossier}
             onPaymentSuccess={async () => {
-              // Update dossier status to PAID and advance to step 4
+              // Update dossier status to PAID and advance to step 5
               if (dossier) {
                 const token = localStorage.getItem('token');
                 await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001'}/dossiers/tourism/${dossier.id}`, {
@@ -163,29 +176,19 @@ function TourismDossierPageContent() {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                   },
-                  body: JSON.stringify({ currentStep: 4, status: 'PAID' })
+                  body: JSON.stringify({ currentStep: 5, status: 'PAID' })
                 });
               }
-              setCurrentStep(4);
+              setCurrentStep(5);
             }}
           />
         );
-      case 4:
+      case 5:
         return (
           <Step4Documents
             uploadedFiles={uploadedFiles}
             onDocumentUpload={handleDocumentUpload}
             stepErrors={stepErrors}
-          />
-        );
-      case 5:
-        return (
-          <Step5Questionnaire
-            questionnaireAnswers={questionnaireAnswers}
-            setQuestionnaireAnswers={setQuestionnaireAnswers}
-            errors={errors}
-            stepErrors={stepErrors}
-            clearFieldError={clearFieldError}
           />
         );
       case 6:
@@ -199,6 +202,7 @@ function TourismDossierPageContent() {
     }
   };
 
+  // Handle loading state after all hooks
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -212,7 +216,7 @@ function TourismDossierPageContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <StructuredData type="service" data={useServiceData()} />
+      <StructuredData type="service" data={serviceData} />
       <StructuredData type="breadcrumb" data={[
         {
           "@type": "ListItem",
@@ -308,17 +312,7 @@ function TourismDossierPageContent() {
   );
 }
 
+
 export default function TourismDossierPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#007ea7] mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading dossier...</p>
-        </div>
-      </div>
-    }>
-      <TourismDossierPageContent />
-    </Suspense>
-  );
+  return <TourismDossierPageContent />;
 }

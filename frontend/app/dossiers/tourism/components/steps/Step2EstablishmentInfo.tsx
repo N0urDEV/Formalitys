@@ -1,8 +1,9 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { EstablishmentInfo, FormErrors, StepErrors } from '../../types';
+import { EstablishmentInfo, FormErrors, StepErrors, UploadedFiles } from '../../types';
 import { FormInput } from '../FormInput';
 import { FormSelect } from '../FormSelect';
+import FileUpload from '../../../../components/FileUpload';
 
 interface Step2EstablishmentInfoProps {
   establishmentInfo: EstablishmentInfo;
@@ -10,6 +11,8 @@ interface Step2EstablishmentInfoProps {
   errors: FormErrors;
   stepErrors: StepErrors;
   clearFieldError: (field: string) => void;
+  uploadedFiles: UploadedFiles;
+  onDocumentUpload: (files: File[], documentType: string) => void;
 }
 
 export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
@@ -17,7 +20,9 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
   setEstablishmentInfo,
   errors,
   stepErrors,
-  clearFieldError
+  clearFieldError,
+  uploadedFiles,
+  onDocumentUpload
 }) => {
   const t = useTranslations('Dossiers.Tourism.Form.Step2');
   const updateEstablishmentInfo = (field: string, value: string) => {
@@ -250,6 +255,40 @@ export const Step2EstablishmentInfo: React.FC<Step2EstablishmentInfoProps> = ({
               required
             />
           </div>
+        </div>
+      </div>
+
+      {/* CNI Upload - Required before payment */}
+      <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
+        <div className="relative z-10">
+          <h3 
+            className="text-xl font-bold text-[#00171f] mb-6"
+            style={{ fontFamily: '"Gascogne Serial", serif' }}
+          >
+            Document d'identité requis
+          </h3>
+          <p 
+            className="text-gray-600 mb-6"
+            style={{ fontFamily: 'Satoshi, sans-serif' }}
+          >
+            Vous devez uploader votre CNI avant de procéder au paiement
+          </p>
+          
+          <FileUpload
+            title="CNI du propriétaire *"
+            description="Carte nationale d'identité du propriétaire (PDF uniquement)"
+            onUpload={(files) => onDocumentUpload(files, 'cni')}
+            acceptedTypes={['.pdf']}
+            maxFiles={1}
+            maxSize={5}
+            currentFiles={uploadedFiles.cni}
+          />
+          {uploadedFiles.cni.length > 0 && (
+            <div className="mt-3 text-green-600 text-sm">
+              ✓ {uploadedFiles.cni.length} fichier(s) uploadé(s)
+            </div>
+          )}
         </div>
       </div>
     </div>

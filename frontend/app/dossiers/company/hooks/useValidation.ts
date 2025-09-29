@@ -82,56 +82,48 @@ export const useValidation = () => {
   const validateStep2 = (companyData: CompanyData): boolean => {
     const stepErrorsList: string[] = [];
     
-    if (!companyData.companyName.trim()) {
-      stepErrorsList.push(t('step4.companyNameRequired'));
-    }
-    
     if (companyData.activities.length === 0) {
-      stepErrorsList.push(t('step4.activitiesRequired'));
+      stepErrorsList.push('Les activités sont requises');
     }
     
     if (companyData.proposedNames.filter(name => name.trim()).length < 3) {
-      stepErrorsList.push(t('step4.proposedNamesRequired'));
+      stepErrorsList.push('Les 3 noms proposés sont requis');
     }
 
     // Additional company information validation
     if (!companyData.raisonSociale.trim()) {
-      stepErrorsList.push(t('step4.raisonSocialeRequired'));
+      stepErrorsList.push('La raison sociale est requise');
     }
     
     if (!companyData.formeJuridique.trim()) {
-      stepErrorsList.push(t('step4.formeJuridiqueRequired'));
-    }
-    
-    if (!companyData.nationalite.trim()) {
-      stepErrorsList.push(t('step4.nationaliteRequired'));
+      stepErrorsList.push('La forme juridique est requise');
     }
     
     if (!companyData.adresseSiege.trim()) {
-      stepErrorsList.push(t('step4.adresseSiegeRequired'));
+      stepErrorsList.push('L\'adresse du siège social est requise');
     }
     
     if (!companyData.villeSiege.trim()) {
-      stepErrorsList.push(t('step4.villeSiegeRequired'));
+      stepErrorsList.push('La ville du siège est requise');
     }
     
     if (!companyData.professionActivite.trim()) {
-      stepErrorsList.push(t('step4.professionActiviteRequired'));
+      stepErrorsList.push('La profession/activité est requise');
     }
     
     if (!companyData.telephone.trim()) {
-      stepErrorsList.push(t('step4.telephoneRequired'));
+      stepErrorsList.push('Le téléphone est requis');
     } else if (!/^[0-9+\-\s()]+$/.test(companyData.telephone)) {
-      stepErrorsList.push(t('step4.telephoneInvalid'));
+      stepErrorsList.push('Le format du téléphone est invalide');
     }
     
     if (!companyData.email.trim()) {
-      stepErrorsList.push(t('step4.emailRequired'));
+      stepErrorsList.push('L\'email est requis');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(companyData.email)) {
-      stepErrorsList.push(t('step4.emailInvalid'));
+      stepErrorsList.push('Le format de l\'email est invalide');
     }
 
-    setStepErrors(prev => ({ ...prev, 4: stepErrorsList }));
+    setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
     return stepErrorsList.length === 0;
   };
 
@@ -142,10 +134,12 @@ export const useValidation = () => {
       case 2:
         return validateStep2Headquarters(data.companyData);
       case 3:
-        return validateStep3Payment(data.dossier);
+        return validateStep2(data.companyData) && validateStep3CNI(data.uploadedFiles);
       case 4:
-        return validateStep4Documents(data.companyData, data.uploadedFiles);
+        return validateStep3Payment(data.dossier);
       case 5:
+        return validateStep5RemainingDocuments(data.uploadedFiles);
+      case 6:
         return true; // Final step - no validation needed
       default:
         return true;
@@ -162,6 +156,37 @@ export const useValidation = () => {
     }
     
     setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
+    return stepErrorsList.length === 0;
+  };
+
+  const validateStep3CNI = (uploadedFiles: any): boolean => {
+    const stepErrorsList: string[] = [];
+    
+    // Check if CNI files are uploaded
+    // Convert uploadedFiles object to array like in components
+    const filesArray = uploadedFiles ? Object.values(uploadedFiles).flat() : [];
+    const cniFiles = filesArray.filter((file: any) => file.documentType === 'cni');
+    
+    if (cniFiles.length === 0) {
+      stepErrorsList.push('Vous devez uploader les CNI de tous les associés avant de procéder au paiement');
+    }
+    
+    setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
+    return stepErrorsList.length === 0;
+  };
+
+  const validateStep5RemainingDocuments = (uploadedFiles: any): boolean => {
+    const stepErrorsList: string[] = [];
+    
+    // Check if remaining documents are uploaded
+    // Convert uploadedFiles object to array like in components
+    const filesArray = uploadedFiles ? Object.values(uploadedFiles).flat() : [];
+    
+    if (filesArray.length === 0) {
+      stepErrorsList.push('Veuillez uploader les documents restants');
+    }
+    
+    setStepErrors(prev => ({ ...prev, 5: stepErrorsList }));
     return stepErrorsList.length === 0;
   };
 
@@ -226,7 +251,9 @@ export const useValidation = () => {
     validateStep2,
     validateStep2Headquarters,
     validateStep3Payment,
+    validateStep3CNI,
     validateStep4Documents,
+    validateStep5RemainingDocuments,
     validateStep,
     clearFieldError,
     clearStepErrors,

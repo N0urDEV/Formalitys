@@ -111,7 +111,6 @@ interface CompanyDossierPDFProps {
   };
   dossier: {
     id: number;
-    companyName: string;
     headquarters: string;
     capital: number;
     selectedBank: string;
@@ -123,7 +122,6 @@ interface CompanyDossierPDFProps {
     // Additional company information
     raisonSociale?: string;
     formeJuridique?: string;
-    nationalite?: string;
     adresseSiege?: string;
     villeSiege?: string;
     professionActivite?: string;
@@ -137,6 +135,7 @@ interface CompanyDossierPDFProps {
     villeRegistreCommerce?: string;
     referenceDepotDeclaration?: string;
     dateDepotDeclaration?: string;
+    autresActivite?: string;
   };
 }
 
@@ -214,22 +213,18 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
           <Text style={styles.sectionTitle}>Informations Générales de la Société</Text>
           <View style={styles.twoColumnRow}>
             <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Nom de la société:</Text>
-                <Text style={styles.value}>{dossier.companyName || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Raison sociale:</Text>
-                <Text style={styles.value}>{dossier.raisonSociale || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Forme juridique:</Text>
-                <Text style={styles.value}>{dossier.formeJuridique || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Nationalité:</Text>
-                <Text style={styles.value}>{dossier.nationalite || 'Non spécifié'}</Text>
-              </View>
+              {dossier.raisonSociale && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Raison sociale:</Text>
+                  <Text style={styles.value}>{dossier.raisonSociale}</Text>
+                </View>
+              )}
+              {dossier.formeJuridique && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Forme juridique:</Text>
+                  <Text style={styles.value}>{dossier.formeJuridique}</Text>
+                </View>
+              )}
             </View>
             <View style={styles.rightColumn}>
               <View style={styles.row}>
@@ -240,59 +235,77 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
                 <Text style={styles.label}>Capital social:</Text>
                 <Text style={styles.value}>{dossier.capital?.toLocaleString()} MAD</Text>
               </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Banque sélectionnée:</Text>
-                <Text style={styles.value}>{dossier.selectedBank || 'Non spécifié'}</Text>
-              </View>
+              {dossier.selectedBank && (
+                <View style={styles.row}>
+                  <Text style={styles.label}>Banque sélectionnée:</Text>
+                  <Text style={styles.value}>{dossier.selectedBank}</Text>
+                </View>
+              )}
             </View>
           </View>
         </View>
 
         {/* Company Address */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Adresse du Siège Social</Text>
-          <View style={styles.twoColumnRow}>
-            <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Adresse:</Text>
-                <Text style={styles.value}>{dossier.adresseSiege || 'Non spécifié'}</Text>
+        {(dossier.adresseSiege || dossier.villeSiege) && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Adresse du Siège Social</Text>
+            <View style={styles.twoColumnRow}>
+              <View style={styles.leftColumn}>
+                {dossier.adresseSiege && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Adresse:</Text>
+                    <Text style={styles.value}>{dossier.adresseSiege}</Text>
+                  </View>
+                )}
               </View>
-            </View>
-            <View style={styles.rightColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Ville:</Text>
-                <Text style={styles.value}>{dossier.villeSiege || 'Non spécifié'}</Text>
+              <View style={styles.rightColumn}>
+                {dossier.villeSiege && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Ville:</Text>
+                    <Text style={styles.value}>{dossier.villeSiege}</Text>
+                  </View>
+                )}
               </View>
             </View>
           </View>
-        </View>
+        )}
 
         {/* Company Contact Information */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Informations de Contact</Text>
-          <View style={styles.twoColumnRow}>
-            <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Téléphone:</Text>
-                <Text style={styles.value}>{dossier.telephone || 'Non spécifié'}</Text>
+        {(dossier.telephone || dossier.fax || dossier.email || dossier.professionActivite) && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Informations de Contact</Text>
+            <View style={styles.twoColumnRow}>
+              <View style={styles.leftColumn}>
+                {dossier.telephone && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Téléphone:</Text>
+                    <Text style={styles.value}>{dossier.telephone}</Text>
+                  </View>
+                )}
+                {dossier.fax && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Fax:</Text>
+                    <Text style={styles.value}>{dossier.fax}</Text>
+                  </View>
+                )}
               </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Fax:</Text>
-                <Text style={styles.value}>{dossier.fax || 'Non spécifié'}</Text>
-              </View>
-            </View>
-            <View style={styles.rightColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Email:</Text>
-                <Text style={styles.value}>{dossier.email || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Profession/Activité:</Text>
-                <Text style={styles.value}>{dossier.professionActivite || 'Non spécifié'}</Text>
+              <View style={styles.rightColumn}>
+                {dossier.email && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Email:</Text>
+                    <Text style={styles.value}>{dossier.email}</Text>
+                  </View>
+                )}
+                {dossier.professionActivite && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Profession/Activité:</Text>
+                    <Text style={styles.value}>{dossier.professionActivite}</Text>
+                  </View>
+                )}
               </View>
             </View>
           </View>
-        </View>
+        )}
 
         {/* Activities */}
         {dossier.activities && dossier.activities.length > 0 && (
@@ -301,6 +314,9 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
             {dossier.activities.map((activity, index) => (
               <Text key={index} style={styles.listItem}>• {activity}</Text>
             ))}
+            {dossier.autresActivite && (
+              <Text style={styles.listItem}>• {dossier.autresActivite}</Text>
+            )}
           </View>
         )}
 
@@ -309,60 +325,78 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Noms Proposés</Text>
             {dossier.proposedNames.map((name, index) => (
-              <Text key={index} style={styles.listItem}>{index + 1}. {name || 'Non spécifié'}</Text>
+              <Text key={index} style={styles.listItem}>{index + 1}. {name}</Text>
             ))}
           </View>
         )}
 
         {/* Tax Information */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Informations Fiscales</Text>
-          <View style={styles.twoColumnRow}>
-            <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>N° Taxe Professionnelle:</Text>
-                <Text style={styles.value}>{dossier.numeroArticleTaxeProfessionnelle || 'Non spécifié'}</Text>
+        {(dossier.numeroArticleTaxeProfessionnelle || dossier.numeroArticleTaxeServicesCommunaux || dossier.numeroAffiliationCNSS) && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Informations Fiscales</Text>
+            <View style={styles.twoColumnRow}>
+              <View style={styles.leftColumn}>
+                {dossier.numeroArticleTaxeProfessionnelle && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>N° Taxe Professionnelle:</Text>
+                    <Text style={styles.value}>{dossier.numeroArticleTaxeProfessionnelle}</Text>
+                  </View>
+                )}
+                {dossier.numeroArticleTaxeServicesCommunaux && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>N° Taxe Services Communaux:</Text>
+                    <Text style={styles.value}>{dossier.numeroArticleTaxeServicesCommunaux}</Text>
+                  </View>
+                )}
               </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>N° Taxe Services Communaux:</Text>
-                <Text style={styles.value}>{dossier.numeroArticleTaxeServicesCommunaux || 'Non spécifié'}</Text>
-              </View>
-            </View>
-            <View style={styles.rightColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>N° Affiliation CNSS:</Text>
-                <Text style={styles.value}>{dossier.numeroAffiliationCNSS || 'Non spécifié'}</Text>
+              <View style={styles.rightColumn}>
+                {dossier.numeroAffiliationCNSS && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>N° Affiliation CNSS:</Text>
+                    <Text style={styles.value}>{dossier.numeroAffiliationCNSS}</Text>
+                  </View>
+                )}
               </View>
             </View>
           </View>
-        </View>
+        )}
 
         {/* Commerce Registry Information */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Registre de Commerce</Text>
-          <View style={styles.twoColumnRow}>
-            <View style={styles.leftColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>N° Registre de Commerce:</Text>
-                <Text style={styles.value}>{dossier.numeroRegistreCommerce || 'Non spécifié'}</Text>
+        {(dossier.numeroRegistreCommerce || dossier.villeRegistreCommerce || dossier.referenceDepotDeclaration || dossier.dateDepotDeclaration) && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Registre de Commerce</Text>
+            <View style={styles.twoColumnRow}>
+              <View style={styles.leftColumn}>
+                {dossier.numeroRegistreCommerce && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>N° Registre de Commerce:</Text>
+                    <Text style={styles.value}>{dossier.numeroRegistreCommerce}</Text>
+                  </View>
+                )}
+                {dossier.villeRegistreCommerce && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Ville du Registre:</Text>
+                    <Text style={styles.value}>{dossier.villeRegistreCommerce}</Text>
+                  </View>
+                )}
               </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Ville du Registre:</Text>
-                <Text style={styles.value}>{dossier.villeRegistreCommerce || 'Non spécifié'}</Text>
-              </View>
-            </View>
-            <View style={styles.rightColumn}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Référence Dépôt Déclaration:</Text>
-                <Text style={styles.value}>{dossier.referenceDepotDeclaration || 'Non spécifié'}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Date Dépôt Déclaration:</Text>
-                <Text style={styles.value}>{dossier.dateDepotDeclaration || 'Non spécifié'}</Text>
+              <View style={styles.rightColumn}>
+                {dossier.referenceDepotDeclaration && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Référence Dépôt Déclaration:</Text>
+                    <Text style={styles.value}>{dossier.referenceDepotDeclaration}</Text>
+                  </View>
+                )}
+                {dossier.dateDepotDeclaration && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Date Dépôt Déclaration:</Text>
+                    <Text style={styles.value}>{dossier.dateDepotDeclaration}</Text>
+                  </View>
+                )}
               </View>
             </View>
           </View>
-        </View>
+        )}
 
         {/* Associates */}
         {dossier.associates && dossier.associates.length > 0 && (

@@ -42,6 +42,7 @@ export const useCompanyDossier = () => {
     villeRegistreCommerce: '',
     referenceDepotDeclaration: '',
     dateDepotDeclaration: '',
+    autresActivite: '',
   });
   
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFiles>({});
@@ -358,7 +359,6 @@ export const useCompanyDossier = () => {
       // Prepare dossier data for PDF
       const dossierData = {
         id: dossier.id,
-        companyName: companyData.companyName,
         headquarters: companyData.headquarters,
         capital: companyData.capital,
         selectedBank: companyData.selectedBank,
@@ -370,7 +370,6 @@ export const useCompanyDossier = () => {
         // Additional company information
         raisonSociale: companyData.raisonSociale,
         formeJuridique: companyData.formeJuridique,
-        nationalite: companyData.nationalite,
         adresseSiege: companyData.adresseSiege,
         villeSiege: companyData.villeSiege,
         professionActivite: companyData.professionActivite,
@@ -384,6 +383,7 @@ export const useCompanyDossier = () => {
         villeRegistreCommerce: companyData.villeRegistreCommerce,
         referenceDepotDeclaration: companyData.referenceDepotDeclaration,
         dateDepotDeclaration: companyData.dateDepotDeclaration,
+        autresActivite: companyData.autresActivite,
       };
 
       // Generate and download PDF using React PDF

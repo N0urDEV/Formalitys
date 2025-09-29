@@ -35,6 +35,7 @@ export interface CompanyData {
   villeRegistreCommerce: string;
   referenceDepotDeclaration: string;
   dateDepotDeclaration: string;
+  autresActivite: string;
 }
 
 export interface UploadedFiles {
@@ -78,6 +79,7 @@ export interface CompanyDossier {
   villeRegistreCommerce?: string;
   referenceDepotDeclaration?: string;
   dateDepotDeclaration?: string;
+  autresActivite?: string;
   uploadedFiles?: any[];
   paymentIntentId?: string;
   paymentStatus?: string;

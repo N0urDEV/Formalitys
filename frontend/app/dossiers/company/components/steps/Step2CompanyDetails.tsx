@@ -42,7 +42,8 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
   const activityOptions = [
     t('activities.commerce'), t('activities.services'), t('activities.importExport'), t('activities.consulting'), 
-    t('activities.it'), t('activities.construction'), t('activities.transport'), t('activities.restaurant')
+    t('activities.it'), t('activities.construction'), t('activities.transport'), t('activities.restaurant'),
+    'Autres'
   ];
 
   const handleActivityChange = (activity: string, checked: boolean) => {
@@ -107,15 +108,6 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
           {t('sections.companyDetails')}
         </h2>
         
-        {/* Company Name */}
-        <FormInput
-          label={t('labels.companyName')}
-          name="companyName"
-          placeholder={t('placeholders.companyName')}
-          value={companyData.companyName}
-          onChange={(value) => setCompanyData({...companyData, companyName: value})}
-          required
-        />
 
         {/* Proposed Names */}
         <div>
@@ -127,17 +119,24 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             <span className="text-red-500 ml-1">*</span>
           </label>
           <div className="space-y-3">
-            {companyData.proposedNames.map((name, index) => (
-              <FormInput
-                key={index}
-                label={t('labels.proposedNameN', { n: index + 1 })}
-                name={`proposedName_${index}`}
-                placeholder={t('placeholders.proposedNameN', { n: index + 1 })}
-                value={name}
-                onChange={(value) => handleProposedNameChange(index, value)}
-                required
-              />
-            ))}
+            {companyData.proposedNames.map((name, index) => {
+              const placeholders = [
+                'Nom idéal pour vous',
+                'Nom apprécié', 
+                'Nom par défaut'
+              ];
+              return (
+                <FormInput
+                  key={index}
+                  label={t('labels.proposedNameN', { n: index + 1 })}
+                  name={`proposedName_${index}`}
+                  placeholder={placeholders[index]}
+                  value={name}
+                  onChange={(value) => handleProposedNameChange(index, value)}
+                  required
+                />
+              );
+            })}
           </div>
         </div>
 
@@ -169,6 +168,20 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               </label>
             ))}
           </div>
+          
+          {/* Custom activity input - shows when "Autres" is selected */}
+          {companyData.activities.includes('Autres') && (
+            <div className="mt-4">
+              <FormInput
+                label="Précisez votre activité"
+                name="autresActivite"
+                placeholder="Décrivez votre activité spécifique"
+                value={companyData.autresActivite}
+                onChange={(value) => setCompanyData({...companyData, autresActivite: value})}
+                required
+              />
+            </div>
+          )}
         </div>
 
 
@@ -209,27 +222,13 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               value={companyData.formeJuridique}
               onChange={(value) => setCompanyData({...companyData, formeJuridique: value})}
               options={[
-                { value: 'SARL', label: t('formeOptions.sarl') },
-                { value: 'SA', label: t('formeOptions.sa') },
-                { value: 'SNC', label: t('formeOptions.snc') },
-                { value: 'SAS', label: t('formeOptions.sas') },
-                { value: 'EURL', label: t('formeOptions.eurl') },
-                { value: 'Auto-entrepreneur', label: t('formeOptions.auto') },
-                { value: 'Entreprise individuelle', label: t('formeOptions.individuelle') }
+                { value: 'SARL AU', label: 'SARL AU (1 associé)' },
+                { value: 'SARL', label: 'SARL (+2 associés)' }
               ]}
               placeholder={t('placeholders.formeJuridique')}
               required
             />
 
-            {/* Nationalité */}
-            <FormInput
-              label={t('labels.nationalite')}
-              name="nationalite"
-              placeholder={t('placeholders.nationalite')}
-              value={companyData.nationalite}
-              onChange={(value) => setCompanyData({...companyData, nationalite: value})}
-              required
-            />
 
             {/* Adresse du siège social */}
             <div className="md:col-span-2">
@@ -372,14 +371,20 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
           </div>
         </div>
 
-        {/* File Uploads */}
+        {/* CNI Upload - Required before payment */}
         <div className="space-y-8">
           <h3 
             className="text-lg font-semibold text-[#00171f]"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
-            {t('sections.files')}
+            Documents d'identité requis
           </h3>
+          <p 
+            className="text-gray-600"
+            style={{ fontFamily: 'Satoshi, sans-serif' }}
+          >
+            Vous devez uploader les CNI de tous les associés avant de procéder au paiement
+          </p>
 
           {/* CNI des associés */}
           <div className="space-y-4">
@@ -406,93 +411,6 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                 />
               </div>
             ))}
-          </div>
-
-          {/* Siège social */}
-          <div className="space-y-4">
-            <h4 
-              className="text-md font-medium text-gray-700"
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              {t('files.siegeSocial')}
-            </h4>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-sm font-medium text-gray-600 mb-2">
-                {companyData.headquarters === 'domicile' && t('files.justifDomicile')}
-                {companyData.headquarters === 'contrat_domiciliation' && t('files.contratDomiciliation')}
-                {companyData.headquarters === 'location_local' && t('files.contratLocation')}
-              </p>
-              <FileUpload
-                key="headquarters"
-                title=""
-                description={t('files.uploadJustif')}
-                onUpload={(files) => onFileUpload(files, companyData.headquarters === 'domicile' ? 'justificatif_domicile_gerant' : companyData.headquarters === 'contrat_domiciliation' ? 'contrat_domiciliation' : 'location_local')}
-                acceptedTypes={['.pdf']}
-                maxFiles={1}
-                maxSize={5}
-                currentFiles={uploadedFiles.filter(file => 
-                  file.documentType === 'justificatif_domicile_gerant' || 
-                  file.documentType === 'contrat_domiciliation' ||
-                  file.documentType === 'location_local'
-                )}
-              />
-            </div>
-          </div>
-
-          {/* Justificatifs de domicile des associés */}
-          <div className="space-y-4">
-            <h4 
-              className="text-md font-medium text-gray-700"
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              {t('files.justifDomicileAssocies')}
-            </h4>
-            {associates.map((associate, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm font-medium text-gray-600 mb-2">
-                  {associate.prenom} {associate.nom} {associate.isGerant ? t('files.manager') : ''}
-                </p>
-                <FileUpload
-                  key={`domicile-${index}`}
-                  title=""
-                  description={t('files.uploadJustifDomicile')}
-                  onUpload={(files) => onFileUpload(files, 'justificatif_domicile')}
-                  acceptedTypes={['.pdf']}
-                  maxFiles={1}
-                  maxSize={5}
-                  currentFiles={uploadedFiles.filter(file => file.documentType === 'justificatif_domicile')}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Autres documents */}
-          <div className="space-y-4">
-            <h4 
-              className="text-md font-medium text-gray-700"
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              {t('files.otherDocs')}
-            </h4>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-sm font-medium text-gray-600 mb-2">
-                {t('files.otherDocsDesc')}
-              </p>
-              <FileUpload
-                key="autres"
-                title=""
-                description={t('files.uploadOtherDocs')}
-                onUpload={(files) => onFileUpload(files, 'autre')}
-                acceptedTypes={['.pdf']}
-                maxFiles={5}
-                maxSize={10}
-                currentFiles={uploadedFiles.filter(file => 
-                  file.documentType === 'statuts' || 
-                  file.documentType === 'acte_constitution' ||
-                  file.documentType === 'autre'
-                )}
-              />
-            </div>
           </div>
         </div>
       </div>

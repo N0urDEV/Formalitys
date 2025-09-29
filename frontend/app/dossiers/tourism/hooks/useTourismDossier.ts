@@ -19,7 +19,7 @@ export const useTourismDossier = () => {
   });
   
   const [establishmentInfo, setEstablishmentInfo] = useState<EstablishmentInfo>({
-    type: '', categorie: '', enseigneCommerciale: '', dateOuverturePrevue: '', 
+    type: '', categorie: '2etoiles', enseigneCommerciale: '', dateOuverturePrevue: '', 
     registreCommerce: '', ice: '', numeroCNSS: '', telephone: '', email: '', 
     siteWeb: '', region: '', province: ''
   });
@@ -175,11 +175,13 @@ export const useTourismDossier = () => {
     })();
   }, [router, searchParams]);
 
-  const saveStep = async (stepData: any) => {
+  const saveStep = async (stepData: any, skipLoading: boolean = false) => {
     if (!dossier) return;
     
     const token = localStorage.getItem('token');
-    setLoading(true);
+    if (!skipLoading) {
+      setLoading(true);
+    }
     
     try {
       await fetch(`${API}/dossiers/tourism/${dossier.id}`, {
@@ -193,7 +195,9 @@ export const useTourismDossier = () => {
     } catch (err) {
       console.error('Error saving step:', err);
     } finally {
-      setLoading(false);
+      if (!skipLoading) {
+        setLoading(false);
+      }
     }
   };
 
@@ -256,6 +260,9 @@ export const useTourismDossier = () => {
     formData.append('documentType', documentType);
 
     try {
+      // Don't set loading to true for file uploads to prevent multiple re-renders
+      // setLoading(true);
+      
       const response = await fetch(`${API}/uploads/multiple`, {
         method: 'POST',
         headers: {
@@ -306,11 +313,11 @@ export const useTourismDossier = () => {
         uploadedPhotos: newPhotos 
       } : null);
       
-      // Save to backend
+      // Save to backend without setting loading state
       await saveStep({
         uploadedFiles: newFiles,
         uploadedPhotos: newPhotos,
-      });
+      }, true);
 
       console.log(`${documentType} uploaded successfully:`, result);
     } catch (error) {
@@ -329,19 +336,44 @@ export const useTourismDossier = () => {
         phone: localStorage.getItem('userPhone') || '',
       };
 
-      // Prepare dossier data for PDF
+      // Prepare dossier data for PDF with all user-entered information
       const dossierData = {
         id: dossier.id,
-        establishmentName: establishmentInfo.name,
-        establishmentType: establishmentInfo.type,
-        address: establishmentInfo.address,
-        city: establishmentInfo.city,
-        capacity: establishmentInfo.capacity,
-        ownerInfo: ownerInfo,
-        establishmentInfo: establishmentInfo,
+        // Owner Information
+        ownerInfo: {
+          nom: ownerInfo.nom,
+          prenom: ownerInfo.prenom,
+          typePiece: ownerInfo.typePiece,
+          numero: ownerInfo.numero,
+          telephone: ownerInfo.telephone,
+          email: ownerInfo.email,
+          adresse: ownerInfo.adresse,
+          qualite: ownerInfo.qualite,
+          registreCommerce: ownerInfo.registreCommerce
+        },
+        // Establishment Information
+        establishmentInfo: {
+          type: establishmentInfo.type,
+          categorie: establishmentInfo.categorie,
+          enseigneCommerciale: establishmentInfo.enseigneCommerciale,
+          dateOuverturePrevue: establishmentInfo.dateOuverturePrevue,
+          registreCommerce: establishmentInfo.registreCommerce,
+          ice: establishmentInfo.ice,
+          numeroCNSS: establishmentInfo.numeroCNSS,
+          telephone: establishmentInfo.telephone,
+          email: establishmentInfo.email,
+          siteWeb: establishmentInfo.siteWeb,
+          region: establishmentInfo.region,
+          province: establishmentInfo.province
+        },
+        // Uploaded Files
+        uploadedFiles: uploadedFiles,
+        // Questionnaire Answers
         questionnaireAnswers: questionnaireAnswers,
+        // Dossier metadata
         createdAt: dossier.createdAt,
         status: dossier.status,
+        currentStep: currentStep
       };
 
       // Generate and download PDF using React PDF
