@@ -25,16 +25,16 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
   };
 
   const QuestionItem: React.FC<{ question: string; questionKey: string }> = ({ question, questionKey }) => (
-    <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-2xl">
-      <div className="flex-1">
+    <div className="p-3 sm:p-4 bg-gray-50 rounded-2xl">
+      <div className="mb-3 sm:mb-0">
         <p 
-          className="text-sm font-medium text-gray-900"
+          className="text-xs sm:text-sm font-medium text-gray-900 leading-relaxed"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           {question}
         </p>
       </div>
-      <div className="flex space-x-6">
+      <div className="flex space-x-4 sm:space-x-6 justify-center sm:justify-start">
         <label className="flex items-center cursor-pointer">
           <input 
             type="radio" 
@@ -42,10 +42,11 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
             value="yes" 
             checked={questionnaireAnswers[questionKey] === 'yes'}
             onChange={(e) => updateAnswer(questionKey, e.target.value)}
-            className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+            className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
           />
           <span 
-            className="ml-2 text-sm font-medium"
+            className="ml-2 text-xs sm:text-sm font-medium text-gray-700"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             Oui
@@ -58,10 +59,11 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
             value="no" 
             checked={questionnaireAnswers[questionKey] === 'no'}
             onChange={(e) => updateAnswer(questionKey, e.target.value)}
-            className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+            className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
           />
           <span 
-            className="ml-2 text-sm font-medium"
+            className="ml-2 text-xs sm:text-sm font-medium text-gray-700"
             style={{ fontFamily: 'Satoshi, sans-serif' }}
           >
             Non
@@ -73,15 +75,15 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
 
   return (
     <div className="space-y-8">
-      <div className="text-center mb-8">
+      <div className="text-center mb-6 sm:mb-8">
         <h2 
-          className="text-2xl font-bold text-[#00171f] mb-4"
+          className="text-xl sm:text-2xl font-bold text-[#00171f] mb-3 sm:mb-4"
           style={{ fontFamily: '"Gascogne Serial", serif' }}
         >
           Questionnaire de conformité
         </h2>
         <p 
-          className="text-gray-600"
+          className="text-sm sm:text-base text-gray-600 px-4 sm:px-0"
           style={{ fontFamily: 'Satoshi, sans-serif' }}
         >
           Remplissez ce questionnaire pour finaliser votre dossier
@@ -125,7 +127,7 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
         <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#00171f] mb-6"
+            className="text-lg sm:text-xl font-bold text-[#00171f] mb-4 sm:mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Questions de conformité de base
@@ -150,7 +152,7 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
         <div className="absolute top-0 right-0 w-20 h-20 bg-[#00171f]/10 rounded-full blur-xl"></div>
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#00171f] mb-6"
+            className="text-lg sm:text-xl font-bold text-[#00171f] mb-4 sm:mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Espaces et équipements
@@ -176,12 +178,12 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
         <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#00171f] mb-6"
+            className="text-lg sm:text-xl font-bold text-[#00171f] mb-4 sm:mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Espaces de restauration
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <FormInput
               label="Nombre des espaces de restauration"
               type="number"
@@ -195,7 +197,7 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
               onChange={(value) => updateAnswer('superficie_espaces_restauration', value)}
             />
             <FormInput
-              label="Capacité d&apos;accueil des espaces de restauration"
+              label="Capacité d&apos;accueil des espaces de restauration (en nombre de personnes)"
               type="number"
               value={questionnaireAnswers.capacite_espaces_restauration || ''}
               onChange={(value) => updateAnswer('capacite_espaces_restauration', value)}
@@ -209,12 +211,12 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
         <div className="absolute top-0 right-0 w-20 h-20 bg-[#00171f]/10 rounded-full blur-xl"></div>
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#00171f] mb-6"
+            className="text-lg sm:text-xl font-bold text-[#00171f] mb-4 sm:mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Salles polyvalentes
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <FormInput
               label="Nombre des salles polyvalentes pouvant accueillir des conférences, banquets ou séminaires"
               type="number"
@@ -222,7 +224,7 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
               onChange={(value) => updateAnswer('nombre_salles_polyvalentes', value)}
             />
             <FormInput
-              label="Capacité d&apos;accueil des salles polyvalentes"
+              label="Capacité d&apos;accueil des salles polyvalentes (en nombre de personnes)"
               type="number"
               value={questionnaireAnswers.capacite_salles_polyvalentes || ''}
               onChange={(value) => updateAnswer('capacite_salles_polyvalentes', value)}
@@ -236,12 +238,12 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
         <div className="absolute top-0 right-0 w-20 h-20 bg-[#007ea7]/10 rounded-full blur-xl"></div>
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#00171f] mb-6"
+            className="text-lg sm:text-xl font-bold text-[#00171f] mb-4 sm:mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Piscines
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
             <FormInput
               label="Nombre des piscines intérieures et/ou extérieures"
               type="number"
@@ -257,7 +259,7 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
         <div className="absolute top-0 right-0 w-20 h-20 bg-[#00171f]/10 rounded-full blur-xl"></div>
         <div className="relative z-10">
           <h3 
-            className="text-xl font-bold text-[#00171f] mb-6"
+            className="text-lg sm:text-xl font-bold text-[#00171f] mb-4 sm:mb-6"
             style={{ fontFamily: '"Gascogne Serial", serif' }}
           >
             Gestion de l<span style={{ fontFamily: 'Times New Roman, serif' }}>'</span>établissement
@@ -279,7 +281,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="yes" 
                     checked={questionnaireAnswers.gestion_proprietaire === 'yes'}
                     onChange={(e) => updateAnswer('gestion_proprietaire', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"
@@ -295,7 +298,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="no" 
                     checked={questionnaireAnswers.gestion_proprietaire === 'no'}
                     onChange={(e) => updateAnswer('gestion_proprietaire', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"
@@ -323,7 +327,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="yes" 
                     checked={questionnaireAnswers.gestion_societe === 'yes'}
                     onChange={(e) => updateAnswer('gestion_societe', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"
@@ -339,7 +344,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="no" 
                     checked={questionnaireAnswers.gestion_societe === 'no'}
                     onChange={(e) => updateAnswer('gestion_societe', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"
@@ -350,7 +356,7 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                 </label>
               </div>
               {questionnaireAnswers.gestion_societe === 'yes' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormInput
                     label="Raison sociale de la société de gestion"
                     value={questionnaireAnswers.raison_sociale_societe || ''}
@@ -400,7 +406,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="yes" 
                     checked={questionnaireAnswers.chaine_hoteliere === 'yes'}
                     onChange={(e) => updateAnswer('chaine_hoteliere', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"
@@ -416,7 +423,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="no" 
                     checked={questionnaireAnswers.chaine_hoteliere === 'no'}
                     onChange={(e) => updateAnswer('chaine_hoteliere', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"
@@ -451,7 +459,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="yes" 
                     checked={questionnaireAnswers.gestion_personne_physique === 'yes'}
                     onChange={(e) => updateAnswer('gestion_personne_physique', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"
@@ -467,7 +476,8 @@ export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
                     value="no" 
                     checked={questionnaireAnswers.gestion_personne_physique === 'no'}
                     onChange={(e) => updateAnswer('gestion_personne_physique', e.target.value)}
-                    className="w-4 h-4 text-[#007ea7] border-gray-300 focus:ring-[#007ea7] focus:ring-2" 
+                    className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+            style={{ accentColor: '#007ea7' }} 
                   />
                   <span 
                     className="ml-2 text-sm font-medium"

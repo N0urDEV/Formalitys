@@ -26,7 +26,6 @@ export const useCompanyDossier = () => {
     capital: 10000,
     selectedBank: '',
     // Additional company information
-    raisonSociale: '',
     formeJuridique: '',
     nationalite: '',
     adresseSiege: '',
@@ -123,7 +122,6 @@ export const useCompanyDossier = () => {
                 capital: specificDossier.capital || 10000,
                 selectedBank: specificDossier.selectedBank || '',
                 // Additional company information
-                raisonSociale: specificDossier.raisonSociale || '',
                 formeJuridique: specificDossier.formeJuridique || '',
                 nationalite: specificDossier.nationalite || '',
                 adresseSiege: specificDossier.adresseSiege || '',
@@ -199,7 +197,6 @@ export const useCompanyDossier = () => {
                 capital: dossierToLoad.capital || 10000,
                 selectedBank: dossierToLoad.selectedBank || '',
                 // Additional company information
-                raisonSociale: dossierToLoad.raisonSociale || '',
                 formeJuridique: dossierToLoad.formeJuridique || '',
                 nationalite: dossierToLoad.nationalite || '',
                 adresseSiege: dossierToLoad.adresseSiege || '',
@@ -368,7 +365,6 @@ export const useCompanyDossier = () => {
         createdAt: dossier.createdAt,
         status: dossier.status,
         // Additional company information
-        raisonSociale: companyData.raisonSociale,
         formeJuridique: companyData.formeJuridique,
         adresseSiege: companyData.adresseSiege,
         villeSiege: companyData.villeSiege,

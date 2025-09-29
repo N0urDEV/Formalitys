@@ -486,7 +486,6 @@
           "proposedNameN": "Nom {n}",
           "activities": "Activités (max 3)",
           "capital": "Capital social",
-          "raisonSociale": "Raison sociale",
           "formeJuridique": "Forme juridique",
           "nationalite": "Nationalité",
           "adresseSiege": "Adresse du siège social ou du principal établissement",
@@ -506,7 +505,6 @@
         "placeholders": {
           "companyName": "Nom de votre société",
           "proposedNameN": "Nom {n}",
-          "raisonSociale": "Raison sociale de la société",
           "nationalite": "Nationalité de la société",
           "adresseSiege": "Adresse complète du siège social",
           "villeSiege": "Ville du siège social",
@@ -575,7 +573,6 @@
           "companyNameRequired": "Le nom de la société est requis",
           "activitiesRequired": "Au moins une activité doit être sélectionnée",
           "proposedNamesRequired": "Trois noms proposés sont requis",
-          "raisonSocialeRequired": "La raison sociale est requise",
           "formeJuridiqueRequired": "La forme juridique est requise",
           "nationaliteRequired": "La nationalité est requise",
           "adresseSiegeRequired": "L'adresse du siège social est requise",

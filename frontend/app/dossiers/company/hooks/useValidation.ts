@@ -71,7 +71,7 @@ export const useValidation = () => {
       stepErrorsList.push(t('step2.selectHeadquarters'));
     }
     
-    if (companyData.headquarters === 'contrat_domiciliation' && !companyData.selectedBank) {
+    if (!companyData.selectedBank) {
       stepErrorsList.push(t('step2.selectBank'));
     }
 
@@ -91,10 +91,6 @@ export const useValidation = () => {
     }
 
     // Additional company information validation
-    if (!companyData.raisonSociale.trim()) {
-      stepErrorsList.push('La raison sociale est requise');
-    }
-    
     if (!companyData.formeJuridique.trim()) {
       stepErrorsList.push('La forme juridique est requise');
     }

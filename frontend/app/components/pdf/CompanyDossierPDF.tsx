@@ -120,7 +120,6 @@ interface CompanyDossierPDFProps {
     createdAt: string;
     status: string;
     // Additional company information
-    raisonSociale?: string;
     formeJuridique?: string;
     adresseSiege?: string;
     villeSiege?: string;
@@ -213,12 +212,6 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
           <Text style={styles.sectionTitle}>Informations Générales de la Société</Text>
           <View style={styles.twoColumnRow}>
             <View style={styles.leftColumn}>
-              {dossier.raisonSociale && (
-                <View style={styles.row}>
-                  <Text style={styles.label}>Raison sociale:</Text>
-                  <Text style={styles.value}>{dossier.raisonSociale}</Text>
-                </View>
-              )}
               {dossier.formeJuridique && (
                 <View style={styles.row}>
                   <Text style={styles.label}>Forme juridique:</Text>

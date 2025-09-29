@@ -19,7 +19,6 @@ export interface CompanyData {
   capital: number;
   selectedBank: string;
   // Additional company information
-  raisonSociale: string;
   formeJuridique: string;
   nationalite: string;
   adresseSiege: string;
@@ -63,7 +62,6 @@ export interface CompanyDossier {
   capital?: number;
   selectedBank?: string;
   // Additional company information
-  raisonSociale?: string;
   formeJuridique?: string;
   nationalite?: string;
   adresseSiege?: string;

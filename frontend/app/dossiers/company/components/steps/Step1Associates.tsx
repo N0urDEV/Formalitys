@@ -67,6 +67,31 @@ export const Step1Associates: React.FC<Step1AssociatesProps> = ({
         </p>
       </div>
 
+      {/* Step 1 Warning Card */}
+      <div className="bg-[#007ea7]/10 border border-[#007ea7]/30 rounded-2xl p-6 mb-6">
+        <div className="flex items-start space-x-3">
+          <div className="w-6 h-6 bg-[#007ea7] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 
+              className="text-lg font-semibold text-[#00171f] mb-2"
+              style={{ fontFamily: 'Satoshi, sans-serif' }}
+            >
+              Information requise
+            </h3>
+            <p 
+              className="text-[#00171f]/80"
+              style={{ fontFamily: 'Satoshi, sans-serif' }}
+            >
+              Vous devez remplir toutes les informations des associés (nom, prénom, téléphone, email, adresse) avant de pouvoir continuer à l'étape suivante.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Step 1 Error Display */}
       {stepErrors[1] && stepErrors[1].length > 0 && (
         <div className="bg-red-50 border border-red-200 rounded-2xl p-6 mb-6">
@@ -237,7 +262,8 @@ export const Step1Associates: React.FC<Step1AssociatesProps> = ({
                   type="checkbox"
                   checked={associate.isGerant}
                   onChange={(e) => updateAssociate(index, 'isGerant', e.target.checked)}
-                  className="w-5 h-5 text-[#007ea7] border-gray-300 rounded focus:ring-[#007ea7] focus:ring-2"
+                  className="w-5 h-5 border-gray-300 rounded focus:ring-2 focus:ring-[#007ea7]"
+                  style={{ accentColor: '#007ea7' }}
                 />
                 <span 
                   className="text-gray-700 font-medium"

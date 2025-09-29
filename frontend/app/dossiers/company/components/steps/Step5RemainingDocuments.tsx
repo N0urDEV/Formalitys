@@ -55,6 +55,31 @@ export const Step5RemainingDocuments: React.FC<Step5RemainingDocumentsProps> = (
         </div>
       </div>
 
+      {/* Step 5 Warning Card */}
+      <div className="bg-[#007ea7]/10 border border-[#007ea7]/30 rounded-2xl p-6 mb-6">
+        <div className="flex items-start space-x-3">
+          <div className="w-6 h-6 bg-[#007ea7] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 
+              className="text-lg font-semibold text-[#00171f] mb-2"
+              style={{ fontFamily: 'Satoshi, sans-serif' }}
+            >
+              Documents restants
+            </h3>
+            <p 
+              className="text-[#00171f]/80"
+              style={{ fontFamily: 'Satoshi, sans-serif' }}
+            >
+              Vous devez uploader tous les documents restants (justificatif de domicile, autres documents) pour finaliser votre dossier.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="space-y-8">
         <div className="text-center mb-8">
           <h2 

@@ -499,7 +499,6 @@
           "proposedNameN": "Name {n}",
           "activities": "Activities (max 3)",
           "capital": "Share capital",
-          "raisonSociale": "Corporate name",
           "formeJuridique": "Legal form",
           "nationalite": "Nationality",
           "adresseSiege": "Registered office address or main establishment",
@@ -519,7 +518,6 @@
         "placeholders": {
           "companyName": "Your company name",
           "proposedNameN": "Name {n}",
-          "raisonSociale": "Company corporate name",
           "nationalite": "Company nationality",
           "adresseSiege": "Complete registered office address",
           "villeSiege": "Registered office city",
@@ -588,7 +586,6 @@
           "companyNameRequired": "Company name is required",
           "activitiesRequired": "At least one activity must be selected",
           "proposedNamesRequired": "Three proposed names are required",
-          "raisonSocialeRequired": "Corporate name is required",
           "formeJuridiqueRequired": "Legal form is required",
           "nationaliteRequired": "Nationality is required",
           "adresseSiegeRequired": "Registered office address is required",
