@@ -1,20 +1,27 @@
 import React from 'react';
-import { QuestionnaireAnswers, StepErrors } from '../../types';
+import { QuestionnaireAnswers, StepErrors, FormErrors } from '../../types';
 import { FormInput } from '../FormInput';
 
 interface Step5QuestionnaireProps {
   questionnaireAnswers: QuestionnaireAnswers;
   setQuestionnaireAnswers: (answers: QuestionnaireAnswers) => void;
+  errors: FormErrors;
   stepErrors: StepErrors;
+  clearFieldError: (field: string) => void;
 }
 
 export const Step5Questionnaire: React.FC<Step5QuestionnaireProps> = ({
   questionnaireAnswers,
   setQuestionnaireAnswers,
-  stepErrors
+  errors,
+  stepErrors,
+  clearFieldError
 }) => {
   const updateAnswer = (key: string, value: any) => {
     setQuestionnaireAnswers(prev => ({ ...prev, [key]: value }));
+    if (errors[key]) {
+      clearFieldError(key);
+    }
   };
 
   const QuestionItem: React.FC<{ question: string; questionKey: string }> = ({ question, questionKey }) => (
