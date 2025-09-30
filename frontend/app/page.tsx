@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from './components/sections/Footer';
+import PromoModal from './components/PromoModal';
 import PartnersCarousel from './components/PartnersCarousel';
 import Navigation from './components/Navigation';
 import StructuredData from './components/StructuredData';
@@ -75,6 +76,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white pointer-events-auto">
+      <PromoModal />
       <StructuredData type="organization" />
       <StructuredData type="faq" />
       {/* Navigation Header */}

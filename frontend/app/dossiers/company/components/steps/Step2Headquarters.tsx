@@ -18,7 +18,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
 }) => {
   const headquartersOptions = [
     { value: 'domicile', label: 'Domicile (gratuit)' },
-    { value: 'contrat_domiciliation', label: 'Contrat de domiciliation (+900 MAD pour 6 mois)' },
+		{ value: 'contrat_domiciliation', label: 'Contrat de domiciliation (+900 MAD pour 12 mois : 6 payés + 6 offerts)' },
     { value: 'location_local', label: 'Location d\'un local' }
   ];
 
@@ -29,6 +29,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
     { value: 'BCP', label: 'Banque Populaire' },
     { value: 'Bank of Africa', label: 'Bank of Africa' },
     { value: 'BMCE Bank', label: 'BMCE Bank' },
+		{ value: 'Saham Bank', label: 'Saham Bank' },
     { value: 'Crédit du Maroc', label: 'Crédit du Maroc' }
   ];
 
@@ -139,6 +140,16 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
                   >
                     {option.label}
                   </div>
+                  {option.value === 'contrat_domiciliation' && (
+                    <div className="mt-2 flex items-center gap-2">
+                      <span className="inline-flex items-center rounded-full bg-green-100 text-green-800 px-2.5 py-0.5 text-xs font-medium border border-green-200">
+                        6 mois offerts
+                      </span>
+                      <span className="text-xs text-gray-600" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                        Payez 6 mois et bénéficiez de 12 mois au total
+                      </span>
+                    </div>
+                  )}
                   {option.value === 'domicile' && (
                     <div 
                       className="text-sm text-gray-600 mt-1"
@@ -152,7 +163,7 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
                       className="text-sm text-gray-600 mt-1"
                       style={{ fontFamily: 'Satoshi, sans-serif' }}
                     >
-                      Domiciliation professionnelle avec adresse commerciale
+                      Domiciliation professionnelle avec adresse commerciale. Offre spéciale : 12 mois pour le prix de 6.
                     </div>
                   )}
                   {option.value === 'location_local' && (
@@ -227,13 +238,13 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
                 className="text-white/90"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                Domiciliation (6 mois)
+              Domiciliation (12 mois : 6 payés + 6 offerts)
               </span>
               <span 
                 className="font-medium"
                 style={{ fontFamily: 'Satoshi, sans-serif' }}
               >
-                +{formatPrice(900)}
+              +{formatPrice(900)}
               </span>
             </div>
           )}
