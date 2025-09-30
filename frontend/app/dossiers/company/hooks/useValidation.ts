@@ -130,7 +130,7 @@ export const useValidation = () => {
       case 2:
         return validateStep2Headquarters(data.companyData);
       case 3:
-        return validateStep2(data.companyData) && validateStep3CNI(data.uploadedFiles);
+        return validateStep2(data.companyData) && validateStep3CNI(data.uploadedFiles, data.associates);
       case 4:
         return validateStep3Payment(data.dossier);
       case 5:
@@ -155,17 +155,20 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateStep3CNI = (uploadedFiles: any): boolean => {
+  const validateStep3CNI = (uploadedFiles: any, associates: Associate[]): boolean => {
     const stepErrorsList: string[] = [];
     
-    // Check if CNI files are uploaded
+    // Check if CNI files are uploaded for each associate
     // Convert uploadedFiles object to array like in components
     const filesArray = uploadedFiles ? Object.values(uploadedFiles).flat() : [];
-    const cniFiles = filesArray.filter((file: any) => file.documentType === 'cni');
     
-    if (cniFiles.length === 0) {
-      stepErrorsList.push('Vous devez uploader les CNI de tous les associés avant de procéder au paiement');
-    }
+    // Check that each associate has their CNI uploaded
+    associates.forEach((associate, index) => {
+      const cniFiles = filesArray.filter((file: any) => file.documentType === `cni-associe-${index}`);
+      if (cniFiles.length === 0) {
+        stepErrorsList.push(`Vous devez uploader la CNI de ${associate.prenom} ${associate.nom} avant de procéder au paiement`);
+      }
+    });
     
     setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
     return stepErrorsList.length === 0;
@@ -186,7 +189,7 @@ export const useValidation = () => {
     return stepErrorsList.length === 0;
   };
 
-  const validateStep4Documents = (companyData: CompanyData, uploadedFiles: any): boolean => {
+  const validateStep4Documents = (companyData: CompanyData, uploadedFiles: any, associates: Associate[]): boolean => {
     const stepErrorsList: string[] = [];
     
     // Validate company data first
@@ -194,9 +197,6 @@ export const useValidation = () => {
     if (!companyValid) {
       return false;
     }
-    
-    // Check required document uploads
-    const requiredDocuments = ['cni', 'justificatif_domicile', 'autre'];
     
     // Handle both array and object formats for uploadedFiles
     let uploadedTypes: string[] = [];
@@ -209,11 +209,19 @@ export const useValidation = () => {
       uploadedTypes = Object.values(uploadedFiles).flat().map(file => file.documentType);
     }
     
-    requiredDocuments.forEach(docType => {
+    // Check that each associate has their justificatif_domicile uploaded
+    associates.forEach((associate, index) => {
+      const domicileFiles = uploadedTypes.filter(type => type === `justificatif_domicile-associe-${index}`);
+      if (domicileFiles.length === 0) {
+        stepErrorsList.push(`Vous devez uploader le justificatif de domicile de ${associate.prenom} ${associate.nom}`);
+      }
+    });
+    
+    // Check for other required documents (non-associate specific)
+    const otherRequiredDocuments = ['autre'];
+    otherRequiredDocuments.forEach(docType => {
       if (!uploadedTypes.includes(docType)) {
         const docNames: any = {
-          'cni': t('docs.cni'),
-          'justificatif_domicile': t('docs.justifDomicile'),
           'autre': t('docs.statuts')
         };
         stepErrorsList.push(t('docs.required', { name: docNames[docType] }));

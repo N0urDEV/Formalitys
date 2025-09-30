@@ -4,6 +4,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import WhatsAppWidget from "./components/WhatsAppWidget";
 import { NextIntlClientProvider } from "next-intl";
 import en from "../messages/en.json";
+import ar from "../messages/ar.json";
 import Script from "next/script";
 import Analytics from "@/app/components/Analytics";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
@@ -69,8 +70,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = typeof window !== 'undefined' ? (localStorage.getItem('locale') || 'en') : 'en';
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
   return (
-    <html lang="en">
+    <html lang={locale === 'ar' ? 'ar' : locale === 'fr' ? 'fr' : 'en'} dir={dir}>
       <head>
         <link rel="stylesheet" href="/fonts/satoshi.css" />
         {/* Site icons */}

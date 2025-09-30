@@ -176,11 +176,11 @@ export const Step5RemainingDocuments: React.FC<Step5RemainingDocumentsProps> = (
                 key={`domicile-${index}`}
                 title=""
                 description={t('files.uploadJustifDomicile')}
-                onUpload={(files) => onFileUpload(files, 'justificatif_domicile')}
+                onUpload={(files) => onFileUpload(files, `justificatif_domicile-associe-${index}`)}
                 acceptedTypes={['.pdf']}
                 maxFiles={1}
                 maxSize={5}
-                currentFiles={uploadedFiles.filter(file => file.documentType === 'justificatif_domicile')}
+                currentFiles={uploadedFiles.filter(file => file.documentType === `justificatif_domicile-associe-${index}`)}
               />
             </div>
           ))}

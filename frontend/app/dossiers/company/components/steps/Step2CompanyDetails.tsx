@@ -415,11 +415,11 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
                   key={`cni-${index}`}
                   title=""
                   description={t('files.uploadCNI')}
-                  onUpload={(files) => onFileUpload(files, 'cni')}
+                  onUpload={(files) => onFileUpload(files, `cni-associe-${index}`)}
                   acceptedTypes={['.pdf']}
                   maxFiles={1}
                   maxSize={5}
-                  currentFiles={uploadedFiles.filter(file => file.documentType === 'cni')}
+                  currentFiles={uploadedFiles.filter(file => file.documentType === `cni-associe-${index}`)}
                 />
               </div>
             ))}
