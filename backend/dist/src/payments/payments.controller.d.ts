@@ -26,5 +26,13 @@ export declare class PaymentsController {
     }): Promise<{
         received: boolean;
     }>;
+    calculatePrice(dto: CreatePaymentIntentDto, req: any): Promise<{
+        basePrice: number;
+        domiciliationFee: number;
+        discountApplied: number;
+        discountPercentage: number;
+        total: number;
+        domiciliationSelected: boolean;
+    } | undefined>;
 }
 export {};

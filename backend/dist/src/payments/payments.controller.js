@@ -54,6 +54,9 @@ let PaymentsController = class PaymentsController {
         }
         return this.paymentsService.handleWebhook(signature, req.rawBody);
     }
+    calculatePrice(dto, req) {
+        return this.paymentsService.calculatePrice(dto.dossierId, dto.dossierType, req.user?.userId);
+    }
 };
 exports.PaymentsController = PaymentsController;
 __decorate([
@@ -81,6 +84,15 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], PaymentsController.prototype, "handleWebhook", null);
+__decorate([
+    (0, common_1.Post)('calculate-price'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [CreatePaymentIntentDto, Object]),
+    __metadata("design:returntype", void 0)
+], PaymentsController.prototype, "calculatePrice", null);
 exports.PaymentsController = PaymentsController = __decorate([
     (0, common_1.Controller)('payments'),
     __metadata("design:paramtypes", [payments_service_1.PaymentsService])

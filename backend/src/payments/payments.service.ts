@@ -20,9 +20,55 @@ export class PaymentsService {
     });
   }
 
+  async calculatePrice(dossierId: number, dossierType: 'company' | 'tourism', userId: number) {
+    // Base pricing in MAD cents (1 MAD = 100 cents)
+    let baseAmount = 0;
+    
+    if (dossierType === 'company') {
+      // Get company dossier to check for domiciliation option
+      const companyDossier = await this.prisma.companyDossier.findUnique({
+        where: { id: dossierId }
+      });
+      
+      baseAmount = 330000; // 3300 MAD base price
+      
+      // Apply discount to base price only (not including domiciliation)
+      const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+      let amount = discount.finalPrice;
+      
+      // Add domiciliation fee if selected (after discount)
+      if (companyDossier?.headquarters === 'contrat_domiciliation') {
+        amount += 90000; // +900 MAD for domiciliation
+      }
+      
+      return {
+        basePrice: baseAmount / 100, // Convert to MAD
+        domiciliationFee: companyDossier?.headquarters === 'contrat_domiciliation' ? 900 : 0,
+        discountApplied: discount.discountAmount / 100, // Convert to MAD
+        discountPercentage: discount.discountPercentage,
+        total: amount / 100, // Convert to MAD
+        domiciliationSelected: companyDossier?.headquarters === 'contrat_domiciliation'
+      };
+    } else if (dossierType === 'tourism') {
+      baseAmount = 160000; // 1600 MAD
+      const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+      
+      return {
+        basePrice: baseAmount / 100, // Convert to MAD
+        domiciliationFee: 0,
+        discountApplied: discount.discountAmount / 100, // Convert to MAD
+        discountPercentage: discount.discountPercentage,
+        total: discount.finalPrice / 100, // Convert to MAD
+        domiciliationSelected: false
+      };
+    }
+  }
+
   async createPaymentIntent(dossierId: number, dossierType: 'company' | 'tourism', userId: number) {
     // Base pricing in MAD cents (1 MAD = 100 cents)
     let baseAmount = 0;
+    let amount = 0;
+    let discount: any = null;
     
     if (dossierType === 'company') {
       // Get company dossier to check for domiciliation option
@@ -38,23 +84,24 @@ export class PaymentsService {
       
       baseAmount = 330000; // 3300 MAD base price
       
-      // Add domiciliation fee if selected
+      // Apply discount to base price only (not including domiciliation)
+      discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+      amount = discount.finalPrice;
+      
+      // Add domiciliation fee if selected (after discount)
       if (companyDossier?.headquarters === 'contrat_domiciliation') {
         console.log('Adding domiciliation fee: +900 MAD');
-        baseAmount += 90000; // +900 MAD for domiciliation
+        amount += 90000; // +900 MAD for domiciliation
       } else {
         console.log('No domiciliation fee - headquarters:', companyDossier?.headquarters);
       }
       
-      console.log('Final base amount:', baseAmount, 'MAD');
+      console.log('Final amount after discount and domiciliation:', amount, 'MAD');
     } else if (dossierType === 'tourism') {
       baseAmount = 160000; // 1600 MAD
+      discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+      amount = discount.finalPrice;
     }
-
-    // Apply loyalty discount to both dossier types
-    let amount = baseAmount;
-    const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
-    amount = discount.finalPrice;
 
     // Check if Stripe is properly configured
     const stripeKey = process.env.STRIPE_SECRET_KEY;

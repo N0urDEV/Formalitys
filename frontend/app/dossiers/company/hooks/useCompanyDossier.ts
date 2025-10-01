@@ -3,6 +3,23 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { CompanyDossier, Associate, CompanyData, UploadedFiles } from '../types';
 import { PDFService } from '../../../services/pdfService';
 
+interface UserDiscountStatus {
+  availableDiscounts: {
+    company: {
+      originalPrice: number;
+      finalPrice: number;
+      discountPercentage: number;
+      discountAmount: number;
+    };
+    tourism: {
+      originalPrice: number;
+      finalPrice: number;
+      discountPercentage: number;
+      discountAmount: number;
+    };
+  };
+}
+
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
 export const useCompanyDossier = () => {
@@ -11,6 +28,8 @@ export const useCompanyDossier = () => {
   const [dossier, setDossier] = useState<CompanyDossier | null>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [discountStatus, setDiscountStatus] = useState<UserDiscountStatus | null>(null);
+  const [pricingData, setPricingData] = useState<any>(null);
   const initializedRef = useRef(false);
   
   const [associates, setAssociates] = useState<Associate[]>([{
@@ -247,6 +266,71 @@ export const useCompanyDossier = () => {
     })();
   }, [router, searchParams]);
 
+  // Load discount status
+  useEffect(() => {
+    const loadDiscountStatus = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      try {
+        console.log('Loading discount status...');
+        const res = await fetch(`${API}/discount/status`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          console.log('Discount status loaded:', data);
+          setDiscountStatus(data);
+        } else {
+          console.error('Failed to load discount status:', res.status, res.statusText);
+        }
+      } catch (error) {
+        console.error('Error loading discount status:', error);
+      }
+    };
+
+    loadDiscountStatus();
+  }, []);
+
+  // Load pricing data from backend
+  const loadPricingData = async () => {
+    if (!dossier) return;
+    
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+      const res = await fetch(`${API}/payments/calculate-price`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          dossierId: dossier.id,
+          dossierType: 'company'
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setPricingData(data);
+      } else {
+        console.error('Failed to load pricing data:', res.status, res.statusText);
+      }
+    } catch (error) {
+      console.error('Error loading pricing data:', error);
+    }
+  };
+
+  // Load pricing data when dossier or companyData changes
+  useEffect(() => {
+    if (dossier && companyData.headquarters) {
+      loadPricingData();
+    }
+  }, [dossier, companyData.headquarters]);
+
   const saveStep = async (stepData: any) => {
     if (!dossier) return;
     
@@ -411,6 +495,49 @@ export const useCompanyDossier = () => {
     return total;
   };
 
+  const calculatePriceWithDiscount = () => {
+    // Use backend pricing data if available, otherwise fallback to frontend calculation
+    if (pricingData) {
+      return {
+        originalPrice: pricingData.basePrice + pricingData.domiciliationFee,
+        finalPrice: pricingData.total,
+        discountPercentage: pricingData.discountPercentage,
+        discountAmount: pricingData.discountApplied
+      };
+    }
+
+    // Fallback to frontend calculation
+    const baseTotal = calculateTotalPrice();
+    
+    if (!discountStatus?.availableDiscounts?.company) {
+      return {
+        originalPrice: baseTotal,
+        finalPrice: baseTotal,
+        discountPercentage: 0,
+        discountAmount: 0
+      };
+    }
+
+    const discount = discountStatus.availableDiscounts.company;
+    
+    // Apply discount only to base price (3300 MAD), then add domiciliation if selected
+    const basePrice = 3300; // Base company creation price
+    const discountPercentage = discount.discountPercentage;
+    const discountAmount = (basePrice * discountPercentage) / 100;
+    const discountedBasePrice = basePrice - discountAmount;
+    
+    // Add domiciliation fee if selected
+    const domiciliationFee = companyData.headquarters === 'contrat_domiciliation' ? 900 : 0;
+    const finalPrice = discountedBasePrice + domiciliationFee;
+    
+    return {
+      originalPrice: baseTotal,
+      finalPrice: finalPrice,
+      discountPercentage: discountPercentage,
+      discountAmount: discountAmount
+    };
+  };
+
   return {
     dossier,
     currentStep,
@@ -425,6 +552,9 @@ export const useCompanyDossier = () => {
     saveStep,
     handleFileUpload,
     downloadPdf,
-    calculateTotalPrice
+    calculateTotalPrice,
+    calculatePriceWithDiscount,
+    discountStatus,
+    pricingData
   };
 };

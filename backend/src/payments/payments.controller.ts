@@ -48,4 +48,14 @@ export class PaymentsController {
     }
     return this.paymentsService.handleWebhook(signature, req.rawBody);
   }
+
+  @Post('calculate-price')
+  @UseGuards(AuthGuard('jwt'))
+  calculatePrice(@Body() dto: CreatePaymentIntentDto, @Req() req: any) {
+    return this.paymentsService.calculatePrice(
+      dto.dossierId,
+      dto.dossierType,
+      req.user?.userId,
+    );
+  }
 }

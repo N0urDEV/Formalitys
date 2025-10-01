@@ -9,10 +9,11 @@ const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 
 interface Step3PaymentProps {
   dossier: any;
+  companyData: any;
   onPaymentSuccess: () => void;
 }
 
-export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSuccess }) => {
+export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, companyData, onPaymentSuccess }) => {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [paymentIntent, setPaymentIntent] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
@@ -173,9 +174,10 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
             currency={paymentIntent?.currency || 'mad'}
             serviceName="Création de société"
             showSummary={true}
+            domiciliationLabel="Domiciliation (12 mois : 6 payés + 6 offerts)"
             costBreakdown={{
-              basePrice: parseInt(paymentIntent?.metadata?.originalPrice || '330000') / 100,
-              domiciliationFee: (parseInt(paymentIntent?.metadata?.originalPrice || '330000') - 330000) / 100 || undefined,
+              basePrice: 3300, // Base company creation price
+              domiciliationFee: companyData.headquarters === 'contrat_domiciliation' ? 900 : undefined,
               discountApplied: parseInt(paymentIntent?.metadata?.discountApplied || '0') / 100,
               discountPercentage: parseInt(paymentIntent?.metadata?.discountPercentage || '0'),
               total: (paymentIntent?.amount || 0) / 100

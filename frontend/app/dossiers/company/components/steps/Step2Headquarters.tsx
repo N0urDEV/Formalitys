@@ -8,13 +8,24 @@ interface Step2HeadquartersProps {
   setCompanyData: (data: CompanyData) => void;
   stepErrors: StepErrors;
   calculateTotalPrice: () => number;
+  calculatePriceWithDiscount: () => {
+    originalPrice: number;
+    finalPrice: number;
+    discountPercentage: number;
+    discountAmount: number;
+  };
+  discountStatus: any;
+  pricingData: any;
 }
 
 export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
   companyData,
   setCompanyData,
   stepErrors,
-  calculateTotalPrice
+  calculateTotalPrice,
+  calculatePriceWithDiscount,
+  discountStatus,
+  pricingData
 }) => {
   const headquartersOptions = [
     { value: 'domicile', label: 'Domicile (gratuit)' },
@@ -248,6 +259,25 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
               </span>
             </div>
           )}
+          
+          {/* Show discount if available */}
+          {pricingData && pricingData.discountPercentage > 0 && (
+            <div className="flex justify-between text-green-300">
+              <span 
+                className="text-green-300"
+                style={{ fontFamily: 'Satoshi, sans-serif' }}
+              >
+                Réduction fidélité ({pricingData.discountPercentage}%)
+              </span>
+              <span 
+                className="font-medium text-green-300"
+                style={{ fontFamily: 'Satoshi, sans-serif' }}
+              >
+                -{formatPrice(pricingData.discountApplied)}
+              </span>
+            </div>
+          )}
+          
           <div className="border-t border-white/20 pt-2 flex justify-between font-bold text-lg">
             <span 
               style={{ fontFamily: 'Satoshi, sans-serif' }}
@@ -257,9 +287,21 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
             <span 
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              {formatPrice(calculateTotalPrice())}
+              {formatPrice(pricingData ? pricingData.total : calculatePriceWithDiscount().finalPrice)}
             </span>
           </div>
+          
+          {/* Show original price if discount applied */}
+          {pricingData && pricingData.discountPercentage > 0 && (
+            <div className="text-center text-white/70 text-sm">
+              <span 
+                className="line-through"
+                style={{ fontFamily: 'Satoshi, sans-serif' }}
+              >
+                Prix normal : {formatPrice(pricingData.basePrice + pricingData.domiciliationFee)}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -40,7 +40,10 @@ function CompanyDossierPageContent() {
     setUploadedFiles,
     saveStep,
     handleFileUpload,
-    downloadPdf
+    downloadPdf,
+    calculatePriceWithDiscount,
+    discountStatus,
+    pricingData
   } = useCompanyDossier();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -143,6 +146,9 @@ function CompanyDossierPageContent() {
             setCompanyData={setCompanyData}
             stepErrors={stepErrors}
             calculateTotalPrice={calculateTotalPrice}
+            calculatePriceWithDiscount={calculatePriceWithDiscount}
+            discountStatus={discountStatus}
+            pricingData={pricingData}
           />
         );
       case 3:
@@ -161,6 +167,7 @@ function CompanyDossierPageContent() {
         return (
           <Step3Payment
             dossier={dossier}
+            companyData={companyData}
             onPaymentSuccess={async () => {
               // Update dossier status to PAID and advance to step 5
               if (dossier) {

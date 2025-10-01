@@ -11,6 +11,7 @@ interface PaymentFormProps {
   currency: string;
   serviceName?: string;
   showSummary?: boolean;
+  domiciliationLabel?: string;
   costBreakdown?: {
     basePrice: number;
     domiciliationFee?: number;
@@ -20,7 +21,7 @@ interface PaymentFormProps {
   };
 }
 
-export default function PaymentForm({ onSuccess, onError, amount, currency, serviceName, showSummary = true, costBreakdown }: PaymentFormProps) {
+export default function PaymentForm({ onSuccess, onError, amount, currency, serviceName, showSummary = true, domiciliationLabel, costBreakdown }: PaymentFormProps) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -73,7 +74,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                  {costBreakdown?.domiciliationFee && (
                    <div className="flex justify-between">
                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                       {t('domiciliation')}
+                       {domiciliationLabel || t('domiciliation')}
                      </span>
                      <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                        +{formatPrice(costBreakdown.domiciliationFee)}

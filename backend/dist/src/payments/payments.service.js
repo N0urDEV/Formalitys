@@ -32,8 +32,44 @@ let PaymentsService = class PaymentsService {
             apiVersion: '2025-02-24.acacia'
         });
     }
+    async calculatePrice(dossierId, dossierType, userId) {
+        let baseAmount = 0;
+        if (dossierType === 'company') {
+            const companyDossier = await this.prisma.companyDossier.findUnique({
+                where: { id: dossierId }
+            });
+            baseAmount = 330000;
+            const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+            let amount = discount.finalPrice;
+            if (companyDossier?.headquarters === 'contrat_domiciliation') {
+                amount += 90000;
+            }
+            return {
+                basePrice: baseAmount / 100,
+                domiciliationFee: companyDossier?.headquarters === 'contrat_domiciliation' ? 900 : 0,
+                discountApplied: discount.discountAmount / 100,
+                discountPercentage: discount.discountPercentage,
+                total: amount / 100,
+                domiciliationSelected: companyDossier?.headquarters === 'contrat_domiciliation'
+            };
+        }
+        else if (dossierType === 'tourism') {
+            baseAmount = 160000;
+            const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+            return {
+                basePrice: baseAmount / 100,
+                domiciliationFee: 0,
+                discountApplied: discount.discountAmount / 100,
+                discountPercentage: discount.discountPercentage,
+                total: discount.finalPrice / 100,
+                domiciliationSelected: false
+            };
+        }
+    }
     async createPaymentIntent(dossierId, dossierType, userId) {
         let baseAmount = 0;
+        let amount = 0;
+        let discount = null;
         if (dossierType === 'company') {
             const companyDossier = await this.prisma.companyDossier.findUnique({
                 where: { id: dossierId }
@@ -44,21 +80,22 @@ let PaymentsService = class PaymentsService {
                 currentStep: companyDossier?.currentStep
             });
             baseAmount = 330000;
+            discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+            amount = discount.finalPrice;
             if (companyDossier?.headquarters === 'contrat_domiciliation') {
                 console.log('Adding domiciliation fee: +900 MAD');
-                baseAmount += 90000;
+                amount += 90000;
             }
             else {
                 console.log('No domiciliation fee - headquarters:', companyDossier?.headquarters);
             }
-            console.log('Final base amount:', baseAmount, 'MAD');
+            console.log('Final amount after discount and domiciliation:', amount, 'MAD');
         }
         else if (dossierType === 'tourism') {
             baseAmount = 160000;
+            discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+            amount = discount.finalPrice;
         }
-        let amount = baseAmount;
-        const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
-        amount = discount.finalPrice;
         const stripeKey = process.env.STRIPE_SECRET_KEY;
         if (!stripeKey) {
             throw new Error('STRIPE_SECRET_KEY is not configured. Please set your Stripe secret key in the environment variables.');
