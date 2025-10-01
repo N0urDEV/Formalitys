@@ -108,52 +108,65 @@ export const useTourismDossier = () => {
           if (dossiers.length > 0) {
             // Find the most recent incomplete dossier
             const incompleteDossier = dossiers.find((d: any) => d.status !== 'COMPLETED');
-            const dossierToLoad = incompleteDossier || dossiers[0]; // Use incomplete or most recent
             
-            console.log('useTourismDossier: Loading existing dossier:', dossierToLoad.id);
-            setDossier(dossierToLoad);
+            if (incompleteDossier) {
+              const dossierToLoad = incompleteDossier;
+              console.log('useTourismDossier: Loading existing incomplete dossier:', dossierToLoad.id);
+              setDossier(dossierToLoad);
             
-            // Check if payment was successful and update step
-            const paymentSuccess = searchParams.get('payment') === 'success';
+              // Check if payment was successful and update step
+              const paymentSuccess = searchParams.get('payment') === 'success';
+              
+              // If user just completed payment (URL parameter) and is on step 3, advance to step 4
+              if (paymentSuccess && dossierToLoad.currentStep === 3) {
+                // Update dossier to step 4 after successful payment
+                await fetch(`${API}/dossiers/tourism/${dossierToLoad.id}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                  },
+                  body: JSON.stringify({ currentStep: 4, status: 'PAID' })
+                });
+                setCurrentStep(4);
+              } 
+              // If user already paid but is still on step 3, advance them to step 4
+              else if (dossierToLoad.status === 'PAID' && dossierToLoad.currentStep === 3) {
+                // Update dossier to step 4 since payment is already completed
+                await fetch(`${API}/dossiers/tourism/${dossierToLoad.id}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                  },
+                  body: JSON.stringify({ currentStep: 4 })
+                });
+                setCurrentStep(4);
+              } 
+              // Otherwise, use the current step from the dossier
+              else {
+                setCurrentStep(dossierToLoad.currentStep);
+              }
             
-            // If user just completed payment (URL parameter) and is on step 3, advance to step 4
-            if (paymentSuccess && dossierToLoad.currentStep === 3) {
-              // Update dossier to step 4 after successful payment
-              await fetch(`${API}/dossiers/tourism/${dossierToLoad.id}`, {
-                method: 'PUT',
-                headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ currentStep: 4, status: 'PAID' })
+              // Load existing data
+              if (dossierToLoad.ownerInfo) {
+                setOwnerInfo(dossierToLoad.ownerInfo);
+              }
+              
+              if (dossierToLoad.establishmentInfo) {
+                setEstablishmentInfo(dossierToLoad.establishmentInfo);
+              }
+            } else {
+              // All dossiers are completed -> create a new dossier
+              console.log('useTourismDossier: All dossiers completed, creating a new dossier');
+              const createRes = await fetch(`${API}/dossiers/tourism`, {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}` }
               });
-              setCurrentStep(4);
-            } 
-            // If user already paid but is still on step 3, advance them to step 4
-            else if (dossierToLoad.status === 'PAID' && dossierToLoad.currentStep === 3) {
-              // Update dossier to step 4 since payment is already completed
-              await fetch(`${API}/dossiers/tourism/${dossierToLoad.id}`, {
-                method: 'PUT',
-                headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ currentStep: 4 })
-              });
-              setCurrentStep(4);
-            } 
-            // Otherwise, use the current step from the dossier
-            else {
-              setCurrentStep(dossierToLoad.currentStep);
-            }
-            
-            // Load existing data
-            if (dossierToLoad.ownerInfo) {
-              setOwnerInfo(dossierToLoad.ownerInfo);
-            }
-            
-            if (dossierToLoad.establishmentInfo) {
-              setEstablishmentInfo(dossierToLoad.establishmentInfo);
+              const newDossier = await createRes.json();
+              console.log('useTourismDossier: Created new dossier:', newDossier.id);
+              setDossier(newDossier);
+              setCurrentStep(1);
             }
           } else {
             // No existing dossiers - create new one

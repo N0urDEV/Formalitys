@@ -87,7 +87,7 @@ const PromoModal: React.FC<PromoModalProps> = ({ showDelayMs = 1200 }) => {
                   Avantage fidélité
                 </h3>
                 <p className="text-[#00171f]/80 text-sm" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  Réduction exclusive sur la <span className="font-semibold">2ᵉ création de société</span> ou l’<span className="font-semibold">hébergement touristique</span>. Contactez-nous pour en profiter.
+                  Réduction dégressive dès la <span className="font-semibold">2ème création de société</span> ou la<span className="font-semibold">2ème pour hébergement touristique</span>. Contactez-nous pour en profiter.
                 </p>
               </div>
             </div>
