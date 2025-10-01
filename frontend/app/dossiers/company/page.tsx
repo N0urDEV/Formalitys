@@ -232,7 +232,7 @@ function CompanyDossierPageContent() {
       
       <DossierNavigation 
         currentStep={currentStep} 
-        totalSteps={5} 
+        totalSteps={6} 
         onFinish={() => window.location.href = '/dashboard'}
         isSubmitting={isSubmitting}
       />
