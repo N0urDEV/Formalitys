@@ -119,6 +119,36 @@ export const useValidation = () => {
       stepErrorsList.push('Le format de l\'email est invalide');
     }
 
+    // Required: projected monthly revenue (HT)
+    if (companyData.chiffreAffairesMensuelHt === undefined || companyData.chiffreAffairesMensuelHt === null || isNaN(companyData.chiffreAffairesMensuelHt)) {
+      stepErrorsList.push("Le chiffre d'affaires mensuel prévu (HT) est requis");
+    } else if (companyData.chiffreAffairesMensuelHt < 0) {
+      stepErrorsList.push("Le chiffre d'affaires mensuel prévu (HT) doit être positif");
+    }
+
+    // Embauche prévue validation
+    if (companyData.embauchePrevue === undefined) {
+      stepErrorsList.push("Veuillez indiquer si vous prévoyez d'embaucher des salariés dès la création");
+    } else if (companyData.embauchePrevue === true) {
+      if (companyData.nbSalaries === undefined || companyData.nbSalaries === null || isNaN(companyData.nbSalaries)) {
+        stepErrorsList.push('Veuillez indiquer le nombre de salariés prévu');
+      } else if (companyData.nbSalaries < 1) {
+        stepErrorsList.push('Le nombre de salariés doit être au minimum 1');
+      }
+    }
+
+    // Validate shares distribution for SARL
+    if (companyData.formeJuridique.trim() === 'SARL') {
+      const shares = companyData.shares || [];
+      const total = shares.reduce((acc, n) => acc + (isNaN(n) ? 0 : n), 0);
+      if (shares.length === 0 || shares.some(s => s === undefined || s === null || isNaN(s))) {
+        stepErrorsList.push('Veuillez saisir la répartition des parts sociales pour chaque associé');
+      }
+      if (Math.round(total) !== 100) {
+        stepErrorsList.push('La somme des pourcentages doit être égale à 100%');
+      }
+    }
+
     setStepErrors(prev => ({ ...prev, 3: stepErrorsList }));
     return stepErrorsList.length === 0;
   };

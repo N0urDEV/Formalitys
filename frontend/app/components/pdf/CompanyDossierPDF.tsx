@@ -135,6 +135,10 @@ interface CompanyDossierPDFProps {
     referenceDepotDeclaration?: string;
     dateDepotDeclaration?: string;
     autresActivite?: string;
+    chiffreAffairesMensuelHt?: number;
+    shares?: number[];
+    embauchePrevue?: boolean;
+    nbSalaries?: number;
   };
 }
 
@@ -324,7 +328,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
         )}
 
         {/* Tax Information */}
-        {(dossier.numeroArticleTaxeProfessionnelle || dossier.numeroArticleTaxeServicesCommunaux || dossier.numeroAffiliationCNSS) && (
+        {(dossier.numeroArticleTaxeProfessionnelle || dossier.numeroArticleTaxeServicesCommunaux || dossier.numeroAffiliationCNSS || typeof dossier.chiffreAffairesMensuelHt === 'number' || dossier.embauchePrevue !== undefined) && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Informations Fiscales</Text>
             <View style={styles.twoColumnRow}>
@@ -347,6 +351,24 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
                   <View style={styles.row}>
                     <Text style={styles.label}>N° Affiliation CNSS:</Text>
                     <Text style={styles.value}>{dossier.numeroAffiliationCNSS}</Text>
+                  </View>
+                )}
+                {typeof dossier.chiffreAffairesMensuelHt === 'number' && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Chiffre d'affaires mensuel prévu (HT):</Text>
+                    <Text style={styles.value}>{dossier.chiffreAffairesMensuelHt?.toLocaleString()} MAD</Text>
+                  </View>
+                )}
+                {dossier.embauchePrevue !== undefined && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Embauche dès la création:</Text>
+                    <Text style={styles.value}>{dossier.embauchePrevue ? 'Oui' : 'Non'}</Text>
+                  </View>
+                )}
+                {dossier.embauchePrevue && typeof dossier.nbSalaries === 'number' && (
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Nombre de salariés prévu:</Text>
+                    <Text style={styles.value}>{dossier.nbSalaries}</Text>
                   </View>
                 )}
               </View>
@@ -403,6 +425,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
                 <Text style={[styles.tableCell, { color: '#ffffff' }]}>Email</Text>
                 <Text style={[styles.tableCell, { color: '#ffffff' }]}>Téléphone</Text>
                 <Text style={[styles.tableCell, { color: '#ffffff' }]}>Rôle</Text>
+                <Text style={[styles.tableCell, { color: '#ffffff' }]}>% Capital</Text>
               </View>
               {dossier.associates.map((associate, index) => (
                 <View key={index} style={styles.tableRow}>
@@ -415,6 +438,9 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
                   <Text style={styles.tableCell}>{associate.telephone}</Text>
                   <Text style={styles.tableCell}>
                     {associate.isGerant ? 'Gérant' : 'Associé'}
+                  </Text>
+                  <Text style={styles.tableCell}>
+                    {Array.isArray(dossier.shares) && typeof dossier.shares[index] === 'number' ? `${dossier.shares[index]}%` : ''}
                   </Text>
                 </View>
               ))}

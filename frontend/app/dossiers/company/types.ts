@@ -18,6 +18,8 @@ export interface CompanyData {
   headquarters: string;
   capital: number;
   selectedBank: string;
+  // Share distribution per associate (percentage of share capital)
+  shares?: number[];
   // Additional company information
   formeJuridique: string;
   nationalite: string;
@@ -35,6 +37,9 @@ export interface CompanyData {
   referenceDepotDeclaration: string;
   dateDepotDeclaration: string;
   autresActivite: string;
+  chiffreAffairesMensuelHt?: number;
+  embauchePrevue?: boolean;
+  nbSalaries?: number;
 }
 
 export interface UploadedFiles {
@@ -61,6 +66,7 @@ export interface CompanyDossier {
   headquarters?: string;
   capital?: number;
   selectedBank?: string;
+  shares?: number[];
   // Additional company information
   formeJuridique?: string;
   nationalite?: string;
@@ -78,6 +84,9 @@ export interface CompanyDossier {
   referenceDepotDeclaration?: string;
   dateDepotDeclaration?: string;
   autresActivite?: string;
+  chiffreAffairesMensuelHt?: number;
+  embauchePrevue?: boolean;
+  nbSalaries?: number;
   uploadedFiles?: any[];
   paymentIntentId?: string;
   paymentStatus?: string;

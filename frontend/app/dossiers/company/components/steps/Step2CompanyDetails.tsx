@@ -66,6 +66,13 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
     setCompanyData({ ...companyData, proposedNames: newNames });
   };
 
+  const handleShareChange = (index: number, value: string) => {
+    const num = Math.max(0, Math.min(100, parseFloat(value) || 0));
+    const shares = [...(companyData.shares || Array(associates.length).fill(0))];
+    shares[index] = num;
+    setCompanyData({ ...companyData, shares });
+  };
+
   return (
     <div className="space-y-8">
       {/* Step 4 Error Display */}
@@ -246,6 +253,61 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               required
             />
 
+            {/* Share distribution for associates */}
+            <div className="md:col-span-2">
+              {companyData.formeJuridique === 'SARL' && (
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                    Répartition des parts sociales
+                  </label>
+                  <div className="space-y-2">
+                    {associates.map((a, idx) => (
+                      <div key={idx} className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                        <div className="md:col-span-2 text-sm text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                          Associé {idx + 1} — {a.prenom} {a.nom}
+                        </div>
+                        <div>
+                          <FormInput
+                            label="% du capital social"
+                            name={`share_${idx}`}
+                            type="number"
+                            placeholder="0"
+                            value={(companyData.shares?.[idx] ?? '').toString()}
+                            onChange={(val) => handleShareChange(idx, val)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                    La somme doit être égale à 100%.
+                  </p>
+                </div>
+              )}
+              {companyData.formeJuridique === 'SARL AU' && (
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                    Répartition des parts sociales
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                    <div className="md:col-span-2 text-sm text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                      Associé 1 — {associates[0]?.prenom} {associates[0]?.nom}
+                    </div>
+                    <div>
+                      <FormInput
+                        label="% du capital social"
+                        name={`share_0`}
+                        type="number"
+                        value={'100'}
+                        onChange={() => {}}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
 
             {/* Adresse du siège social */}
             <div className="md:col-span-2">
@@ -323,6 +385,16 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Chiffre d'affaires mensuel prévu (HT) */}
+            <FormInput
+              label="Chiffre d'affaires mensuel prévu (HT)"
+              name="chiffreAffairesMensuelHt"
+              type="number"
+              placeholder="Ex: 50 000"
+              value={companyData.chiffreAffairesMensuelHt?.toString() || ''}
+              onChange={(value) => setCompanyData({ ...companyData, chiffreAffairesMensuelHt: value === '' ? undefined : parseFloat(value) })}
+              required
+            />
             {/* N° Taxe professionnelle */}
             <FormInput
               label={t('labels.numeroArticleTaxeProfessionnelle')}
@@ -385,6 +457,53 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
               value={companyData.dateDepotDeclaration}
               onChange={(value) => setCompanyData({...companyData, dateDepotDeclaration: value})}
             />
+          </div>
+
+          {/* Embauche dès la création - own space below */}
+          <div className="mt-6 space-y-3">
+            <label className="block text-sm font-medium text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+              Avez-vous prévu d'embaucher des salariés dès la création ?
+            </label>
+            <div className="flex items-center gap-6">
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="embauchePrevue"
+                  value="oui"
+                  checked={companyData.embauchePrevue === true}
+                  onChange={() => setCompanyData({ ...companyData, embauchePrevue: true })}
+                  className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+                  style={{ accentColor: '#007ea7' }}
+                />
+                <span className="text-sm text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>Oui</span>
+              </label>
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="embauchePrevue"
+                  value="non"
+                  checked={companyData.embauchePrevue === false}
+                  onChange={() => setCompanyData({ ...companyData, embauchePrevue: false, nbSalaries: undefined })}
+                  className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-[#007ea7]"
+                  style={{ accentColor: '#007ea7' }}
+                />
+                <span className="text-sm text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>Non</span>
+              </label>
+            </div>
+
+            {companyData.embauchePrevue === true && (
+              <div className="max-w-xs">
+                <FormInput
+                  label="Si oui, combien ?"
+                  name="nbSalaries"
+                  type="number"
+                  placeholder="Ex: 2"
+                  value={companyData.nbSalaries?.toString() || ''}
+                  onChange={(value) => setCompanyData({ ...companyData, nbSalaries: value === '' ? undefined : parseInt(value) })}
+                  required
+                />
+              </div>
+            )}
           </div>
         </div>
 

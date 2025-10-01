@@ -22,7 +22,8 @@ export class DiscountService {
   private readonly DISCOUNT_TIERS: DiscountTier[] = [
     { tier: 1, minDossiers: 0, discountPercentage: 0, description: 'Premier dossier' },
     { tier: 2, minDossiers: 1, discountPercentage: 15, description: 'Deuxième dossier - 15% de réduction' },
-    { tier: 3, minDossiers: 2, discountPercentage: 25, description: 'Troisième dossier et plus - 25% de réduction' }
+    { tier: 3, minDossiers: 2, discountPercentage: 20, description: 'Troisième dossier - 20% de réduction' },
+    { tier: 4, minDossiers: 3, discountPercentage: 25, description: 'Quatrième dossier et plus - 25% de réduction' }
   ];
 
   private readonly BASE_PRICES = {
@@ -35,22 +36,15 @@ export class DiscountService {
   /**
    * Calculate discount for a user based on their dossier history
    */
-  async calculateDiscount(userId: number, dossierType: 'company' | 'tourism'): Promise<DiscountCalculation> {
-    const basePrice = this.BASE_PRICES[dossierType];
+  async calculateDiscount(
+    userId: number,
+    dossierType: 'company' | 'tourism',
+    basePriceOverride?: number
+  ): Promise<DiscountCalculation> {
+    // Allow caller to override base price (e.g., company with domiciliation)
+    const basePrice = typeof basePriceOverride === 'number' ? basePriceOverride : this.BASE_PRICES[dossierType];
     
-    // Only apply discounts to tourism dossiers
-    if (dossierType === 'company') {
-      return {
-        originalPrice: basePrice,
-        discountPercentage: 0,
-        discountAmount: 0,
-        finalPrice: basePrice,
-        reason: 'no_discount_company',
-        tier: 1
-      };
-    }
-    
-    // For tourism dossiers, count completed dossiers
+    // Count completed dossiers (both types contribute to loyalty tier)
     const [companyCount, tourismCount] = await Promise.all([
       this.prisma.companyDossier.count({
         where: { 
@@ -76,9 +70,35 @@ export class DiscountService {
       basePrice
     });
     
-    // Find the appropriate discount tier
-    const tier = this.getDiscountTier(completedDossiers);
-    const discountPercentage = tier.discountPercentage;
+    // Compute discount percentage based on dossier type rules
+    let discountPercentage = 0;
+    let tier = this.getDiscountTier(completedDossiers);
+
+    if (dossierType === 'tourism') {
+      // Tourism: flat 15% for any dossier beyond the first
+      discountPercentage = completedDossiers >= 1 ? 15 : 0;
+      tier = {
+        tier: discountPercentage > 0 ? 2 : 1,
+        minDossiers: discountPercentage > 0 ? 1 : 0,
+        discountPercentage,
+        description: discountPercentage > 0 ? 'Dossiers tourisme au-delà du premier - 15% de réduction' : 'Premier dossier'
+      };
+    } else {
+      // Company: 2nd=15%, 3rd=20%, 4th+=25%
+      if (completedDossiers >= 3) {
+        discountPercentage = 25;
+        tier = { tier: 4, minDossiers: 3, discountPercentage, description: 'Quatrième dossier et plus - 25% de réduction' };
+      } else if (completedDossiers === 2) {
+        discountPercentage = 20;
+        tier = { tier: 3, minDossiers: 2, discountPercentage, description: 'Troisième dossier - 20% de réduction' };
+      } else if (completedDossiers === 1) {
+        discountPercentage = 15;
+        tier = { tier: 2, minDossiers: 1, discountPercentage, description: 'Deuxième dossier - 15% de réduction' };
+      } else {
+        discountPercentage = 0;
+        tier = { tier: 1, minDossiers: 0, discountPercentage, description: 'Premier dossier' };
+      }
+    }
     const discountAmount = Math.round((basePrice * discountPercentage) / 100);
     const finalPrice = basePrice - discountAmount;
     

@@ -51,12 +51,10 @@ export class PaymentsService {
       baseAmount = 160000; // 1600 MAD
     }
 
-    // Only apply discounts to tourism dossiers
+    // Apply loyalty discount to both dossier types
     let amount = baseAmount;
-    if (dossierType === 'tourism') {
-      const discount = await this.discountService.calculateDiscount(userId, dossierType);
-      amount = discount.finalPrice;
-    }
+    const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+    amount = discount.finalPrice;
 
     // Check if Stripe is properly configured
     const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -76,10 +74,8 @@ export class PaymentsService {
         },
       });
 
-      // Apply discount to dossier (only for tourism)
-      if (dossierType === 'tourism') {
-        await this.discountService.applyDiscountToDossier(userId, dossierId, dossierType);
-      }
+      // Persist discount info on the dossier for transparency
+      await this.discountService.applyDiscountToDossier(userId, dossierId, dossierType);
 
       // Update dossier with payment intent
       const updateData = {
