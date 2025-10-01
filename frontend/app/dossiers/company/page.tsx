@@ -42,8 +42,7 @@ function CompanyDossierPageContent() {
     handleFileUpload,
     downloadPdf,
     calculatePriceWithDiscount,
-    discountStatus,
-    pricingData
+    discountStatus
   } = useCompanyDossier();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -145,10 +144,6 @@ function CompanyDossierPageContent() {
             companyData={companyData}
             setCompanyData={setCompanyData}
             stepErrors={stepErrors}
-            calculateTotalPrice={calculateTotalPrice}
-            calculatePriceWithDiscount={calculatePriceWithDiscount}
-            discountStatus={discountStatus}
-            pricingData={pricingData}
           />
         );
       case 3:

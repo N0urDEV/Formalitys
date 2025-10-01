@@ -1,5 +1,4 @@
 import React from 'react';
-import { formatPrice, formatPriceWithBreakdown } from '../../../../utils/currency';
 import { CompanyData, StepErrors } from '../../types';
 import { FormSelect } from '../FormSelect';
 
@@ -7,25 +6,12 @@ interface Step2HeadquartersProps {
   companyData: CompanyData;
   setCompanyData: (data: CompanyData) => void;
   stepErrors: StepErrors;
-  calculateTotalPrice: () => number;
-  calculatePriceWithDiscount: () => {
-    originalPrice: number;
-    finalPrice: number;
-    discountPercentage: number;
-    discountAmount: number;
-  };
-  discountStatus: any;
-  pricingData: any;
 }
 
 export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
   companyData,
   setCompanyData,
-  stepErrors,
-  calculateTotalPrice,
-  calculatePriceWithDiscount,
-  discountStatus,
-  pricingData
+  stepErrors
 }) => {
   const headquartersOptions = [
     { value: 'domicile', label: 'Domicile (gratuit)' },
@@ -220,90 +206,6 @@ export const Step2Headquarters: React.FC<Step2HeadquartersProps> = ({
         </div>
       </div>
 
-      {/* Price Summary */}
-      <div className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] rounded-3xl p-8 text-white">
-        <h3 
-          className="text-xl font-bold mb-4"
-          style={{ fontFamily: '"Gascogne Serial", serif' }}
-        >
-          Récapitulatif des coûts
-        </h3>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span 
-              className="text-white/90"
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              Création de société
-            </span>
-            <span 
-              className="font-medium"
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              {formatPrice(3300)}
-            </span>
-          </div>
-          {companyData.headquarters === 'contrat_domiciliation' && (
-            <div className="flex justify-between">
-              <span 
-                className="text-white/90"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-              Domiciliation (12 mois : 6 payés + 6 offerts)
-              </span>
-              <span 
-                className="font-medium"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-              +{formatPrice(900)}
-              </span>
-            </div>
-          )}
-          
-          {/* Show discount if available */}
-          {pricingData && pricingData.discountPercentage > 0 && (
-            <div className="flex justify-between text-green-300">
-              <span 
-                className="text-green-300"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Réduction fidélité ({pricingData.discountPercentage}%)
-              </span>
-              <span 
-                className="font-medium text-green-300"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                -{formatPrice(pricingData.discountApplied)}
-              </span>
-            </div>
-          )}
-          
-          <div className="border-t border-white/20 pt-2 flex justify-between font-bold text-lg">
-            <span 
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              Total
-            </span>
-            <span 
-              style={{ fontFamily: 'Satoshi, sans-serif' }}
-            >
-              {formatPrice(pricingData ? pricingData.total : calculatePriceWithDiscount().finalPrice)}
-            </span>
-          </div>
-          
-          {/* Show original price if discount applied */}
-          {pricingData && pricingData.discountPercentage > 0 && (
-            <div className="text-center text-white/70 text-sm">
-              <span 
-                className="line-through"
-                style={{ fontFamily: 'Satoshi, sans-serif' }}
-              >
-                Prix normal : {formatPrice(pricingData.basePrice + pricingData.domiciliationFee)}
-              </span>
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 };
