@@ -18,7 +18,7 @@ export declare class DiscountService {
     private readonly DISCOUNT_TIERS;
     private readonly BASE_PRICES;
     constructor(prisma: PrismaService);
-    calculateDiscount(userId: number, dossierType: 'company' | 'tourism'): Promise<DiscountCalculation>;
+    calculateDiscount(userId: number, dossierType: 'company' | 'tourism', basePriceOverride?: number): Promise<DiscountCalculation>;
     private getDiscountTier;
     getDiscountInfo(completedDossiers: number): {
         currentTier: DiscountTier;

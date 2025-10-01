@@ -10,14 +10,17 @@ interface PaymentFormProps {
   amount: number;
   currency: string;
   serviceName?: string;
+  showSummary?: boolean;
   costBreakdown?: {
     basePrice: number;
     domiciliationFee?: number;
+    discountApplied?: number;
+    discountPercentage?: number;
     total: number;
   };
 }
 
-export default function PaymentForm({ onSuccess, onError, amount, currency, serviceName, costBreakdown }: PaymentFormProps) {
+export default function PaymentForm({ onSuccess, onError, amount, currency, serviceName, showSummary = true, costBreakdown }: PaymentFormProps) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -53,6 +56,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {showSummary && (
       <div className="p-4 bg-gray-50 rounded-lg">
         <h3 className="font-medium mb-4" style={{ fontFamily: 'Satoshi, sans-serif' }}>
           {t('summary')}
@@ -76,13 +80,13 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                      </span>
                    </div>
                  )}
-                 {costBreakdown?.total && costBreakdown.total < (costBreakdown.basePrice + (costBreakdown.domiciliationFee || 0)) && (
+                 {costBreakdown?.discountApplied && costBreakdown.discountApplied > 0 && (
                    <div className="flex justify-between text-green-600">
                      <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                       {t('discountApplied')}
+                       {t('discountApplied')} ({costBreakdown.discountPercentage}%)
                      </span>
                      <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                       -{formatPrice((costBreakdown.basePrice + (costBreakdown.domiciliationFee || 0)) - costBreakdown.total)}
+                       -{formatPrice(costBreakdown.discountApplied)}
                      </span>
                    </div>
                  )}
@@ -96,6 +100,7 @@ export default function PaymentForm({ onSuccess, onError, amount, currency, serv
                  </div>
         </div>
       </div>
+      )}
 
       <div className="border rounded-lg p-4">
         <PaymentElement />

@@ -461,10 +461,10 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
 
           {/* Embauche dès la création - own space below */}
           <div className="mt-6 space-y-3">
-            <label className="block text-sm font-medium text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-              Avez-vous prévu d'embaucher des salariés dès la création ?
-            </label>
             <div className="flex items-center gap-6">
+              <label className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Satoshi, sans-serif' }}>
+                Avez-vous prévu d'embaucher des salariés dès la création ?
+              </label>
               <label className="inline-flex items-center gap-2">
                 <input
                   type="radio"
@@ -494,7 +494,7 @@ export const Step2CompanyDetails: React.FC<Step2CompanyDetailsProps> = ({
             {companyData.embauchePrevue === true && (
               <div className="max-w-xs">
                 <FormInput
-                  label="Si oui, combien ?"
+                  label="Combien ?"
                   name="nbSalaries"
                   type="number"
                   placeholder="Ex: 2"

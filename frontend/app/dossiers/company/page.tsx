@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, Suspense } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { useCompanyDossier } from './hooks/useCompanyDossier';
 import { useValidation } from './hooks/useValidation';
 import DossierNavigation from '../components/DossierNavigation';
@@ -43,6 +43,28 @@ function CompanyDossierPageContent() {
     downloadPdf
   } = useCompanyDossier();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasCompletedStep6 = useRef(false);
+
+  // Handle completion when reaching step 6
+  useEffect(() => {
+    if (currentStep === 6 && !hasCompletedStep6.current) {
+      hasCompletedStep6.current = true;
+      const completeStep = async () => {
+        console.log('Company dossier Step6Final onComplete called, currentStep:', currentStep);
+        try {
+          await saveStep({
+            currentStep: 6
+          });
+          console.log('Company dossier final step saved successfully with currentStep: 6');
+        } catch (error) {
+          console.error('Error saving company dossier final step:', error);
+        }
+      };
+      completeStep();
+    }
+  }, [currentStep, saveStep]);
+
   // Calculate total price function
   const calculateTotalPrice = () => {
     let total = 3300; // Base price for company creation
@@ -62,8 +84,6 @@ function CompanyDossierPageContent() {
     clearFieldError,
     clearStepErrors
   } = useValidation();
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNext = async () => {
     const isValid = await validateStep(currentStep, {

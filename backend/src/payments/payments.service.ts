@@ -71,6 +71,11 @@ export class PaymentsService {
           dossierId: dossierId.toString(),
           dossierType,
           userId: userId.toString(),
+          originalPrice: baseAmount.toString(),
+          discountApplied: discount.discountAmount.toString(),
+          discountPercentage: discount.discountPercentage.toString(),
+          finalPrice: amount.toString(),
+          discountReason: discount.reason,
         },
       });
 

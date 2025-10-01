@@ -39,11 +39,16 @@ export class DiscountController {
       tiers: [
         { tier: 1, minDossiers: 0, discountPercentage: 0, description: 'Premier dossier' },
         { tier: 2, minDossiers: 1, discountPercentage: 15, description: 'Deuxième dossier - 15% de réduction' },
-        { tier: 3, minDossiers: 2, discountPercentage: 25, description: 'Troisième dossier et plus - 25% de réduction' }
+        { tier: 3, minDossiers: 2, discountPercentage: 20, description: 'Troisième dossier - 20% de réduction' },
+        { tier: 4, minDossiers: 3, discountPercentage: 25, description: 'Quatrième dossier et plus - 25% de réduction' }
       ],
       basePrices: {
         company: 330000, // 3300 DH in cents
         tourism: 160000  // 1600 DH in cents
+      },
+      rules: {
+        company: "15% sur 2ème, 20% sur 3ème, 25% sur 4ème et plus",
+        tourism: "15% sur tous les dossiers au-delà du premier"
       }
     };
   }

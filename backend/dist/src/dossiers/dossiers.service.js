@@ -44,7 +44,7 @@ let DossiersService = class DossiersService {
             currentStep: data.currentStep,
             updatedAt: new Date()
         };
-        if (data.currentStep >= 5) {
+        if (data.currentStep >= 6) {
             updateData.status = 'COMPLETED';
         }
         if (data.companyData) {

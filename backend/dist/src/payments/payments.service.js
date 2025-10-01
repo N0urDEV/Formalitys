@@ -57,10 +57,8 @@ let PaymentsService = class PaymentsService {
             baseAmount = 160000;
         }
         let amount = baseAmount;
-        if (dossierType === 'tourism') {
-            const discount = await this.discountService.calculateDiscount(userId, dossierType);
-            amount = discount.finalPrice;
-        }
+        const discount = await this.discountService.calculateDiscount(userId, dossierType, baseAmount);
+        amount = discount.finalPrice;
         const stripeKey = process.env.STRIPE_SECRET_KEY;
         if (!stripeKey) {
             throw new Error('STRIPE_SECRET_KEY is not configured. Please set your Stripe secret key in the environment variables.');
@@ -73,11 +71,14 @@ let PaymentsService = class PaymentsService {
                     dossierId: dossierId.toString(),
                     dossierType,
                     userId: userId.toString(),
+                    originalPrice: baseAmount.toString(),
+                    discountApplied: discount.discountAmount.toString(),
+                    discountPercentage: discount.discountPercentage.toString(),
+                    finalPrice: amount.toString(),
+                    discountReason: discount.reason,
                 },
             });
-            if (dossierType === 'tourism') {
-                await this.discountService.applyDiscountToDossier(userId, dossierId, dossierType);
-            }
+            await this.discountService.applyDiscountToDossier(userId, dossierId, dossierType);
             const updateData = {
                 paymentIntentId: paymentIntent.id,
                 paymentStatus: 'pending',

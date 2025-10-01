@@ -37,8 +37,8 @@ export class DossiersService {
       updatedAt: new Date()
     };
     
-    // Check if dossier is completed (all 5 steps done)
-    if (data.currentStep >= 5) {
+    // Check if dossier is completed (all 6 steps done)
+    if (data.currentStep >= 6) {
       updateData.status = 'COMPLETED';
     }
     

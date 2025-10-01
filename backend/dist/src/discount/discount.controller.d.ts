@@ -26,5 +26,9 @@ export declare class DiscountController {
             company: number;
             tourism: number;
         };
+        rules: {
+            company: string;
+            tourism: string;
+        };
     };
 }
