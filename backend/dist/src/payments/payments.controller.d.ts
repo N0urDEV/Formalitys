@@ -16,6 +16,7 @@ export declare class PaymentsController {
         amount: number;
         currency: string;
         status: import("stripe").Stripe.PaymentIntent.Status;
+        metadata: import("stripe").Stripe.Metadata;
     }>;
     confirmPayment(dto: ConfirmPaymentDto): Promise<{
         success: boolean;

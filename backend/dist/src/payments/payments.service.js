@@ -102,6 +102,7 @@ let PaymentsService = class PaymentsService {
                 amount: paymentIntent.amount,
                 currency: paymentIntent.currency,
                 status: paymentIntent.status,
+                metadata: paymentIntent.metadata,
             };
         }
         catch (error) {

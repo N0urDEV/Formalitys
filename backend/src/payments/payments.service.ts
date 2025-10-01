@@ -107,6 +107,7 @@ export class PaymentsService {
         amount: paymentIntent.amount,
         currency: paymentIntent.currency,
         status: paymentIntent.status,
+        metadata: paymentIntent.metadata,
       };
     } catch (error) {
       console.error('Stripe error:', error);

@@ -12,6 +12,7 @@ export declare class PaymentsService {
         amount: number;
         currency: string;
         status: Stripe.PaymentIntent.Status;
+        metadata: Stripe.Metadata;
     }>;
     confirmPayment(paymentIntentId: string): Promise<{
         success: boolean;

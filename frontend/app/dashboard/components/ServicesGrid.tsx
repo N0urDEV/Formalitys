@@ -56,14 +56,14 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ discountStatus }) =>
       buttonStyle: 'bg-[#007ea7] text-white hover:bg-[#00a8e8]'
     }
   ];
-  // Update services with discount information (only for tourism)
+  // Update services with discount information for both company and tourism
   const servicesWithDiscounts = services.map(service => {
     if (!discountStatus) return service;
     
-    // Only apply discounts to tourism service
-    if (service.id !== 'tourism') return service;
+    const discount = service.id === 'company' 
+      ? discountStatus.availableDiscounts.company 
+      : discountStatus.availableDiscounts.tourism;
     
-    const discount = discountStatus.availableDiscounts.tourism;
     if (!discount || discount.discountPercentage === 0) return service;
     
     return {

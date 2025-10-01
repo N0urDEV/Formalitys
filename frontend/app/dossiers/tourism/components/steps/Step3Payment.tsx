@@ -49,6 +49,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
         const data = await response.json();
         console.log('Payment intent response:', data);
         console.log('Payment amount:', data.amount, 'cents =', data.amount / 100, 'MAD');
+        console.log('Payment intent metadata:', data.metadata);
         setClientSecret(data.client_secret);
         setPaymentIntent(data);
         setLoading(false);
@@ -140,8 +141,11 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
             amount={paymentIntent?.amount || 0}
             currency={paymentIntent?.currency || 'mad'}
             serviceName="Régularisation Hébergement Touristique"
+            showSummary={true}
             costBreakdown={{
-              basePrice: 1600,
+              basePrice: parseInt(paymentIntent?.metadata?.originalPrice || '160000') / 100 || 1600,
+              discountApplied: parseInt(paymentIntent?.metadata?.discountApplied || '0') / 100,
+              discountPercentage: parseInt(paymentIntent?.metadata?.discountPercentage || '0'),
               total: (paymentIntent?.amount || 0) / 100
             }}
           />

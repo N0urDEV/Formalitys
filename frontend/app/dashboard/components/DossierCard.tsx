@@ -31,11 +31,11 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
   // Check if dossier is completed (all steps done and paid)
   const isCompleted = dossier.status === 'COMPLETED' || 
     (dossier.status === 'PAID' && (
-      (dossier.type === 'company' && dossier.currentStep >= 5) ||
+      (dossier.type === 'company' && dossier.currentStep >= 6) ||
       (dossier.type === 'tourism' && dossier.currentStep >= 6)
     )) ||
     // Also consider completed if all steps are done regardless of status
-    ((dossier.type === 'company' && dossier.currentStep >= 5) ||
+    ((dossier.type === 'company' && dossier.currentStep >= 6) ||
      (dossier.type === 'tourism' && dossier.currentStep >= 6));
 
   return (
@@ -97,13 +97,13 @@ export const DossierCard: React.FC<DossierCardProps> = ({ dossier, onDelete, onD
               className="text-sm font-medium text-[#007ea7]"
               style={{ fontFamily: 'Satoshi, sans-serif' }}
             >
-              {dossier.currentStep}/{dossier.type === 'company' ? 5 : 6}
+              {dossier.currentStep}/{dossier.type === 'company' ? 6 : 6}
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
               className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] h-2 rounded-full transition-all duration-500"
-              style={{ width: `${(dossier.currentStep / (dossier.type === 'company' ? 5 : 6)) * 100}%` }}
+              style={{ width: `${(dossier.currentStep / (dossier.type === 'company' ? 6 : 6)) * 100}%` }}
             ></div>
           </div>
         </div>

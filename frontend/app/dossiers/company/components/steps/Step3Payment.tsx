@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import PaymentForm from '../../../../components/PaymentForm';
+import { formatPrice } from '../../../../utils/currency';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_...');
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
@@ -163,60 +164,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
         </div>
       </div>
       
-      <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 space-y-8">
-        {/* Récapitulatif des coûts (avec remise) */}
-        <div className="bg-gradient-to-r from-[#007ea7] to-[#00a8e8] rounded-2xl p-6 text-white">
-          <h3 
-            className="text-lg font-bold mb-4"
-            style={{ fontFamily: 'Satoshi, sans-serif' }}
-          >
-            Récapitulatif des coûts
-          </h3>
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className="text-white/90" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Création de société
-              </span>
-              <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                {(parseInt(paymentIntent?.metadata?.originalPrice || '330000') / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'MAD' })}
-              </span>
-            </div>
-            {parseInt(paymentIntent?.metadata?.originalPrice || '330000') > 330000 && (
-              <div className="flex justify-between">
-                <span className="text-white/90" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  Domiciliation (12 mois : 6 payés + 6 offerts)
-                </span>
-                <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  +{( (parseInt(paymentIntent?.metadata?.originalPrice || '330000') - 330000) / 100 ).toLocaleString('fr-FR', { style: 'currency', currency: 'MAD' })}
-                </span>
-              </div>
-            )}
-            {parseInt(paymentIntent?.metadata?.discountApplied || '0') > 0 && (
-              <div className="flex justify-between text-green-200">
-                <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  Réduction appliquée ({parseInt(paymentIntent?.metadata?.discountPercentage || '0')}%)
-                </span>
-                <span className="font-medium" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                  -{(parseInt(paymentIntent?.metadata?.discountApplied || '0') / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'MAD' })}
-                </span>
-              </div>
-            )}
-            {parseInt(paymentIntent?.metadata?.discountApplied || '0') > 0 && (
-              <p className="text-xs text-white/90 mt-1" style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Vous bénéficiez d’une remise fidélité de {parseInt(paymentIntent?.metadata?.discountPercentage || '0')}% grâce à vos dossiers précédents.
-              </p>
-            )}
-            <div className="border-t border-white/20 pt-2 flex justify-between font-bold text-lg">
-              <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                Total
-              </span>
-              <span style={{ fontFamily: 'Satoshi, sans-serif' }}>
-                {((paymentIntent?.amount || 0) / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'MAD' })}
-              </span>
-            </div>
-          </div>
-        </div>
-
+      <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <PaymentForm
             onSuccess={handlePaymentSuccess}
@@ -224,7 +172,7 @@ export const Step3Payment: React.FC<Step3PaymentProps> = ({ dossier, onPaymentSu
             amount={paymentIntent?.amount || 0}
             currency={paymentIntent?.currency || 'mad'}
             serviceName="Création de société"
-            showSummary={false}
+            showSummary={true}
             costBreakdown={{
               basePrice: parseInt(paymentIntent?.metadata?.originalPrice || '330000') / 100,
               domiciliationFee: (parseInt(paymentIntent?.metadata?.originalPrice || '330000') - 330000) / 100 || undefined,
