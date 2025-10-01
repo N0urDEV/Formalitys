@@ -412,6 +412,9 @@ export const useCompanyDossier = () => {
         phone: localStorage.getItem('userPhone') || '',
       };
 
+      // Calculate pricing with discount for PDF
+      const pricingInfo = calculatePriceWithDiscount();
+
       // Prepare dossier data for PDF
       const dossierData = {
         id: dossier.id,
@@ -439,6 +442,16 @@ export const useCompanyDossier = () => {
         referenceDepotDeclaration: companyData.referenceDepotDeclaration,
         dateDepotDeclaration: companyData.dateDepotDeclaration,
         autresActivite: companyData.autresActivite,
+        // New fields added recently
+        shares: companyData.shares,
+        chiffreAffairesMensuelHt: companyData.chiffreAffairesMensuelHt,
+        embauchePrevue: companyData.embauchePrevue,
+        nbSalaries: companyData.nbSalaries,
+        // Pricing information
+        originalPrice: pricingInfo.originalPrice,
+        finalPrice: pricingInfo.finalPrice,
+        discountPercentage: pricingInfo.discountPercentage,
+        discountAmount: pricingInfo.discountAmount,
       };
 
       // Generate and download PDF using React PDF

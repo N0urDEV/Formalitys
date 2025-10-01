@@ -139,6 +139,11 @@ interface CompanyDossierPDFProps {
     shares?: number[];
     embauchePrevue?: boolean;
     nbSalaries?: number;
+    // Pricing information
+    originalPrice?: number;
+    finalPrice?: number;
+    discountPercentage?: number;
+    discountAmount?: number;
   };
 }
 
@@ -156,7 +161,7 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
       case 'domicile':
         return 'Domicile (gratuit)';
       case 'contrat_domiciliation':
-        return 'Contrat de domiciliation (+900 MAD)';
+        return 'Contrat de domiciliation (12 mois : 6 payés + 6 offerts)';
       case 'location_local':
         return 'Location d\'un local';
       default:
@@ -459,8 +464,14 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
                      </View>
                      {dossier.headquarters === 'contrat_domiciliation' && (
                        <View style={styles.row}>
-                         <Text style={styles.label}>Domiciliation (6 mois):</Text>
+                         <Text style={styles.label}>Domiciliation (12 mois : 6 payés + 6 offerts):</Text>
                          <Text style={styles.value}>+{formatPrice(900)}</Text>
+                       </View>
+                     )}
+                     {dossier.discountPercentage && dossier.discountPercentage > 0 && (
+                       <View style={styles.row}>
+                         <Text style={[styles.label, { color: '#22c55e' }]}>Réduction fidélité ({dossier.discountPercentage}%):</Text>
+                         <Text style={[styles.value, { color: '#22c55e' }]}>-{formatPrice(dossier.discountAmount || 0)}</Text>
                        </View>
                      )}
             </View>
@@ -468,9 +479,17 @@ export const CompanyDossierPDF: React.FC<CompanyDossierPDFProps> = ({ user, doss
               <View style={[styles.row, { borderTop: '1px solid #E5E5E5', paddingTop: 4, marginTop: 4 }]}>
                 <Text style={[styles.label, { fontWeight: 'bold', fontSize: 10 }]}>Total:</Text>
                 <Text style={[styles.value, { fontWeight: 'bold', fontSize: 10, color: '#007ea7' }]}>
-                  {formatPrice(calculateTotalPrice())}
+                  {formatPrice(dossier.finalPrice || calculateTotalPrice())}
                 </Text>
               </View>
+              {dossier.discountPercentage && dossier.discountPercentage > 0 && (
+                <View style={styles.row}>
+                  <Text style={[styles.label, { fontSize: 7, color: '#666666' }]}>Prix normal:</Text>
+                  <Text style={[styles.value, { fontSize: 7, color: '#666666', textDecoration: 'line-through' }]}>
+                    {formatPrice(dossier.originalPrice || calculateTotalPrice())}
+                  </Text>
+                </View>
+              )}
             </View>
           </View>
         </View>
