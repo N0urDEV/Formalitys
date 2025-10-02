@@ -48,18 +48,6 @@ export function AdminTopBar({ setSidebarOpen, currentPath }: AdminTopBarProps) {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-600">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span style={{ fontFamily: 'Satoshi, sans-serif' }}>Système actif</span>
-          </div>
-          <div className="text-sm text-gray-500">
-            {new Date().toLocaleDateString('fr-FR', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
-          </div>
         </div>
       </div>
     </div>
