@@ -11,9 +11,9 @@ import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 import MessagesProvider from "@/app/components/MessagesProvider";
 
 export const metadata: Metadata = {
-  title: "Formalitys - Company Formation & Tourist Accommodation in Morocco | 100% Online",
-  description: "Create your LLC in Morocco | Legal formalities for tourist rentals online. Expert support.",
-  keywords: "company formation Morocco, LLC Morocco, tourist accommodation, Airbnb Morocco, legal formalities, OMPIC, commercial register, tourist rental formalities",
+  title: "Formalitys - Création Société & Hébergement Touristique au Maroc | 100% En Ligne",
+  description: "Créez votre SARL au Maroc | Formalités légales pour locations touristiques en ligne. Accompagnement expert.",
+  keywords: "création société Maroc, SARL Maroc, hébergement touristique, Airbnb Maroc, formalités légales, OMPIC, registre commerce, locations touristiques, société au Maroc, démarches juridiques Maroc",
   openGraph: {
     title: "Formalitys - Legal Procedures in Morocco | 100% Online",
     description: "Simplify your legal procedures in Morocco. LLC formation and tourist accommodation compliance with our experts.",
@@ -49,6 +49,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://formalitys.com",
+    languages: {
+      'fr': 'https://formalitys.com/fr',
+      'en': 'https://formalitys.com/en', 
+      'ar': 'https://formalitys.com/ar',
+    },
   },
   icons: {
     icon: [
