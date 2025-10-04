@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001';
 import OptimizedImage from '../components/OptimizedImage';
+import TawkToChat from '../components/TawkToChat';
 
 interface BlogPost {
   id: number;
@@ -247,6 +248,9 @@ export default function BlogPage() {
 
       {/* Footer */}
       <Footer />
+      
+      {/* Tawk.to Chat */}
+      <TawkToChat />
     </div>
   );
 }
